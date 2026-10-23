@@ -61,7 +61,7 @@ export default function StandardsGrid() {
             <span>The Sabora Protocol</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-stone-950">
+          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-stone-950">
             Engineered for European Standards
           </h2>
 
@@ -97,7 +97,7 @@ export default function StandardsGrid() {
                     <div className="w-10 h-10 rounded-2xl bg-white border border-stone-200 flex items-center justify-center text-emerald-800 shadow-2xs group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5 text-emerald-800" />
                     </div>
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-950 group-hover:text-emerald-950 transition-colors">
+                    <h3 className="font-sans text-xl sm:text-2xl font-bold text-stone-950 group-hover:text-emerald-950 transition-colors">
                       {pillar.title}
                     </h3>
                   </div>

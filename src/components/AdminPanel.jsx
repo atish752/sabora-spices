@@ -747,6 +747,7 @@ export default function AdminPanel({
 
       {/* Add / Edit Product Modal */}
       <ProductModalForm
+        key={editingProduct?.id || 'new'}
         isOpen={modalOpen}
         onClose={() => {
           setModalOpen(false);

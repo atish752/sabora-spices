@@ -77,9 +77,24 @@ export default function QuickRfqDesk() {
 
   const handleCopy = () => {
     const raw = compileMessage();
-    navigator.clipboard.writeText(raw);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(raw);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = raw;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
@@ -93,7 +108,7 @@ export default function QuickRfqDesk() {
             <span>Instant Quotation Desk</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-stone-950">
+          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-stone-950">
             Interactive Quick RFQ
           </h2>
 

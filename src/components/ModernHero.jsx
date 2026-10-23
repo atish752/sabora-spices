@@ -18,6 +18,8 @@ const HERO_SPICES = [
   {
     id: 'cardamom',
     name: 'Green Cardamom (Elaichi)',
+    shortName: 'Cardamom',
+    tabLabel: 'Cardamom 8mm+',
     botanical: 'Elettaria cardamomum',
     grade: '8mm+ Extra Bold Sortex',
     origin: 'Cardamom Hills, Idukki (1,100m)',
@@ -32,6 +34,8 @@ const HERO_SPICES = [
   {
     id: 'turmeric',
     name: 'Turmeric Whole Fingers (Haldi)',
+    shortName: 'Turmeric',
+    tabLabel: 'Salem Turmeric',
     botanical: 'Curcuma longa',
     grade: 'Salem Double Polished',
     origin: 'Salem Alluvial Plains, Tamil Nadu',
@@ -46,6 +50,8 @@ const HERO_SPICES = [
   {
     id: 'makhana',
     name: 'Jumbo Makhana (Fox Nuts)',
+    shortName: 'Makhana',
+    tabLabel: 'Jumbo Makhana',
     botanical: 'Euryale ferox',
     grade: '6-Suta Jumbo (>18mm)',
     origin: 'Mithila Wetlands, Bihar',
@@ -108,10 +114,10 @@ export default function ModernHero({ heroConfig, onScrollToSection, onSelectProd
             </span>
           </div>
 
-          {/* Bold Editorial Headline */}
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-stone-950 max-w-4xl leading-[1.08] sm:leading-[1.06]">
+          {/* Bold Modern High-Impact Headline */}
+          <h1 className="font-sans text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-stone-950 max-w-4xl leading-[1.08] sm:leading-[1.05]">
             {headline.split('\n').map((line, idx) => (
-              <span key={idx} className="block">
+              <span key={idx} className={`block ${idx === 1 ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-emerald-600 to-amber-600' : ''}`}>
                 {line}
               </span>
             ))}
@@ -159,7 +165,7 @@ export default function ModernHero({ heroConfig, onScrollToSection, onSelectProd
                       : 'text-stone-600 hover:text-stone-900 hover:bg-white/60'
                   }`}
                 >
-                  <span className="truncate">{spice.name.split(' ')[0]} {spice.name.split(' ')[1] || ''}</span>
+                  <span className="truncate">{spice.tabLabel}</span>
                 </button>
               );
             })}
@@ -191,7 +197,7 @@ export default function ModernHero({ heroConfig, onScrollToSection, onSelectProd
                 </div>
 
                 <div>
-                  <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-950 leading-tight">
+                  <h2 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 leading-tight">
                     {activeSpice.name}
                   </h2>
                   <p className="font-serif italic text-sm text-stone-500 mt-1">
@@ -230,12 +236,12 @@ export default function ModernHero({ heroConfig, onScrollToSection, onSelectProd
                     className="px-5 py-3 rounded-full bg-[#041A12] hover:bg-[#082E20] text-white font-mono text-xs font-bold tracking-wider uppercase border border-amber-400/40 shadow-md flex items-center gap-2 cursor-pointer transition-transform hover:scale-[1.02]"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
-                    <span>Inquire {activeSpice.name.split(' ')[0]} (1-Click)</span>
+                    <span>Inquire {activeSpice.shortName} (1-Click)</span>
                   </button>
 
                   <button
                     onClick={() => {
-                      const matched = products.find(p => p.id?.includes(activeSpice.id));
+                      const matched = products.find(p => p.id?.includes(activeSpice.id)) || products[0];
                       if (matched && onSelectProduct) onSelectProduct(matched);
                     }}
                     className="px-4 py-3 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold transition-colors cursor-pointer"

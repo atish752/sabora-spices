@@ -63,7 +63,19 @@ export default function App() {
   };
 
   const handleScrollToSection = (sectionId) => {
-    const el = document.getElementById(sectionId);
+    const aliasMap = {
+      catalog: 'collection',
+      products: 'collection',
+      quality: 'standards',
+      'b2b-services': 'solutions',
+      services: 'solutions',
+      reviews: 'trust',
+      testimonials: 'trust',
+      'inquiry-form': 'rfq-desk',
+      rfq: 'rfq-desk',
+    };
+    const targetId = aliasMap[sectionId] || sectionId;
+    const el = document.getElementById(targetId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }

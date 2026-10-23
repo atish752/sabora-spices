@@ -78,16 +78,16 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
 
       {/* Drawer Panel */}
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-slate-200">
+        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-stone-200">
           
           {/* Header */}
-          <div className="p-5 bg-[#041A12] text-slate-100 flex items-center justify-between border-b border-emerald-900/60 relative overflow-hidden">
+          <div className="p-5 bg-[#041A12] text-stone-100 flex items-center justify-between border-b border-emerald-900/60 relative overflow-hidden">
             <div className="flex items-center gap-3 relative z-10">
               <div className="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center">
                 <MessageCircle className="w-5 h-5 text-emerald-400 fill-emerald-400" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-base text-white tracking-wide">WhatsApp Commercial Desk</h3>
+                <h3 className="font-sans font-bold text-base text-white tracking-wide">WhatsApp Commercial Desk</h3>
                 <p className="text-[11px] text-amber-300 font-mono flex items-center gap-1">
                   <Sparkles className="w-2.5 h-2.5 text-amber-400" />
                   <span>Direct European Wholesale RFQs</span>
@@ -97,7 +97,7 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
             
             <button 
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors flex items-center justify-center text-sm font-bold cursor-pointer relative z-10"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-stone-300 hover:text-white transition-colors flex items-center justify-center text-sm font-bold cursor-pointer relative z-10"
               aria-label="Close Drawer"
             >
               ×
@@ -108,20 +108,20 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
           <div className="p-6 overflow-y-auto space-y-4 flex-1">
             
             {/* Sabora Direct Guarantee */}
-            <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100 text-xs text-slate-700 flex items-center gap-2.5">
+            <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100 text-xs text-stone-700 flex items-center gap-2.5">
               <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
               <span>Direct connection to European export desk. Fast response within 2 hours.</span>
             </div>
 
             {/* Product Selection */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Product Lot Selected
               </label>
               <select
                 value={selectedProductId}
                 onChange={(e) => setSelectedProductId(e.target.value)}
-                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800"
+                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-stone-200 bg-white text-stone-800"
               >
                 <option value="general">★ Complete Assortment & Price Dossier (All Spices)</option>
                 {products.map(p => (
@@ -134,7 +134,7 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
 
             {/* Company / Buyer Name */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Company / Firm Name
               </label>
               <div className="relative">
@@ -143,21 +143,21 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
                   placeholder="e.g. EuroSpice Trading GmbH / BioSpices B.V."
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full text-xs p-2.5 pl-8 rounded-xl border border-slate-200 bg-white text-slate-800"
+                  className="w-full text-xs p-2.5 pl-8 rounded-xl border border-stone-200 bg-white text-stone-800"
                 />
-                <Building2 className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-3" />
+                <Building2 className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-3" />
               </div>
             </div>
 
             {/* Quantity Required */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Estimated Order Volume
               </label>
               <select
                 value={volume}
                 onChange={(e) => setVolume(e.target.value)}
-                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 font-mono"
+                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-stone-200 bg-white text-stone-800 font-mono"
               >
                 <option value="Sample Evaluation Pack (250g - 1 Kg)">Sample Evaluation Pack (250g - 1 Kg)</option>
                 <option value="50 Kg (Trial Batch)">50 Kg (Trial Batch)</option>
@@ -170,13 +170,13 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
 
             {/* Packaging */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Packaging Preference
               </label>
               <select
                 value={packaging}
                 onChange={(e) => setPackaging(e.target.value)}
-                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800"
+                className="w-full text-xs font-semibold p-2.5 rounded-xl border border-stone-200 bg-white text-stone-800"
               >
                 <option value="Multiwall Kraft Paper Bags (25/50kg)">Multiwall Kraft Paper Bags (25/50kg)</option>
                 <option value="Vacuum Sealed Nitrogen Flushed Pouches">Vacuum Sealed Nitrogen Pouches</option>
@@ -187,7 +187,7 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
 
             {/* Destination Port / City */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Discharge Port / Delivery City (CIF / FOB)
               </label>
               <div className="relative">
@@ -196,15 +196,15 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
                   placeholder="e.g. Rotterdam, Hamburg, Antwerp, Genoa..."
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full text-xs p-2.5 pl-8 rounded-xl border border-slate-200 bg-white text-slate-800"
+                  className="w-full text-xs p-2.5 pl-8 rounded-xl border border-stone-200 bg-white text-stone-800"
                 />
-                <MapPin className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-3" />
+                <MapPin className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-3" />
               </div>
             </div>
 
             {/* Custom Notes */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase mb-1 tracking-wider font-mono">
+              <label className="block text-xs font-bold text-stone-800 uppercase mb-1 tracking-wider font-mono">
                 Specific Quality Requirements (Optional)
               </label>
               <textarea
@@ -212,14 +212,14 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
                 placeholder="e.g. 8mm bold green cardamom, HPLC curcumin %, target shipment window..."
                 value={customNotes}
                 onChange={(e) => setCustomNotes(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800"
+                className="w-full text-xs p-2.5 rounded-xl border border-stone-200 bg-white text-stone-800"
               />
             </div>
 
             {/* Message Preview */}
-            <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">Pre-filled Message Preview:</p>
-              <p className="text-xs text-slate-700 font-mono whitespace-pre-line bg-white p-2.5 rounded-lg border border-slate-200 line-clamp-4">
+            <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 space-y-1">
+              <p className="text-[10px] font-bold text-stone-400 uppercase tracking-wider font-mono">Pre-filled Message Preview:</p>
+              <p className="text-xs text-stone-700 font-mono whitespace-pre-line bg-white p-2.5 rounded-lg border border-stone-200 line-clamp-4">
                 {decodeURIComponent(generateMessage())}
               </p>
             </div>
@@ -227,7 +227,7 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
           </div>
 
           {/* Bottom Action */}
-          <div className="p-5 border-t border-slate-100 bg-white space-y-2">
+          <div className="p-5 border-t border-stone-100 bg-white space-y-2">
             <button
               onClick={handleSendWhatsApp}
               className="w-full py-3.5 px-6 bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] hover:brightness-110 active:scale-95 text-white border border-amber-400/50 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2.5 cursor-pointer font-mono"
@@ -235,7 +235,7 @@ export default function WhatsAppDrawer({ isOpen, onClose, initialProduct = null,
               <MessageCircle className="w-4 h-4 fill-emerald-400 text-emerald-400" />
               <span>Send RFQ on WhatsApp (1-Click)</span>
             </button>
-            <p className="text-[10px] text-slate-400 text-center font-mono">
+            <p className="text-[10px] text-stone-400 text-center font-mono">
               Active WhatsApp Desk: {SITE_CONFIG.whatsappDisplayNumber}
             </p>
           </div>

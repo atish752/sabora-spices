@@ -71,7 +71,7 @@ export default function ModernSolutions() {
             <span>Commercial Supply Channels</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-stone-950">
+          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-stone-950">
             Wholesale & Private Label Solutions
           </h2>
 
@@ -103,7 +103,7 @@ export default function ModernSolutions() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-950 mb-3 group-hover:text-emerald-950 transition-colors">
+                  <h3 className="font-sans text-xl sm:text-2xl font-bold text-stone-950 mb-3 group-hover:text-emerald-950 transition-colors">
                     {sol.title}
                   </h3>
 

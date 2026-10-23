@@ -50,7 +50,7 @@ export default function ModernCollection({ products = [], onSelectProduct, onOpe
             <span>Export Catalog 2025/26</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-stone-950">
+          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-stone-950">
             The Single-Estate Collection
           </h2>
 
@@ -132,8 +132,9 @@ export default function ModernCollection({ products = [], onSelectProduct, onOpe
                       className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_12px_20px_rgba(0,0,0,0.16)] relative z-10"
                       loading="lazy"
                       onError={(e) => {
-                        // Fallback icon placeholder if image fails
-                        e.target.style.display = 'none';
+                        // Fallback image so card never appears broken or empty
+                        e.target.onerror = null;
+                        e.target.src = '/images/cardamom.png';
                       }}
                     />
 
@@ -147,7 +148,7 @@ export default function ModernCollection({ products = [], onSelectProduct, onOpe
 
                   {/* Product Titles */}
                   <div className="space-y-1 mb-4">
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-950 group-hover:text-emerald-950 transition-colors leading-snug">
+                    <h3 className="font-sans text-xl sm:text-2xl font-bold text-stone-950 group-hover:text-emerald-950 transition-colors leading-snug">
                       {product.name}
                     </h3>
 

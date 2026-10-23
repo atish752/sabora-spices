@@ -42,7 +42,7 @@ const REVIEWS = [
 
 export default function EuropeanTrust() {
   return (
-    <section className="py-20 sm:py-28 bg-[#FAF8F5] scroll-mt-20">
+    <section id="trust" className="py-20 sm:py-28 bg-[#FAF8F5] scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -52,7 +52,7 @@ export default function EuropeanTrust() {
             <span>European Commercial Trust</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-stone-950">
+          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-stone-950">
             Verified European Partnerships
           </h2>
 

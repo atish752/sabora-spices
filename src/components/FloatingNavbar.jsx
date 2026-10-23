@@ -108,24 +108,30 @@ export default function FloatingNavbar({ onScrollToSection, onOpenWhatsAppDrawer
           </div>
         </nav>
 
-        {/* Mobile Dropdown Sheet */}
+        {/* Mobile Dropdown Sheet with backdrop */}
         {mobileMenuOpen && (
-          <div className="pointer-events-auto md:hidden mt-2 mx-auto max-w-sm bg-white/95 backdrop-blur-2xl rounded-3xl p-5 border border-stone-200 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-4 duration-200">
-            <div className="space-y-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => {
-                    onScrollToSection(link.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-stone-800 hover:bg-stone-100 transition-colors flex items-center justify-between"
-                >
-                  <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-stone-400" />
-                </button>
-              ))}
-            </div>
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-2xs pointer-events-auto md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <div className="relative z-50 pointer-events-auto md:hidden mt-2 mx-auto max-w-sm bg-white/95 backdrop-blur-2xl rounded-3xl p-5 border border-stone-200 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-4 duration-200">
+              <div className="space-y-1">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => {
+                      onScrollToSection(link.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-stone-800 hover:bg-stone-100 transition-colors flex items-center justify-between"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight className="w-4 h-4 text-stone-400" />
+                  </button>
+                ))}
+              </div>
 
             <div className="pt-2 border-t border-stone-100 space-y-2">
               <button
@@ -150,8 +156,9 @@ export default function FloatingNavbar({ onScrollToSection, onOpenWhatsAppDrawer
               </button>
             </div>
           </div>
-        )}
-      </header>
-    </>
-  );
+        </>
+      )}
+    </header>
+  </>
+);
 }
