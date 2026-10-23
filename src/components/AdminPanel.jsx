@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Plus, Edit2, Trash2, Save, LogOut, ArrowLeft,
   CheckCircle2, AlertCircle, Star, Sparkles, Image as ImageIcon,
-  RotateCcw, Eye, ShieldCheck, Tag, DollarSign, Package
+  RotateCcw, Eye, ShieldCheck, Tag, DollarSign, Package, Upload, X
 } from 'lucide-react';
 import { PRODUCTS as DEFAULT_PRODUCTS } from '../data/products';
 
@@ -13,6 +13,47 @@ const PRESET_IMAGES = [
   { label: 'Turmeric Pack', url: '/images/turmeric-whole.png' },
   { label: 'Makhana Pack', url: '/images/makhana-fox-nuts.png' },
 ];
+
+/**
+ * Client-side high-fidelity image compressor.
+ * Compresses uploaded images to max 800px width/height to guarantee ultra-fast loading
+ * and stay well within localStorage storage quotas.
+ */
+function compressImageFile(file, maxWidth = 800, quality = 0.85) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith('image/')) {
+      return reject(new Error('Invalid image file'));
+    }
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth || height > maxWidth) {
+          if (width > height) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxWidth) / height);
+            height = maxWidth;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(dataUrl);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
 
 // Toast notification
 function Toast({ message, type }) {
@@ -85,9 +126,14 @@ function LoginScreen({ onLogin }) {
   );
 }
 
-// Add / Edit Product Modal
+// Add / Edit Product Modal with Instant Photo Upload & Compression
 function ProductModal({ product, isOpen, onClose, onSave }) {
   const isEditing = Boolean(product?.id);
+  const fileInputRef = useRef(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const [showUrlInput, setShowUrlInput] = useState(false);
+
   const [formData, setFormData] = useState({
     id: product?.id || `product-${Date.now()}`,
     name: product?.name || '',
@@ -102,6 +148,27 @@ function ProductModal({ product, isOpen, onClose, onSave }) {
   });
 
   if (!isOpen) return null;
+
+  const handleFileSelect = async (file) => {
+    if (!file) return;
+    setIsUploading(true);
+    try {
+      const compressedDataUrl = await compressImageFile(file, 800, 0.85);
+      setFormData(prev => ({ ...prev, image: compressedDataUrl }));
+    } catch (err) {
+      alert('Could not read image file. Please choose a valid JPG/PNG/WEBP.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -218,34 +285,123 @@ function ProductModal({ product, isOpen, onClose, onSave }) {
             </div>
           </div>
 
-          {/* Image Selection */}
-          <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider font-mono">
-              Product Image
+          {/* Photo Uploader (File / Dropzone / Presets) */}
+          <div className="space-y-2">
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider font-mono">
+              Product Photo Upload
             </label>
-            <div className="flex items-center gap-2 mb-2">
-              {PRESET_IMAGES.map((preset) => (
-                <button
-                  type="button"
-                  key={preset.url}
-                  onClick={() => setFormData({ ...formData, image: preset.url })}
-                  className={`text-xs px-2.5 py-1.5 rounded-lg border font-mono transition-all ${
-                    formData.image === preset.url
-                      ? 'bg-[#041A12] text-white border-emerald-600 shadow-xs'
-                      : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                  }`}
-                >
-                  {preset.label}
-                </button>
-              ))}
-            </div>
+
+            {/* Hidden native file input */}
             <input
-              type="text"
-              value={formData.image}
-              onChange={e => setFormData({ ...formData, image: e.target.value })}
-              placeholder="Or enter image URL (/images/cardamom.png)"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-mono focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 outline-none"
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  handleFileSelect(e.target.files[0]);
+                }
+              }}
             />
+
+            {/* Image Preview or Drop Area */}
+            {formData.image ? (
+              <div className="flex items-center gap-4 p-3.5 bg-slate-50 border border-slate-200 rounded-2xl">
+                <div className="w-16 h-16 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden">
+                  <img
+                    src={formData.image}
+                    alt="Preview"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-slate-800 truncate">
+                    Photo attached
+                  </p>
+                  <p className="text-[11px] text-slate-500 font-mono truncate">
+                    {formData.image.startsWith('data:') ? 'Custom uploaded image (optimized)' : formData.image}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="text-[11px] font-mono font-bold text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                    >
+                      Upload Different
+                    </button>
+                    <span className="text-slate-300">•</span>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, image: '' })}
+                      className="text-[11px] font-mono font-bold text-red-600 hover:text-red-800 underline cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={`border-2 border-dashed rounded-2xl p-5 text-center cursor-pointer transition-all ${
+                  dragOver
+                    ? 'border-emerald-600 bg-emerald-50/50'
+                    : 'border-slate-300 hover:border-emerald-600/60 bg-slate-50/60 hover:bg-slate-50'
+                }`}
+              >
+                <div className="w-10 h-10 mx-auto rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 mb-2 shadow-2xs">
+                  <Upload className="w-5 h-5 text-emerald-700" />
+                </div>
+                <p className="text-xs font-bold text-slate-800">
+                  {isUploading ? 'Optimizing photo...' : 'Click to upload photo or drag & drop'}
+                </p>
+                <p className="text-[11px] text-slate-500 mt-0.5 font-mono">
+                  PNG, JPG, or WEBP (auto-compressed for speed)
+                </p>
+              </div>
+            )}
+
+            {/* Quick Presets & Alternative URL Link */}
+            <div className="flex items-center justify-between pt-1">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Presets:</span>
+                {PRESET_IMAGES.map((preset) => (
+                  <button
+                    type="button"
+                    key={preset.url}
+                    onClick={() => setFormData({ ...formData, image: preset.url })}
+                    className={`text-[10px] px-2 py-0.5 rounded-md border font-mono transition-all ${
+                      formData.image === preset.url
+                        ? 'bg-[#041A12] text-white border-emerald-600'
+                        : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    {preset.label.split(' ')[0]}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowUrlInput(!showUrlInput)}
+                className="text-[10px] font-mono text-slate-500 hover:text-slate-800 underline"
+              >
+                {showUrlInput ? 'Hide URL' : 'Use URL'}
+              </button>
+            </div>
+
+            {showUrlInput && (
+              <input
+                type="text"
+                value={formData.image}
+                onChange={e => setFormData({ ...formData, image: e.target.value })}
+                placeholder="Or paste external/public image URL..."
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 outline-none mt-1"
+              />
+            )}
           </div>
 
           {/* MOQ, Origin, and Price */}

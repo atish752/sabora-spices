@@ -19,7 +19,8 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
     return () => clearInterval(t);
   }, [paused, slides.length]);
 
-  const current = slides[idx] ?? slides[0];
+  const safeIdx = idx < slides.length ? idx : 0;
+  const current = slides[safeIdx] ?? slides[0];
   if (!current) return null;
 
   const handleWhatsApp = () => {
@@ -70,12 +71,12 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
             </div>
 
             {/* Main Grand Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.08] tracking-tight whitespace-pre-line">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.08] tracking-tight whitespace-pre-line">
               {headline}
             </h1>
 
             {/* Subheading Narrative */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-sans max-w-xl mx-auto lg:mx-0">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-sans max-w-xl mx-auto lg:mx-0">
               {subheading}
             </p>
 
@@ -109,13 +110,13 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
                     key={p.id}
                     onClick={() => setIdx(i)}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all cursor-pointer flex items-center gap-2 ${
-                      i === idx
+                      i === safeIdx
                         ? 'bg-[#041A12] text-white shadow-sm border border-emerald-600'
                         : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                     }`}
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full ${i === idx ? 'bg-amber-400' : 'bg-slate-300'}`} />
-                    <span className="font-serif font-bold">{p.name.split(' ')[0]}</span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${i === safeIdx ? 'bg-amber-400' : 'bg-slate-300'}`} />
+                    <span className="font-serif font-bold">{p.name.split(' ').slice(0, 2).join(' ')}</span>
                     <span className="font-mono text-[10px] opacity-70">
                       {(p.moq || '50 Kg').split('(')[0].trim()}
                     </span>
@@ -127,13 +128,13 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
           </div>
 
           {/* Right Column: Visual Tactile Pedestal Showcase (5 cols) */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
+          <div className="lg:col-span-5 relative flex items-center justify-center py-4">
             
             {/* Ambient radiant light orb */}
-            <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-emerald-500/20 via-amber-400/15 to-emerald-400/20 blur-3xl pointer-events-none" />
+            <div className="absolute w-60 h-60 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-tr from-emerald-500/20 via-amber-400/15 to-emerald-400/20 blur-3xl pointer-events-none" />
 
             {/* Plinth Pedestal Circle */}
-            <div className="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-b from-white via-slate-50 to-emerald-50/40 p-6 shadow-2xl border border-slate-200/90 flex items-center justify-center">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-b from-white via-slate-50 to-emerald-50/40 p-6 shadow-2xl border border-slate-200/90 flex items-center justify-center">
               
               <div className="absolute inset-3 rounded-full border border-amber-400/40 pointer-events-none" />
               <div className="absolute inset-6 rounded-full border border-dashed border-emerald-500/20 pointer-events-none" />
@@ -145,11 +146,14 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
                   src={current.image}
                   alt={current.name}
                   className="max-h-[85%] max-w-[85%] object-contain drop-shadow-[0_20px_25px_rgba(4,26,18,0.25)] transition-all duration-500"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/cardamom.png';
+                  }}
                 />
               </div>
 
               {/* Floating Spec Pill: Top Right */}
-              <div className="absolute -top-2 right-2 sm:-right-2 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-slate-200 text-left">
+              <div className="absolute top-0 right-0 sm:-top-2 sm:-right-2 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-slate-200 text-left">
                 <div className="flex items-center gap-1.5 text-amber-700">
                   <Sparkles className="w-3 h-3 text-amber-600" />
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Lot Grade</span>
@@ -160,13 +164,13 @@ export default function HeroSlider({ products = [], heroConfig, onScrollToSectio
               </div>
 
               {/* Floating Compliance Pill: Bottom Left */}
-              <div className="absolute -bottom-2 left-2 sm:-left-2 z-20 bg-[#041A12] text-white px-3.5 py-2 rounded-xl shadow-lg border border-emerald-500/30 text-left">
+              <div className="absolute bottom-0 left-0 sm:-bottom-2 sm:-left-2 z-20 bg-[#041A12] text-white px-3.5 py-2 rounded-xl shadow-lg border border-emerald-500/30 text-left">
                 <div className="flex items-center gap-1.5 text-emerald-400">
                   <ShieldCheck className="w-3 h-3 text-emerald-400" />
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-300">Purity</span>
                 </div>
                 <p className="text-[11px] font-mono text-slate-200 mt-0.5">
-                  Non-ETO • 99.8% Sortex
+                  {current.euCompliance ? current.euCompliance.split('•')[0].trim() : 'Non-ETO'} • 99.8% Sortex
                 </p>
               </div>
 

@@ -3,22 +3,21 @@ import {
   X, 
   MessageCircle, 
   ShieldCheck, 
-  Scale, 
   MapPin, 
   Package, 
   Check, 
   FileCheck2,
   Copy,
   ExternalLink,
-  ChevronRight,
   Sparkles,
-  Anchor
+  Anchor,
+  Scale
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function ProductModal({ product, onClose }) {
   const [selectedQuantity, setSelectedQuantity] = useState("500 Kg (Commercial Lot)");
-  const [packagingPreference, setPackagingPreference] = useState("Multiwall Kraft Paper Valve Bags (25/50kg)");
+  const [packagingPreference, setPackagingPreference] = useState("Multiwall Kraft Barrier Bags (25/50kg)");
   const [destinationCity, setDestinationCity] = useState("Rotterdam Port (Netherlands)");
   const [copiedNotice, setCopiedNotice] = useState(false);
 
@@ -40,11 +39,10 @@ export default function ProductModal({ product, onClose }) {
       customText += `\n• Delivery Destination / Port (CIF / FOB): ${destinationCity.trim()}`;
     }
     return product.whatsappTemplate?.(customText) ?? encodeURIComponent(
-      `Hello Sabora Spices team,\n\nI am interested in *${product.name}* for commercial European B2B procurement.\n\n${customText}\n\nPlease share wholesale pricing, MOQ, and export delivery terms.\n\nThank you!`
+      `Hello Sabora Spices team,\n\nI am interested in *${product.name}* for European wholesale supply.\n\n${customText}\n\nPlease share current CIF export rates, MOQ, and laboratory COA specifications.\n\nThank you!`
     );
   };
 
-  // Immediate 1-click launch WhatsApp
   const handleLaunchWhatsApp = () => {
     const encoded = generateFormalMessage();
     SITE_CONFIG.openWhatsApp(encoded);
@@ -58,22 +56,22 @@ export default function ProductModal({ product, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
       
       {/* Modal Container */}
       <div 
-        className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden my-4 max-h-[94vh] flex flex-col font-sans"
+        className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200/90 overflow-hidden my-6 max-h-[92vh] flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Header bar */}
-        <div className="flex items-center justify-between px-6 sm:px-8 py-4 border-b border-slate-200/80 bg-white/95 sticky top-0 z-20 backdrop-blur-md">
+        <div className="flex items-center justify-between px-6 sm:px-8 py-4 border-b border-slate-100 bg-white/95 sticky top-0 z-20 backdrop-blur-md">
           <div className="flex items-center gap-2.5 flex-wrap">
-            <span className="text-xs font-bold uppercase tracking-widest text-brass-700 bg-brass-50 px-2.5 py-1 rounded-md border border-brass-300 font-mono">
-              {product.category}
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md font-mono">
+              {product.category || 'Whole Spices'}
             </span>
             {product.badge && (
-              <span className="text-xs font-bold text-emerald-950 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 font-mono">
+              <span className="text-[10px] font-bold text-amber-900 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200/80 font-mono uppercase">
                 {product.badge}
               </span>
             )}
@@ -86,356 +84,174 @@ export default function ProductModal({ product, onClose }) {
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer border border-transparent hover:border-slate-200"
+            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors text-sm font-bold cursor-pointer"
             aria-label="Close Modal"
           >
-            <X className="w-5 h-5" />
+            ×
           </button>
         </div>
 
         {/* Scrollable Body */}
-        <div className="overflow-y-auto p-5 sm:p-8 space-y-8 flex-1 pb-24 sm:pb-8 font-sans">
+        <div className="overflow-y-auto p-6 sm:p-8 space-y-6 flex-1 font-sans">
           
-          {/* Top Section: Photo + Overview + 1-CLICK WHATSAPP BUTTON */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
+          {/* Top Section: Photo + Overview */}
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
             
-            {/* Product Image Showcase with Glowing Pedestal */}
-            <div className="md:col-span-5 bg-gradient-to-b from-slate-50 via-emerald-50/20 to-slate-100/70 rounded-xl p-6 border border-slate-200/80 flex flex-col items-center justify-center relative group shadow-sm overflow-hidden">
-              <div className="absolute w-48 h-48 rounded-full bg-emerald-400/15 blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
+            {/* Product Image Showcase */}
+            <div className="sm:col-span-5 bg-gradient-to-b from-slate-50 via-emerald-50/20 to-slate-100/60 rounded-2xl p-6 border border-slate-100 flex flex-col items-center justify-center relative group overflow-hidden">
+              <div className="absolute w-36 h-36 rounded-full bg-emerald-400/10 blur-xl pointer-events-none" />
               <img 
                 src={product.image} 
                 alt={product.name} 
-                className="max-h-72 w-auto object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500 relative z-10" 
+                className="max-h-56 w-auto object-contain drop-shadow-lg relative z-10" 
               />
-              <div className="w-32 h-2.5 rounded-full bg-slate-300/40 blur-xs mt-1" />
-              <div className="mt-4 flex items-center gap-2 bg-white/95 px-3.5 py-1.5 rounded-full border border-slate-200/80 text-[10px] font-bold text-slate-900 shadow-xs font-mono uppercase relative z-10">
+              <div className="mt-3 flex items-center gap-1.5 bg-white/95 px-3 py-1 rounded-full border border-slate-200 text-[10px] font-mono font-bold text-slate-700 shadow-2xs uppercase relative z-10">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>99.8% Optical Sortex Grade</span>
+                <span>Sortex 99.8% Calibrated</span>
               </div>
             </div>
 
-            {/* Product Meta & Top 1-Click WhatsApp CTA */}
-            <div className="md:col-span-7 space-y-4">
+            {/* Product Meta */}
+            <div className="sm:col-span-7 space-y-3">
               <div>
-                <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-slate-950 tracking-tight leading-tight">
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
                   {product.name}
                 </h2>
                 
                 {product.botanicalName && (
-                  <p className="font-serif italic text-sm text-brass-700 font-medium mt-1">
+                  <p className="font-serif italic text-xs text-amber-800 mt-0.5">
                     {product.botanicalName}
                   </p>
                 )}
 
-                <p className="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
-                  {product.tagline || product.subtitle}
+                <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                  {product.subtitle || 'Laser sortex-cleaned single-origin harvest lot for European tea blenders and gourmet purveyors.'}
                 </p>
               </div>
 
-              {/* Instant 1-Click WhatsApp Action Button */}
-              <div className="p-4 sm:p-5 bg-gradient-to-b from-slate-50 to-white rounded-xl border border-slate-200/80 space-y-3 shadow-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-900 flex items-center gap-2">
-                    <MessageCircle className="w-4 h-4 fill-emerald-600 text-emerald-600" />
-                    <span>WhatsApp Export Desk (1-Click)</span>
-                  </span>
-                  <span className="text-[10px] font-bold text-emerald-950 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 font-mono uppercase">
-                    Active Desk
+              {/* Quick Specs Grid */}
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono py-2">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase block">Single-Origin</span>
+                  <span className="font-bold text-slate-800 truncate block">
+                    {product.origin ? product.origin.split(',')[0] : 'Direct Estate'}
                   </span>
                 </div>
-                
-                <button
-                  onClick={handleLaunchWhatsApp}
-                  className="relative overflow-hidden w-full py-4 px-5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-98 text-white rounded-lg font-bold text-xs sm:text-sm shadow-md shadow-emerald-950/25 hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-2.5 cursor-pointer group uppercase tracking-wider font-mono border border-emerald-400/40 ring-2 ring-emerald-500/10"
-                  title="Open WhatsApp with formal inquiry"
-                >
-                  <div className="absolute inset-0 shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <MessageCircle className="w-4 h-4 fill-white text-white group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">Send Commercial Inquiry on WhatsApp</span>
-                  <ExternalLink className="w-3.5 h-3.5 relative z-10" />
-                </button>
-
-                <p className="text-[11px] text-slate-500 text-center font-sans">
-                  Pre-fills formal commercial pretext for this {product.name.split(' ')[0]} lot.
-                </p>
-              </div>
-
-              {/* Quick specs grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200/80">
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Terroir & Origin</p>
-                  <p className="text-xs font-bold text-slate-900 mt-0.5 flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-brass-600 shrink-0" />
-                    <span className="truncate">{product.origin || 'Direct Estate'}</span>
-                  </p>
-                </div>
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200/80">
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Commercial MOQ</p>
-                  <p className="text-xs font-bold text-slate-900 mt-0.5 flex items-center gap-1">
-                    <Scale className="w-3.5 h-3.5 text-brass-600 shrink-0" />
-                    <span className="truncate">{product.moq || '50 Kg'}</span>
-                  </p>
-                </div>
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200/80 col-span-2 sm:col-span-1">
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Incoterms</p>
-                  <p className="text-xs font-bold text-slate-900 mt-0.5 flex items-center gap-1">
-                    <Anchor className="w-3.5 h-3.5 text-brass-600 shrink-0" />
-                    <span className="truncate">{product.incoterms ? product.incoterms.split('|')[0].trim() : 'CIF European Ports'}</span>
-                  </p>
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                  <span className="text-[10px] text-slate-400 uppercase block">Minimum Order</span>
+                  <span className="font-bold text-slate-800 truncate block">
+                    {(product.moq || '50 Kg').split('(')[0].trim()}
+                  </span>
                 </div>
               </div>
 
-              {/* Terroir & EU Standards Strip */}
-              {(product.terroir || product.euCompliance) && (
-                <div className="p-3.5 bg-emerald-50/50 rounded-lg border border-emerald-100 space-y-1">
-                  {product.terroir && (
-                    <p className="text-[11px] text-slate-700 font-sans">
-                      <strong className="text-slate-900">Terroir:</strong> {product.terroir}
-                    </p>
-                  )}
-                  {product.euCompliance && (
-                    <p className="text-[11px] text-emerald-950 font-semibold flex items-center gap-1.5 font-sans">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                      <span>{product.euCompliance}</span>
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {/* Grades available */}
-              {product.gradesAvailable && product.gradesAvailable.length > 0 && (
-                <div>
-                  <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5 font-mono">
-                    Available Export Calibrations:
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {product.gradesAvailable.map((g, idx) => (
-                      <span key={idx} className="text-xs px-2.5 py-1 bg-white text-slate-800 rounded-md border border-slate-200 font-medium font-sans shadow-2xs">
-                        ✓ {g}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
+              {/* 1-Click WhatsApp Button */}
+              <button
+                onClick={handleLaunchWhatsApp}
+                className="w-full py-3.5 px-5 bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] hover:brightness-110 active:scale-95 text-white border border-amber-400/50 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer font-mono"
+              >
+                <MessageCircle className="w-4 h-4 fill-emerald-400 text-emerald-400 shrink-0" />
+                <span>Inquire on WhatsApp (1-Click)</span>
+              </button>
             </div>
 
           </div>
 
-          {/* Section 2: Technical & Chemical Specifications Table (COA) */}
-          <div className="space-y-3">
+          {/* Technical Specifications Table */}
+          <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between">
-              <h3 className="font-cinzel text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                <FileCheck2 className="w-5 h-5 text-brass-600" />
-                <span>Technical Dossier & Chemical Analysis (COA)</span>
+              <h3 className="font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
+                <FileCheck2 className="w-4 h-4 text-emerald-700" />
+                <span>Technical Specifications & Analytical Benchmarks (COA)</span>
               </h3>
-              <span className="text-xs text-brass-800 font-bold bg-brass-50 px-2.5 py-1 rounded-md border border-brass-300 font-mono uppercase">
-                EU Compliant
+              <span className="text-[10px] text-emerald-900 font-bold bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200 font-mono uppercase">
+                EU MRL Compliant
               </span>
             </div>
 
-            <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs sm:text-sm divide-y divide-slate-200">
-                  <thead className="bg-slate-100 text-slate-900 font-bold uppercase text-[11px] tracking-wider font-mono">
-                    <tr>
-                      <th className="py-3 px-4">Analytical Parameter</th>
-                      <th className="py-3 px-4">Certified Laboratory Benchmark</th>
+            <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+              <table className="w-full text-left text-xs divide-y divide-slate-100">
+                <thead className="bg-slate-50 text-slate-700 font-bold uppercase text-[10px] tracking-wider font-mono">
+                  <tr>
+                    <th className="py-2.5 px-4">Parameter</th>
+                    <th className="py-2.5 px-4">Certified Benchmark</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-800 font-sans">
+                  {(product.specifications && product.specifications.length > 0 ? product.specifications : [
+                    { label: 'Origin Terroir', value: product.origin || 'Direct Estate Harvest' },
+                    { label: 'Optical Purity', value: '99.8% Laser Sortex' },
+                    { label: 'EU Pesticide MRLs', value: 'Conforms to (EC) No 396/2005' },
+                    { label: 'Shelf Life', value: '24 Months in Nitrogen Sealed Packaging' }
+                  ]).map((spec, i) => (
+                    <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}>
+                      <td className="py-2.5 px-4 font-semibold text-slate-600">{spec.label}</td>
+                      <td className="py-2.5 px-4 text-slate-900 font-medium">{spec.value}</td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200/80 text-slate-800 font-sans">
-                    {(product.specifications && product.specifications.length > 0) ? (
-                      product.specifications.map((spec, i) => (
-                        <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}>
-                          <td className="py-2.5 px-4 font-semibold text-slate-700">{spec.label}</td>
-                          <td className="py-2.5 px-4 text-slate-950 font-bold">{spec.value}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={2} className="py-4 px-4 text-center text-slate-500 italic">
-                          Official batch HPLC analysis, moisture, and volatile oil Certificate of Analysis (COA) dispatched with commercial evaluation samples.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          {/* Section 3: Bulk Packaging & Target European Blenders */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* Packaging options */}
-            <div className="p-5 bg-slate-50/70 rounded-xl border border-slate-200/80 space-y-3 shadow-2xs">
-              <h4 className="font-cinzel font-bold text-base text-slate-900 flex items-center gap-2">
-                <Package className="w-4 h-4 text-brass-600" />
-                <span>Export Packaging Specifications</span>
-              </h4>
-              <ul className="space-y-2 text-xs text-slate-700 font-sans">
-                {(product.packagingOptions && product.packagingOptions.length > 0 ? product.packagingOptions : [
-                  "25 Kg / 50 Kg Multiwall Kraft Paper Bags with PE Liner",
-                  "Vacuum Sealed Nitrogen Barrier Pouches",
-                  "Custom Private Label Stand-Up Pouches with Multilingual EU Labeling",
-                  "Palletized Container Shipments for Sea & Air Freight"
-                ]).map((opt, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{opt}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Interactive RFQ Form Strip */}
+          <div className="p-5 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-4">
+            <h4 className="font-serif text-base font-bold text-slate-900 flex items-center gap-2">
+              <MessageCircle className="w-4 h-4 text-emerald-700 fill-emerald-700" />
+              <span>Configure Pre-Filled WhatsApp RFQ</span>
+            </h4>
 
-            {/* Target industries */}
-            <div className="p-5 bg-slate-50/70 rounded-xl border border-slate-200/80 space-y-3 shadow-2xs">
-              <h4 className="font-cinzel font-bold text-base text-slate-900 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brass-600" />
-                <span>Ideal Industry Applications in Europe</span>
-              </h4>
-              <ul className="space-y-2 text-xs text-slate-700 font-sans">
-                {(product.b2bIdealFor && product.b2bIdealFor.length > 0 ? product.b2bIdealFor : [
-                  "European Spice Blenders & Tea Houses",
-                  "Bio & Organic Supermarket Chains in DACH & Benelux",
-                  "Gourmet Bakery & Confectionery Producers",
-                  "Overseas Importers & Global Commodity Distributors"
-                ]).map((ind, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-brass-600 shrink-0 mt-0.5" />
-                    <span>{ind}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-
-          {/* Section 4: Interactive WhatsApp RFQ Customizer */}
-          <div className="p-6 bg-slate-50/80 rounded-xl border border-slate-200/80 space-y-5 shadow-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <h4 className="font-cinzel text-lg font-bold text-slate-900 flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5 text-emerald-600 fill-emerald-600" />
-                  <span>Configure Your Commercial RFQ</span>
-                </h4>
-                <p className="text-xs text-slate-600 mt-0.5 font-sans">
-                  Select your quantity and European discharge port. The message below updates in real-time.
-                </p>
-              </div>
-
-              <span className="text-[10px] font-bold text-emerald-950 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-200 shrink-0 font-mono uppercase">
-                Direct to Export Desk
-              </span>
-            </div>
-
-            {/* Interactive Inputs */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-sans">
-              
-              {/* Estimated Volume */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider font-mono">
-                  Volume Required
+                <label className="block text-[10px] font-bold text-slate-600 uppercase mb-1 font-mono">
+                  Order Volume
                 </label>
                 <select
                   value={selectedQuantity}
                   onChange={(e) => setSelectedQuantity(e.target.value)}
-                  className="w-full text-xs font-semibold p-2.5 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 text-slate-800 shadow-2xs"
+                  className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800"
                 >
-                  <option value="50 Kg (Trial Batch)">50 Kg (Trial Batch)</option>
-                  <option value="100 Kg">100 Kg</option>
-                  <option value="500 Kg (Commercial Lot)">500 Kg (Commercial Lot)</option>
-                  <option value="1 Metric Ton (1,000 Kg)">1 Metric Ton (1,000 Kg)</option>
-                  <option value="5+ Metric Tons (FCL Cargo)">5+ Metric Tons (FCL Cargo)</option>
-                  <option value="Sample Pack (250g - 1 Kg)">Sample Pack (250g - 1 Kg)</option>
+                  <option value="50 Kg (Trial Pallet Lot)">50 Kg (Trial Pallet Lot)</option>
+                  <option value="250 Kg - 500 Kg (Commercial Lot)">250 Kg - 500 Kg (Commercial Lot)</option>
+                  <option value="1 MT - 3 MT (LCL Container)">1 MT - 3 MT (LCL Container)</option>
+                  <option value="Full Container Load (20ft FCL)">Full Container Load (20ft FCL)</option>
+                  <option value="Evaluation Sample Kit (250g - 1 Kg)">Evaluation Sample Kit (250g - 1 Kg)</option>
                 </select>
               </div>
 
-              {/* Packaging */}
               <div>
-                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider font-mono">
-                  Packaging Type
-                </label>
-                <select
-                  value={packagingPreference}
-                  onChange={(e) => setPackagingPreference(e.target.value)}
-                  className="w-full text-xs font-semibold p-2.5 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 text-slate-800 shadow-2xs"
-                >
-                  <option value="Multiwall Kraft Paper Valve Bags (25/50kg)">Multiwall Kraft Paper Bags (25/50kg)</option>
-                  <option value="Vacuum Sealed Nitrogen Bricks">Vacuum Sealed Nitrogen Bricks</option>
-                  <option value="Custom Private Label Pouches (Our Brand)">Custom Private Label Pouches</option>
-                  <option value="Export Master Corrugated Boxes">Export Master Corrugated Boxes</option>
-                </select>
-              </div>
-
-              {/* Destination Port / City */}
-              <div>
-                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider font-mono">
+                <label className="block text-[10px] font-bold text-slate-600 uppercase mb-1 font-mono">
                   Discharge Port (CIF / FOB)
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Rotterdam, Hamburg, Genoa, London"
+                  placeholder="e.g. Rotterdam, Hamburg, Genoa..."
                   value={destinationCity}
                   onChange={(e) => setDestinationCity(e.target.value)}
-                  className="w-full text-xs p-2.5 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 text-slate-800 shadow-2xs"
+                  className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800"
                 />
               </div>
-
             </div>
 
-            {/* Live Message Preview Box */}
-            <div className="relative bg-white rounded-lg border border-slate-200 p-4 shadow-2xs font-sans">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono">
-                  Pre-filled WhatsApp Message Preview:
-                </span>
-                <button
-                  onClick={handleCopyMessage}
-                  className="text-xs text-brass-700 hover:text-brass-900 font-semibold flex items-center gap-1 cursor-pointer"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>{copiedNotice ? "Copied!" : "Copy Text"}</span>
-                </button>
-              </div>
-              <p className="text-xs text-slate-800 font-mono whitespace-pre-line bg-slate-50 p-3 rounded-md border border-slate-200/80 max-h-36 overflow-y-auto">
-                {decodeURIComponent(generateFormalMessage())}
-              </p>
-            </div>
+            <div className="flex items-center justify-between pt-1">
+              <button
+                onClick={handleCopyMessage}
+                className="text-xs text-amber-800 hover:text-amber-900 font-semibold flex items-center gap-1 cursor-pointer font-mono"
+              >
+                <Copy className="w-3.5 h-3.5" />
+                <span>{copiedNotice ? "Copied to clipboard!" : "Copy inquiry text"}</span>
+              </button>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button
                 onClick={handleLaunchWhatsApp}
-                className="relative overflow-hidden flex-1 py-4 px-6 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-98 text-white rounded-lg font-bold text-sm shadow-md shadow-emerald-950/25 hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-3 cursor-pointer group uppercase tracking-wider font-mono border border-emerald-400/40 ring-2 ring-emerald-500/10"
+                className="px-5 py-2.5 bg-[#041A12] hover:bg-emerald-950 text-white rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-2"
               >
-                <div className="absolute inset-0 shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                <MessageCircle className="w-5 h-5 fill-white text-white group-hover:scale-110 transition-transform relative z-10" />
-                <span className="relative z-10">Launch WhatsApp RFQ (1-Click)</span>
-                <ExternalLink className="w-4 h-4 relative z-10" />
-              </button>
-
-              <button
-                onClick={onClose}
-                className="py-3.5 px-6 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg font-bold text-xs cursor-pointer uppercase tracking-wider font-mono transition-colors"
-              >
-                Close & Return
+                <MessageCircle className="w-3.5 h-3.5 fill-emerald-400 text-emerald-400" />
+                <span>Send on WhatsApp</span>
               </button>
             </div>
-
           </div>
 
-        </div>
-
-        {/* Mobile Sticky Bottom Inquiry Trigger */}
-        <div className="sm:hidden absolute bottom-0 inset-x-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 shadow-lg">
-          <button
-            onClick={handleLaunchWhatsApp}
-            className="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer border border-emerald-400/30 uppercase tracking-wider font-mono"
-          >
-            <MessageCircle className="w-4 h-4 fill-white text-white" />
-            <span>Send Inquiry on WhatsApp (1-Click)</span>
-          </button>
         </div>
 
       </div>

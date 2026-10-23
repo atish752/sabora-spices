@@ -81,14 +81,14 @@ export default function Navbar({ onSelectProduct, onOpenWhatsAppDrawer, onScroll
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-cinzel text-xl sm:text-2xl font-bold tracking-[0.16em] text-[#041A12] group-hover:text-amber-700 transition-colors">
+                  <span className="font-cinzel text-lg sm:text-2xl font-bold tracking-[0.12em] sm:tracking-[0.16em] text-[#041A12] group-hover:text-amber-700 transition-colors">
                     SABORA SPICES
                   </span>
                   <span className="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-900 border border-amber-400/60 rounded hidden sm:inline-block font-mono">
                     EU EXPORT
                   </span>
                 </div>
-                <p className="text-[10px] font-sans text-slate-500 tracking-wider uppercase font-semibold">
+                <p className="text-[9px] sm:text-[10px] font-sans text-slate-500 tracking-wider uppercase font-semibold">
                   Artisanal Terroir Spices
                 </p>
               </div>
@@ -219,7 +219,8 @@ export default function Navbar({ onSelectProduct, onOpenWhatsAppDrawer, onScroll
                 <span className="w-2 h-2 rounded-full bg-emerald-400 relative" />
               </div>
               <MessageCircle className="w-4 h-4 fill-emerald-400 text-emerald-400 shrink-0" />
-              <span className="tracking-wide">Inquire (1-Click)</span>
+              <span className="hidden sm:inline tracking-wide">Inquire (1-Click)</span>
+              <span className="sm:hidden tracking-wide text-[11px]">Inquire</span>
             </button>
 
             {/* Mobile Menu Toggle Button */}

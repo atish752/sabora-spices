@@ -202,12 +202,14 @@ function normalizeProduct(p, defaultMatch) {
     pricePerPiece: p.pricePerPiece || { value: '', label: 'Per Piece', visible: false },
     bulkPrice: p.bulkPrice || { value: '', quantityLabel: 'Per 50 Kg', visible: false },
     whatsappTemplate: (customDetails = '') => {
-      if (defaultMatch?.whatsappTemplate && !customDetails) {
-        return defaultMatch.whatsappTemplate();
-      }
       let msg = `Hello Sabora Spices export team,\n\nI am requesting commercial wholesale terms and an official quotation for *${p.name}*${p.botanicalName ? ` (${p.botanicalName})` : ''}.\n\n`;
-      if (customDetails) msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      msg += `Could you please share current wholesale pricing (CIF / FOB), MOQ, and COA specifications?\n\nThank you!`;
+      if (customDetails) {
+        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
+      }
+      msg += `• Minimum Order Quantity (MOQ): ${(p.moq || '50 Kg').split('(')[0].trim()}\n`;
+      if (p.origin) msg += `• Origin / Terroir: ${p.origin}\n`;
+      if (p.bulkPrice?.visible && p.bulkPrice?.value) msg += `• Wholesale Rate: ${p.bulkPrice.value}\n`;
+      msg += `\nCould you please share current CIF / FOB European port rates and latest COA specifications?\n\nThank you!`;
       return encodeURIComponent(msg);
     },
   };
