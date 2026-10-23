@@ -1,153 +1,120 @@
 import React from 'react';
-import { Package, Factory, Anchor, MessageCircle, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Anchor, Package, Factory, MessageCircle, Check } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function B2BServices({ servicesConfig, onOpenWhatsAppDrawer }) {
   const defaultServices = [
     {
       num: "01",
-      icon: Package,
-      badge: "OEM & European Retail Brands",
-      title: "Private Label & Retail Packaging",
-      description: "Launch your own branded whole spices line. We sortex grade, nitrogen flush, and package in sustainable FSC-certified kraft zipper pouches or luxury glass jars with complete multilingual European labelling.",
-      features: [
-        "100g to 1kg recyclable barrier pouches & amber jars",
-        "Nitrogen flush technology locking volatile terpenes for 24 months",
-        "Multilingual EU compliant labelling (EN, DE, FR, NL) & barcoding",
-        "Accessible MOQ trial batches for emerging European gourmet brands"
+      icon: Anchor,
+      badge: "Ocean & Air Cargo",
+      title: "Bulk Container Freight (CIF / FOB)",
+      description: "Direct origin shipping to European ports with complete phytosanitary clearance, APEDA documentation, and container stuffing.",
+      bullets: [
+        "FCL (20ft / 40ft) & consolidated LCL pallet cargo",
+        "CIF Rotterdam, Hamburg, Antwerp & Genoa",
+        "Full phytosanitary & non-ETO certification included"
       ],
-      whatsappPrompt: "Hello Sabora Spices team,\n\nI am interested in Private Label / OEM retail packaging for our European brand. Could you please share available packaging formats, minimum order quantities (MOQ), and pricing?\n\nThank you!"
+      whatsappPrompt: "Hello Sabora Spices team,\n\nI want to inquire about bulk container load export terms, phytosanitary clearance, and CIF European port pricing (Rotterdam / Hamburg).\n\nThank you!"
     },
     {
       num: "02",
-      icon: Anchor,
-      badge: "European Commodity Importers",
-      title: "Bulk Ocean & Air Freight (CIF / FOB)",
-      description: "Direct origin bulk supply for international spice markets. We manage complete customs documentation, APEDA export clearance, phytosanitary certificates, and container stuffing to major European ports.",
-      features: [
-        "25 Kg & 50 Kg multiwall kraft paper sacks with food-grade PE barrier",
-        "FCL (20ft / 40ft containers) & consolidated LCL palletized cargo",
-        "CIF Rotterdam, Hamburg, Antwerp, Genoa & DAP door delivery",
-        "Fumigation, Phytosanitary, and non-ETO certification included"
+      icon: Package,
+      badge: "European Gourmet Brands",
+      title: "Private Label & OEM Packaging",
+      description: "Launch your branded whole spice assortment. We sortex-grade, nitrogen-flush, and pack in retail-ready recyclable pouches or glass jars.",
+      bullets: [
+        "100g to 1kg recyclable barrier pouches & amber jars",
+        "Nitrogen flush locking essential oils for 24 months",
+        "Multilingual European labeling (EN, DE, FR, NL) & EAN barcoding"
       ],
-      whatsappPrompt: "Hello Sabora Spices team,\n\nI want to inquire about bulk container load export terms, phytosanitary clearance, and CIF European port pricing (Rotterdam / Hamburg) for whole spices.\n\nThank you!"
+      whatsappPrompt: "Hello Sabora Spices team,\n\nI am interested in Private Label / OEM packaging for our brand. Please share available formats, MOQs, and pricing.\n\nThank you!"
     },
     {
       num: "03",
       icon: Factory,
-      badge: "Industrial Blenders & HORECA",
+      badge: "Blenders & Food Ateliers",
       title: "Institutional Supply Contracts",
-      description: "Reliable, round-the-year spice procurement contracts for commercial grinding mills, masala blending houses, tea ateliers, and luxury European gastronomy groups.",
-      features: [
+      description: "Consistent harvest agreements for spice mills, tea ateliers, and gastronomy houses with price protection and scheduled dispatches.",
+      bullets: [
         "Consistent batch-to-batch volatile oil and curcumin levels",
-        "Scheduled monthly dispatches & reserved buffer inventory",
-        "Contract volume pricing with protection against market volatility",
-        "Priority batch testing with accredited Certificate of Analysis (COA)"
+        "Scheduled monthly dispatches with reserved buffer stock",
+        "Contract volume pricing with protection against market swings"
       ],
-      whatsappPrompt: "Hello Sabora Spices team,\n\nWe are looking for long-term institutional wholesale supply contracts for our blending / food manufacturing unit. Please connect with our commercial desk.\n\nThank you!"
+      whatsappPrompt: "Hello Sabora Spices team,\n\nWe are looking for long-term wholesale supply contracts for our blending / food manufacturing unit. Please connect with our commercial desk.\n\nThank you!"
     }
   ];
-
-  const serviceItems = (servicesConfig?.items && servicesConfig.items.length > 0)
-    ? servicesConfig.items.map((item, idx) => ({
-        ...item,
-        icon: idx === 0 ? Package : idx === 1 ? Anchor : Factory,
-        features: item.features || defaultServices[idx]?.features || []
-      }))
-    : defaultServices;
 
   const handleServiceWhatsAppClick = (promptText) => {
     SITE_CONFIG.openWhatsApp(encodeURIComponent(promptText));
   };
 
-  const title = servicesConfig?.title || "Tailored B2B Solutions for European Trade";
-  const subtitle = servicesConfig?.subtitle || "From palletized retail-ready pouches for organic supermarket chains to multi-ton container loads delivered CIF Rotterdam, Sabora Spices provides end-to-end supply chain assurance.";
-
   return (
-    <section 
-      id="b2b-services" 
-      className="w-full py-18 sm:py-26 bg-gradient-to-b from-[#020F0A] via-[#041D14] to-[#020F0A] text-slate-100 border-y border-emerald-900/60 scroll-mt-20 relative overflow-hidden"
-    >
-      {/* Radiant metallic gold hairline borders top and bottom */}
-      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
-
-      {/* Ambient glowing illumination orbs */}
-      <div className="absolute -top-32 -left-32 w-[38rem] h-[38rem] bg-emerald-500/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-[38rem] h-[38rem] bg-amber-400/10 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 relative z-10">
+    <section id="b2b-services" className="w-full py-16 sm:py-20 bg-slate-50/60 border-b border-slate-200/80 scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-3.5 mb-6 reveal-init">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-emerald-500/20 text-amber-300 text-xs font-bold uppercase tracking-widest border border-amber-400/50 font-mono shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Commercial Wholesale & OEM Services</span>
+        <div className="max-w-2xl mb-12 space-y-3">
+          <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/80">
+            <Anchor className="w-3.5 h-3.5 text-amber-600" />
+            <span>Commercial Supply Chains</span>
           </div>
           
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.06]">
-            {title}
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+            Wholesale & Export Solutions
           </h2>
           
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans max-w-2xl mx-auto">
-            {subtitle}
+          <p className="text-sm sm:text-base text-slate-600 font-sans leading-relaxed">
+            From palletized private-label retail pouches to multi-ton container loads delivered CIF to European terminals.
           </p>
         </div>
 
-        {/* Decorative Hairline Line */}
-        <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-amber-400/50 to-transparent mb-14 reveal-line" />
-
-        {/* Services Grid (High-Contrast Frosted Glass Luxury Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {serviceItems.map((srv, index) => {
-            const Icon = srv.icon || Package;
+        {/* 3 Modern Service Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7">
+          {defaultServices.map((service, idx) => {
+            const Icon = service.icon;
             return (
-              <div 
-                key={index}
-                className="bg-gradient-to-b from-white/[0.08] to-white/[0.03] backdrop-blur-xl rounded-2xl p-7 sm:p-9 border border-white/15 hover:border-amber-400/80 transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_30px_rgba(245,158,11,0.2)] hover:-translate-y-1.5 flex flex-col justify-between group reveal-init relative overflow-hidden"
+              <div
+                key={idx}
+                className="bg-white rounded-3xl border border-slate-200/90 hover:border-emerald-600/50 p-6 sm:p-7 flex flex-col justify-between shadow-2xs hover:shadow-xl transition-all duration-300 space-y-6"
               >
-                <div className="corner-tick-tl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="corner-tick-br opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-6">
-                    <span className="font-mono text-xs font-bold text-amber-300 bg-white/10 border border-white/20 px-3 py-1 rounded-md tracking-widest">
-                      SERVICE {srv.num || `0${index + 1}`}
-                    </span>
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-600/30 to-amber-500/20 border border-amber-400/40 text-amber-300 group-hover:bg-gradient-to-br group-hover:from-amber-400 group-hover:to-yellow-500 group-hover:text-slate-950 flex items-center justify-center transition-all shadow-md">
-                      <Icon className="w-6 h-6" />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="w-11 h-11 rounded-2xl bg-[#041A12] text-amber-400 flex items-center justify-center shadow-xs">
+                      <Icon className="w-5 h-5 text-amber-400" />
                     </div>
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">
+                      {service.badge}
+                    </span>
                   </div>
 
-                  <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-widest block mb-2 font-mono">
-                    {srv.badge}
-                  </span>
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-slate-900 leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 font-sans mt-2 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors leading-snug">
-                    {srv.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-sans">
-                    {srv.description}
-                  </p>
-
-                  <ul className="space-y-2.5 mb-8 border-t border-white/10 pt-5">
-                    {srv.features?.map((feat, fIndex) => (
-                      <li key={fIndex} className="text-xs text-slate-200 flex items-start gap-2.5 font-sans">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{feat}</span>
+                  {/* Bullet Highlights */}
+                  <ul className="space-y-2 pt-2 border-t border-slate-100">
+                    {service.bullets.map((b, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 font-sans">
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
+                {/* WhatsApp Button */}
                 <button
-                  onClick={() => handleServiceWhatsAppClick(srv.whatsappPrompt)}
-                  className="relative overflow-hidden w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-98 text-white border border-emerald-400/50 hover:border-amber-400/70 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer font-mono shadow-[0_8px_25px_rgba(4,26,18,0.5)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.45)] group/btn"
+                  onClick={() => handleServiceWhatsAppClick(service.whatsappPrompt)}
+                  className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#041A12] text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
                 >
-                  <div className="absolute inset-0 shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <MessageCircle className="w-4 h-4 text-emerald-200 group-hover/btn:scale-110 transition-transform relative z-10 shrink-0" />
-                  <span className="relative z-10">Inquire on WhatsApp (1-Click)</span>
+                  <MessageCircle className="w-3.5 h-3.5 fill-emerald-400 text-emerald-400" />
+                  <span>Inquire on WhatsApp</span>
                 </button>
               </div>
             );

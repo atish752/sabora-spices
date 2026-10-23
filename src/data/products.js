@@ -44,14 +44,14 @@ export const PRODUCTS = [
       "Overseas Importers & Global Distributors"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about this cardamom spices (Green Cardamom / Elaichi) for commercial B2B procurement.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting commercial wholesale terms and an official quotation for *Green Cardamom (8mm+ Extra Bold)*.\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Could you please share:\n`;
-      msg += `1. Current wholesale price per Kg (for 7.5mm & 8mm+ bold pods)\n`;
-      msg += `2. Minimum Order Quantity (MOQ) & sample evaluation policy\n`;
-      msg += `3. Delivery timeline & dispatch terms (CIF / FOB)\n\n`;
+      msg += `Could you please provide:\n`;
+      msg += `1. Current CIF European port pricing per metric ton / kg (7.5mm & 8mm+ bold pods)\n`;
+      msg += `2. Minimum Order Quantity (MOQ) and pre-shipment sample evaluation terms\n`;
+      msg += `3. Latest laboratory Certificate of Analysis (COA) specifications\n\n`;
       msg += `Looking forward to your formal quotation. Thank you!`;
       return encodeURIComponent(msg);
     }
@@ -100,14 +100,14 @@ export const PRODUCTS = [
       "Export Houses shipping to Europe & Middle East"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your Turmeric Whole (Haldi Fingers & Bulbs) for commercial B2B procurement.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting commercial wholesale terms and an official quotation for *Turmeric Whole (Haldi Fingers & Bulbs)*.\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Could you please share:\n`;
-      msg += `1. Current wholesale rates per metric ton / quintal (Salem / Nizamabad)\n`;
-      msg += `2. Curcumin potency Certificate of Analysis (COA)\n`;
-      msg += `3. Packaging options (multiwall paper/jute) and export lead time\n\n`;
+      msg += `Could you please provide:\n`;
+      msg += `1. Current wholesale rates per metric ton (Salem Double Polished)\n`;
+      msg += `2. HPLC Curcumin potency Certificate of Analysis (COA)\n`;
+      msg += `3. Packaging options (multiwall paper/jute) and export dispatch timeline\n\n`;
       msg += `Looking forward to your formal quotation. Thank you!`;
       return encodeURIComponent(msg);
     }
@@ -156,14 +156,14 @@ export const PRODUCTS = [
       "Ayurvedic, Diet & Nutrition Manufacturers"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your Jumbo Makhana (Fox Nuts / Phool Makhana) for wholesale / private label supply.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting wholesale / private label supply terms for *Jumbo Makhana Fox Nuts (5-Suta / 6-Suta)*.\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Could you please share:\n`;
+      msg += `Could you please provide:\n`;
       msg += `1. Current wholesale rates for 5-suta and 6-suta jumbo grades\n`;
-      msg += `2. Private label packaging capabilities & sample dispatch process\n`;
-      msg += `3. Minimum order quantity and payment terms\n\n`;
+      msg += `2. Private label OEM packaging capabilities & sample dispatch process\n`;
+      msg += `3. Minimum order quantity and export lead time\n\n`;
       msg += `Looking forward to your formal quotation. Thank you!`;
       return encodeURIComponent(msg);
     }
@@ -207,11 +207,11 @@ export const PRODUCTS = [
       "International Export Commodity Traders"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your Black Pepper (Tellicherry & Malabar Garbled) for commercial wholesale supply.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Tellicherry & Malabar Garbled Black Pepper (550g/L - 580g/L)*.\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Please share current bulk rates (550g/L - 580g/L), MOQ, and delivery terms.\n\nThank you!`;
+      msg += `Please share current bulk rates, lab COA, MOQ, and CIF port terms.\n\nThank you!`;
       return encodeURIComponent(msg);
     }
   },
@@ -249,11 +249,11 @@ export const PRODUCTS = [
       "Gourmet Spice Mix Brands"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your Cloves (Lal Pari Whole Cloves) for commercial wholesale supply.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Lal Pari Handpicked Cloves* (>18% Eugenol).\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Please share current bulk pricing per Kg, eugenol oil analysis, and MOQ.\n\nThank you!`;
+      msg += `Please share current bulk pricing per kg, eugenol analysis, and export terms.\n\nThank you!`;
       return encodeURIComponent(msg);
     }
   },
@@ -291,7 +291,7 @@ export const PRODUCTS = [
       "Artisan Tisane & Tea Blenders"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your Star Anise (Chakra Phool Whole Blossoms) for commercial wholesale supply.\n\n`;
+      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Star Anise Whole 8-Pointed Blossoms*.\n\n`;
       if (customDetails) {
         msg += `*My Requirement Details:*\n${customDetails}\n\n`;
       }
@@ -308,10 +308,10 @@ export const CATEGORIES = [
 ];
 
 export const GENERAL_WHATSAPP_MESSAGE = (customDetails = "") => {
-  let msg = `Hello Sabora Spices team,\n\nI am interested to know more about your whole spices products and commercial B2B supply for European & international trade.\n\n`;
+  let msg = `Hello Sabora Spices team,\n\nI am contacting your European commercial desk regarding wholesale supply of single-estate whole spices.\n\n`;
   if (customDetails) {
     msg += `*My Inquiry:*\n${customDetails}\n\n`;
   }
-  msg += `Could you please share your complete wholesale product catalog, latest price list, and export supply terms (CIF / FOB)?\n\nThank you!`;
+  msg += `Could you please share your complete wholesale catalog, latest CIF price list, and export dispatch schedule?\n\nThank you!`;
   return encodeURIComponent(msg);
 };

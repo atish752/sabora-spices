@@ -37,10 +37,10 @@ export default function MobileBottomBar({ onOpenWhatsAppDrawer, onScrollToSectio
         {/* 1-Tap WhatsApp Main Action Button */}
         <button
           onClick={handleMobileWhatsAppClick}
-          className="flex-1 py-3 px-3 bg-gradient-to-r from-emerald-600 to-emerald-500 active:from-emerald-700 active:to-emerald-600 text-white border border-emerald-400/40 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20 transition-all cursor-pointer uppercase tracking-wider font-mono"
+          className="flex-1 py-3 px-3 bg-gradient-to-r from-[#041A12] to-[#082E20] text-white border border-amber-400/50 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20 transition-all cursor-pointer uppercase tracking-wider font-mono"
           title="Open WhatsApp with 1 tap"
         >
-          <MessageCircle className="w-4 h-4 fill-white text-white shrink-0" />
+          <MessageCircle className="w-4 h-4 fill-emerald-400 text-emerald-400 shrink-0" />
           <span>WhatsApp RFQ</span>
         </button>
 

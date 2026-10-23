@@ -14,27 +14,27 @@ const LS_HERO_KEY = 'sabora_hero_config';
 export const DEFAULT_HOMEPAGE_CONFIG = {
   announcement: {
     enabled: true,
-    badge: 'EXPORT NOTICE',
-    text: 'Harvest 2025/26 Single-Estate Lots • EU Reg. (EC) 396/2005 Compliant • CIF Rotterdam, Hamburg & Genoa Ports • Non-ETO Steam Sterilized • 1-Click WhatsApp Direct Desk',
+    badge: 'HARVEST 2025/26',
+    text: 'Single-Estate Harvests • CIF European Ports (Rotterdam, Hamburg, Genoa) • Non-ETO Purity',
   },
   hero: {
-    headline: 'Artisanal Single-Estate Spices,\nDirect From Origin',
-    subheading: 'Direct plantation harvest for European blenders, tea ateliers & food purveyors. Optical sortex graded, EU MRL compliant & steam sterilized.',
-    badge: 'SINGLE-ORIGIN HARVEST • CROP 2025/26',
+    headline: 'Artisanal Whole Spices,\nDirect From Origin.',
+    subheading: 'Single-estate harvests curated for European blenders, tea ateliers, and gourmet purveyors. Laser sortex-graded with direct CIF port delivery.',
+    badge: 'CROP 2025/26 DIRECT HARVEST',
     ctaText: 'Inquire on WhatsApp (1-Click)',
-    secondaryCtaText: 'Explore Catalog & Lab COA',
-    theme: 'emerald', // 'emerald' | 'alabaster'
+    secondaryCtaText: 'Explore Collection',
+    theme: 'emerald',
     stats: [
-      { id: 1, value: '15+ Years', label: 'Heritage Terroir', desc: 'Generational estate cultivation' },
-      { id: 2, value: '28+ Nations', label: 'Direct Export', desc: 'EU, UK & Swiss trade networks' },
-      { id: 3, value: '99.8%', label: 'Sortex Purity', desc: 'Laser optical color-graded' },
-      { id: 4, value: '2,500+ MT', label: 'Annual Volume', desc: 'Certified container freight' },
+      { id: 1, value: '15+ Yrs', label: 'Terroir Heritage', desc: 'Generational estate farming' },
+      { id: 2, value: '99.8%', label: 'Sortex Purity', desc: 'Laser optical color-graded' },
+      { id: 3, value: '28+ Nations', label: 'Global Trade', desc: 'European & global network' },
+      { id: 4, value: 'CIF & Air', label: 'Direct Freight', desc: 'Rotterdam, Hamburg, Genoa' },
     ]
   },
   trustBadges: {
     rating: '4.95',
     ratingScale: '/ 5.0',
-    reviewCount: '1,280+ Importers & Blenders',
+    reviewCount: '1,280+ European Importers',
     pillar1Title: 'Single-Estate Terroir',
     pillar1Desc: 'Idukki, Salem & Mithila origin lots',
     pillar2Title: 'EU MRL Compliant',
@@ -43,10 +43,10 @@ export const DEFAULT_HOMEPAGE_CONFIG = {
     pillar3Desc: 'Rotterdam, Hamburg, Genoa & Air',
   },
   story: {
-    title: 'Crafted by ancient terroirs, certified by European standards.',
-    subtitle: 'Uncompromising provenance, botanical purity, and scientific verification for discerning European culinary blenders and commercial importers.',
-    manifestoQuote: 'Great gastronomy begins in the soil. We believe whole spices should arrive at European blending mills and artisanal tables exactly as harvested — unadulterated, fragrant, and vibrant with natural essential oils.',
-    paragraph: 'When contracting Green Cardamom, Salem Turmeric, or Jumbo Makhana with Sabora Spices, every container delivered CIF Rotterdam or Hamburg matches the precise essential oil density, color vibrancy, and laboratory purity of your approved pre-shipment sample lot.',
+    title: 'The Sabora Quality Standard',
+    subtitle: 'Four non-negotiable principles guiding every harvest from plantation soil to European port.',
+    manifestoQuote: 'Great gastronomy begins in the soil. We believe whole spices should arrive at European blending mills and artisanal tables exactly as harvested — fragrant, unadulterated, and vibrant.',
+    paragraph: 'When contracting Green Cardamom, Salem Turmeric, or Jumbo Makhana with Sabora Spices, every container delivered CIF Rotterdam or Hamburg matches the precise volatile oil density and purity of your approved sample lot.',
     items: [
       {
         num: "01",
@@ -205,9 +205,9 @@ function normalizeProduct(p, defaultMatch) {
       if (defaultMatch?.whatsappTemplate && !customDetails) {
         return defaultMatch.whatsappTemplate();
       }
-      let msg = `Hello Sabora Spices export team,\n\nI am interested in *${p.name}*${p.botanicalName ? ` (${p.botanicalName})` : ''} for commercial European B2B procurement.\n\n`;
+      let msg = `Hello Sabora Spices export team,\n\nI am requesting commercial wholesale terms and an official quotation for *${p.name}*${p.botanicalName ? ` (${p.botanicalName})` : ''}.\n\n`;
       if (customDetails) msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      msg += `Could you please share current wholesale pricing, MOQ, COA specifications, and export delivery terms (CIF / FOB)?\n\nThank you!`;
+      msg += `Could you please share current wholesale pricing (CIF / FOB), MOQ, and COA specifications?\n\nThank you!`;
       return encodeURIComponent(msg);
     },
   };
