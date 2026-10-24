@@ -1,761 +1,1053 @@
 import React, { useState } from 'react';
 import { 
+  ArrowLeft, 
   Plus, 
-  Edit2, 
   Trash2, 
   Save, 
-  LogOut, 
-  ArrowLeft, 
+  RotateCcw, 
+  Upload, 
   CheckCircle2, 
   AlertCircle, 
-  Star, 
-  Sparkles, 
+  Layers, 
+  Package, 
+  Sliders, 
   Image as ImageIcon, 
-  RotateCcw, 
   Eye, 
+  MessageCircle, 
+  Mail, 
+  Download, 
   ShieldCheck, 
-  Upload, 
-  X,
-  Lock
+  Lock, 
+  Unlock, 
+  ChevronUp, 
+  ChevronDown 
 } from 'lucide-react';
-import { PRODUCTS as DEFAULT_PRODUCTS } from '../data/products';
-
-const ADMIN_PASSWORD = 'sabora2024';
-
-const PRESET_IMAGES = [
-  { label: 'Cardamom Pack', url: '/images/cardamom.png' },
-  { label: 'Turmeric Pack', url: '/images/turmeric-whole.png' },
-  { label: 'Makhana Pack', url: '/images/makhana-fox-nuts.png' },
-];
-
-/**
- * Client-side high-fidelity image compressor.
- * Compresses uploaded images to max 800px width/height to guarantee ultra-fast loading
- * and stay well within localStorage storage quotas.
- */
-function compressImageFile(file, maxWidth = 800, quality = 0.85) {
-  return new Promise((resolve, reject) => {
-    if (!file || !file.type.startsWith('image/')) {
-      return reject(new Error('Invalid image file'));
-    }
-    const reader = new FileReader();
-    reader.onerror = reject;
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onerror = reject;
-      img.onload = () => {
-        let width = img.width;
-        let height = img.height;
-        if (width > maxWidth || height > maxWidth) {
-          if (width > height) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
-          } else {
-            width = Math.round((width * maxWidth) / height);
-            height = maxWidth;
-          }
-        }
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        const dataUrl = canvas.toDataURL('image/jpeg', quality);
-        resolve(dataUrl);
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-function Toast({ message, type }) {
-  return (
-    <div className={`fixed top-4 right-4 z-[200] flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-xl text-xs font-bold font-mono tracking-wider transition-all ${
-      type === 'success' 
-        ? 'bg-[#041A12] text-white border border-emerald-500/40' 
-        : 'bg-red-950 text-white border border-red-500/40'
-    }`}>
-      {type === 'success' ? (
-        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-      ) : (
-        <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-      )}
-      <span>{message}</span>
-    </div>
-  );
-}
-
-function LoginScreen({ onLogin }) {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      onLogin();
-    } else {
-      setError('Incorrect password. Please try again.');
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4 font-sans relative overflow-hidden">
-      <div className="w-full max-w-sm bg-white rounded-3xl border border-stone-200/90 shadow-2xl p-8 space-y-6 relative z-10">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-[#041A12] text-white flex items-center justify-center mx-auto mb-3 border border-amber-400/40 shadow-sm">
-            <Lock className="w-5 h-5 text-amber-300" />
-          </div>
-          <h1 className="font-serif text-2xl font-bold text-stone-900">
-            Sabora Admin Desk
-          </h1>
-          <p className="text-xs text-stone-500">
-            Enter your management password to continue.
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-600 mb-1.5">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setError('');
-              }}
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/30"
-              autoFocus
-            />
-          </div>
-
-          {error && (
-            <p className="text-xs text-red-600 font-medium">{error}</p>
-          )}
-
-          <button
-            type="submit"
-            className="w-full py-3 px-4 rounded-xl bg-[#041A12] hover:bg-[#082E20] text-white text-xs font-mono font-bold tracking-wider uppercase border border-amber-400/40 shadow-sm transition-all cursor-pointer"
-          >
-            Access Management Console
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-function ProductModalForm({ isOpen, onClose, product, onSave }) {
-  const isEditing = Boolean(product);
-  const [formData, setFormData] = useState({
-    id: product?.id || `product-${Date.now()}`,
-    name: product?.name || '',
-    subtitle: product?.subtitle || '',
-    botanicalName: product?.botanicalName || '',
-    category: product?.category || 'Whole Spices',
-    image: product?.image || '/images/cardamom.png',
-    moq: product?.moq || '50 Kg',
-    origin: product?.origin || 'Idukki, Kerala, India',
-    badge: product?.badge || 'Export Grade #1',
-    featured: product?.featured ?? false,
-    price: product?.bulkPrice?.value || '',
-  });
-  const [isUploading, setIsUploading] = useState(false);
-
-  if (!isOpen) return null;
-
-  const handleFileSelect = async (file) => {
-    if (!file) return;
-    setIsUploading(true);
-    try {
-      const compressedDataUrl = await compressImageFile(file, 800, 0.85);
-      setFormData(prev => ({ ...prev, image: compressedDataUrl }));
-    } catch {
-      alert('Could not read image file. Please choose a valid JPG/PNG/WEBP.');
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name.trim()) return;
-
-    const savedProduct = {
-      ...(product || {}),
-      id: formData.id,
-      name: formData.name.trim(),
-      subtitle: formData.subtitle.trim(),
-      botanicalName: formData.botanicalName.trim(),
-      category: formData.category,
-      image: formData.image.trim(),
-      moq: formData.moq.trim(),
-      origin: formData.origin.trim(),
-      badge: formData.badge.trim(),
-      featured: formData.featured,
-      pricingEnabled: Boolean(formData.price.trim()),
-      bulkPrice: {
-        value: formData.price.trim(),
-        quantityLabel: 'Wholesale Rate',
-        visible: Boolean(formData.price.trim())
-      },
-      specifications: product?.specifications || [
-        { label: 'Origin', value: formData.origin.trim() || 'Direct Origin' },
-        { label: 'Grade', value: formData.badge.trim() || 'Sortex Cleaned' },
-        { label: 'MOQ', value: formData.moq.trim() || '50 Kg' }
-      ]
-    };
-
-    onSave(savedProduct);
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-white rounded-3xl border border-stone-200 shadow-2xl w-full max-w-lg p-6 sm:p-8 space-y-5 my-8">
-        
-        <div className="flex items-center justify-between border-b border-stone-100 pb-4">
-          <div>
-            <h2 className="font-serif text-2xl font-bold text-stone-900">
-              {isEditing ? 'Edit Product' : 'Add New Product'}
-            </h2>
-            <p className="text-xs text-stone-500 font-sans mt-0.5">
-              Enter product specifications for your European wholesale catalog.
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center text-sm font-bold cursor-pointer"
-          >
-            ×
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-              Product Name *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.name}
-              onChange={e => setFormData({ ...formData, name: e.target.value })}
-              placeholder="e.g. Green Cardamom (Elaichi)"
-              className="w-full px-4 py-2 rounded-xl border border-stone-200 text-sm focus:border-emerald-600 outline-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-                Botanical Name
-              </label>
-              <input
-                type="text"
-                value={formData.botanicalName}
-                onChange={e => setFormData({ ...formData, botanicalName: e.target.value })}
-                placeholder="e.g. Elettaria cardamomum"
-                className="w-full px-4 py-2 rounded-xl border border-stone-200 text-sm focus:border-emerald-600 outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-                Category
-              </label>
-              <select
-                value={formData.category}
-                onChange={e => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-4 py-2 rounded-xl border border-stone-200 text-sm focus:border-emerald-600 outline-none"
-              >
-                <option value="Whole Spices">Whole Spices</option>
-                <option value="Gourmet & Healthy Agro">Gourmet & Healthy Agro</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-              Short Description / Subtitle
-            </label>
-            <input
-              type="text"
-              value={formData.subtitle}
-              onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
-              placeholder="e.g. Sortex Sorted 8mm+ Extra Bold Natural Green Pods"
-              className="w-full px-4 py-2 rounded-xl border border-stone-200 text-sm focus:border-emerald-600 outline-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-                Origin / Terroir
-              </label>
-              <input
-                type="text"
-                value={formData.origin}
-                onChange={e => setFormData({ ...formData, origin: e.target.value })}
-                placeholder="e.g. Idukki, Kerala"
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:border-emerald-600 outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-                Quality Badge
-              </label>
-              <input
-                type="text"
-                value={formData.badge}
-                onChange={e => setFormData({ ...formData, badge: e.target.value })}
-                placeholder="e.g. Export Grade #1"
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:border-emerald-600 outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-                MOQ
-              </label>
-              <input
-                type="text"
-                value={formData.moq}
-                onChange={e => setFormData({ ...formData, moq: e.target.value })}
-                placeholder="e.g. 50 Kg"
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:border-emerald-600 outline-none"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1">
-              Wholesale Price (Optional)
-            </label>
-            <input
-              type="text"
-              value={formData.price}
-              onChange={e => setFormData({ ...formData, price: e.target.value })}
-              placeholder="e.g. $18.50/kg CIF Rotterdam (Leave blank for Inquire)"
-              className="w-full px-4 py-2 rounded-xl border border-stone-200 text-sm focus:border-emerald-600 outline-none"
-            />
-          </div>
-
-          {/* Product Image Section */}
-          <div className="space-y-2 pt-1 border-t border-stone-100">
-            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700">
-              Product Photo
-            </label>
-
-            <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-xl border border-stone-200 overflow-hidden bg-stone-50 flex items-center justify-center shrink-0 p-1">
-                <img
-                  src={formData.image}
-                  alt="Preview"
-                  className="w-full h-full object-contain"
-                  onError={(e) => { e.target.src = '/images/cardamom.png'; }}
-                />
-              </div>
-
-              <div className="flex-1 space-y-1.5">
-                <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold cursor-pointer transition-colors">
-                  <Upload className="w-3.5 h-3.5" />
-                  <span>{isUploading ? 'Compressing...' : 'Upload Image File'}</span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={e => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-                    disabled={isUploading}
-                  />
-                </label>
-
-                <input
-                  type="text"
-                  value={formData.image}
-                  onChange={e => setFormData({ ...formData, image: e.target.value })}
-                  placeholder="Or enter Image URL"
-                  className="w-full px-3 py-1.5 rounded-xl border border-stone-200 text-xs focus:border-emerald-600 outline-none"
-                />
-              </div>
-            </div>
-
-            {/* Preset quick buttons */}
-            <div className="flex items-center gap-2 pt-1">
-              <span className="text-[10px] text-stone-400 font-mono uppercase">Presets:</span>
-              {PRESET_IMAGES.map((preset) => (
-                <button
-                  key={preset.url}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, image: preset.url })}
-                  className="px-2 py-0.5 rounded text-[10px] bg-stone-100 hover:bg-stone-200 text-stone-700 font-mono transition-colors"
-                >
-                  {preset.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-stone-100">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl text-stone-600 hover:bg-stone-100 text-xs font-semibold transition-colors cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-2.5 rounded-xl bg-[#041A12] hover:bg-[#082E20] text-white text-xs font-mono font-bold tracking-wider uppercase border border-amber-400/40 shadow-sm cursor-pointer"
-            >
-              {isEditing ? 'Update Product' : 'Create Product'}
-            </button>
-          </div>
-
-        </form>
-
-      </div>
-    </div>
-  );
-}
+import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function AdminPanel({
-  products = [],
-  heroConfig = {},
+  products,
+  heroSlides,
+  inquiries,
+  firebaseStatus,
   onSaveProducts,
-  onSaveHeroConfig,
+  onSaveHeroSlides,
+  onUpdateInquiryStatus,
+  onDeleteInquiry,
   onResetAll,
   onClose
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [toast, setToast] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('sabora_admin_auth') === 'true';
+  });
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState(false);
 
-  // Hero section editing state
-  const [heroHeadline, setHeroHeadline] = useState(heroConfig?.headline || 'Artisanal Whole Spices.\nDirect From Origin.');
-  const [heroSubheading, setHeroSubheading] = useState(heroConfig?.subheading || 'Single-estate harvests curated for European spice blenders, tea ateliers, and organic brands. Laser sortex-graded with direct CIF port delivery.');
+  const [activeTab, setActiveTab] = useState('hero'); // 'hero', 'products', 'inquiries', 'settings'
+  const [saveSuccessMsg, setSaveSuccessMsg] = useState('');
 
-  // Modal editing state
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
+  // Editable local state
+  const [editableHeroSlides, setEditableHeroSlides] = useState(heroSlides || []);
+  const [editableProducts, setEditableProducts] = useState(products || []);
+  const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+  const [selectedProductIndex, setSelectedProductIndex] = useState(0);
 
-  const showToast = (message, type = 'success') => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
-
-  if (!isAuthenticated) {
-    return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
-  }
-
-  const handleSaveHero = (e) => {
+  // Authentication check
+  const handleLogin = (e) => {
     e.preventDefault();
-    if (onSaveHeroConfig) {
-      onSaveHeroConfig({
-        headline: heroHeadline,
-        subheading: heroSubheading
-      });
-      showToast('Hero section updated successfully!');
-    }
-  };
-
-  const handleToggleFeatured = (productId) => {
-    const updated = products.map(p => 
-      p.id === productId ? { ...p, featured: !p.featured } : p
-    );
-    if (onSaveProducts) {
-      onSaveProducts(updated);
-      showToast('Product featured status updated');
-    }
-  };
-
-  const handleDeleteProduct = (productId) => {
-    if (window.confirm('Are you sure you want to remove this product from the catalog?')) {
-      const updated = products.filter(p => p.id !== productId);
-      if (onSaveProducts) {
-        onSaveProducts(updated);
-        showToast('Product deleted from catalog', 'success');
-      }
-    }
-  };
-
-  const handleSaveProduct = (productData) => {
-    let updated;
-    const exists = products.some(p => p.id === productData.id);
-    if (exists) {
-      updated = products.map(p => p.id === productData.id ? productData : p);
-      showToast(`Updated "${productData.name}"`);
+    if (pinInput === '2026' || pinInput === 'admin' || pinInput === '1234') {
+      setIsAuthenticated(true);
+      sessionStorage.setItem('sabora_admin_auth', 'true');
+      setPinError(false);
     } else {
-      updated = [productData, ...products];
-      showToast(`Added "${productData.name}"`);
+      setPinError(true);
     }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem('sabora_admin_auth');
+  };
+
+  const triggerSaveNotification = (msg = 'Changes saved successfully!') => {
+    setSaveSuccessMsg(msg);
+    setTimeout(() => setSaveSuccessMsg(''), 4000);
+  };
+
+  // ── Hero Slide Actions ──
+  const handleHeroChange = (field, value) => {
+    const updated = [...editableHeroSlides];
+    updated[selectedSlideIndex] = {
+      ...updated[selectedSlideIndex],
+      [field]: value
+    };
+    setEditableHeroSlides(updated);
+  };
+
+  const handleHeroImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      handleHeroChange('image', reader.result);
+      triggerSaveNotification('Hero image uploaded into slide preview!');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleAddHeroSlide = () => {
+    const newSlide = {
+      id: "slide_" + Date.now(),
+      tag: "NEW SOURCING HIGHLIGHT",
+      title: "New Harvest Announcement\nDirect From Origin.",
+      subtitle: "Add descriptive details about your new crop, harvest season, or sourcing region here.",
+      image: "/images/hero-heritage.jpg",
+      badge: "Crop 2026",
+      primaryCtaText: "Request Wholesale Quote",
+      primaryCtaLink: "#contact",
+      secondaryCtaText: "Explore Products",
+      secondaryCtaLink: "#products",
+      fitMode: "cover"
+    };
+    const updated = [...editableHeroSlides, newSlide];
+    setEditableHeroSlides(updated);
+    setSelectedSlideIndex(updated.length - 1);
+  };
+
+  const handleDeleteHeroSlide = (index) => {
+    if (editableHeroSlides.length <= 1) {
+      alert("You must keep at least 1 hero banner slide.");
+      return;
+    }
+    const updated = editableHeroSlides.filter((_, i) => i !== index);
+    setEditableHeroSlides(updated);
+    setSelectedSlideIndex(Math.max(0, index - 1));
+  };
+
+  const handleSaveHero = async () => {
+    if (onSaveHeroSlides) {
+      await onSaveHeroSlides(editableHeroSlides);
+      triggerSaveNotification('Hero section slides saved & synced to cloud!');
+    }
+  };
+
+  // ── Product Actions ──
+  const handleProductChange = (field, value) => {
+    const updated = [...editableProducts];
+    updated[selectedProductIndex] = {
+      ...updated[selectedProductIndex],
+      [field]: value
+    };
+    setEditableProducts(updated);
+  };
+
+  const handleProductImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      handleProductChange('image', reader.result);
+      triggerSaveNotification('Product photo uploaded successfully!');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleAddProduct = () => {
+    const newProd = {
+      id: "prod_" + Date.now(),
+      name: "New Whole Spice Product",
+      subtitle: "Sourced with Purpose — Direct Farm Origin",
+      botanicalName: "Botanical specimen",
+      category: "Whole Spices",
+      categoryKey: "other",
+      featured: true,
+      badge: "Fresh Arrival",
+      tagline: "Enter product overview and quality summary here.",
+      image: "/images/cardamom-pouch.jpg",
+      gallery: ["/images/cardamom-pouch.jpg"],
+      rating: 4.9,
+      reviewsCount: 10,
+      moq: "100 Kg",
+      origin: "Selected Indian Belts",
+      netWeight: "Food-Grade Pouch & Bulk",
+      gradesAvailable: ["Standard Grade", "Export Grade"],
+      specifications: [
+        { label: "Product Form", value: "100% Whole Agricultural Product" },
+        { label: "Moisture Content", value: "Max 10.0%" }
+      ],
+      packagingOptions: [
+        "Sabora-Branded Food-Grade Pouches",
+        "Bulk Sacks / Corrugated Boxes"
+      ]
+    };
+    const updated = [...editableProducts, newProd];
+    setEditableProducts(updated);
+    setSelectedProductIndex(updated.length - 1);
+  };
+
+  const handleDeleteProduct = (index) => {
+    if (confirm("Are you sure you want to delete this product?")) {
+      const updated = editableProducts.filter((_, i) => i !== index);
+      setEditableProducts(updated);
+      setSelectedProductIndex(Math.max(0, index - 1));
+    }
+  };
+
+  const handleSaveProducts = async () => {
     if (onSaveProducts) {
-      onSaveProducts(updated);
+      await onSaveProducts(editableProducts);
+      triggerSaveNotification('Products catalog saved & synced to cloud!');
     }
   };
 
-  const handleResetDefaults = () => {
-    if (window.confirm('Reset all catalog products and hero settings back to factory defaults?')) {
-      if (onResetAll) {
-        onResetAll();
-        showToast('Reset all data to defaults');
-        setHeroHeadline('Artisanal Whole Spices.\nDirect From Origin.');
-        setHeroSubheading('Single-estate harvests curated for European spice blenders, tea ateliers, and organic brands. Laser sortex-graded with direct CIF port delivery.');
-      }
+  // ── Inquiries Export ──
+  const handleExportInquiriesCsv = () => {
+    if (!inquiries || inquiries.length === 0) {
+      alert("No inquiries to export.");
+      return;
     }
+
+    const headers = ["ID", "Date", "Status", "Name", "Company", "Phone", "Email", "Product", "Quantity", "Grade", "Packaging", "Destination", "Notes"];
+    const rows = inquiries.map(inq => [
+      inq.id || "",
+      inq.createdAt || "",
+      inq.status || "New",
+      `"${(inq.name || '').replace(/"/g, '""')}"`,
+      `"${(inq.company || '').replace(/"/g, '""')}"`,
+      `"${(inq.phone || '').replace(/"/g, '""')}"`,
+      `"${(inq.email || '').replace(/"/g, '""')}"`,
+      `"${(inq.product || '').replace(/"/g, '""')}"`,
+      `"${(inq.quantity || '').replace(/"/g, '""')}"`,
+      `"${(inq.grade || '').replace(/"/g, '""')}"`,
+      `"${(inq.packaging || '').replace(/"/g, '""')}"`,
+      `"${(inq.destination || '').replace(/"/g, '""')}"`,
+      `"${(inq.notes || '').replace(/"/g, '""')}"`,
+    ]);
+
+    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `sabora_inquiries_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  return (
-    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 font-sans pb-20">
-      
-      {toast && <Toast message={toast.message} type={toast.type} />}
-
-      {/* Top Admin Navigation Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-stone-200/90 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
-          
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-amber-400 p-0.5 bg-white shrink-0">
-              <img src="/images/logo.jpg" alt="Logo" className="w-full h-full object-cover rounded-full" />
-            </div>
-            <div>
-              <span className="font-cinzel text-base font-bold tracking-wider text-stone-900 block">
-                SABORA ADMIN
-              </span>
-              <span className="text-[10px] font-mono text-emerald-800 font-bold uppercase tracking-wider">
-                Management Console
-              </span>
-            </div>
+  // Login Gate
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-stone-900 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-stone-200 space-y-6 text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center">
+            <Lock className="w-8 h-8" />
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={handleResetDefaults}
-              className="px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
-              title="Reset to factory defaults"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Reset Defaults</span>
-            </button>
-
-            <button
-              onClick={onClose}
-              className="px-4 py-1.5 rounded-xl bg-[#041A12] hover:bg-[#082E20] text-white text-xs font-mono font-bold tracking-wider uppercase border border-amber-400/40 shadow-xs flex items-center gap-2 transition-all cursor-pointer"
-            >
-              <Eye className="w-3.5 h-3.5 text-emerald-400" />
-              <span>View Website</span>
-            </button>
-          </div>
-
-        </div>
-      </header>
-
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 pt-8 space-y-10">
-        
-        {/* Section 1: Hero Section Editor */}
-        <section className="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 shadow-xs">
-          <div className="max-w-2xl mb-6">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
-              Section Editor
-            </span>
-            <h2 className="font-serif text-2xl font-bold text-stone-900 mt-2">
-              Homepage Hero Section
+          <div className="space-y-1">
+            <h2 className="font-serif text-2xl font-bold text-stone-900">
+              SABORA SPICES
             </h2>
-            <p className="text-xs text-stone-500 font-sans">
-              Update the headline and subline shown at the top of the European showcase.
+            <p className="text-xs text-amber-700 font-semibold uppercase tracking-wider">
+              Management Portal
+            </p>
+            <p className="text-xs text-stone-500 pt-1">
+              Enter admin passcode to manage hero banners, products, and incoming quotes.
             </p>
           </div>
 
-          <form onSubmit={handleSaveHero} className="space-y-4 max-w-3xl">
+          <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Hero Headline (Supports line breaks)
-              </label>
-              <textarea
-                rows={2}
-                value={heroHeadline}
-                onChange={e => setHeroHeadline(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm font-serif font-bold text-stone-900 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/30"
+              <input
+                type="password"
+                value={pinInput}
+                onChange={(e) => setPinInput(e.target.value)}
+                placeholder="Enter PIN (Default: 2026)"
+                autoFocus
+                className="w-full text-center tracking-widest text-lg font-mono py-3 px-4 rounded-xl border border-stone-300 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
               />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Hero Subheading
-              </label>
-              <textarea
-                rows={2}
-                value={heroSubheading}
-                onChange={e => setHeroSubheading(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm font-sans text-stone-700 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/30"
-              />
-            </div>
-
-            <div className="pt-1">
-              <button
-                type="submit"
-                className="px-5 py-2.5 rounded-xl bg-stone-900 hover:bg-[#041A12] text-white text-xs font-mono font-bold uppercase tracking-wider border border-amber-400/40 shadow-xs flex items-center gap-2 cursor-pointer transition-all"
-              >
-                <Save className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Save Hero Settings</span>
-              </button>
-            </div>
-          </form>
-        </section>
-
-        {/* Section 2: Product Catalog Manager */}
-        <section className="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 shadow-xs">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-            <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-900 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                Catalog Manager
-              </span>
-              <h2 className="font-serif text-2xl font-bold text-stone-900 mt-2">
-                Products & Wholesale Inventory
-              </h2>
-              <p className="text-xs text-stone-500 font-sans">
-                Manage spices, package photos, MOQs, and pricing.
-              </p>
+              {pinError && (
+                <p className="text-xs text-rose-600 font-medium pt-1.5">
+                  Invalid passcode. Please use 2026 or contact admin.
+                </p>
+              )}
             </div>
 
             <button
-              onClick={() => {
-                setEditingProduct(null);
-                setModalOpen(true);
-              }}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#041A12] to-[#082E20] text-white text-xs font-mono font-bold uppercase tracking-wider border border-amber-400/40 shadow-sm flex items-center gap-2 cursor-pointer hover:scale-[1.01] transition-transform"
+              type="submit"
+              className="w-full py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-sm shadow transition-all cursor-pointer"
             >
-              <Plus className="w-4 h-4 text-emerald-400" />
-              <span>Add New Product</span>
+              Sign In to Dashboard
             </button>
-          </div>
+          </form>
 
-          {/* Product List Table / Grid */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="border-b border-stone-200 font-mono uppercase tracking-wider text-stone-400 text-[10px]">
-                  <th className="py-3 px-3">Product</th>
-                  <th className="py-3 px-3">Category</th>
-                  <th className="py-3 px-3">MOQ</th>
-                  <th className="py-3 px-3">Wholesale Price</th>
-                  <th className="py-3 px-3 text-center">Featured</th>
-                  <th className="py-3 px-3 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-stone-100 font-sans">
-                {products.map((product) => (
-                  <tr key={product.id} className="hover:bg-stone-50/80 transition-colors">
+          <button
+            onClick={onClose}
+            className="text-xs text-stone-500 hover:text-stone-800 underline font-medium"
+          >
+            ← Return to public website
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const currentHeroSlide = editableHeroSlides[selectedSlideIndex] || editableHeroSlides[0];
+  const currentProduct = editableProducts[selectedProductIndex] || editableProducts[0];
+
+  return (
+    <div className="min-h-screen bg-stone-100 text-stone-900 flex flex-col font-sans antialiased">
+      
+      {/* ── Admin Top Navigation Bar ── */}
+      <header className="bg-[#03150E] text-white border-b border-emerald-950 px-4 sm:px-8 py-3 flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-semibold"
+            title="Return to Public Website"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Back to Website</span>
+          </button>
+
+          <div className="h-5 w-px bg-white/20" />
+
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-white/10 p-0.5 border border-amber-400/40">
+              <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <span className="font-serif font-bold text-sm block leading-none">SABORA SPICES</span>
+              <span className="text-[10px] text-amber-400 uppercase font-mono block">Admin Management Desk</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Badge & Logout */}
+        <div className="flex items-center gap-3">
+          <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-600/40 text-[11px] text-emerald-300 font-mono">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>{firebaseStatus?.message || "Firebase Connected"}</span>
+          </span>
+
+          <button
+            onClick={handleLogout}
+            className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-rose-900/40 text-stone-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
+          >
+            Logout
+          </button>
+        </div>
+      </header>
+
+      {/* Save Success Banner */}
+      {saveSuccessMsg && (
+        <div className="bg-emerald-600 text-white text-center py-2 px-4 text-xs font-bold animate-fadeIn flex items-center justify-center gap-2">
+          <CheckCircle2 className="w-4 h-4" />
+          <span>{saveSuccessMsg}</span>
+        </div>
+      )}
+
+      {/* ── Main Tab Navigation ── */}
+      <div className="bg-white border-b border-stone-200 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto flex items-center gap-1 sm:gap-4 overflow-x-auto text-xs sm:text-sm font-bold">
+          <button
+            onClick={() => setActiveTab('hero')}
+            className={`py-3.5 px-3 border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === 'hero' 
+                ? 'border-[#0F3D2E] text-[#0F3D2E]' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            }`}
+          >
+            <ImageIcon className="w-4 h-4" />
+            <span>Hero Section Banner ({editableHeroSlides.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('products')}
+            className={`py-3.5 px-3 border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === 'products' 
+                ? 'border-[#0F3D2E] text-[#0F3D2E]' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            }`}
+          >
+            <Package className="w-4 h-4" />
+            <span>Products Catalog ({editableProducts.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('inquiries')}
+            className={`py-3.5 px-3 border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === 'inquiries' 
+                ? 'border-[#0F3D2E] text-[#0F3D2E]' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            }`}
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>Inquiries & Quotes Inbox ({inquiries?.length || 0})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('settings')}
+            className={`py-3.5 px-3 border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === 'settings' 
+                ? 'border-[#0F3D2E] text-[#0F3D2E]' 
+                : 'border-transparent text-stone-500 hover:text-stone-800'
+            }`}
+          >
+            <Sliders className="w-4 h-4" />
+            <span>Settings & Sync</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ── Content Area ── */}
+      <main className="flex-1 p-4 sm:p-8 max-w-7xl mx-auto w-full">
+        
+        {/* ══════════════════════════════════════════════════════════
+            TAB 1: HERO SECTION BANNER MANAGER
+        ══════════════════════════════════════════════════════════ */}
+        {activeTab === 'hero' && (
+          <div className="space-y-6">
+            
+            {/* Action Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <div>
+                <h2 className="font-serif text-lg font-bold text-stone-900">
+                  Hero Section Banners & Carousel Slides
+                </h2>
+                <p className="text-xs text-stone-500">
+                  Add, edit, change images, headlines, or adjust fit mode for each hero slide.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleAddHeroSlide}
+                  className="px-3.5 py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Plus className="w-4 h-4 text-emerald-700" />
+                  <span>Add New Slide</span>
+                </button>
+
+                <button
+                  onClick={handleSaveHero}
+                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <Save className="w-4 h-4 text-amber-300" />
+                  <span>Save All Slides</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Slide Selector Badges */}
+            <div className="flex flex-wrap gap-2">
+              {editableHeroSlides.map((slide, idx) => (
+                <button
+                  key={slide.id || idx}
+                  onClick={() => setSelectedSlideIndex(idx)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                    idx === selectedSlideIndex
+                      ? 'bg-[#0F3D2E] text-white shadow'
+                      : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50'
+                  }`}
+                >
+                  <span>Slide #{idx + 1}</span>
+                  <span className="text-[10px] opacity-75 font-normal truncate max-w-[120px]">
+                    {slide.tag || slide.title?.slice(0, 15)}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Slide Editor Card */}
+            {currentHeroSlide && (
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                
+                {/* Visual Preview */}
+                <div className="space-y-2">
+                  <span className="text-xs font-bold text-stone-700 uppercase tracking-wider">
+                    Live Banner Preview:
+                  </span>
+                  <div className="relative w-full aspect-[21/8] max-h-72 rounded-2xl overflow-hidden bg-stone-900 border border-stone-200 flex items-center justify-center">
+                    <img
+                      src={currentHeroSlide.image}
+                      alt="Hero preview"
+                      className={`w-full h-full ${
+                        currentHeroSlide.fitMode === 'contain' ? 'object-contain' : 'object-cover'
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 text-white space-y-1">
+                      <span className="text-[10px] bg-amber-500/80 text-black px-2 py-0.5 rounded font-bold uppercase font-mono">
+                        {currentHeroSlide.tag}
+                      </span>
+                      <h3 className="font-serif text-lg sm:text-xl font-bold whitespace-pre-line leading-snug">
+                        {currentHeroSlide.title}
+                      </h3>
+                      <p className="text-xs text-stone-300 line-clamp-2">
+                        {currentHeroSlide.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Edit Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  
+                  {/* Photo Upload / URL */}
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-bold text-stone-800 flex items-center justify-between">
+                      <span>Hero Banner Image (File Upload or URL)</span>
+                      <span className="text-[11px] text-stone-500">Supports JPG, PNG, WEBP</span>
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <input
+                        type="text"
+                        value={currentHeroSlide.image}
+                        onChange={(e) => handleHeroChange('image', e.target.value)}
+                        placeholder="Image URL (e.g. /images/hero-heritage.jpg or cloud URL)"
+                        className="flex-1 px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                      <label className="px-4 py-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 shrink-0 border border-stone-300">
+                        <Upload className="w-4 h-4 text-emerald-700" />
+                        <span>Upload Photo</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleHeroImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Fit Mode Toggle */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Image Fit Mode</label>
+                    <select
+                      value={currentHeroSlide.fitMode || 'cover'}
+                      onChange={(e) => handleHeroChange('fitMode', e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    >
+                      <option value="cover">Cover (Fills whole banner width/height seamlessly)</option>
+                      <option value="contain">Contain (Fits complete image without cropping edges)</option>
+                    </select>
+                  </div>
+
+                  {/* Tag Pill */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Tag / Badge Label</label>
+                    <input
+                      type="text"
+                      value={currentHeroSlide.tag}
+                      onChange={(e) => handleHeroChange('tag', e.target.value)}
+                      placeholder="e.g. INDIA-BASED SOURCING & SUPPLY"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Headline */}
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-bold text-stone-800">Headline (Use newline for line breaks)</label>
+                    <textarea
+                      rows={2}
+                      value={currentHeroSlide.title}
+                      onChange={(e) => handleHeroChange('title', e.target.value)}
+                      placeholder="e.g. Whole Spices & Makhana.\nSourced with Purpose."
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Subtitle */}
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-bold text-stone-800">Subtitle / Description</label>
+                    <textarea
+                      rows={2}
+                      value={currentHeroSlide.subtitle}
+                      onChange={(e) => handleHeroChange('subtitle', e.target.value)}
+                      placeholder="Brief description of the sourcing, origin, or product..."
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Primary CTA */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Primary Button Text</label>
+                    <input
+                      type="text"
+                      value={currentHeroSlide.primaryCtaText}
+                      onChange={(e) => handleHeroChange('primaryCtaText', e.target.value)}
+                      placeholder="e.g. Request Wholesale Quote"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Primary Button Target</label>
+                    <input
+                      type="text"
+                      value={currentHeroSlide.primaryCtaLink}
+                      onChange={(e) => handleHeroChange('primaryCtaLink', e.target.value)}
+                      placeholder="#contact or #products or whatsapp"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Secondary CTA */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Secondary Button Text</label>
+                    <input
+                      type="text"
+                      value={currentHeroSlide.secondaryCtaText}
+                      onChange={(e) => handleHeroChange('secondaryCtaText', e.target.value)}
+                      placeholder="e.g. Explore Products"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Secondary Button Target</label>
+                    <input
+                      type="text"
+                      value={currentHeroSlide.secondaryCtaLink}
+                      onChange={(e) => handleHeroChange('secondaryCtaLink', e.target.value)}
+                      placeholder="#products or whatsapp"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    />
+                  </div>
+
+                </div>
+
+                {/* Slide Bottom Bar */}
+                <div className="pt-4 border-t border-stone-200 flex items-center justify-between">
+                  <button
+                    onClick={() => handleDeleteHeroSlide(selectedSlideIndex)}
+                    className="px-3.5 py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    <span>Delete Slide #{selectedSlideIndex + 1}</span>
+                  </button>
+
+                  <button
+                    onClick={handleSaveHero}
+                    className="px-5 py-2.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow transition-all cursor-pointer flex items-center gap-2"
+                  >
+                    <Save className="w-4 h-4 text-amber-300" />
+                    <span>Save Slide Changes</span>
+                  </button>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════════
+            TAB 2: PRODUCTS CATALOG MANAGER
+        ══════════════════════════════════════════════════════════ */}
+        {activeTab === 'products' && (
+          <div className="space-y-6">
+            
+            {/* Action Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <div>
+                <h2 className="font-serif text-lg font-bold text-stone-900">
+                  Products Catalog & Specifications
+                </h2>
+                <p className="text-xs text-stone-500">
+                  Edit product titles, photos, grades, origins, and specifications.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleAddProduct}
+                  className="px-3.5 py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Plus className="w-4 h-4 text-emerald-700" />
+                  <span>Add Product</span>
+                </button>
+
+                <button
+                  onClick={handleSaveProducts}
+                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <Save className="w-4 h-4 text-amber-300" />
+                  <span>Save All Products</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Product Selector Badges */}
+            <div className="flex flex-wrap gap-2">
+              {editableProducts.map((p, idx) => (
+                <button
+                  key={p.id || idx}
+                  onClick={() => setSelectedProductIndex(idx)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                    idx === selectedProductIndex
+                      ? 'bg-[#0F3D2E] text-white shadow'
+                      : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50'
+                  }`}
+                >
+                  <span>{p.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Product Editor Form */}
+            {currentProduct && (
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+                
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                  
+                  {/* Photo Preview & Upload (4 cols) */}
+                  <div className="md:col-span-4 space-y-3">
+                    <span className="text-xs font-bold text-stone-800 uppercase tracking-wider block">
+                      Product Photo Preview
+                    </span>
+                    <div className="h-56 w-full rounded-2xl bg-stone-50 border border-stone-200 p-4 flex items-center justify-center overflow-hidden">
+                      <img
+                        src={currentProduct.image}
+                        alt={currentProduct.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <label className="w-full py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 border border-stone-300">
+                      <Upload className="w-4 h-4 text-emerald-700" />
+                      <span>Upload New Photo</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleProductImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Core Details (8 cols) */}
+                  <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    {/* Thumbnail + Name */}
-                    <td className="py-3.5 px-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-stone-50 border border-stone-200 p-1 flex items-center justify-center shrink-0">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="max-h-full max-w-full object-contain"
-                            onError={(e) => { e.target.src = '/images/cardamom.png'; }}
-                          />
-                        </div>
-                        <div>
-                          <span className="font-serif font-bold text-sm text-stone-900 block">
-                            {product.name}
-                          </span>
-                          {product.botanicalName && (
-                            <span className="font-serif italic text-[11px] text-stone-500 block">
-                              {product.botanicalName}
-                            </span>
-                          )}
-                          <span className="text-[10px] text-stone-400 font-mono block">
-                            {product.origin || 'Origin Direct'}
-                          </span>
-                        </div>
-                      </div>
-                    </td>
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <label className="text-xs font-bold text-stone-800">Product Name</label>
+                      <input
+                        type="text"
+                        value={currentProduct.name}
+                        onChange={(e) => handleProductChange('name', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
 
-                    {/* Category */}
-                    <td className="py-3.5 px-3 text-stone-600 font-mono text-[11px]">
-                      {product.category}
-                    </td>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Category Tag</label>
+                      <input
+                        type="text"
+                        value={currentProduct.category}
+                        onChange={(e) => handleProductChange('category', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
 
-                    {/* MOQ */}
-                    <td className="py-3.5 px-3 font-mono text-stone-800 font-semibold">
-                      {(product.moq || '50 Kg').split('(')[0].trim()}
-                    </td>
-
-                    {/* Price */}
-                    <td className="py-3.5 px-3 font-mono">
-                      {product.bulkPrice?.visible && product.bulkPrice?.value ? (
-                        <span className="font-bold text-emerald-800">{product.bulkPrice.value}</span>
-                      ) : (
-                        <span className="text-stone-400">Inquire CIF</span>
-                      )}
-                    </td>
-
-                    {/* Featured Toggle */}
-                    <td className="py-3.5 px-3 text-center">
-                      <button
-                        onClick={() => handleToggleFeatured(product.id)}
-                        className={`p-1.5 rounded-full transition-colors cursor-pointer ${
-                          product.featured
-                            ? 'text-amber-500 bg-amber-50'
-                            : 'text-stone-300 hover:text-stone-400'
-                        }`}
-                        title={product.featured ? 'Featured on Showcase' : 'Not Featured'}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Category Key (Filter)</label>
+                      <select
+                        value={currentProduct.categoryKey || 'other'}
+                        onChange={(e) => handleProductChange('categoryKey', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
                       >
-                        <Star className={`w-4 h-4 ${product.featured ? 'fill-amber-400' : ''}`} />
-                      </button>
-                    </td>
+                        <option value="cardamom">Whole Green Cardamom</option>
+                        <option value="makhana">Makhana (Fox Nuts)</option>
+                        <option value="turmeric">Whole Turmeric Fingers</option>
+                        <option value="other">Cloves & Other Whole Spices</option>
+                      </select>
+                    </div>
 
-                    {/* Actions */}
-                    <td className="py-3.5 px-3 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => {
-                            setEditingProduct(product);
-                            setModalOpen(true);
-                          }}
-                          className="p-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors cursor-pointer"
-                          title="Edit Product"
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Primary Origin</label>
+                      <input
+                        type="text"
+                        value={currentProduct.origin}
+                        onChange={(e) => handleProductChange('origin', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Minimum Order (MOQ)</label>
+                      <input
+                        type="text"
+                        value={currentProduct.moq}
+                        onChange={(e) => handleProductChange('moq', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <label className="text-xs font-bold text-stone-800">Tagline / Overview</label>
+                      <textarea
+                        rows={2}
+                        value={currentProduct.tagline || currentProduct.subtitle}
+                        onChange={(e) => handleProductChange('tagline', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <label className="text-xs font-bold text-stone-800">Image Path / Cloud URL</label>
+                      <input
+                        type="text"
+                        value={currentProduct.image}
+                        onChange={(e) => handleProductChange('image', e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Product Save/Delete Buttons */}
+                <div className="pt-4 border-t border-stone-200 flex items-center justify-between">
+                  <button
+                    onClick={() => handleDeleteProduct(selectedProductIndex)}
+                    className="px-3.5 py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    <span>Delete {currentProduct.name}</span>
+                  </button>
+
+                  <button
+                    onClick={handleSaveProducts}
+                    className="px-5 py-2.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow transition-all cursor-pointer flex items-center gap-2"
+                  >
+                    <Save className="w-4 h-4 text-amber-300" />
+                    <span>Save Products Catalog</span>
+                  </button>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════════════
+            TAB 3: INQUIRIES & RFQ INBOX
+        ══════════════════════════════════════════════════════════ */}
+        {activeTab === 'inquiries' && (
+          <div className="space-y-6">
+            
+            {/* Action Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <div>
+                <h2 className="font-serif text-lg font-bold text-stone-900">
+                  Quotations & Sourcing Inquiries Inbox
+                </h2>
+                <p className="text-xs text-stone-500">
+                  Real-time leads submitted through the website RFQ desk.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleExportInquiriesCsv}
+                  className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export to CSV</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Inquiries Table / List */}
+            {inquiries && inquiries.length > 0 ? (
+              <div className="space-y-3">
+                {inquiries.map((inq, idx) => (
+                  <div
+                    key={inq.id || idx}
+                    className="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs hover:border-emerald-500/50 transition-all space-y-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-100 pb-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-stone-500">
+                          #{idx + 1}
+                        </span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono ${
+                          inq.status === 'Contacted' 
+                            ? 'bg-blue-100 text-blue-800' 
+                            : inq.status === 'Closed'
+                            ? 'bg-stone-200 text-stone-700'
+                            : 'bg-emerald-100 text-emerald-800'
+                        }`}>
+                          {inq.status || 'New'}
+                        </span>
+                        <span className="text-xs font-bold text-stone-900">
+                          {inq.name}
+                        </span>
+                        {inq.company && (
+                          <span className="text-xs text-stone-500">
+                            ({inq.company})
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="text-stone-400 font-mono text-[11px]">
+                          {inq.createdAt ? new Date(inq.createdAt).toLocaleString() : 'Recent'}
+                        </span>
+
+                        <select
+                          value={inq.status || 'New'}
+                          onChange={(e) => onUpdateInquiryStatus && onUpdateInquiryStatus(inq.id, e.target.value)}
+                          className="px-2 py-1 rounded border border-stone-200 bg-stone-50 text-[11px] font-semibold text-stone-700 focus:outline-none"
                         >
-                          <Edit2 className="w-3.5 h-3.5" />
-                        </button>
+                          <option value="New">Status: New</option>
+                          <option value="Contacted">Status: Contacted</option>
+                          <option value="In Progress">Status: In Progress</option>
+                          <option value="Closed">Status: Closed</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Inquiry Details Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs bg-stone-50 p-3 rounded-xl border border-stone-100">
+                      <div>
+                        <span className="text-stone-400 text-[11px] block">Product:</span>
+                        <strong className="text-stone-900">{inq.product}</strong>
+                      </div>
+                      <div>
+                        <span className="text-stone-400 text-[11px] block">Quantity:</span>
+                        <strong className="text-stone-900">{inq.quantity}</strong>
+                      </div>
+                      <div>
+                        <span className="text-stone-400 text-[11px] block">Grade/Specs:</span>
+                        <span className="text-stone-800">{inq.grade || 'Standard'}</span>
+                      </div>
+                      <div>
+                        <span className="text-stone-400 text-[11px] block">Destination:</span>
+                        <span className="text-stone-800">{inq.destination}</span>
+                      </div>
+                    </div>
+
+                    {inq.notes && (
+                      <p className="text-xs text-stone-600 bg-amber-50/50 p-2.5 rounded-lg border border-amber-100 italic">
+                        "{inq.notes}"
+                      </p>
+                    )}
+
+                    {/* Action Bar for Inquiry */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+                      <div className="flex items-center gap-3 text-stone-600">
+                        <span>📞 {inq.phone}</span>
+                        {inq.email && <span>✉️ {inq.email}</span>}
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {inq.phone && (
+                          <button
+                            onClick={() => {
+                              const cleanPhone = inq.phone.replace(/[^0-9]/g, '');
+                              const msg = `Hello ${inq.name}, thank you for your enquiry with SABORA SPICES regarding ${inq.product}. We have reviewed your requirement for ${inq.quantity} to ${inq.destination}.`;
+                              window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+                            }}
+                            className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                            <span>Reply via WhatsApp</span>
+                          </button>
+                        )}
+
                         <button
-                          onClick={() => handleDeleteProduct(product.id)}
-                          className="p-1.5 rounded-lg bg-stone-100 hover:bg-red-50 text-stone-400 hover:text-red-600 transition-colors cursor-pointer"
-                          title="Delete Product"
+                          onClick={() => onDeleteInquiry && onDeleteInquiry(inq.id)}
+                          className="p-1.5 rounded-lg hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer"
+                          title="Delete Lead"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                    </td>
-
-                  </tr>
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            ) : (
+              <div className="p-12 text-center bg-white rounded-3xl border border-stone-200 text-stone-500 space-y-2">
+                <MessageCircle className="w-10 h-10 text-stone-300 mx-auto" />
+                <h3 className="font-serif text-lg font-bold text-stone-700">No Inquiries Received Yet</h3>
+                <p className="text-xs max-w-sm mx-auto">
+                  When prospective buyers fill out the quote request form on the website, their leads will appear here in real time.
+                </p>
+              </div>
+            )}
+
           </div>
-        </section>
+        )}
+
+        {/* ══════════════════════════════════════════════════════════
+            TAB 4: SETTINGS & CLOUD SYNC
+        ══════════════════════════════════════════════════════════ */}
+        {activeTab === 'settings' && (
+          <div className="space-y-6 max-w-3xl">
+            
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+              <div>
+                <h2 className="font-serif text-xl font-bold text-stone-900">
+                  Firebase Cloud Backend & Storage
+                </h2>
+                <p className="text-xs text-stone-500">
+                  Configured credentials for project <strong className="text-stone-800">sabora-spices</strong>.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2 text-xs font-mono">
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Project ID:</span>
+                  <span className="font-bold text-stone-900">sabora-spices</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Auth Domain:</span>
+                  <span className="text-stone-800">sabora-spices.firebaseapp.com</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Storage Bucket:</span>
+                  <span className="text-stone-800">sabora-spices.firebasestorage.app</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Sync Status:</span>
+                  <span className="text-emerald-700 font-bold">{firebaseStatus?.message}</span>
+                </div>
+              </div>
+
+              {/* Reset to Factory Defaults */}
+              <div className="pt-4 border-t border-stone-200 space-y-3">
+                <div>
+                  <h3 className="text-sm font-bold text-stone-900">Reset to Factory Defaults</h3>
+                  <p className="text-xs text-stone-500">
+                    Restores the original verified products, pouches, and hero banner slides from the SABORA SPICES specification dossier.
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => {
+                    if (confirm("Reset all products and hero banners back to factory default?")) {
+                      onResetAll();
+                      triggerSaveNotification("Reset completed! Reloading defaults...");
+                      setTimeout(() => window.location.reload(), 1000);
+                    }
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+                >
+                  <RotateCcw className="w-4 h-4 text-amber-700" />
+                  <span>Restore Factory Defaults</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        )}
 
       </main>
-
-      {/* Add / Edit Product Modal */}
-      <ProductModalForm
-        key={editingProduct?.id || 'new'}
-        isOpen={modalOpen}
-        onClose={() => {
-          setModalOpen(false);
-          setEditingProduct(null);
-        }}
-        product={editingProduct}
-        onSave={handleSaveProduct}
-      />
 
     </div>
   );

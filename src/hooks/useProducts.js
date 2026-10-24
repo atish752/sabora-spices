@@ -1,347 +1,320 @@
-/**
- * useProducts — localStorage-aware product data and comprehensive European Luxury Homepage configuration hook.
- *
- * Supports European botanical schema, live homepage customization, section visibility toggles,
- * hero statistics, announcement marquee, terroir manifesto text, and full accordion & service controls.
- */
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { PRODUCTS as DEFAULT_PRODUCTS } from '../data/products';
+import { db } from '../config/firebase';
+import { 
+  collection, 
+  doc, 
+  getDocs, 
+  setDoc, 
+  addDoc, 
+  deleteDoc, 
+  serverTimestamp,
+  orderBy,
+  query
+} from 'firebase/firestore';
 
-const LS_PRODUCTS_KEY = 'sabora_products';
-const LS_HOMEPAGE_KEY = 'sabora_homepage_config';
-const LS_HERO_KEY = 'sabora_hero_config';
+const LS_PRODUCTS_KEY = 'sabora_products_v2';
+const LS_HERO_KEY = 'sabora_hero_slides_v2';
+const LS_INQUIRIES_KEY = 'sabora_inquiries_v2';
 
-export const DEFAULT_HOMEPAGE_CONFIG = {
-  announcement: {
-    enabled: true,
-    badge: 'HARVEST 2025/26',
-    text: 'Single-Estate Harvests • CIF European Ports (Rotterdam, Hamburg, Genoa) • Non-ETO Purity',
+export const DEFAULT_HERO_SLIDES = [
+  {
+    id: "slide-1",
+    tag: "INDIA-BASED SOURCING & SUPPLY",
+    title: "Whole Spices & Makhana.\nSourced with Purpose.",
+    subtitle: "Specialising in whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts) for domestic and international business buyers.",
+    image: "/images/hero-heritage.jpg",
+    badge: "Direct Sourcing & Export Ready",
+    primaryCtaText: "Request Wholesale Quote",
+    primaryCtaLink: "#contact",
+    secondaryCtaText: "Explore Products",
+    secondaryCtaLink: "#products",
+    fitMode: "cover" // 'cover' or 'contain'
   },
-  hero: {
-    headline: 'Artisanal Whole Spices,\nDirect From Origin.',
-    subheading: 'Single-estate harvests curated for European blenders, tea ateliers, and gourmet purveyors. Laser sortex-graded with direct CIF port delivery.',
-    badge: 'CROP 2025/26 DIRECT HARVEST',
-    ctaText: 'Inquire on WhatsApp (1-Click)',
-    secondaryCtaText: 'Explore Collection',
-    theme: 'emerald',
-    stats: [
-      { id: 1, value: '15+ Yrs', label: 'Terroir Heritage', desc: 'Generational estate farming' },
-      { id: 2, value: '99.8%', label: 'Sortex Purity', desc: 'Laser optical color-graded' },
-      { id: 3, value: '28+ Nations', label: 'Global Trade', desc: 'European & global network' },
-      { id: 4, value: 'CIF & Air', label: 'Direct Freight', desc: 'Rotterdam, Hamburg, Genoa' },
-    ]
+  {
+    id: "slide-2",
+    tag: "KERALA & WESTERN GHATS ORIGIN",
+    title: "Whole Green Cardamom\nSelected for Quality.",
+    subtitle: "Sourced from Kerala's recognized cardamom-growing regions (Idukki district). Hand-sorted for size, grade, appearance, and volatile oil aroma.",
+    image: "/images/hero-cardamom-sorting.jpg",
+    badge: "7.5mm & 8mm+ Extra Bold",
+    primaryCtaText: "View Cardamom Specs",
+    primaryCtaLink: "#products",
+    secondaryCtaText: "WhatsApp Sourcing Desk",
+    secondaryCtaLink: "whatsapp",
+    fitMode: "cover"
   },
-  trustBadges: {
-    rating: '4.95',
-    ratingScale: '/ 5.0',
-    reviewCount: '1,280+ European Importers',
-    pillar1Title: 'Single-Estate Terroir',
-    pillar1Desc: 'Idukki, Salem & Mithila origin lots',
-    pillar2Title: 'EU MRL Compliant',
-    pillar2Desc: 'Non-ETO • 99.8% Sortex purity',
-    pillar3Title: 'CIF European Ports',
-    pillar3Desc: 'Rotterdam, Hamburg, Genoa & Air',
+  {
+    id: "slide-3",
+    tag: "BIHAR WETLAND HARVEST",
+    title: "Premium Whole Makhana\n(Popped Fox Nuts).",
+    subtitle: "Crunchy, pure lotus seed pops with zero chemical bleaching. Uniform 5-Suta and 6-Suta Jumbo grades in Sabora pouches & bulk supply.",
+    image: "/images/makhana-pouch.jpg",
+    badge: "100% Natural Superfood",
+    primaryCtaText: "Request Makhana Quote",
+    primaryCtaLink: "#contact",
+    secondaryCtaText: "Our Sourcing Story",
+    secondaryCtaLink: "#sourcing",
+    fitMode: "cover"
   },
-  story: {
-    title: 'The Sabora Quality Standard',
-    subtitle: 'Four non-negotiable principles guiding every harvest from plantation soil to European port.',
-    manifestoQuote: 'Great gastronomy begins in the soil. We believe whole spices should arrive at European blending mills and artisanal tables exactly as harvested — fragrant, unadulterated, and vibrant.',
-    paragraph: 'When contracting Green Cardamom, Salem Turmeric, or Jumbo Makhana with Sabora Spices, every container delivered CIF Rotterdam or Hamburg matches the precise volatile oil density and purity of your approved sample lot.',
-    items: [
-      {
-        num: "01",
-        title: "Direct Single-Estate Terroir Procurement",
-        subtitle: "Bypassing intermediary trading layers for pure provenance",
-        content: "We bypass multiple mandi trading tiers by working directly with generational farmer producer organizations (FPOs) and private estate clusters. Our green cardamom is nurtured at 1,100m elevation under the tropical rainforest canopy of Idukki, Kerala; our high-curcumin golden turmeric fingers from the black alluvial soil of Salem; and our jumbo fox nuts from pristine Mithila freshwater ponds. This preserves terroir authenticity, peak volatile terpenes, and fair farmer compensation."
-      },
-      {
-        num: "02",
-        title: "Optical Sortex Color-Grading & Calibrated Sizing",
-        subtitle: "99.8% purity through laser sorting and vibratory destoners",
-        content: "All incoming whole crop passes through multi-tier vibratory destoners, aspirators, and advanced Sortex optical laser sorters. We eliminate immature pods, pinheads, hollow berries, and foreign organic matter with 99.8% calibrated accuracy. Cardamom pods are sorted by millimeter screens (7.5mm, 8mm+ Extra Bold), while makhana undergoes meticulous double hand-sorting to deliver uniform 5-suta and 6-suta jumbo specimens."
-      },
-      {
-        num: "03",
-        title: "European Compliance (EC 396/2005) & Laboratory COA",
-        subtitle: "Strict testing for pesticide MRLs, heavy metals, and active potency",
-        content: "Every commercial export lot is analyzed by accredited independent laboratories (ISO/IEC 17025 accredited). We verify volatile essential oil yield (>8% for green cardamom), curcumin potency (>4.5% for turmeric via HPLC), moisture thresholds (<10%), and pesticide residue levels strictly conforming to EU Regulation (EC) No 396/2005 and European Spice Association (ESA) benchmarks. Comprehensive Certificate of Analysis (COA) dossiers are issued with every shipment."
-      },
-      {
-        num: "04",
-        title: "Non-ETO Steam Treatment & Aroma-Lock Nitrogen Packaging",
-        subtitle: "Maximum terpene preservation without chemical residues",
-        content: "We completely reject Ethylene Oxide (ETO) chemical treatment, employing advanced gentle steam sterilization upon buyer specification to eradicate microbial loads while safeguarding delicate aroma terpenes. Export shipments are hermetically packed in multi-wall kraft barrier sacks with food-grade poly liners or nitrogen-flushed barrier pouches to guarantee a 24-month aroma shelf life across sea and air freight."
-      }
-    ]
-  },
-  services: {
-    title: 'Tailored B2B Solutions for European Trade',
-    subtitle: 'From palletized retail-ready pouches for organic supermarket chains to multi-ton container loads delivered CIF Rotterdam, Sabora Spices provides end-to-end supply chain assurance.',
-    items: [
-      {
-        num: "01",
-        badge: "OEM & European Retail Brands",
-        title: "Private Label & Retail Packaging",
-        description: "Launch your own branded whole spices line. We sortex grade, nitrogen flush, and package in sustainable FSC-certified kraft zipper pouches or luxury glass jars with complete multilingual European labelling.",
-        features: [
-          "100g to 1kg recyclable barrier pouches & amber jars",
-          "Nitrogen flush technology locking volatile terpenes for 24 months",
-          "Multilingual EU compliant labelling (EN, DE, FR, NL) & barcoding",
-          "Accessible MOQ trial batches for emerging European gourmet brands"
-        ],
-        whatsappPrompt: "Hello Sabora Spices team,\n\nI am interested in Private Label / OEM retail packaging for our European brand. Could you please share available packaging formats, minimum order quantities (MOQ), and pricing?\n\nThank you!"
-      },
-      {
-        num: "02",
-        badge: "European Commodity Importers",
-        title: "Bulk Ocean & Air Freight (CIF / FOB)",
-        description: "Direct origin bulk supply for international spice markets. We manage complete customs documentation, APEDA export clearance, phytosanitary certificates, and container stuffing to major European ports.",
-        features: [
-          "25 Kg & 50 Kg multiwall kraft paper sacks with food-grade PE barrier",
-          "FCL (20ft / 40ft containers) & consolidated LCL palletized cargo",
-          "CIF Rotterdam, Hamburg, Antwerp, Genoa & DAP door delivery",
-          "Fumigation, Phytosanitary, and non-ETO certification included"
-        ],
-        whatsappPrompt: "Hello Sabora Spices team,\n\nI want to inquire about bulk container load export terms, phytosanitary clearance, and CIF European port pricing (Rotterdam / Hamburg) for whole spices.\n\nThank you!"
-      },
-      {
-        num: "03",
-        badge: "Industrial Blenders & HORECA",
-        title: "Institutional Supply Contracts",
-        description: "Reliable, round-the-year spice procurement contracts for commercial grinding mills, masala blending houses, tea ateliers, and luxury European gastronomy groups.",
-        features: [
-          "Consistent batch-to-batch volatile oil and curcumin levels",
-          "Scheduled monthly dispatches & reserved buffer inventory",
-          "Contract volume pricing with protection against market volatility",
-          "Priority batch testing with accredited Certificate of Analysis (COA)"
-        ],
-        whatsappPrompt: "Hello Sabora Spices team,\n\nWe are looking for long-term institutional wholesale supply contracts for our blending / food manufacturing unit. Please connect with our commercial desk.\n\nThank you!"
-      }
-    ]
-  },
-  reviews: {
-    title: 'Trusted by European spice mills, tea blenders & gourmet ateliers.',
-    subtitle: 'From container loads arriving at Rotterdam, Hamburg, and Genoa to retail private-label superfood packs across European organic grocers, see why commercial wholesale buyers choose Sabora Spices.',
-    score: '4.95',
-    scale: '/ 5.0 Rating',
-    items: [
-      {
-        date: "18-02-2026",
-        rating: 5,
-        quote: "We contracted 4 metric tons of Green Cardamom (8mm Bold) delivered CIF Rotterdam for our Dutch tea blending facility. Pod sizing was extraordinarily uniform, moisture was under 9.8%, and the volatile essential oils tested at 8.1% in our laboratory. Sabora Spices is now our primary direct-origin supplier in Asia.",
-        author: "Sophie van den Berg",
-        designation: "Head of Procurement & R&D",
-        company: "De Botanische Specerij B.V.",
-        location: "Amsterdam, Netherlands"
-      },
-      {
-        date: "14-01-2026",
-        rating: 5,
-        quote: "As an industrial European spice importer supplying German butchery and seasoning houses, compliance with EU Regulation (EC) 396/2005 is paramount. Sabora's Salem Turmeric tested at 4.9% curcumin with zero chemical polish residue. The APEDA export paperwork and phytosanitary certificates arrived without a single discrepancy.",
-        author: "Marcus Lindner",
-        designation: "Global Sourcing Director",
-        company: "EuroSpice Trading GmbH",
-        location: "Hamburg, Germany"
-      },
-      {
-        date: "28-12-2025",
-        rating: 5,
-        quote: "For our French gourmet condiment and mustard atelier, the whole black pepper and star anise quality must be flawless. Sabora's Tellicherry black pepper had dense liter weights of 575g/L and deep aromatic pungency. Their commercial team is exceptionally attentive on WhatsApp.",
-        author: "Jean-Luc Moreau",
-        designation: "Master Blender & Founder",
-        company: "Comptoir Artisanal des Épices",
-        location: "Lyon, France"
-      },
-      {
-        date: "05-11-2025",
-        rating: 5,
-        quote: "We launched private-label roasted makhana superfood snack packs across Scandinavian organic supermarkets. Sabora supplied custom-printed nitrogen-flushed stand-up zip pouches directly to our Gothenburg warehouse. Pristine milky white fox nuts with zero burnt spots.",
-        author: "Astrid Lindholm",
-        designation: "Co-Founder & COO",
-        company: "Nordic SuperFoods AB",
-        location: "Stockholm, Sweden"
-      },
-      {
-        date: "19-10-2025",
-        rating: 5,
-        quote: "We ordered 2 metric tons of Green Cardamom (8mm Bold) for our packaging facility in Dubai. The aroma and uniform pod size exceeded our expectations. The nitrogen-flushed packaging arrived in pristine condition. Excellent B2B partner for multi-ton orders.",
-        author: "Tariq Al-Mansoor",
-        designation: "Procurement Director",
-        company: "Al-Barakah Food Industries",
-        location: "Dubai, UAE"
-      }
-    ]
-  },
-  sections: {
-    showTicker: true,
-    showTrustBadges: true,
-    showCatalog: true,
-    showB2BServices: true,
-    showStory: true,
-    showReviews: true,
-    showRFQ: true,
+  {
+    id: "slide-4",
+    tag: "TESTED BEFORE DISPATCH",
+    title: "Food Safety & Quality\nat Every Step.",
+    subtitle: "Compliance with FSSAI regulations, ISO 9001 & ISO 22000 principles, accredited laboratory analysis, and FoSCoS portal reporting.",
+    image: "/images/hero-cardamom-harvest.jpg",
+    badge: "Batch Release Protocol",
+    primaryCtaText: "Quality & Lab Testing",
+    primaryCtaLink: "#lab-testing",
+    secondaryCtaText: "Contact Us",
+    secondaryCtaLink: "#contact",
+    fitMode: "cover"
   }
-};
-
-export const DEFAULT_HERO_CONFIG = DEFAULT_HOMEPAGE_CONFIG.hero;
-
-function normalizeProduct(p, defaultMatch) {
-  return {
-    ...p,
-    botanicalName: p.botanicalName || defaultMatch?.botanicalName || '',
-    terroir: p.terroir || defaultMatch?.terroir || '',
-    aromaNotes: Array.isArray(p.aromaNotes) && p.aromaNotes.length > 0 ? p.aromaNotes : (defaultMatch?.aromaNotes || []),
-    euCompliance: p.euCompliance || defaultMatch?.euCompliance || 'EU MRL (EC) 396/2005 Compliant • Non-ETO',
-    incoterms: p.incoterms || defaultMatch?.incoterms || 'CIF Rotterdam / Hamburg / Genoa | FOB Cochin',
-    batchCode: p.batchCode || defaultMatch?.batchCode || 'SB-EXP-2025/26',
-    gradesAvailable: Array.isArray(p.gradesAvailable) ? p.gradesAvailable : (defaultMatch?.gradesAvailable || []),
-    specifications: Array.isArray(p.specifications) ? p.specifications : (defaultMatch?.specifications || []),
-    packagingOptions: Array.isArray(p.packagingOptions) ? p.packagingOptions : (defaultMatch?.packagingOptions || []),
-    b2bIdealFor: Array.isArray(p.b2bIdealFor) ? p.b2bIdealFor : (defaultMatch?.b2bIdealFor || []),
-    pricingEnabled: Boolean(p.pricingEnabled),
-    pricePerPiece: p.pricePerPiece || { value: '', label: 'Per Piece', visible: false },
-    bulkPrice: p.bulkPrice || { value: '', quantityLabel: 'Per 50 Kg', visible: false },
-    whatsappTemplate: (customDetails = '') => {
-      let msg = `Hello Sabora Spices export team,\n\nI am requesting commercial wholesale terms and an official quotation for *${p.name}*${p.botanicalName ? ` (${p.botanicalName})` : ''}.\n\n`;
-      if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `• Minimum Order Quantity (MOQ): ${(p.moq || '50 Kg').split('(')[0].trim()}\n`;
-      if (p.origin) msg += `• Origin / Terroir: ${p.origin}\n`;
-      if (p.bulkPrice?.visible && p.bulkPrice?.value) msg += `• Wholesale Rate: ${p.bulkPrice.value}\n`;
-      msg += `\nCould you please share current CIF / FOB European port rates and latest COA specifications?\n\nThank you!`;
-      return encodeURIComponent(msg);
-    },
-  };
-}
-
-function getStoredProducts() {
-  try {
-    const raw = localStorage.getItem(LS_PRODUCTS_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed.map(p => {
-          const defaultMatch = DEFAULT_PRODUCTS.find(d => d.id === p.id);
-          const merged = defaultMatch ? { ...defaultMatch, ...p } : p;
-          return normalizeProduct(merged, defaultMatch);
-        });
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return null;
-}
-
-function getStoredHomepageConfig() {
-  try {
-    const raw = localStorage.getItem(LS_HOMEPAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      return {
-        ...DEFAULT_HOMEPAGE_CONFIG,
-        ...parsed,
-        announcement: { ...DEFAULT_HOMEPAGE_CONFIG.announcement, ...(parsed.announcement || {}) },
-        hero: {
-          ...DEFAULT_HOMEPAGE_CONFIG.hero,
-          ...(parsed.hero || {}),
-          stats: Array.isArray(parsed?.hero?.stats) && parsed.hero.stats.length > 0
-            ? parsed.hero.stats
-            : DEFAULT_HOMEPAGE_CONFIG.hero.stats
-        },
-        trustBadges: { ...DEFAULT_HOMEPAGE_CONFIG.trustBadges, ...(parsed.trustBadges || {}) },
-        story: {
-          ...DEFAULT_HOMEPAGE_CONFIG.story,
-          ...(parsed.story || {}),
-          items: Array.isArray(parsed?.story?.items) && parsed.story.items.length > 0
-            ? parsed.story.items
-            : DEFAULT_HOMEPAGE_CONFIG.story.items
-        },
-        services: {
-          ...DEFAULT_HOMEPAGE_CONFIG.services,
-          ...(parsed.services || {}),
-          items: Array.isArray(parsed?.services?.items) && parsed.services.items.length > 0
-            ? parsed.services.items
-            : DEFAULT_HOMEPAGE_CONFIG.services.items
-        },
-        reviews: {
-          ...DEFAULT_HOMEPAGE_CONFIG.reviews,
-          ...(parsed.reviews || {}),
-          items: Array.isArray(parsed?.reviews?.items) && parsed.reviews.items.length > 0
-            ? parsed.reviews.items
-            : DEFAULT_HOMEPAGE_CONFIG.reviews.items
-        },
-        sections: { ...DEFAULT_HOMEPAGE_CONFIG.sections, ...(parsed.sections || {}) },
-      };
-    }
-    // Check legacy hero key
-    const legacyHero = localStorage.getItem(LS_HERO_KEY);
-    if (legacyHero) {
-      const parsedHero = JSON.parse(legacyHero);
-      return {
-        ...DEFAULT_HOMEPAGE_CONFIG,
-        hero: {
-          ...DEFAULT_HOMEPAGE_CONFIG.hero,
-          ...parsedHero,
-          stats: Array.isArray(parsedHero?.stats) ? parsedHero.stats : DEFAULT_HOMEPAGE_CONFIG.hero.stats
-        }
-      };
-    }
-  } catch {
-    // ignore
-  }
-  return DEFAULT_HOMEPAGE_CONFIG;
-}
+];
 
 export function useProducts() {
-  const [products, setProducts] = useState(() => getStoredProducts() ?? DEFAULT_PRODUCTS);
-  const [homepageConfig, setHomepageConfig] = useState(getStoredHomepageConfig);
-
-  // Persist products to localStorage (excluding function)
-  const saveProducts = useCallback((newProducts) => {
-    const serialisable = newProducts.map(({ whatsappTemplate, ...rest }) => rest);
-    localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(serialisable));
-    // Restore function references with safe fallbacks
-    const withFns = newProducts.map(p => {
-      const defaultMatch = DEFAULT_PRODUCTS.find(d => d.id === p.id);
-      return normalizeProduct(p, defaultMatch);
-    });
-    setProducts(withFns);
-  }, []);
-
-  const saveHomepageConfig = useCallback((newConfig) => {
-    localStorage.setItem(LS_HOMEPAGE_KEY, JSON.stringify(newConfig));
-    if (newConfig?.hero) {
-      localStorage.setItem(LS_HERO_KEY, JSON.stringify(newConfig.hero));
+  // Load products from localStorage or default
+  const [products, setProducts] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_PRODUCTS_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.warn("Failed reading products from localStorage", e);
     }
-    setHomepageConfig(newConfig);
+    return DEFAULT_PRODUCTS;
+  });
+
+  // Load hero slides from localStorage or default
+  const [heroSlides, setHeroSlides] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_HERO_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.warn("Failed reading hero slides from localStorage", e);
+    }
+    return DEFAULT_HERO_SLIDES;
+  });
+
+  // Load inquiries
+  const [inquiries, setInquiries] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_INQUIRIES_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.warn("Failed reading inquiries from localStorage", e);
+    }
+    return [];
+  });
+
+  const [isLoadingFromFirebase, setIsLoadingFromFirebase] = useState(false);
+  const [firebaseStatus, setFirebaseStatus] = useState({ connected: false, message: 'Local Mode' });
+
+  // Sync with Firebase Firestore on mount
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchFromFirebase() {
+      if (!db) {
+        if (isMounted) setFirebaseStatus({ connected: false, message: 'Firebase DB not initialized (using local cache)' });
+        return;
+      }
+
+      setIsLoadingFromFirebase(true);
+      try {
+        // 1. Fetch Products from Firestore
+        const productsCol = collection(db, 'sabora_products');
+        const prodSnap = await getDocs(productsCol);
+        if (!prodSnap.empty && isMounted) {
+          const remoteProducts = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+          if (remoteProducts.length > 0) {
+            setProducts(remoteProducts);
+            localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(remoteProducts));
+          }
+        }
+
+        // 2. Fetch Hero Slides from Firestore
+        const heroDoc = doc(db, 'sabora_settings', 'hero_slides');
+        const heroSnap = await getDocs(collection(db, 'sabora_hero_slides'));
+        if (!heroSnap.empty && isMounted) {
+          const remoteSlides = heroSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+          if (remoteSlides.length > 0) {
+            setHeroSlides(remoteSlides);
+            localStorage.setItem(LS_HERO_KEY, JSON.stringify(remoteSlides));
+          }
+        }
+
+        // 3. Fetch Inquiries from Firestore
+        try {
+          const inqQuery = query(collection(db, 'sabora_inquiries'), orderBy('createdAt', 'desc'));
+          const inqSnap = await getDocs(inqQuery);
+          if (!inqSnap.empty && isMounted) {
+            const remoteInquiries = inqSnap.docs.map(d => ({ 
+              id: d.id, 
+              ...d.data(),
+              createdAt: d.data().createdAt?.toDate ? d.data().createdAt.toDate().toISOString() : d.data().createdAt || new Date().toISOString()
+            }));
+            setInquiries(remoteInquiries);
+            localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(remoteInquiries));
+          }
+        } catch (inqErr) {
+          // May require index or permissions; silent fallback to local
+        }
+
+        if (isMounted) {
+          setFirebaseStatus({ connected: true, message: 'Connected to Firebase' });
+        }
+      } catch (err) {
+        console.warn("Firestore sync info (running happily in offline/cache mode):", err);
+        if (isMounted) {
+          setFirebaseStatus({ connected: false, message: 'Local storage active (Firebase synced on save)' });
+        }
+      } finally {
+        if (isMounted) setIsLoadingFromFirebase(false);
+      }
+    }
+
+    fetchFromFirebase();
+    return () => { isMounted = false; };
   }, []);
 
-  const saveHeroConfig = useCallback((newHero) => {
-    setHomepageConfig((prev) => {
-      const updated = { ...prev, hero: { ...prev.hero, ...newHero } };
-      localStorage.setItem(LS_HOMEPAGE_KEY, JSON.stringify(updated));
-      localStorage.setItem(LS_HERO_KEY, JSON.stringify(updated.hero));
-      return updated;
-    });
+  // Save products to state, localStorage, and Firestore
+  const saveProducts = useCallback(async (newProducts) => {
+    setProducts(newProducts);
+    try {
+      localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(newProducts));
+    } catch (e) {
+      console.warn("Failed saving to localStorage", e);
+    }
+
+    if (db) {
+      try {
+        for (const p of newProducts) {
+          const docRef = doc(db, 'sabora_products', p.id);
+          await setDoc(docRef, p, { merge: true });
+        }
+      } catch (err) {
+        console.warn("Firestore saveProducts warning:", err);
+      }
+    }
   }, []);
 
+  // Save hero slides to state, localStorage, and Firestore
+  const saveHeroSlides = useCallback(async (newSlides) => {
+    setHeroSlides(newSlides);
+    try {
+      localStorage.setItem(LS_HERO_KEY, JSON.stringify(newSlides));
+    } catch (e) {
+      console.warn("Failed saving hero slides to localStorage", e);
+    }
+
+    if (db) {
+      try {
+        for (const s of newSlides) {
+          const docRef = doc(db, 'sabora_hero_slides', s.id);
+          await setDoc(docRef, s, { merge: true });
+        }
+      } catch (err) {
+        console.warn("Firestore saveHeroSlides warning:", err);
+      }
+    }
+  }, []);
+
+  // Submit an inquiry (contact / quote request)
+  const submitInquiry = useCallback(async (inquiryData) => {
+    const id = "inq_" + Date.now() + "_" + Math.random().toString(36).substring(2, 6);
+    const newInquiry = {
+      id,
+      ...inquiryData,
+      status: "New",
+      createdAt: new Date().toISOString()
+    };
+
+    const updated = [newInquiry, ...inquiries];
+    setInquiries(updated);
+    try {
+      localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(updated));
+    } catch (e) {
+      console.warn("Failed saving inquiries to localStorage", e);
+    }
+
+    if (db) {
+      try {
+        await addDoc(collection(db, 'sabora_inquiries'), {
+          ...inquiryData,
+          status: "New",
+          createdAt: serverTimestamp()
+        });
+      } catch (err) {
+        console.warn("Firestore submitInquiry warning:", err);
+      }
+    }
+
+    return newInquiry;
+  }, [inquiries]);
+
+  // Update inquiry status
+  const updateInquiryStatus = useCallback(async (id, newStatus) => {
+    const updated = inquiries.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq);
+    setInquiries(updated);
+    try {
+      localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(updated));
+    } catch (e) {}
+
+    if (db) {
+      try {
+        const docRef = doc(db, 'sabora_inquiries', id);
+        await setDoc(docRef, { status: newStatus }, { merge: true });
+      } catch (err) {}
+    }
+  }, [inquiries]);
+
+  // Delete an inquiry
+  const deleteInquiry = useCallback(async (id) => {
+    const updated = inquiries.filter(inq => inq.id !== id);
+    setInquiries(updated);
+    try {
+      localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(updated));
+    } catch (e) {}
+
+    if (db) {
+      try {
+        await deleteDoc(doc(db, 'sabora_inquiries', id));
+      } catch (err) {}
+    }
+  }, [inquiries]);
+
+  // Reset to original defaults
   const resetAllToDefaults = useCallback(() => {
-    localStorage.removeItem(LS_PRODUCTS_KEY);
-    localStorage.removeItem(LS_HOMEPAGE_KEY);
-    localStorage.removeItem(LS_HERO_KEY);
     setProducts(DEFAULT_PRODUCTS);
-    setHomepageConfig(DEFAULT_HOMEPAGE_CONFIG);
+    setHeroSlides(DEFAULT_HERO_SLIDES);
+    try {
+      localStorage.removeItem(LS_PRODUCTS_KEY);
+      localStorage.removeItem(LS_HERO_KEY);
+    } catch (e) {}
   }, []);
 
   return {
     products,
-    homepageConfig,
-    heroConfig: homepageConfig.hero,
+    heroSlides,
+    inquiries,
+    isLoadingFromFirebase,
+    firebaseStatus,
     saveProducts,
-    saveHomepageConfig,
-    saveHeroConfig,
+    saveHeroSlides,
+    submitInquiry,
+    updateInquiryStatus,
+    deleteInquiry,
     resetAllToDefaults
   };
 }
+
+export default useProducts;

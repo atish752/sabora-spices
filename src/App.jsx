@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import FloatingNavbar from './components/FloatingNavbar';
-import ModernHero from './components/ModernHero';
-import MarqueeTape from './components/MarqueeTape';
-import ModernCollection from './components/ModernCollection';
-import StandardsGrid from './components/StandardsGrid';
-import ModernSolutions from './components/ModernSolutions';
-import QuickRfqDesk from './components/QuickRfqDesk';
-import EuropeanTrust from './components/EuropeanTrust';
-import ModernFooter from './components/ModernFooter';
-import MobileBottomBar from './components/MobileBottomBar';
-import ProductModal from './components/ProductModal';
-import WhatsAppDrawer from './components/WhatsAppDrawer';
+import HeaderNavbar from './components/HeaderNavbar';
+import HeroSection from './components/HeroSection';
+import TrustHighlightsBar from './components/TrustHighlightsBar';
+import AboutSection from './components/AboutSection';
+import ProductsSection from './components/ProductsSection';
+import SourcingOriginSection from './components/SourcingOriginSection';
+import WhySaboraSection from './components/WhySaboraSection';
+import QualitySafetySection from './components/QualitySafetySection';
+import LabTestingSection from './components/LabTestingSection';
+import ComplianceSection from './components/ComplianceSection';
+import InternationalExportSection from './components/InternationalExportSection';
+import FaqSection from './components/FaqSection';
+import ContactRfqSection from './components/ContactRfqSection';
+import FooterSection from './components/FooterSection';
+import ProductDetailModal from './components/ProductDetailModal';
+import MobileFloatingBar from './components/MobileFloatingBar';
 import AdminPanel from './components/AdminPanel';
+
 import { MessageCircle } from 'lucide-react';
 import { SITE_CONFIG } from './config/siteConfig';
-import { GENERAL_WHATSAPP_MESSAGE } from './data/products';
 import { useProducts } from './hooks/useProducts';
 
-// Admin panel URL query parameter check
 function isAdminRoute() {
   return (
     typeof window !== 'undefined' &&
@@ -28,62 +31,50 @@ function isAdminRoute() {
 export default function App() {
   const {
     products,
-    homepageConfig,
-    heroConfig,
+    heroSlides,
+    inquiries,
+    firebaseStatus,
     saveProducts,
-    saveHomepageConfig,
-    saveHeroConfig,
+    saveHeroSlides,
+    submitInquiry,
+    updateInquiryStatus,
+    deleteInquiry,
     resetAllToDefaults
   } = useProducts();
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [whatsAppDrawerOpen, setWhatsAppDrawerOpen] = useState(false);
-  const [drawerProduct, setDrawerProduct] = useState(null);
-  const [drawerNote, setDrawerNote] = useState('');
   const [showAdmin, setShowAdmin] = useState(isAdminRoute);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [activeProductFilter, setActiveProductFilter] = useState('all');
+  const [preselectedQuoteProduct, setPreselectedQuoteProduct] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Hairline scroll progress indicator
+  // Hairline scroll progress
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(progress);
+        setScrollProgress((window.scrollY / totalHeight) * 100);
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleOpenWhatsAppDrawer = (product = null, note = '') => {
-    setDrawerProduct(product);
-    setDrawerNote(note);
-    setWhatsAppDrawerOpen(true);
-  };
-
-  const handleScrollToSection = (sectionId) => {
-    const aliasMap = {
-      catalog: 'collection',
-      products: 'collection',
-      quality: 'standards',
-      'b2b-services': 'solutions',
-      services: 'solutions',
-      reviews: 'trust',
-      testimonials: 'trust',
-      'inquiry-form': 'rfq-desk',
-      rfq: 'rfq-desk',
-    };
-    const targetId = aliasMap[sectionId] || sectionId;
-    const el = document.getElementById(targetId);
+  const handleScrollToSection = (sectionId, filter = null) => {
+    if (filter) {
+      setActiveProductFilter(filter);
+    }
+    const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleFloatingWhatsAppClick = () => {
-    const encoded = GENERAL_WHATSAPP_MESSAGE();
-    SITE_CONFIG.openWhatsApp(encoded);
+  const handleOpenQuoteModal = (product = null) => {
+    if (product) {
+      setPreselectedQuoteProduct(product);
+    }
+    handleScrollToSection('contact');
   };
 
   // ── Admin Mode View ───────────────────────────────────────────────────────
@@ -91,9 +82,13 @@ export default function App() {
     return (
       <AdminPanel
         products={products}
-        heroConfig={homepageConfig?.hero || heroConfig}
+        heroSlides={heroSlides}
+        inquiries={inquiries}
+        firebaseStatus={firebaseStatus}
         onSaveProducts={saveProducts}
-        onSaveHeroConfig={saveHeroConfig}
+        onSaveHeroSlides={saveHeroSlides}
+        onUpdateInquiryStatus={updateInquiryStatus}
+        onDeleteInquiry={deleteInquiry}
         onResetAll={resetAllToDefaults}
         onClose={() => {
           setShowAdmin(false);
@@ -105,81 +100,122 @@ export default function App() {
     );
   }
 
-  // ── Modern European Public Website ────────────────────────────────────────
+  // ── Public Sabora Spices Website ─────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans antialiased selection:bg-[#041A12] selection:text-amber-300 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAF9] text-stone-900 flex flex-col font-sans antialiased selection:bg-[#041A12] selection:text-amber-300 relative overflow-x-hidden">
       
-      {/* Luxury Hairline Scroll Progress Bar */}
+      {/* Hairline Scroll Progress Bar */}
       <div
-        id="scroll-progress-bar"
         className="fixed top-0 left-0 h-[2.5px] bg-gradient-to-r from-amber-500 via-emerald-400 to-amber-400 z-50 pointer-events-none"
         style={{ width: `${scrollProgress}%` }}
         aria-hidden="true"
       />
 
-      {/* Floating Modern Glassmorphism Pill Navbar */}
-      <FloatingNavbar
-        products={products}
+      {/* Sticky Header with Top Announcement & 11-Item Menu */}
+      <HeaderNavbar
         onScrollToSection={handleScrollToSection}
-        onOpenWhatsAppDrawer={() => handleOpenWhatsAppDrawer()}
+        onOpenQuoteModal={handleOpenQuoteModal}
+        onOpenAdmin={() => setShowAdmin(true)}
       />
 
       {/* Main Content Blueprint */}
       <main className="flex-1 w-full relative z-10">
         
-        {/* 1. Hero Section: Editorial Typography & Interactive Product Showcase */}
-        <section id="hero" className="w-full">
-          <ModernHero
-            heroConfig={homepageConfig?.hero || heroConfig}
-            products={products}
-            onScrollToSection={handleScrollToSection}
-            onSelectProduct={(product) => setSelectedProduct(product)}
-          />
-        </section>
-
-        {/* 2. Sleek Infinite Export Quality Tape */}
-        <MarqueeTape />
-
-        {/* 3. The 2026 Collection (Product Grid) */}
-        <ModernCollection
-          products={products}
-          onSelectProduct={(product) => setSelectedProduct(product)}
-          onOpenWhatsAppDrawer={(product, note) => handleOpenWhatsAppDrawer(product, note)}
+        {/* 1. Hero Section (Responsive Aspect Ratio - Fits Desktop, Tablet, Mobile without cropping) */}
+        <HeroSection
+          slides={heroSlides}
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
         />
 
-        {/* 4. Why Sabora / European Regulatory Standards (NO Accordion) */}
-        <StandardsGrid />
+        {/* 2. Trust Highlights Bar (4 Feature Cards matching Shahi Food Services) */}
+        <TrustHighlightsBar
+          onScrollToSection={handleScrollToSection}
+        />
 
-        {/* 5. Wholesale & Private Label Solutions */}
-        <ModernSolutions />
+        {/* 3. About Us (Section 002 of SABORA SPICES.txt) */}
+        <AboutSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
 
-        {/* 6. Interactive Quick RFQ Desk */}
-        <QuickRfqDesk />
+        {/* 4. Products Portfolio & Submenu (Section 003 of SABORA SPICES.txt) */}
+        <ProductsSection
+          products={products}
+          activeFilter={activeProductFilter}
+          onSelectProduct={(p) => setSelectedProduct(p)}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
 
-        {/* 7. Verified European Commercial Trust */}
-        <EuropeanTrust />
+        {/* 5. Sourcing & Origin (Section 004 of SABORA SPICES.txt) */}
+        <SourcingOriginSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 6. Why Sabora (Section 005 of SABORA SPICES.txt: All 14 Pillars) */}
+        <WhySaboraSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 7. Quality & Food Safety (Section 006 of SABORA SPICES.txt) */}
+        <QualitySafetySection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 8. Laboratory Testing & Verification (Section 007 of SABORA SPICES.txt) */}
+        <LabTestingSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 9. Regulatory Compliance (Section 008 of SABORA SPICES.txt) */}
+        <ComplianceSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 10. International & Export Supply (Section 009 of SABORA SPICES.txt) */}
+        <InternationalExportSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 11. Frequently Asked Questions (Section 0010 of SABORA SPICES.txt: All 25 FAQs) */}
+        <FaqSection
+          onScrollToSection={handleScrollToSection}
+          onOpenQuoteModal={handleOpenQuoteModal}
+        />
+
+        {/* 12. Contact Us & Request a Quote Desk */}
+        <ContactRfqSection
+          onSubmitInquiry={submitInquiry}
+          preselectedProduct={preselectedQuoteProduct}
+        />
 
       </main>
 
-      {/* Modern Luxury Footer */}
-      <ModernFooter
+      {/* Footer Section with Complete Menu, Policies, and Admin Link */}
+      <FooterSection
         onScrollToSection={handleScrollToSection}
         onOpenAdmin={() => setShowAdmin(true)}
       />
 
-      {/* Mobile Sticky Bottom Action Bar */}
-      <MobileBottomBar
-        onOpenWhatsAppDrawer={() => handleOpenWhatsAppDrawer()}
+      {/* Sticky Mobile Bottom Floating Action Bar */}
+      <MobileFloatingBar
+        onOpenQuoteModal={handleOpenQuoteModal}
         onScrollToSection={handleScrollToSection}
       />
 
       {/* Desktop Floating WhatsApp Button */}
       <aside aria-label="WhatsApp quick chat" className="hidden sm:block fixed bottom-6 right-6 z-40">
         <button
-          onClick={handleFloatingWhatsAppClick}
+          onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I am interested in sourcing whole spices and makhana.")}
           className="p-3.5 bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] hover:brightness-110 active:scale-95 text-white rounded-full shadow-[0_12px_35px_rgba(4,26,18,0.35)] hover:shadow-[0_16px_45px_rgba(4,26,18,0.45)] hover:scale-105 transition-all flex items-center justify-center group cursor-pointer border border-amber-400/50"
-          aria-label="Direct 1-Click WhatsApp Inquiry"
-          title="Direct 1-Click WhatsApp Commercial Desk"
+          aria-label="Direct 1-Click WhatsApp Sourcing Desk"
+          title="Direct 1-Click WhatsApp Sourcing Desk"
         >
           <div className="relative">
             <MessageCircle className="w-5 h-5 fill-emerald-400 text-emerald-400 group-hover:scale-110 transition-transform" />
@@ -187,27 +223,22 @@ export default function App() {
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-400 pointer-events-none" />
           </div>
           <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 font-bold text-xs pl-0 group-hover:pl-2.5 text-amber-200 uppercase tracking-wider font-mono">
-            WhatsApp Desk (1-Click)
+            WhatsApp Sourcing Desk
           </span>
         </button>
       </aside>
 
-      {/* Product Deep Specification Modal */}
+      {/* Product Detail Dossier Modal */}
       {selectedProduct && (
-        <ProductModal
+        <ProductDetailModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
+          onOpenQuoteModal={(p) => {
+            setSelectedProduct(null);
+            handleOpenQuoteModal(p);
+          }}
         />
       )}
-
-      {/* WhatsApp Fast Desk Custom Drawer */}
-      <WhatsAppDrawer
-        isOpen={whatsAppDrawerOpen}
-        onClose={() => setWhatsAppDrawerOpen(false)}
-        initialProduct={drawerProduct}
-        initialNote={drawerNote}
-        products={products}
-      />
 
     </div>
   );

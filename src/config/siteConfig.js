@@ -1,45 +1,89 @@
+/**
+ * Site Configuration for SABORA SPICES
+ * Based on SABORA SPICES.txt and client specifications
+ */
 export const SITE_CONFIG = {
   name: "Sabora Spices",
-  tagline: "Artisanal Whole Spices & European Export Purveyors",
-  subTagline: "Single-Estate Terroir | Optical Sortex Cleaned | EU MRL Compliant | Private Label & Bulk Freight",
-  instagramUrl: "https://www.instagram.com/saboraspices/",
-  instagramHandle: "@saboraspices",
+  tagline: "Whole Spices & Makhana. Sourced with Purpose.",
+  subTagline: "India-Based Sourcing and Supply for Domestic and International Buyers",
   
-  // WhatsApp settings (Used for 1-click inquiries)
-  whatsappNumber: "919876543210",
-  whatsappDisplayNumber: "+91 98765 43210",
+  // Official Contact Information from SABORA SPICES.txt
+  address: "Jahangirpuri, Delhi – 110033, India",
+  phones: [
+    { display: "+91 78809 06610", raw: "917880906610", primary: true },
+    { display: "+91 95327 01582", raw: "919532701582", primary: false }
+  ],
+  primaryPhone: "+91 78809 06610",
+  secondaryPhone: "+91 95327 01582",
+  primaryPhoneRaw: "917880906610",
+  secondaryPhoneRaw: "919532701582",
   
-  phone: "+91 98765 43210",
-  email: "exports@saboraspices.com",
-  inquiryEmail: "orders@saboraspices.com",
-  address: "Spice Processing & Export Terminal, Cochin / Tuticorin, India",
+  whatsappNumber: "917880906610",
+  whatsappDisplayNumber: "+91 78809 06610",
   
-  businessHours: "Mon - Sat: 9:00 AM - 7:00 PM IST (European & Global WhatsApp Desk 24/7)",
+  email: "info@saboraspices.com",
+  inquiryEmail: "sales@saboraspices.com",
+  website: "www.saboraspices.com",
   
-  stats: {
-    experience: "15+ Years",
-    countriesExported: "28+ Nations (EU, UK, Middle East)",
-    annualSupply: "2,500+ MT",
-    purityRate: "99.8% Sortex Grade",
-    clientSatisfaction: "4.95 / 5.0 Rating"
-  },
+  workingHours: "Monday – Saturday: 9:00 AM – 7:30 PM IST (WhatsApp Desk Active 24/7)",
   
-  certifications: [
-    { name: "EU MRL Compliant", code: "Reg. (EC) 396/2005", badge: "European Standard" },
-    { name: "FSSC 22000 / ISO", code: "Food Safety Mgmt", badge: "International Standard" },
-    { name: "Spice Board India", code: "Registered Exporter", badge: "Quality Assured" },
-    { name: "APEDA Certified", code: "Export Grade Agro", badge: "Govt. of India" },
-    { name: "Non-ETO & Steam Ready", code: "Zero Harmful Residues", badge: "Aroma Locked" }
+  // Key Core Categories
+  coreCategories: [
+    "Whole Green Cardamom",
+    "Makhana (Fox Nuts)",
+    "Whole Turmeric Fingers",
+    "Other Whole Spices (Clove, Black Pepper)"
   ],
 
-  // Utility to generate a 1-click WhatsApp URL with pre-filled message
-  buildWhatsAppUrl: (encodedMessage) => {
-    return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodedMessage}`;
+  // Sourcing Origins
+  origins: {
+    cardamom: "Kerala & Western Ghats (Idukki District)",
+    makhana: "Mithila Region, Bihar",
+    turmeric: "Salem & Nizamabad, India"
   },
 
-  // Safe launcher that works reliably on desktop and mobile browsers
-  openWhatsApp: (encodedMessage) => {
-    const url = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodedMessage}`;
+  // Compliance & Quality Highlights
+  certifications: [
+    { name: "FSSAI Compliant", desc: "Food Safety & Standards Authority of India", badge: "Mandatory Standard" },
+    { name: "ISO 9001:2015 Principles", desc: "Quality Management Systems (QMS)", badge: "Quality Assured" },
+    { name: "ISO 22000:2018 Principles", desc: "Food Safety Management Systems (FSMS)", badge: "Food Safety" },
+    { name: "FoSCoS Reporting", desc: "Periodic laboratory test reports upload", badge: "Regulatory Portal" },
+    { name: "Tested Before Dispatch", desc: "Approved Food Testing Laboratory COA", badge: "Release Control" }
+  ],
+
+  // Menu Items (matching screenshot: WhatsApp Image 2026-10-24 at 11.42.47.jpeg)
+  menuItems: [
+    { id: "hero", label: "Home", href: "#hero" },
+    { id: "about", label: "About Us", href: "#about" },
+    { 
+      id: "products", 
+      label: "Products", 
+      href: "#products",
+      submenu: [
+        { label: "Whole Green Cardamom", href: "#products", filter: "cardamom" },
+        { label: "Makhana (Fox Nuts)", href: "#products", filter: "makhana" },
+        { label: "Whole Turmeric Fingers", href: "#products", filter: "turmeric" },
+        { label: "Cloves & Other Whole Spices", href: "#products", filter: "other" }
+      ]
+    },
+    { id: "sourcing", label: "Sourcing & Origin", href: "#sourcing" },
+    { id: "why-sabora", label: "Why Sabora", href: "#why-sabora" },
+    { id: "quality", label: "Quality & Food Safety", href: "#quality" },
+    { id: "lab-testing", label: "Laboratory Testing", href: "#lab-testing" },
+    { id: "compliance", label: "Regulatory Compliance", href: "#compliance" },
+    { id: "export", label: "International & Export Supply", href: "#export" },
+    { id: "faq", label: "FAQ", href: "#faq" },
+    { id: "contact", label: "Contact Us", href: "#contact" }
+  ],
+
+  buildWhatsAppUrl: (message) => {
+    return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  },
+
+  openWhatsApp: (message) => {
+    const url = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 };
+
+export default SITE_CONFIG;

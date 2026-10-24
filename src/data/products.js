@@ -1,317 +1,296 @@
+/**
+ * SABORA SPICES — Master Products Catalog
+ * Based on SABORA SPICES.txt (Section 001, 003, 004, 007)
+ */
 export const PRODUCTS = [
   {
     id: "cardamom-whole",
     name: "Green Cardamom (Elaichi)",
-    subtitle: "Sortex Sorted 8mm+ Extra Bold Natural Green Pods",
+    subtitle: "Whole Green Cardamom — Kerala & Western Ghats Origin",
     botanicalName: "Elettaria cardamomum",
     category: "Whole Spices",
+    categoryKey: "cardamom",
     featured: true,
-    badge: "Export Grade #1",
-    tagline: "The Queen of Spices with intense natural aroma and high volatile oil content, harvested from high-altitude plantations.",
-    image: "/images/cardamom.png",
-    rating: 4.95,
-    reviewsCount: 38,
-    moq: "50 Kg (Sample from 1 Kg)",
-    origin: "Idukki Hills, Kerala, India",
-    terroir: "Cardamom Hills, Idukki (1,100m elevation, shade-grown rainforest canopy)",
-    aromaNotes: ["Sweet Pine & Menthol", "Zesty Citrus Peel", "Warm Camphor Undertone"],
-    euCompliance: "EU MRL (EC) 396/2005 Compliant • Non-ETO • Steam Sterilized",
-    incoterms: "CIF Rotterdam / Hamburg / Genoa | FOB Cochin",
-    batchCode: "SB-IDK-2025/26",
-    leadTime: "3 - 5 Business Days",
-    gradesAvailable: ["8mm+ Extra Bold", "7.5mm - 8mm Bold", "7mm Medium", "Split / Seeds"],
+    badge: "Primary Focus • Export Grade",
+    tagline: "Valued for its distinctive aroma, flavor, and versatile culinary applications. Sourced directly from Idukki, Kerala.",
+    image: "/images/cardamom-pouch.jpg",
+    gallery: [
+      "/images/cardamom-pouch.jpg",
+      "/images/cardamom-pods.jpg",
+      "/images/cardamom-bowl.jpg",
+      "/images/cardamom-macro.jpg",
+      "/images/hero-cardamom-sorting.jpg"
+    ],
+    rating: 4.96,
+    reviewsCount: 42,
+    moq: "50 Kg (Sample Available on Request)",
+    origin: "Idukki District, Kerala & Western Ghats, India",
+    terroir: "High-elevation rainforest canopy, Idukki, Kerala (natural humidity & shade)",
+    netWeight: "500g Sabora Pouch & Bulk",
+    aromaNotes: ["Intense Sweet Pine", "Citrus & Eucalyptus", "Warm Camphoric Notes"],
+    leadTime: "2 - 4 Business Days",
+    gradesAvailable: ["8mm+ Extra Bold", "7.5mm - 8mm Bold", "7mm Medium", "Split / Seeds on Request"],
     specifications: [
+      { label: "Product Form", value: "100% Whole Green Cardamom Pods" },
       { label: "Botanical Name", value: "Elettaria cardamomum" },
-      { label: "Size Grading", value: "7.0 mm to 8.5 mm+ Bold" },
-      { label: "Moisture Content", value: "Max 10.5%" },
-      { label: "Volatile Oil", value: "Min 7.5% - 8.2% v/w" },
-      { label: "Color / Appearance", value: "Natural Deep Vibrant Green, No Artificial Color" },
-      { label: "Extraneous Matter", value: "< 0.5% (Sortex Cleaned)" },
-      { label: "EU Residue Limits", value: "Conforms to (EC) No 396/2005" },
-      { label: "Crop Season", value: "Fresh New Crop (Aug - Jan)" },
-      { label: "Shelf Life", value: "24 Months (in hermetic packaging)" },
+      { label: "Origin Region", value: "Idukki District, Kerala (Western Ghats)" },
+      { label: "Color / Appearance", value: "Deep Vibrant Natural Green, Free from Artificial Polish" },
+      { label: "Capsule Sizing", value: "7.0 mm to 8.5 mm+ Bold" },
+      { label: "Moisture Content", value: "Max 10.0% (Moisture Controlled)" },
+      { label: "Volatile Essential Oil", value: "Min 7.0% - 8.5% v/w (High Terpene Density)" },
+      { label: "Immature / Hollow Pods", value: "< 1.0% (Meticulously Sorted)" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Testing & Certification", value: "Accredited Lab Report & FoSCoS Linked COA" },
+      { label: "Shelf Life", value: "24 Months in Sealed Barrier Packaging" }
     ],
     packagingOptions: [
-      "1 Kg / 2 Kg Vacuum Sealed Nitrogen Pouches",
-      "5 Kg Food-Grade Inner Poly + Master Carton",
-      "10 Kg & 25 Kg Export Master Corrugated Cases",
-      "Custom Private Label Stand-Up Pouches with Zipper"
+      "500g Food-Grade Sabora-Branded Stand-Up Zipper Pouches",
+      "1 Kg & 2 Kg Vacuum-Sealed Nitrogen Barrier Pouches",
+      "5 Kg Food-Grade Inner Poly Liner + Master Corrugated Box",
+      "10 Kg & 25 Kg Export Master Cases",
+      "Buyer-Specific & Private-Label Packaging (subject to MOQ)"
     ],
     b2bIdealFor: [
-      "European Spice Blenders & Tea Houses",
-      "Gourmet Bakery & Nordic Pastry Producers",
-      "HORECA (Luxury Hotels & Michelin Kitchens)",
-      "Overseas Importers & Global Distributors"
+      "Domestic & International Whole Spice Wholesalers",
+      "Food Processing & Commercial Kitchens",
+      "Sweet, Confectionery & Beverage Manufacturers",
+      "Retail Supermarket Chains & Private-Label Brands"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting commercial wholesale terms and an official quotation for *Green Cardamom (8mm+ Extra Bold)*.\n\n`;
+      let msg = `Hello SABORA SPICES team,\n\nI am requesting commercial supply terms and a quotation for *Whole Green Cardamom (Elaichi)*.\n\n`;
       if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
+        msg += `*Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Could you please provide:\n`;
-      msg += `1. Current CIF European port pricing per metric ton / kg (7.5mm & 8mm+ bold pods)\n`;
-      msg += `2. Minimum Order Quantity (MOQ) and pre-shipment sample evaluation terms\n`;
-      msg += `3. Latest laboratory Certificate of Analysis (COA) specifications\n\n`;
-      msg += `Looking forward to your formal quotation. Thank you!`;
-      return encodeURIComponent(msg);
-    }
-  },
-  {
-    id: "turmeric-whole",
-    name: "Turmeric Whole (Haldi)",
-    subtitle: "High Curcumin (4.5%+) Double Polished Fingers & Bulbs",
-    botanicalName: "Curcuma longa",
-    category: "Whole Spices",
-    featured: true,
-    badge: "High Curcumin 4.5%+",
-    tagline: "Sun-dried golden turmeric fingers sourced directly from certified farmer clusters with guaranteed natural curcumin potency.",
-    image: "/images/turmeric-whole.png",
-    rating: 4.92,
-    reviewsCount: 46,
-    moq: "500 Kg (1 Container for Export)",
-    origin: "Salem & Nizamabad, India",
-    terroir: "Salem & Nizamabad Black Alluvial Plains (Natural solar cured)",
-    aromaNotes: ["Warm Earthy Musk", "Golden Ginger Warmth", "Subtle Peppery Bite"],
-    euCompliance: "EU MRL (EC) 396/2005 Compliant • Non-ETO • Heavy Metal Tested",
-    incoterms: "CIF Rotterdam / Antwerp / Hamburg | FOB Chennai",
-    batchCode: "SB-SLM-2025/26",
-    leadTime: "5 - 7 Business Days",
-    gradesAvailable: ["Salem Double Polished Fingers", "Nizamabad Finger Select", "Gathha (Bulbs)", "Sortex Cleaned Whole"],
-    specifications: [
-      { label: "Botanical Name", value: "Curcuma longa" },
-      { label: "Curcumin Content", value: "3.8% to 5.2%+ (Lab Verified)" },
-      { label: "Moisture Content", value: "Max 9.5%" },
-      { label: "Length of Fingers", value: "4 cm to 9 cm" },
-      { label: "Color / Finish", value: "Bright Deep Orange-Yellow, Double Polished" },
-      { label: "Total Ash", value: "< 6.5%" },
-      { label: "Pesticide Residue", value: "Conforms to EU / USFDA norms" },
-      { label: "Shelf Life", value: "24 Months" },
-    ],
-    packagingOptions: [
-      "25 Kg / 50 Kg Multiwall Kraft Paper Bags with PE Liner",
-      "25 Kg PP Bags with Heavy Duty Inner Liner",
-      "500g & 1 Kg Nitrogen Flushed Retail Pouches",
-      "Private Label Packaging Available"
-    ],
-    b2bIdealFor: [
-      "European Spice Mills & Organic Curry Powder Grinders",
-      "Pharma & Curcumin Extraction Units in Germany & France",
-      "Wholesale Spice Merchants & Mandi Traders",
-      "Export Houses shipping to Europe & Middle East"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting commercial wholesale terms and an official quotation for *Turmeric Whole (Haldi Fingers & Bulbs)*.\n\n`;
-      if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Could you please provide:\n`;
-      msg += `1. Current wholesale rates per metric ton (Salem Double Polished)\n`;
-      msg += `2. HPLC Curcumin potency Certificate of Analysis (COA)\n`;
-      msg += `3. Packaging options (multiwall paper/jute) and export dispatch timeline\n\n`;
-      msg += `Looking forward to your formal quotation. Thank you!`;
-      return encodeURIComponent(msg);
+      msg += `Please share:\n1. Pricing for 7.5mm & 8mm+ grades\n2. Available packaging formats & MOQ\n3. Lab test report & delivery timeline\n\nThank you!`;
+      return msg;
     }
   },
   {
     id: "makhana-fox-nuts",
     name: "Makhana (Fox Nuts)",
-    subtitle: "Jumbo Crisp 5-Suta / 6-Suta Phool Makhana",
+    subtitle: "Premium Whole Phool Makhana — Bihar Origin",
     botanicalName: "Euryale ferox",
-    category: "Gourmet & Healthy Agro",
+    category: "Makhana (Fox Nuts)",
+    categoryKey: "makhana",
     featured: true,
-    badge: "100% Natural Superfood",
-    tagline: "Pure, crunchy lotus seed pops with zero chemical bleaching, uniform size, and natural pristine white color.",
-    image: "/images/makhana-fox-nuts.png",
-    rating: 4.97,
-    reviewsCount: 29,
-    moq: "100 Kg",
-    origin: "Mithila Region, Bihar, India",
-    terroir: "Mithila Wetland Ponds, Bihar (Clean freshwater traditional harvesting)",
-    aromaNotes: ["Light Toasted Cereal", "Delicate Nutty Finish", "Milky Sweetness"],
-    euCompliance: "EU Food Law Reg. (EC) 178/2002 Compliant • Non-Bleached • Allergen Controlled",
-    incoterms: "CIF Hamburg / Rotterdam / London | FOB Kolkata",
-    batchCode: "SB-MTH-2025/26",
+    badge: "Core Category • Superfood",
+    tagline: "Crunchy, pure lotus seed pops with zero chemical bleaching. Sourced directly from Bihar's established wetland ecosystem.",
+    image: "/images/makhana-pouch.jpg",
+    gallery: [
+      "/images/makhana-pouch.jpg",
+      "/images/makhana-pile.jpg"
+    ],
+    rating: 4.95,
+    reviewsCount: 36,
+    moq: "100 Kg (Sample Available on Request)",
+    origin: "Mithila Region & Wetland Clusters, Bihar, India",
+    terroir: "Freshwater aquatic wetland ecosystems of North Bihar",
+    netWeight: "Sabora Food-Grade Pouch & Bulk",
+    aromaNotes: ["Mild Toasted Cereal", "Clean Nutty Scent", "Delicate Sweetness"],
     leadTime: "3 - 5 Business Days",
-    gradesAvailable: ["6 Suta Jumbo (>18mm)", "5.5 Suta Handpicked", "5 Suta Premium", "Industrial Grade / Flakes"],
+    gradesAvailable: ["6 Suta Jumbo (>18mm)", "5.5 Suta Handpicked", "5 Suta Premium", "Bulk Wholesale Grade"],
     specifications: [
+      { label: "Product Form", value: "100% Whole Popped Fox Nuts (Phool Makhana)" },
       { label: "Botanical Name", value: "Euryale ferox" },
-      { label: "Grade / Size", value: "5 Suta & 6 Suta+ Hand Sorted" },
-      { label: "Moisture Content", value: "Max 5.0% (Extra Crisp)" },
+      { label: "Origin Region", value: "Bihar, India" },
+      { label: "Size / Diameter", value: "5 Suta (16mm) to 6 Suta+ Jumbo (>18mm)" },
+      { label: "Moisture Content", value: "Max 5.0% (Crisp & Low Moisture)" },
+      { label: "Processing", value: "Traditional Sun Drying & Roasting, Unbleached" },
+      { label: "Color / Appearance", value: "Natural Pristine Milky White, Free of Chemicals" },
       { label: "Black Spot Ratio", value: "< 1.5% (Rigorous Hand Sorting)" },
-      { label: "Protein Content", value: "9.7 g / 100 g" },
-      { label: "Processing", value: "Traditional roasting, nil artificial additives" },
-      { label: "Color", value: "Natural Milky White, Unbleached" },
-      { label: "Shelf Life", value: "12 Months in airtight nitrogen pack" },
+      { label: "Protein Content", value: "Approx. 9.7 g / 100 g" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Shelf Life", value: "12 Months in Moisture-Proof Packaging" }
     ],
     packagingOptions: [
-      "5 Kg / 10 Kg Master Heavy Poly Bags in 5-ply Corrugated Box",
-      "100g, 250g, 500g Nitrogen Flushed Foil Stand-Up Pouches",
-      "Private Label Ready (Your Brand Logo & Barcode Printing)",
-      "Bulk Palletized Shipments for Sea & Air Cargo"
+      "Sabora-Branded Food-Grade Moisture-Barrier Pouches",
+      "5 Kg & 10 Kg Heavy Duty Poly Bags inside 5-Ply Master Boxes",
+      "Custom Private-Label Retail Pouches (100g, 250g, 500g)",
+      "Palletized Container Shipments for Domestic & Export Supply"
     ],
     b2bIdealFor: [
-      "European Healthy Snack Brands & Superfood Packers",
-      "Bio & Organic Supermarket Chains in Benelux & DACH",
-      "Modern Trade & FMCG Aggregators",
-      "Ayurvedic, Diet & Nutrition Manufacturers"
+      "Healthy Snack Brands & Superfood Packagers",
+      "Modern Trade, Supermarkets & FMCG Distributors",
+      "Catering Companies, Hotels & Food Services",
+      "Private-Label Organic & Health Food Brands"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting wholesale / private label supply terms for *Jumbo Makhana Fox Nuts (5-Suta / 6-Suta)*.\n\n`;
+      let msg = `Hello SABORA SPICES team,\n\nI am inquiring about commercial supply for *Makhana (Fox Nuts)*.\n\n`;
       if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
+        msg += `*Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Could you please provide:\n`;
-      msg += `1. Current wholesale rates for 5-suta and 6-suta jumbo grades\n`;
-      msg += `2. Private label OEM packaging capabilities & sample dispatch process\n`;
-      msg += `3. Minimum order quantity and export lead time\n\n`;
-      msg += `Looking forward to your formal quotation. Thank you!`;
-      return encodeURIComponent(msg);
+      msg += `Please share:\n1. Current rates for 5-Suta & 6-Suta Jumbo grades\n2. Private-label & bulk packaging options\n3. Minimum order quantity and dispatch schedule\n\nThank you!`;
+      return msg;
+    }
+  },
+  {
+    id: "turmeric-whole",
+    name: "Whole Turmeric Fingers",
+    subtitle: "Double Polished Whole Haldi Fingers — High Curcumin",
+    botanicalName: "Curcuma longa",
+    category: "Whole Spices",
+    categoryKey: "turmeric",
+    featured: true,
+    badge: "Whole Spices • High Curcumin",
+    tagline: "Sun-cured golden whole turmeric fingers sourced from prime producing regions. Free from synthetic dyes and lead chromate.",
+    image: "/images/turmeric-pouch.jpg",
+    gallery: [
+      "/images/turmeric-pouch.jpg",
+      "/images/turmeric-pile.jpg"
+    ],
+    rating: 4.92,
+    reviewsCount: 31,
+    moq: "200 Kg",
+    origin: "Salem & Nizamabad, India",
+    terroir: "Fertile alluvial plains of Southern & Central India",
+    netWeight: "Sabora Food-Grade Pouch & Bulk",
+    aromaNotes: ["Earthy Woody Musk", "Warm Golden Pungency", "Subtle Peppery Bite"],
+    leadTime: "3 - 5 Business Days",
+    gradesAvailable: ["Salem Double Polished Fingers", "Nizamabad Finger Select", "Gathha (Whole Bulbs)"],
+    specifications: [
+      { label: "Product Form", value: "100% Whole Turmeric Fingers (Haldi)" },
+      { label: "Botanical Name", value: "Curcuma longa" },
+      { label: "Curcumin Content", value: "3.5% to 5.0%+ (Natural Active)" },
+      { label: "Moisture Content", value: "Max 9.5%" },
+      { label: "Length of Fingers", value: "4 cm to 9 cm Uniform Fingers" },
+      { label: "Color / Finish", value: "Bright Deep Golden Yellow, Double Polished" },
+      { label: "Adulteration / Dyes", value: "Nil (Tested Negative for Lead Chromate / Metanil)" },
+      { label: "Extraneous Matter", value: "< 0.5%" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Shelf Life", value: "24 Months in Cool Dry Storage" }
+    ],
+    packagingOptions: [
+      "Sabora-Branded Food-Grade Retail Pouches",
+      "25 Kg & 50 Kg Multiwall Kraft Paper Bags with Inner Liner",
+      "25 Kg High-Density PP Bags with Moisture Barrier",
+      "Private-Label Packaging Tailored to Buyer Specs"
+    ],
+    b2bIdealFor: [
+      "Spice Grinders & Curry Powder Manufacturers",
+      "Ayurvedic & Herbal Extraction Units",
+      "Wholesale Mandi Traders & Distributors",
+      "International Food Importers"
+    ],
+    whatsappTemplate: (customDetails = "") => {
+      let msg = `Hello SABORA SPICES team,\n\nI am requesting wholesale rates for *Whole Turmeric Fingers (Haldi)*.\n\n`;
+      if (customDetails) {
+        msg += `*Requirement Details:*\n${customDetails}\n\n`;
+      }
+      msg += `Please provide bulk pricing per metric ton / kg, curcumin test details, and dispatch lead time.\n\nThank you!`;
+      return msg;
+    }
+  },
+  {
+    id: "clove-whole",
+    name: "Whole Cloves (Laung)",
+    subtitle: "Aromatic Whole Cloves with Intact Crown — High Eugenol",
+    botanicalName: "Syzygium aromaticum",
+    category: "Whole Spices",
+    categoryKey: "other",
+    featured: true,
+    badge: "Whole Spices • 1kg Pack",
+    tagline: "Rich in aroma and volatile eugenol. Hand-sorted whole flower buds with intact full crowns.",
+    image: "/images/clove-pouch.jpg",
+    gallery: [
+      "/images/clove-pouch.jpg"
+    ],
+    rating: 4.93,
+    reviewsCount: 24,
+    moq: "50 Kg",
+    origin: "Tamil Nadu & Selected High-Grade Lots, India",
+    terroir: "Western Ghats Slopes & Coastal Tropical Valleys",
+    netWeight: "1kg Sabora Pouch & Bulk",
+    aromaNotes: ["Intense Eugenol Warmth", "Sweet Spicy Floral", "Penetrating Aroma"],
+    leadTime: "2 - 4 Business Days",
+    gradesAvailable: ["Handpicked Bold (Lal Pari)", "Standard Whole Bold", "Export Quality"],
+    specifications: [
+      { label: "Product Form", value: "100% Whole Clove Buds with Full Crowns" },
+      { label: "Botanical Name", value: "Syzygium aromaticum" },
+      { label: "Head Intactness", value: "> 90% Intact Buds" },
+      { label: "Volatile Essential Oil", value: "Min 17.0% - 19.5% (High Eugenol)" },
+      { label: "Moisture Content", value: "Max 10.0%" },
+      { label: "Foreign Organic Matter", value: "< 0.5%" },
+      { label: "Color / Appearance", value: "Deep Reddish Brown, Natural Sheen" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Shelf Life", value: "24 Months" }
+    ],
+    packagingOptions: [
+      "1 Kg Sabora-Branded Food-Grade Pouches",
+      "5 Kg & 10 Kg Master Cartons with Food-Grade Liner",
+      "25 Kg Export Bags",
+      "Private-Label Packaging"
+    ],
+    b2bIdealFor: [
+      "Wholesale Spice Merchants & Mandi Traders",
+      "Bakery, Beverage & Culinary Blenders",
+      "Pharmaceutical, Essential Oil & Oral Care Products",
+      "Domestic & International Buyers"
+    ],
+    whatsappTemplate: (customDetails = "") => {
+      let msg = `Hello SABORA SPICES team,\n\nI am inquiring about *Whole Cloves (Laung)* in 1kg Sabora pouches / bulk.\n\n`;
+      if (customDetails) {
+        msg += `*Requirement Details:*\n${customDetails}\n\n`;
+      }
+      msg += `Please share current rates, head intactness specs, and delivery schedule.\n\nThank you!`;
+      return msg;
     }
   },
   {
     id: "black-pepper-bold",
-    name: "Black Pepper (Kali Mirch)",
-    subtitle: "Tellicherry & Malabar Garbled Black Pepper",
+    name: "Whole Black Pepper (Kali Mirch)",
+    subtitle: "Tellicherry & Malabar Garbled Bold Black Pepper",
     botanicalName: "Piper nigrum",
     category: "Whole Spices",
+    categoryKey: "other",
     featured: false,
-    badge: "550g/l - 580g/l High Density",
-    tagline: "Pungent, piperine-rich whole black pepper corns machine graded and free from pinheads.",
-    image: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=800&q=80",
-    rating: 4.88,
-    reviewsCount: 22,
-    moq: "200 Kg",
-    origin: "Wayanad, Kerala & Coorg, Karnataka",
-    terroir: "Malabar Coast & Wayanad Highlands (Single-estate hillside vines)",
-    aromaNotes: ["Deep Woody Pungency", "Sharp Black Terpenes", "Warm Lingering Heat"],
-    euCompliance: "ESA Minimum Quality Guidelines • Non-ETO • Aflatoxin Tested",
-    incoterms: "CIF Rotterdam / Hamburg / Genoa | FOB Cochin",
-    batchCode: "SB-ML-2025/26",
+    badge: "Subject to Sourcing Feasibility",
+    tagline: "Bold whole black peppercorns with sharp piperine pungency, sorted and cleaned to buyer requirements.",
+    image: "/images/cardamom-plantation.jpg",
+    gallery: [
+      "/images/cardamom-plantation.jpg"
+    ],
+    rating: 4.89,
+    reviewsCount: 18,
+    moq: "100 Kg",
+    origin: "Kerala & Karnataka, India",
+    terroir: "Western Ghats pepper vine plantations",
+    netWeight: "Bulk & Sabora Pouches",
+    aromaNotes: ["Pungent Woody Heat", "Sharp Peppery Terpenes", "Warm Lingering Finish"],
     leadTime: "3 - 5 Business Days",
-    gradesAvailable: ["TGSEB (Tellicherry Garbled Special Extra Bold)", "Malabar Garbled (MG-1)", "550g/L Regular Bold"],
+    gradesAvailable: ["TGSEB Bold", "Malabar Garbled (MG-1)", "550g/L Regular Bold"],
     specifications: [
+      { label: "Product Form", value: "100% Whole Dried Black Peppercorns" },
       { label: "Botanical Name", value: "Piper nigrum" },
-      { label: "Density / Liter Weight", value: "550 g/L to 580 g/L" },
-      { label: "Piperine Content", value: "4.5% to 5.8%" },
+      { label: "Liter Weight (Density)", value: "550 g/L to 580 g/L" },
+      { label: "Piperine Content", value: "4.5% to 5.5%" },
       { label: "Moisture Content", value: "Max 11.0%" },
-      { label: "Pinheads / Light Berries", value: "< 1.5%" },
-      { label: "Shelf Life", value: "24 Months" },
+      { label: "Light Berries / Pinheads", value: "< 1.5%" },
+      { label: "Shelf Life", value: "24 Months" }
     ],
     packagingOptions: [
-      "25 Kg / 50 Kg Multiwall Paper & Jute Bags",
-      "Custom Vacuum Pouches 1 Kg to 5 Kg"
+      "25 Kg & 50 Kg Multiwall Bags",
+      "Sabora-Branded Pouches on Request",
+      "Buyer-Specific Packaging"
     ],
     b2bIdealFor: [
-      "European Sauce & Charcuterie Makers",
-      "Gourmet Seasoning Blenders in France & Italy",
-      "International Export Commodity Traders"
+      "Food Manufacturers & Sauce Blenders",
+      "Seasoning & Culinary Mix Brands",
+      "Commodity Wholesalers"
     ],
     whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Tellicherry & Malabar Garbled Black Pepper (550g/L - 580g/L)*.\n\n`;
+      let msg = `Hello SABORA SPICES team,\n\nI am requesting details and availability for *Whole Black Pepper (Kali Mirch)*.\n\n`;
       if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
+        msg += `*Requirement Details:*\n${customDetails}\n\n`;
       }
-      msg += `Please share current bulk rates, lab COA, MOQ, and CIF port terms.\n\nThank you!`;
-      return encodeURIComponent(msg);
-    }
-  },
-  {
-    id: "cloves-lal-pari",
-    name: "Cloves (Laung)",
-    subtitle: "Handpicked Lal Pari Madagascar & Indian Grade",
-    botanicalName: "Syzygium aromaticum",
-    category: "Whole Spices",
-    featured: false,
-    badge: "High Eugenol >18%",
-    tagline: "Intensely aromatic reddish-brown whole flower buds with intact full crowns.",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
-    rating: 4.91,
-    reviewsCount: 19,
-    moq: "100 Kg",
-    origin: "Tamil Nadu & Imported Select Lots",
-    terroir: "Western Ghats Slopes & Select Island Estates",
-    aromaNotes: ["Intense Warm Eugenol", "Sweet Floral Spice", "Penetrating Aroma"],
-    euCompliance: "EU MRL Compliant • Full Crown Retention >92% • Steam Sterilized",
-    incoterms: "CIF Rotterdam / Hamburg | FOB Tuticorin",
-    batchCode: "SB-CLV-2025/26",
-    leadTime: "3 - 5 Business Days",
-    gradesAvailable: ["Lal Pari Handpicked", "Standard Bold", "Clove Stems / Grinding Grade"],
-    specifications: [
-      { label: "Botanical Name", value: "Syzygium aromaticum" },
-      { label: "Head Intactness", value: "> 92%" },
-      { label: "Eugenol Oil", value: "Min 17.5% - 19.0%" },
-      { label: "Moisture Content", value: "Max 10.0%" },
-    ],
-    packagingOptions: ["10 Kg Corrugated Cartons", "25 Kg Heavy Bags"],
-    b2bIdealFor: [
-      "German & Scandinavian Glühwein / Bakery Producers",
-      "Pharmaceutical & Oral Care Formulations",
-      "Gourmet Spice Mix Brands"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Lal Pari Handpicked Cloves* (>18% Eugenol).\n\n`;
-      if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please share current bulk pricing per kg, eugenol analysis, and export terms.\n\nThank you!`;
-      return encodeURIComponent(msg);
-    }
-  },
-  {
-    id: "star-anise",
-    name: "Star Anise (Chakra Phool)",
-    subtitle: "Autumn Crop Whole 8-Pointed Star Blossoms",
-    botanicalName: "Illicium verum",
-    category: "Whole Spices",
-    featured: false,
-    badge: "Full 8-Point Florets",
-    tagline: "Vibrant mahogany blossoms with rich anethole aroma, perfect for premium culinary and blending blends.",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
-    rating: 4.89,
-    reviewsCount: 15,
-    moq: "100 Kg",
-    origin: "Arunachal Pradesh & Certified Global Partners",
-    terroir: "Sub-Himalayan Foothills (Autumn sun-dried whole stars)",
-    aromaNotes: ["Sweet Liquorice", "Warm Anethole", "Balsamic Herbal"],
-    euCompliance: "100% True Illicium Verum • Nil Shikimi Toxicity • EU Reg. Compliant",
-    incoterms: "CIF Rotterdam / Hamburg | FOB Kolkata",
-    batchCode: "SB-STR-2025/26",
-    leadTime: "4 - 6 Business Days",
-    gradesAvailable: ["Hand Selected Whole 8-Horn", "Standard Whole", "Broken Pieces"],
-    specifications: [
-      { label: "Botanical Name", value: "Illicium verum" },
-      { label: "Whole Broken Ratio", value: "> 85% Full Stars" },
-      { label: "Moisture Content", value: "Max 9.5%" },
-      { label: "Color", value: "Natural Chestnut Brown" },
-    ],
-    packagingOptions: ["10 Kg Master Cartons with Poly Barrier", "Custom Retail Packs"],
-    b2bIdealFor: [
-      "European Distilleries & Botanicals Producers",
-      "Asian & Fusion Culinary Brands in Western Europe",
-      "Artisan Tisane & Tea Blenders"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello Sabora Spices team,\n\nI am requesting an official wholesale quotation for *Star Anise Whole 8-Pointed Blossoms*.\n\n`;
-      if (customDetails) {
-        msg += `*My Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please share current bulk pricing, whole star ratio guarantee, and MOQ.\n\nThank you!`;
-      return encodeURIComponent(msg);
+      msg += `Please confirm current availability, grade options, and commercial terms.\n\nThank you!`;
+      return msg;
     }
   }
 ];
 
-export const CATEGORIES = [
-  "All Products",
-  "Whole Spices",
-  "Gourmet & Healthy Agro"
-];
-
-export const GENERAL_WHATSAPP_MESSAGE = (customDetails = "") => {
-  let msg = `Hello Sabora Spices team,\n\nI am contacting your European commercial desk regarding wholesale supply of single-estate whole spices.\n\n`;
-  if (customDetails) {
-    msg += `*My Inquiry:*\n${customDetails}\n\n`;
-  }
-  msg += `Could you please share your complete wholesale catalog, latest CIF price list, and export dispatch schedule?\n\nThank you!`;
-  return encodeURIComponent(msg);
+export const GENERAL_WHATSAPP_MESSAGE = (subject = "General Enquiry") => {
+  const text = `Hello SABORA SPICES team,\n\nI am visiting your website (www.saboraspices.com) and would like to discuss a commercial enquiry regarding whole spices & makhana.\n\n*Subject:* ${subject}\n\nPlease share your catalog, current availability, and quotation terms.\n\nThank you!`;
+  return text;
 };
+
+export default PRODUCTS;
