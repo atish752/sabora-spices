@@ -44,7 +44,7 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
         onOpenQuoteModal={onOpenQuoteModal}
       />
 
-      {/* Main Section 008 Component */}
+      {/* Core Compliance Section Component */}
       <ComplianceSection
         onScrollToSection={(sectionId) => onNavigate && onNavigate(sectionId)}
         onOpenQuoteModal={onOpenQuoteModal}

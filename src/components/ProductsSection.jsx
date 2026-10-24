@@ -59,13 +59,13 @@ export default function ProductsSection({
             Whole Spices & Makhana (Fox Nuts)
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ 100% whole harvest guarantee • Zero powders, zero fillers, zero polishing chemicals ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, our product offering focuses strictly on whole, unground agricultural products. We specialise in whole green cardamom, whole turmeric fingers, and whole Makhana, with additional whole spices available according to buyer requirements.
           </p>
-
-          <div className="inline-block px-3 py-1 bg-amber-50 border border-amber-200 rounded text-xs text-amber-800 font-medium">
-            ★ Note: Our product focus is on whole spices rather than powdered or ground spices.
-          </div>
         </div>
 
         {/* Filter Navigation Tabs */}

@@ -43,6 +43,10 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
             Frequently Asked Questions (FAQ)
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Transparent answers directly from our founders • Reach out anytime on WhatsApp ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl mx-auto font-normal">
             Everything you need to know about our whole spices sourcing, Makhana supply, packaging options, laboratory testing, and commercial order terms.
           </p>

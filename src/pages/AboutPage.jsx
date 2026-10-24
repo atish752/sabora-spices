@@ -16,7 +16,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
         onOpenQuoteModal={onOpenQuoteModal}
       />
 
-      {/* Complete Section 002 Component */}
+      {/* Core About Section Component */}
       <AboutSection
         onScrollToSection={(sectionId) => onNavigate && onNavigate(sectionId)}
         onOpenQuoteModal={onOpenQuoteModal}

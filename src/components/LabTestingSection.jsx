@@ -64,6 +64,10 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
             Tested for Quality. Verified Before Dispatch.
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Independent NABL laboratory analysis • Full Certificate of Analysis (COA) per lot ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, laboratory testing is an essential part of our commitment to product quality, food safety, and responsible supply. Quality does not rely on visual inspection alone; it is supported by empirical testing and documented release control.
           </p>

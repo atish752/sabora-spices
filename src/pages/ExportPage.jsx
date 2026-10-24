@@ -26,7 +26,7 @@ export default function ExportPage({ onNavigate, onOpenQuoteModal, onSubmitInqui
         onOpenQuoteModal={onOpenQuoteModal}
       />
 
-      {/* Main Section 009 Component */}
+      {/* Core International Export Section Component */}
       <InternationalExportSection
         onScrollToSection={(sectionId) => onNavigate && onNavigate(sectionId)}
         onOpenQuoteModal={onOpenQuoteModal}

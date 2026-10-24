@@ -61,6 +61,10 @@ export default function InternationalExportSection({ onOpenQuoteModal, onScrollT
             Connecting Indian Products with Global Business Opportunities
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Phytosanitary certified, seaworthy export cartons, CIF & FOB port coordination ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, we welcome enquiries from international importers, wholesalers, distributors, food manufacturers, and private-label brands seeking dependable whole spices and Makhana sourced directly from India.
           </p>

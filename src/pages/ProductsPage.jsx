@@ -150,11 +150,14 @@ export default function ProductsPage({
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
               <Package className="w-3.5 h-3.5 text-amber-600" />
-              <span>Section 003 — Packaging Solutions</span>
+              <span>Packaging & Private-Label Formats</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Flexible Packaging Formats & Private-Label Solutions
             </h2>
+            <p className="font-hand text-base sm:text-lg text-amber-800 font-bold">
+              ~ Custom printed retail pouches, bulk gunny sacks, or clean master cartons ~
+            </p>
             <p className="text-sm text-stone-600 leading-relaxed font-normal">
               Whether you need retail shelf-ready barrier pouches or containerized bulk packaging, we configure solutions suited to your supply chain.
             </p>

@@ -153,9 +153,9 @@ export default {
         'gold-glow': '0 0 35px -5px rgba(245, 158, 11, 0.45)',
       },
       animation: {
-        'marquee': 'marquee 28s linear infinite',
-        'marquee-fast': 'marquee 18s linear infinite',
-        'marquee-mobile': 'marquee 22s linear infinite',
+        'marquee': 'marquee 32s linear infinite',
+        'marquee-fast': 'marquee 20s linear infinite',
+        'marquee-mobile': 'marquee 25s linear infinite',
         'float': 'softFloat 5s ease-in-out infinite',
         'shimmer': 'subtleShimmer 3s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
@@ -163,7 +163,7 @@ export default {
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         softFloat: {
           '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },

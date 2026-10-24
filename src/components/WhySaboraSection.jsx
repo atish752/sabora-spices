@@ -120,6 +120,10 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
             Quality-Led Sourcing. Reliable Supply. Lasting Partnerships.
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Real humans behind every batch, direct farmer relationships, and zero shortcuts ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, we believe quality begins at the source and continues through every stage of sourcing, product selection, handling, packaging, and supply. Here is why businesses consider SABORA SPICES as their sourcing partner.
           </p>

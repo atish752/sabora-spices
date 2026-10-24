@@ -58,14 +58,14 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
       <div className={`marquee-container flex overflow-hidden w-full ${isPaused ? 'is-paused' : ''}`}>
         
         {/* Track 1 */}
-        <div className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 animate-marquee">
+        <div className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 pr-3.5 sm:pr-4.5 animate-marquee">
           {marqueeItems.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={`t1-${idx}`}
                 onClick={() => onScrollToSection && onScrollToSection(item.target)}
-                className="w-[280px] xs:w-[300px] sm:w-[330px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
+                className="w-[280px] xs:w-[310px] sm:w-[340px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
               >
                 <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -83,15 +83,15 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
           })}
         </div>
 
-        {/* Track 2 (Clone for infinite seamless marquee loop) */}
-        <div aria-hidden="true" className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 animate-marquee ml-3.5 sm:ml-4.5">
+        {/* Track 2 (Clone for 100% infinite seamless marquee loop - zero gap offset jump) */}
+        <div aria-hidden="true" className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 pr-3.5 sm:pr-4.5 animate-marquee">
           {marqueeItems.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={`t2-${idx}`}
                 onClick={() => onScrollToSection && onScrollToSection(item.target)}
-                className="w-[280px] xs:w-[300px] sm:w-[330px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
+                className="w-[280px] xs:w-[310px] sm:w-[340px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
               >
                 <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />

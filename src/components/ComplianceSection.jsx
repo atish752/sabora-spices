@@ -54,6 +54,10 @@ export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection 
             Responsible Sourcing. Regulatory Awareness. Market-Specific Requirements.
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Full FSSAI alignment, FoSCoS portal logging, and authentic commercial tax invoices ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, we recognize that regulatory compliance is an essential part of responsible food sourcing, packaging, and supply. Our approach is to identify and address the relevant regulatory requirements for each product and transaction before dispatch.
           </p>

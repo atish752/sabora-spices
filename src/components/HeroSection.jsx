@@ -24,14 +24,15 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
   const togglePlay = () => {
     const nextState = !isPlaying;
     setIsPlaying(nextState);
-    [desktopVideoRef.current, mobileVideoRef.current].forEach(v => {
-      if (!v) return;
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+    const targetVideo = isDesktop ? desktopVideoRef.current : mobileVideoRef.current;
+    if (targetVideo) {
       if (nextState) {
-        v.play().catch(() => {});
+        targetVideo.play().catch(() => setIsPlaying(false));
       } else {
-        v.pause();
+        targetVideo.pause();
       }
-    });
+    }
   };
 
   const toggleMute = () => {
@@ -42,17 +43,45 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
     });
   };
 
-  // Ensure autoplay starts smoothly when component mounts
+  // Safe autoplay for the active device video (conserves mobile bandwidth & battery)
   useEffect(() => {
-    const playPromises = [
-      desktopVideoRef.current?.play(),
-      mobileVideoRef.current?.play()
-    ].filter(Boolean);
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+    const activeVideo = isDesktop ? desktopVideoRef.current : mobileVideoRef.current;
+    const inactiveVideo = isDesktop ? mobileVideoRef.current : desktopVideoRef.current;
+    
+    // Pause inactive video to conserve bandwidth, CPU and mobile battery
+    if (inactiveVideo) {
+      try { inactiveVideo.pause(); } catch (e) {}
+    }
 
-    Promise.all(playPromises).catch(() => {
-      // Browsers restrict unmuted autoplay, muted is safe
-    });
-  }, []);
+    if (activeVideo) {
+      activeVideo.muted = true;
+      const playPromise = activeVideo.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {
+            // Autoplay restricted by browser/low-power mode; ready for tap-to-play
+            setIsPlaying(false);
+          });
+      }
+    }
+
+    const handleResize = () => {
+      const desktopNow = window.innerWidth >= 768;
+      const curActive = desktopNow ? desktopVideoRef.current : mobileVideoRef.current;
+      const curInactive = desktopNow ? mobileVideoRef.current : desktopVideoRef.current;
+      if (curInactive) {
+        try { curInactive.pause(); } catch (e) {}
+      }
+      if (curActive && isPlaying) {
+        curActive.play().catch(() => {});
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isPlaying]);
 
   const handleCtaClick = (link) => {
     if (!link) return;
@@ -220,13 +249,28 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
 
         {/* 5. Floating Video Player Controls (Bottom-Right Corner) */}
         <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-30 flex items-center gap-2">
+          {!isPlaying ? (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
+              <Play className="w-3 h-3 fill-current" />
+              <span>Tap to Play</span>
+            </span>
+          ) : (
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-emerald-300 text-[10px] font-semibold border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>HARVEST FOOTAGE</span>
+            </span>
+          )}
           <button
             onClick={togglePlay}
             aria-label={isPlaying ? "Pause Hero Video" : "Play Hero Video"}
-            className="p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
+            className={`p-2 sm:p-2.5 rounded-full backdrop-blur-md border transition-all active:scale-90 cursor-pointer shadow-lg flex items-center justify-center ${
+              !isPlaying 
+                ? 'bg-amber-500 text-stone-950 border-amber-400 shadow-amber-500/30' 
+                : 'bg-black/50 hover:bg-black/75 text-white/90 hover:text-white border-white/20'
+            }`}
             title={isPlaying ? "Pause video" : "Play video"}
           >
-            {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />}
           </button>
           <button
             onClick={toggleMute}

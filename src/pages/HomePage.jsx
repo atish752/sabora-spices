@@ -61,6 +61,9 @@ export default function HomePage({
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">
                 Whole Spices & Makhana (Fox Nuts)
               </h2>
+              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+                ~ Hand-sorted at peak harvest • Direct from Kerala & Bihar to Delhi hub ~
+              </p>
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                 Specialising strictly in whole, unground agricultural products. Direct procurement from recognized origins with batch laboratory testing and custom packaging.
               </p>
@@ -230,6 +233,10 @@ export default function HomePage({
                 SABORA SPICES — Connecting Quality Products with Business Opportunities
               </h2>
 
+              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+                ~ Sourced with genuine human care, direct origin connections & 100% whole crops ~
+              </p>
+
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                 <strong className="text-stone-900">SABORA SPICES</strong> is an India-based sourcing and supply enterprise based in <strong>Jahangirpuri, Delhi, India</strong>, providing dependable whole spices and Makhana (Fox Nuts) to wholesalers, distributors, retail brands, food businesses, and international importers.
               </p>
@@ -320,6 +327,9 @@ export default function HomePage({
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Direct Sourcing from India's Premier Spice & Makhana Belts
             </h2>
+            <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+              ~ Direct ties with planter estates in Idukki, Mithila wetland growers, & Salem belts ~
+            </p>
             <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
               We align crop procurement directly with India's agricultural centers where climate and soil yield the finest botanical characteristics.
             </p>
@@ -404,6 +414,9 @@ export default function HomePage({
               <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
                 Why Business Buyers Partner with SABORA SPICES
               </h2>
+              <p className="font-hand text-base sm:text-lg text-amber-800 font-bold">
+                ~ Transparent batch pricing, verified NABL lab reports & zero commodity guesswork ~
+              </p>
               <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
                 A buyer-focused supply model eliminating the uncertainties of unorganized commodity trade.
               </p>
@@ -468,6 +481,9 @@ export default function HomePage({
               <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">
                 Frequently Asked Questions
               </h2>
+              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold mt-1">
+                ~ Direct answers to questions buyers ask before placing orders ~
+              </p>
             </div>
 
             <button

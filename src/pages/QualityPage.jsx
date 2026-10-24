@@ -17,7 +17,7 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
         onOpenQuoteModal={onOpenQuoteModal}
       />
 
-      {/* Main Section 006 Component */}
+      {/* Core Quality Section Component */}
       <QualitySafetySection
         onScrollToSection={(sectionId) => onNavigate && onNavigate(sectionId)}
         onOpenQuoteModal={onOpenQuoteModal}

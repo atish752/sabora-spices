@@ -88,6 +88,10 @@ export default function QualitySafetySection({ onScrollToSection, onOpenQuoteMod
             Quality You Can Trust. Food Safety at Every Step.
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Zero chemical polishes, zero filler pods, verified against strict FSSAI MRL standards ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, quality and food safety are fundamental to our approach to sourcing and supplying whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts). We look to established FSSAI requirements and ISO management principles to guide our operations.
           </p>

@@ -85,6 +85,10 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
             Our Sourcing Approach & Product Origins in India
           </h2>
 
+          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+            ~ Directly connected with Kerala hill planters, Mithila aquatic farmers & Salem mandis ~
+          </p>
+
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             We believe sourcing should be guided by the product and its origin rather than relying on a single location for every requirement. Geographical origin alone is not treated as a guarantee of quality; we combine origin awareness with rigorous product inspection.
           </p>

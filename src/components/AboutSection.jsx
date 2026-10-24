@@ -60,6 +60,10 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
               Connecting Quality Products with Business Opportunities
             </h2>
 
+            <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
+              ~ Direct from generational planters to our central Delhi logistics hub ~
+            </p>
+
             <div className="space-y-4 text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
               <p>
                 <strong className="text-stone-900 font-semibold">SABORA SPICES</strong> is an India-based sourcing and supply business specialising in whole spices and Makhana (Fox Nuts) for domestic and international business buyers.
