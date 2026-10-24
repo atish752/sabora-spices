@@ -9,28 +9,28 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
       icon: ShieldCheck,
       iconBg: "bg-emerald-100 text-emerald-800",
       title: "FSSAI & Standards Compliance",
-      desc: "All whole spices & makhana comply with applicable FSSAI regulations and ISO 9001/22000 principles.",
+      desc: "Compliant with FSSAI food regulations & ISO quality principles.",
       target: "compliance"
     },
     {
       icon: MapPin,
       iconBg: "bg-amber-100 text-amber-800",
       title: "Origin–Focused Procurement",
-      desc: "Kerala Western Ghats for green cardamom, Bihar for makhana, and Salem for whole turmeric fingers.",
+      desc: "Direct harvest from Kerala, Bihar, and Salem agricultural belts.",
       target: "sourcing"
     },
     {
       icon: FlaskConical,
       iconBg: "bg-emerald-100 text-emerald-800",
       title: "Batch Testing Before Dispatch",
-      desc: "Accredited food laboratory testing for moisture, contaminants, and pesticide residues with FoSCoS linking.",
+      desc: "Accredited NABL lab testing for purity, moisture & CoA records.",
       target: "lab-testing"
     },
     {
       icon: PackageCheck,
       iconBg: "bg-stone-100 text-stone-800",
       title: "Packaging & Private–Label",
-      desc: "Food-grade Sabora-branded pouches, bulk wholesale packaging, and buyer-specific private-label solutions.",
+      desc: "Food-grade barrier pouches, bulk sacks & private labeling.",
       target: "products"
     }
   ];

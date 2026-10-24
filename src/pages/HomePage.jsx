@@ -11,13 +11,9 @@ import {
   FlaskConical, 
   Globe2, 
   HelpCircle, 
-  FileText, 
-  MessageCircle,
   Package,
-  Layers,
   Award
 } from 'lucide-react';
-import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function HomePage({
   heroSlides,
@@ -49,23 +45,20 @@ export default function HomePage({
       />
 
       {/* 3. Featured Products Showcase */}
-      <section className="py-16 sm:py-24 bg-[#F8FAF9] border-b border-stone-200">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
+      <section className="py-14 sm:py-20 bg-[#F8FAF9] border-b border-stone-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="max-w-xl space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
                 <Leaf className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Core Sabora Product Lines</span>
+                <span>Featured Wholesale Crops</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">
-                Whole Spices & Makhana (Fox Nuts)
+              <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+                Whole Spices & Makhana
               </h2>
-              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
-                ~ Hand-sorted at peak harvest • Direct from Kerala & Bihar to Delhi hub ~
-              </p>
-              <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
-                Specialising strictly in whole, unground agricultural products. Direct procurement from recognized origins with batch laboratory testing and custom packaging.
+              <p className="text-sm text-stone-600 font-normal">
+                Direct origin procurement • Hand-sorted whole crops • Tested before dispatch
               </p>
             </div>
 
@@ -73,9 +66,9 @@ export default function HomePage({
             <div className="shrink-0">
               <button
                 onClick={() => onNavigate && onNavigate('products')}
-                className="px-5 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-amber-300 hover:text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-emerald-700/50"
+                className="px-5 py-2.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-amber-300 hover:text-white text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
               >
-                <span>Browse All Products & Sizing</span>
+                <span>Full Catalog</span>
                 <ArrowRight className="w-4 h-4 text-amber-400" />
               </button>
             </div>
@@ -114,7 +107,7 @@ export default function HomePage({
                 {/* Visual Area */}
                 <div 
                   onClick={() => onSelectProduct && onSelectProduct(product)}
-                  className="relative h-60 sm:h-64 w-full bg-gradient-to-b from-stone-100 to-stone-50 overflow-hidden cursor-pointer flex items-center justify-center p-4"
+                  className="relative h-56 sm:h-60 w-full bg-gradient-to-b from-stone-100 to-stone-50 overflow-hidden cursor-pointer flex items-center justify-center p-4"
                 >
                   <img
                     src={product.image}
@@ -135,20 +128,17 @@ export default function HomePage({
                 </div>
 
                 {/* Details */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div className="space-y-1.5">
                     <div className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
                       {product.category || "Whole Agricultural Product"}
                     </div>
                     <h3 
                       onClick={() => onSelectProduct && onSelectProduct(product)}
-                      className="font-serif text-lg sm:text-xl font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors cursor-pointer"
+                      className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors cursor-pointer"
                     >
                       {product.name}
                     </h3>
-                    <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed font-normal">
-                      {product.tagline || product.subtitle || product.shortDescription || product.description}
-                    </p>
                   </div>
 
                   {/* Quick Specs Snippet */}
@@ -175,7 +165,7 @@ export default function HomePage({
                       onClick={() => onSelectProduct && onSelectProduct(product)}
                       className="text-xs font-semibold text-[#0F3D2E] hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Technical Specs</span>
+                      <span>Specifications</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
 
@@ -192,25 +182,21 @@ export default function HomePage({
           </div>
 
           {/* Dedicated Catalog Callout Banner */}
-          <div className="bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] rounded-2xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800/50 shadow-lg">
-            <div className="space-y-2 text-center md:text-left">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                <Package className="w-3.5 h-3.5 text-amber-300" />
-                <span>Dedicated Products Page Available</span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-                Looking for Detailed Sizing, Lab Reports & Packaging Options?
+          <div className="bg-gradient-to-r from-[#041A12] to-[#082E20] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-4 border border-emerald-800/40 shadow-md">
+            <div className="space-y-1.5 text-center md:text-left">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                Need Millimeter Sizing & Technical CoA Sheets?
               </h3>
-              <p className="text-stone-300 text-xs sm:text-sm max-w-2xl font-normal">
-                Visit our dedicated Products page to filter by grading millimeter specs, explore private-label packaging options, and download CoA technical sheets.
+              <p className="text-stone-300 text-xs sm:text-sm font-normal">
+                Filter by grading millimeter specs, explore packaging options, and review lab parameters.
               </p>
             </div>
 
             <button
               onClick={() => onNavigate && onNavigate('products')}
-              className="shrink-0 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-sm shadow-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/40"
+              className="shrink-0 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs sm:text-sm shadow-lg transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
             >
-              <span>Explore Full Products Catalog</span>
+              <span>View Full Specifications</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -219,94 +205,63 @@ export default function HomePage({
       </section>
 
       {/* 4. About Us Executive Spotlight */}
-      <section className="py-16 sm:py-20 bg-white border-b border-stone-100">
+      <section className="py-14 sm:py-18 bg-white border-b border-stone-100">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-[#0F3D2E] tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
-                <span>Our Heritage & Purpose</span>
+                <span>About Sabora Spices</span>
               </div>
 
-              <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight">
-                SABORA SPICES — Connecting Quality Products with Business Opportunities
+              <h2 className="font-serif text-2xl sm:text-3.5xl font-extrabold text-stone-900 leading-tight">
+                Direct Origin Sourcing & Wholesale Supply
               </h2>
 
-              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
-                ~ Sourced with genuine human care, direct origin connections & 100% whole crops ~
-              </p>
-
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
-                <strong className="text-stone-900">SABORA SPICES</strong> is an India-based sourcing and supply enterprise based in <strong>Jahangirpuri, Delhi, India</strong>, providing dependable whole spices and Makhana (Fox Nuts) to wholesalers, distributors, retail brands, food businesses, and international importers.
+                Based in Delhi, we supply whole spices and Fox Nuts (Makhana) directly to wholesalers, retail brands, and food manufacturers with complete origin transparency and batch testing.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-stone-50 border border-stone-200">
-                  <div className="font-serif text-lg font-bold text-[#0F3D2E]">Product Understanding</div>
-                  <p className="text-xs text-stone-600 mt-1">Agreeing on capsule size, aroma, moisture, and grade before confirmation.</p>
+              {/* 3 Quick Value Badges */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <span className="text-xs font-bold text-stone-800">100% Whole Crops</span>
                 </div>
-                <div className="p-4 rounded-xl bg-stone-50 border border-stone-200">
-                  <div className="font-serif text-lg font-bold text-amber-700">Clear Communication</div>
-                  <p className="text-xs text-stone-600 mt-1">Clarity on availability, quantities, pricing, and realistic delivery terms.</p>
+                <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-center gap-2.5">
+                  <MapPin className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span className="text-xs font-bold text-stone-800">Direct From Origins</span>
                 </div>
-                <div className="p-4 rounded-xl bg-stone-50 border border-stone-200">
-                  <div className="font-serif text-lg font-bold text-emerald-700">Delhi Hub Execution</div>
-                  <p className="text-xs text-stone-600 mt-1">Aligning careful preparation, packaging, and dispatch from Delhi.</p>
+                <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-center gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-[#0F3D2E] shrink-0" />
+                  <span className="text-xs font-bold text-stone-800">Delhi Dispatch Hub</span>
                 </div>
               </div>
 
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate && onNavigate('about')}
-                  className="px-5 py-3 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-bold shadow transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-bold shadow-sm transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <span>Read Full About Us & Business Story</span>
+                  <span>Read About Us</span>
                   <ArrowRight className="w-4 h-4 text-amber-300" />
                 </button>
               </div>
             </div>
 
-            {/* Permanent Relocation of Hero Master Photo */}
-            <div className="lg:col-span-5 space-y-3">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-stone-200 group">
+            {/* Clean Imagery */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200 group">
                 <img
                   src="/images/hero-sabora-master.jpg"
-                  alt="Sabora Spices Signature Brand & Harvest"
-                  className="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                  alt="Sabora Spices Packaging"
+                  className="w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-5">
-                  <div className="text-white space-y-1">
-                    <span className="text-[11px] font-mono text-amber-300 uppercase tracking-wider bg-black/40 px-2 py-0.5 rounded backdrop-blur-sm">
-                      Signature Sabora Harvest & Packaging
-                    </span>
-                    <h4 className="font-serif text-base sm:text-lg font-bold">100% Whole Agricultural Sourcing</h4>
-                    <p className="text-xs text-stone-200">Pure, whole green cardamom and makhana in food-grade barrier pouches.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Complementary Dual Photo Strip */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="relative rounded-xl overflow-hidden border border-stone-200 h-24 sm:h-28 group">
-                  <img
-                    src="/images/hero-cardamom-sorting.jpg"
-                    alt="Hand-sorted green cardamom"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end p-2 sm:p-2.5">
-                    <span className="text-[10px] sm:text-xs font-semibold text-white">Hand-sorted by sieve</span>
-                  </div>
-                </div>
-                <div className="relative rounded-xl overflow-hidden border border-stone-200 h-24 sm:h-28 group">
-                  <img
-                    src="/images/hero-sabora-pouches.jpg"
-                    alt="Sabora sealed pouches"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end p-2 sm:p-2.5">
-                    <span className="text-[10px] sm:text-xs font-semibold text-white">Food-grade pouches</span>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+                  <span className="text-xs font-semibold text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-md">
+                    Whole Spices & Makhana Sourcing
+                  </span>
                 </div>
               </div>
             </div>
@@ -316,85 +271,55 @@ export default function HomePage({
       </section>
 
       {/* 5. Sourcing & Origin Highlights */}
-      <section className="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
+      <section className="py-14 sm:py-18 bg-stone-50 border-b border-stone-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-8">
           
-          <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
               <MapPin className="w-3.5 h-3.5 text-amber-600" />
-              <span>Direct Sourcing Belts</span>
+              <span>Direct Sourcing Origins</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
-              Direct Sourcing from India's Premier Spice & Makhana Belts
+            <h2 className="font-serif text-2xl sm:text-3.5xl font-extrabold text-stone-900 tracking-tight">
+              India's Benchmark Growing Belts
             </h2>
-            <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
-              ~ Direct ties with planter estates in Idukki, Mithila wetland growers, & Salem belts ~
-            </p>
-            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
-              We align crop procurement directly with India's agricultural centers where climate and soil yield the finest botanical characteristics.
+            <p className="text-xs sm:text-sm text-stone-600 font-normal">
+              Procuring directly from regional farmer clusters and planter estates.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-xl p-6 border border-stone-200 space-y-4 hover:shadow-lg transition-shadow">
-              <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold text-sm">
-                01
-              </div>
-              <h3 className="font-serif text-xl font-bold text-stone-900">Kerala & Western Ghats</h3>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Specialized sourcing in Idukki district for whole green cardamom with intense volatile oil content and deep natural coloration.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="bg-white rounded-xl p-5 border border-stone-200 space-y-2 hover:shadow-md transition-shadow">
+              <div className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Kerala • Western Ghats</div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">Green Cardamom</h3>
+              <p className="text-xs text-stone-600 leading-normal">
+                Idukki estates, 7mm to 8.5mm+ bold capsules with rich essential oils.
               </p>
-              <button
-                onClick={() => onNavigate && onNavigate('sourcing')}
-                className="text-xs font-bold text-[#0F3D2E] flex items-center gap-1 hover:text-emerald-700 cursor-pointer pt-2"
-              >
-                <span>Explore Kerala Sourcing</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-stone-200 space-y-4 hover:shadow-lg transition-shadow">
-              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 font-bold text-sm">
-                02
-              </div>
-              <h3 className="font-serif text-xl font-bold text-stone-900">Mithila Region, Bihar</h3>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Premier freshwater wetland clusters for whole Makhana (Fox Nuts). 5-Suta and 6-Suta Jumbo grades with zero chemical bleaching.
+            <div className="bg-white rounded-xl p-5 border border-stone-200 space-y-2 hover:shadow-md transition-shadow">
+              <div className="text-xs font-bold text-amber-700 uppercase tracking-wider">Mithila, Bihar</div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">Makhana (Fox Nuts)</h3>
+              <p className="text-xs text-stone-600 leading-normal">
+                Fresh wetland harvest, 5-Suta & 6-Suta Jumbo with zero chemical bleach.
               </p>
-              <button
-                onClick={() => onNavigate && onNavigate('sourcing')}
-                className="text-xs font-bold text-amber-800 flex items-center gap-1 hover:text-amber-900 cursor-pointer pt-2"
-              >
-                <span>Explore Bihar Makhana</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-stone-200 space-y-4 hover:shadow-lg transition-shadow">
-              <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center text-yellow-800 font-bold text-sm">
-                03
-              </div>
-              <h3 className="font-serif text-xl font-bold text-stone-900">Salem & Nizamabad</h3>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Whole turmeric finger belts selected for high active curcumin potency (3.5% - 5.2%+), clean double polish, and whole integrity.
+            <div className="bg-white rounded-xl p-5 border border-stone-200 space-y-2 hover:shadow-md transition-shadow">
+              <div className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Salem & Erode</div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">Whole Turmeric Fingers</h3>
+              <p className="text-xs text-stone-600 leading-normal">
+                High active curcumin (3.5% - 5%+), double polished, unadulterated whole roots.
               </p>
-              <button
-                onClick={() => onNavigate && onNavigate('sourcing')}
-                className="text-xs font-bold text-yellow-800 flex items-center gap-1 hover:text-yellow-900 cursor-pointer pt-2"
-              >
-                <span>Explore Turmeric Belts</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
             </div>
           </div>
 
-          <div className="text-center pt-2">
+          <div className="text-center pt-1">
             <button
               onClick={() => onNavigate && onNavigate('sourcing')}
-              className="px-6 py-3 rounded-lg bg-white border border-stone-300 hover:border-emerald-600 text-stone-800 hover:text-[#0F3D2E] text-xs sm:text-sm font-bold shadow-xs hover:shadow transition-all inline-flex items-center gap-2 cursor-pointer"
+              className="px-5 py-2.5 rounded-lg bg-white border border-stone-300 hover:border-emerald-600 text-stone-800 hover:text-[#0F3D2E] text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all inline-flex items-center gap-2 cursor-pointer"
             >
-              <span>View Complete 6-Step Sourcing Workflow & Origin Details</span>
-              <ArrowRight className="w-4 h-4 text-emerald-600" />
+              <span>Explore Sourcing Process</span>
+              <ArrowRight className="w-3.5 h-3.5 text-emerald-600" />
             </button>
           </div>
 
@@ -402,66 +327,52 @@ export default function HomePage({
       </section>
 
       {/* 6. Why Sabora & Quality Pillars Banner */}
-      <section className="py-16 sm:py-20 bg-white border-b border-stone-200">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
+      <section className="py-14 sm:py-18 bg-white border-b border-stone-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-8">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
                 <Award className="w-3.5 h-3.5 text-amber-600" />
-                <span>Wholesale Supply Standards</span>
+                <span>Supply Standards</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
-                Why Business Buyers Partner with SABORA SPICES
+              <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight mt-1.5">
+                Why Buyers Partner With Us
               </h2>
-              <p className="font-hand text-base sm:text-lg text-amber-800 font-bold">
-                ~ Transparent batch pricing, verified NABL lab reports & zero commodity guesswork ~
-              </p>
-              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
-                A buyer-focused supply model eliminating the uncertainties of unorganized commodity trade.
-              </p>
             </div>
 
             <button
               onClick={() => onNavigate && onNavigate('why-sabora')}
-              className="shrink-0 px-5 py-2.5 rounded-lg bg-[#0F3D2E] text-white text-xs sm:text-sm font-bold hover:bg-[#15543F] transition-all flex items-center gap-1.5 cursor-pointer"
+              className="shrink-0 px-4 py-2 rounded-lg bg-[#0F3D2E] text-white text-xs sm:text-sm font-semibold hover:bg-[#15543F] transition-all flex items-center gap-1.5 cursor-pointer w-fit"
             >
-              <span>See All 14 Why Sabora Pillars</span>
-              <ArrowRight className="w-4 h-4 text-amber-400" />
+              <span>All 14 Standards</span>
+              <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-5 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-              <ShieldCheck className="w-6 h-6 text-emerald-700" />
-              <h4 className="font-serif font-bold text-stone-900 text-base">FSSAI & Regulatory Alignment</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Operating strictly within Indian food safety laws and ISO 9001/22000 quality principles.
-              </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1.5">
+              <ShieldCheck className="w-5 h-5 text-emerald-700" />
+              <h4 className="font-serif font-bold text-stone-900 text-sm">FSSAI & ISO</h4>
+              <p className="text-xs text-stone-600">Full food safety & regulatory compliance</p>
             </div>
 
-            <div className="p-5 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-              <FlaskConical className="w-6 h-6 text-emerald-700" />
-              <h4 className="font-serif font-bold text-stone-900 text-base">NABL Lab Testing</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Accredited testing for moisture, volatile oil assays, and pesticide residues with FoSCoS link.
-              </p>
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1.5">
+              <FlaskConical className="w-5 h-5 text-emerald-700" />
+              <h4 className="font-serif font-bold text-stone-900 text-sm">NABL Tested</h4>
+              <p className="text-xs text-stone-600">Accredited batch analysis & CoA records</p>
             </div>
 
-            <div className="p-5 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-              <Package className="w-6 h-6 text-amber-700" />
-              <h4 className="font-serif font-bold text-stone-900 text-base">Barrier Pouch Packaging</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Food-grade barrier pouches and seaworthy corrugated export cartons for maximum shelf-life.
-              </p>
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1.5">
+              <Package className="w-5 h-5 text-amber-700" />
+              <h4 className="font-serif font-bold text-stone-900 text-sm">Barrier Pouches</h4>
+              <p className="text-xs text-stone-600">Food-grade aroma lock & bulk sacks</p>
             </div>
 
-            <div className="p-5 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
-              <Globe2 className="w-6 h-6 text-[#0F3D2E]" />
-              <h4 className="font-serif font-bold text-stone-900 text-base">International Supply</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Export supply with Phytosanitary certificates, Certificates of Origin, and FOB/CIF coordination.
-              </p>
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-1.5">
+              <Globe2 className="w-5 h-5 text-[#0F3D2E]" />
+              <h4 className="font-serif font-bold text-stone-900 text-sm">Global Export</h4>
+              <p className="text-xs text-stone-600">Phytosanitary & FOB/CIF handling</p>
             </div>
           </div>
 
@@ -469,66 +380,45 @@ export default function HomePage({
       </section>
 
       {/* 7. Quick FAQ Preview */}
-      <section className="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
+      <section className="py-12 sm:py-16 bg-stone-50 border-b border-stone-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-6">
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
                 <HelpCircle className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Wholesale Buyer Questions</span>
+                <span>Buyer Questions</span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">
+              <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-900 mt-1">
                 Frequently Asked Questions
               </h2>
-              <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold mt-1">
-                ~ Direct answers to questions buyers ask before placing orders ~
-              </p>
             </div>
 
             <button
               onClick={() => onNavigate && onNavigate('faq')}
-              className="text-xs sm:text-sm font-bold text-[#0F3D2E] hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+              className="text-xs sm:text-sm font-semibold text-[#0F3D2E] hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
             >
-              <span>Browse All 25 FAQs</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>View All 25 FAQs</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
-              <h4 className="font-serif font-bold text-stone-900 text-sm">
-                What products does SABORA SPICES specialise in?
-              </h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Our two core categories are whole spices and Makhana (Fox Nuts). We specialise in whole green cardamom, whole turmeric fingers, and Makhana, focusing strictly on whole products rather than powdered spices.
-              </p>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white p-4.5 rounded-xl border border-stone-200 space-y-1">
               <h4 className="font-serif font-bold text-stone-900 text-sm">
                 What are your Minimum Order Quantities (MOQ)?
               </h4>
               <p className="text-xs text-stone-600 leading-relaxed">
-                MOQs are flexible and discussed according to the product type, packaging format, and buyer location. We accommodate both trial sample quantities and commercial container-load orders.
+                Flexible commercial MOQs tailored to your business, with trial batches and container loads available.
               </p>
             </div>
 
-            <div className="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
+            <div className="bg-white p-4.5 rounded-xl border border-stone-200 space-y-1">
               <h4 className="font-serif font-bold text-stone-900 text-sm">
-                Can you arrange laboratory testing and Certificates of Analysis (CoA)?
+                Do you provide lab CoA test reports?
               </h4>
               <p className="text-xs text-stone-600 leading-relaxed">
-                Yes. Independent testing through NABL-accredited food laboratories can be arranged for moisture, volatile oil content, pesticide residues, and aflatoxins with FoSCoS portal verification.
-              </p>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
-              <h4 className="font-serif font-bold text-stone-900 text-sm">
-                Do you supply international and export buyers?
-              </h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
-                Yes. We welcome international enquiries and coordinate export packaging, phytosanitary certificates, certificates of origin, and freight dispatch through Nhava Sheva, Mundra, or ICD Delhi.
+                Yes. Independent NABL-accredited test reports for moisture, volatile oil assays, and purity.
               </p>
             </div>
           </div>

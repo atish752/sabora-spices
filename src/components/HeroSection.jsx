@@ -129,7 +129,7 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
         - Mobile screens (< 768px): 9:16 Portrait video (/videos/Portrait.mp4)
         - Desktop screens (>= 768px): 16:9 Landscape video (/videos/Landscape.mp4)
       */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[620px] md:h-[660px] lg:h-[720px] xl:h-[780px] flex items-center overflow-hidden">
+      <div className="relative w-full min-h-[380px] sm:min-h-[440px] md:h-[500px] lg:h-[560px] xl:h-[600px] flex items-end overflow-hidden">
         
         {/* 1. Desktop 16:9 Landscape Video */}
         <video
@@ -161,89 +161,22 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           <source src="/videos/Portrait.mp4" type="video/mp4" />
         </video>
 
-        {/* 3. Atmospheric Dark Imperial Overlays for Flawless Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020F0A]/95 via-[#020F0A]/55 to-black/35 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020F0A]/95 via-[#020F0A]/70 md:via-[#020F0A]/45 to-transparent pointer-events-none" />
+        {/* 3. Natural vibrant video: subtle bottom fade ONLY for text legibility, no dull dark overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-        {/* 4. Hero Content Layer */}
-        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full py-12 sm:py-16">
-          <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-5">
-            
-            {/* Cute Artisanal Badge (Replaced generic AI Sparkles with natural Leaf & origin info) */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wide shadow-sm">
-                <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-                <span>DIRECT ORIGIN HARVEST • DELHI HUB</span>
-              </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-medium backdrop-blur-sm">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
-                <span>100% Whole Agricultural Spices</span>
-              </span>
-            </div>
-
-            {/* Headline with Cute Warm Handwritten Touch */}
-            <div className="space-y-2">
-              <h1 className="font-serif text-3xl sm:text-4.5xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.12] tracking-tight drop-shadow-md">
-                Whole Spices & Makhana.<br />
-                <span className="text-gold-gradient font-normal italic">Sourced with Purpose.</span>
-              </h1>
-              <p className="font-hand text-lg sm:text-xl text-amber-200/95 tracking-wide">
-                ~ Hand-sorted whole cardamom, pure Bihar makhana pops & golden turmeric fingers ~
-              </p>
-            </div>
-
-            {/* Subtitle / Descriptive Copy */}
-            <p className="text-xs sm:text-sm md:text-base text-stone-200/90 font-normal leading-relaxed max-w-2xl drop-shadow">
-              We connect India's premier agricultural growing belts with domestic wholesalers, retail brands, food businesses, and overseas importers. Direct origin procurement with batch laboratory analysis and food-grade barrier pouch packaging.
+        {/* 4. Minimal Hero Text on Video */}
+        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full pb-6 sm:pb-8 pointer-events-none">
+          <div className="max-w-xl space-y-1 sm:space-y-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-amber-300 text-[11px] sm:text-xs font-semibold tracking-wider uppercase">
+              <Leaf className="w-3 h-3 text-emerald-400" />
+              <span>Direct Origin Harvest</span>
+            </span>
+            <h1 className="font-serif text-3xl sm:text-4.5xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)]">
+              Whole Spices & Makhana
+            </h1>
+            <p className="font-hand text-base sm:text-xl text-amber-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+              ~ Pure whole harvest direct from Kerala & Bihar to Delhi hub ~
             </p>
-
-            {/* Action Buttons */}
-            <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => handleCtaClick('/contact')}
-                className="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/30 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
-              >
-                <span>Request Wholesale Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => handleCtaClick('/products')}
-                className="px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-semibold border border-white/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-              >
-                <span>Browse Products & Sizing</span>
-              </button>
-
-              <button
-                onClick={() => handleCtaClick('whatsapp')}
-                className="px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-[#0F3D2E]/90 hover:bg-[#0F3D2E] text-emerald-300 hover:text-white text-xs sm:text-sm font-semibold border border-emerald-500/40 backdrop-blur-md shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
-                <span className="hidden xs:inline">WhatsApp Desk</span>
-                <span className="xs:hidden">WhatsApp</span>
-              </button>
-            </div>
-
-            {/* Key Trust Highlights Chips */}
-            <div className="pt-3 sm:pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-2xl text-[11px] sm:text-xs text-stone-300">
-              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="truncate">FSSAI & ISO Aligned</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span className="truncate">Kerala & Bihar Belts</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
-                <Package className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="truncate">Barrier Pouch & Bulk</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span className="truncate">NABL Lab Verification</span>
-              </div>
-            </div>
-
           </div>
         </div>
 
@@ -282,6 +215,57 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           </button>
         </div>
 
+      </div>
+
+      {/* 
+        ── Action Buttons Bar (Below the Video, not on that) ──
+      */}
+      <div className="relative z-20 bg-[#03140E] border-t border-emerald-900/50 py-5 sm:py-6 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+          
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 w-full md:w-auto">
+            <button
+              onClick={() => handleCtaClick('/contact')}
+              className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
+            >
+              <span>Request Wholesale Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => handleCtaClick('/products')}
+              className="px-4 sm:px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md text-white text-xs sm:text-sm font-semibold border border-white/20 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+            >
+              <span>Browse Products</span>
+            </button>
+
+            <button
+              onClick={() => handleCtaClick('whatsapp')}
+              className="px-4 sm:px-5 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-xs sm:text-sm font-semibold border border-emerald-500/40 shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+              <span>WhatsApp Desk</span>
+            </button>
+          </div>
+
+          {/* Clean Quick Badges */}
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 sm:gap-3 text-[11px] sm:text-xs text-stone-300">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>FSSAI Aligned</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+              <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <span>Kerala & Bihar Belts</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+              <Package className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>Barrier Pouch & Bulk</span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

@@ -107,22 +107,18 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-16">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
             <Mail className="w-3.5 h-3.5 text-emerald-700" />
-            <span>Wholesale Sourcing Desk & Quotations</span>
+            <span>Wholesale Sourcing Desk</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">
-            Let Us Understand Your Sourcing Requirements
+          <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+            Request a Wholesale Quote
           </h2>
 
-          <p className="font-hand text-base sm:text-lg text-emerald-800 font-bold">
-            ~ Direct founder response within 4 business hours from our Delhi logistics hub ~
-          </p>
-
-          <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
-            Whether you are a wholesaler, distributor, retailer, food business, importer, or private-label brand, SABORA SPICES welcomes your enquiry. Tell us which product you require, preferred specifications, quantity, and destination.
+          <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            Tell us your product requirements, volume, and destination. Fast response from our Delhi logistics hub.
           </p>
         </div>
 
