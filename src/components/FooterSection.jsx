@@ -33,12 +33,15 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
           
           {/* Col 1: Brand Info & Bio (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-white/10 p-1 flex items-center justify-center border border-amber-400/40">
+            <div 
+              onClick={() => handleLinkClick('home')}
+              className="flex items-center gap-3 cursor-pointer group w-fit"
+            >
+              <div className="w-14 h-14 rounded-full bg-white/10 p-1 flex items-center justify-center border border-amber-400/40 group-hover:scale-105 transition-transform">
                 <img src="/images/logo.png" alt="Sabora Spices" className="w-full h-full object-contain" />
               </div>
               <div>
-                <span className="font-serif text-2xl font-bold tracking-tight text-white block">
+                <span className="font-serif text-2xl font-bold tracking-tight text-white block group-hover:text-amber-400 transition-colors">
                   SABORA SPICES
                 </span>
                 <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider block">

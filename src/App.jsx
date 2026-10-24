@@ -64,13 +64,21 @@ function parseCurrentRoute() {
   if (queryPage && validRoutes.includes(queryPage)) {
     resolvedRoute = queryPage;
   }
-  // Check pathname /...
-  else if (path && validRoutes.includes(path)) {
-    resolvedRoute = path;
+  // Check pathname /... or subpaths
+  else if (path) {
+    const segments = path.split('/').filter(Boolean);
+    const matched = segments.find(s => validRoutes.includes(s));
+    if (matched) {
+      resolvedRoute = matched;
+    }
   }
   // Check hash #/...
-  else if (hash && validRoutes.includes(hash)) {
-    resolvedRoute = hash;
+  if (resolvedRoute === 'home' && hash) {
+    const hashSegments = hash.split('?')[0].split('/').filter(Boolean);
+    const matchedHash = hashSegments.find(s => validRoutes.includes(s));
+    if (matchedHash) {
+      resolvedRoute = matchedHash;
+    }
   }
 
   return { route: resolvedRoute, params };
@@ -123,15 +131,49 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Update document title dynamically according to the dedicated page
+  useEffect(() => {
+    const titles = {
+      home: "SABORA SPICES | Whole Spices & Makhana. Sourced with Purpose.",
+      about: "About Us | SABORA SPICES — Connecting Quality Products with Business Opportunities",
+      products: "Products & Grading Specifications | SABORA SPICES",
+      sourcing: "Sourcing & Origin Belts | SABORA SPICES — Kerala, Bihar & Salem",
+      'why-sabora': "Why Sabora | SABORA SPICES — 14 Core Pillars of Buyer Trust",
+      quality: "Quality Assurance & Food Safety | SABORA SPICES",
+      'lab-testing': "Accredited Laboratory Testing & CoA | SABORA SPICES",
+      compliance: "Regulatory Compliance & FSSAI Standards | SABORA SPICES",
+      export: "Global Export Supply & Logistics | SABORA SPICES",
+      faq: "Frequently Asked Questions (FAQ) | SABORA SPICES",
+      contact: "Contact Us & Request a Wholesale Quote | SABORA SPICES",
+      admin: "Admin Management Portal | SABORA SPICES"
+    };
+
+    if (titles[currentRoute]) {
+      document.title = titles[currentRoute];
+    }
+  }, [currentRoute]);
+
   /**
    * Universal navigation function to transition between separate dedicated pages
    */
   const navigateTo = useCallback((targetRoute, params = {}) => {
-    let cleanRoute = (targetRoute || 'home').toLowerCase();
+    let cleanRoute = (targetRoute || 'home').toLowerCase().trim();
+    if (cleanRoute.startsWith('/')) cleanRoute = cleanRoute.slice(1);
+    if (cleanRoute.startsWith('#')) cleanRoute = cleanRoute.slice(1);
     if (cleanRoute === 'hero') cleanRoute = 'home';
 
+    let mergedParams = { ...params };
+    if (cleanRoute.includes('?')) {
+      const [r, q] = cleanRoute.split('?');
+      cleanRoute = r;
+      const sp = new URLSearchParams(q);
+      for (const [k, v] of sp.entries()) {
+        mergedParams[k] = v;
+      }
+    }
+
     setCurrentRoute(cleanRoute);
-    setRouteParams(params);
+    setRouteParams(mergedParams);
 
     // Build standard URL
     let newPath = '/';
@@ -139,12 +181,12 @@ export default function App() {
       newPath = `/${cleanRoute}`;
     }
 
-    if (params.category) {
-      newPath += `?category=${encodeURIComponent(params.category)}`;
+    if (mergedParams.category) {
+      newPath += `?category=${encodeURIComponent(mergedParams.category)}`;
     }
 
     try {
-      window.history.pushState({ route: cleanRoute, params }, '', newPath);
+      window.history.pushState({ route: cleanRoute, params: mergedParams }, '', newPath);
     } catch (e) {
       console.warn("History pushState exception:", e);
     }

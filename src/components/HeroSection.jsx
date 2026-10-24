@@ -59,18 +59,34 @@ export default function HeroSection({ slides, onScrollToSection, onOpenQuoteModa
     if (!link) return;
     if (link === 'whatsapp') {
       SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I am interested in sourcing whole spices and makhana.");
-    } else if (link === '#contact' || link === '/contact') {
+      return;
+    }
+    if (link === '#contact' || link === '/contact' || link === 'contact') {
       if (onOpenQuoteModal) onOpenQuoteModal();
       else if (onNavigate) onNavigate('contact');
-      else onScrollToSection('contact');
-    } else if (link.startsWith('/')) {
-      if (onNavigate) onNavigate(link.replace('/', ''));
-    } else if (link.startsWith('#')) {
-      if (onNavigate) onNavigate(link.replace('#', ''));
-      else onScrollToSection(link.replace('#', ''));
-    } else {
-      window.open(link, '_blank');
+      else if (onScrollToSection) onScrollToSection('contact');
+      return;
     }
+    if (link.startsWith('/') || link.startsWith('#')) {
+      const clean = link.replace(/^[/#]+/, '');
+      const [route, search] = clean.split('?');
+      const params = {};
+      if (search) {
+        const sp = new URLSearchParams(search);
+        for (const [k, v] of sp.entries()) {
+          params[k] = v;
+        }
+      }
+      if (onNavigate) onNavigate(route || 'home', params);
+      else if (onScrollToSection) onScrollToSection(route || 'home');
+      return;
+    }
+    if (link.startsWith('http')) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    if (onNavigate) onNavigate(link);
+    else if (onScrollToSection) onScrollToSection(link);
   };
 
   if (activeSlides.length === 0) return null;

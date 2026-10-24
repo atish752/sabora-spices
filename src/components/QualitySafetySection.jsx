@@ -165,7 +165,7 @@ export default function QualitySafetySection({ onScrollToSection, onOpenQuoteMod
             </p>
           </div>
           <button
-            onClick={() => onScrollToSection('lab-testing')}
+            onClick={() => onScrollToSection && onScrollToSection('lab-testing')}
             className="px-6 py-3 rounded-xl bg-white text-[#0F3D2E] hover:bg-emerald-50 font-bold text-xs sm:text-sm shadow-md transition-all shrink-0 cursor-pointer"
           >
             Explore Lab Testing Protocol

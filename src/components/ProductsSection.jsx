@@ -21,6 +21,11 @@ export default function ProductsSection({
 }) {
   const [selectedCategory, setSelectedCategory] = useState(activeFilter);
 
+  // Synchronize category filter whenever activeFilter prop changes (e.g. from header submenu)
+  React.useEffect(() => {
+    setSelectedCategory(activeFilter || 'all');
+  }, [activeFilter]);
+
   const categories = [
     { id: 'all', label: 'All Products' },
     { id: 'cardamom', label: 'Whole Green Cardamom' },

@@ -188,7 +188,7 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
             </div>
 
             <button
-              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onScrollToSection('contact')}
+              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
               className="px-6 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <span>Partner with SABORA SPICES</span>

@@ -33,6 +33,17 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmittedData, setLastSubmittedData] = useState(null);
 
+  // Synchronize product selection when user clicks Request Quote on a specific product card
+  React.useEffect(() => {
+    if (preselectedProduct?.name) {
+      setFormData(prev => ({
+        ...prev,
+        product: preselectedProduct.name,
+        grade: preselectedProduct.gradesAvailable?.[0] || prev.grade
+      }));
+    }
+  }, [preselectedProduct]);
+
   const productOptions = [
     "Whole Green Cardamom (Elaichi)",
     "Makhana (Fox Nuts)",

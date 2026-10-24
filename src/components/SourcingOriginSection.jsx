@@ -205,7 +205,7 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
               </p>
             </div>
             <button
-              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onScrollToSection('contact')}
+              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
               className="px-6 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shrink-0 cursor-pointer shadow-md"
             >
               Discuss Your Origin Needs

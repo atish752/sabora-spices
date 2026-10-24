@@ -96,7 +96,7 @@ export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection 
 
               <div className="pt-2">
                 <button
-                  onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onScrollToSection('contact')}
+                  onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
                   className="px-6 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shadow transition-all cursor-pointer inline-flex items-center gap-2"
                 >
                   <span>Discuss Your Compliance Requirements</span>

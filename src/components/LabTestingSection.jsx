@@ -167,7 +167,7 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
               </p>
             </div>
             <button
-              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onScrollToSection('contact')}
+              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
               className="px-6 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-semibold shadow shrink-0 cursor-pointer flex items-center gap-2"
             >
               <span>Request Sample & COA Dossier</span>

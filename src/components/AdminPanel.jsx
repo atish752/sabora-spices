@@ -132,12 +132,12 @@ export default function AdminPanel({
       image: "/images/hero-sabora-master.jpg",
       badge: "Crop 2026",
       primaryCtaText: "Request Wholesale Quote",
-      primaryCtaLink: "#contact",
+      primaryCtaLink: "/contact",
       secondaryCtaText: "Explore Products",
-      secondaryCtaLink: "#products",
-      displayMode: "banner",
-      showOverlayText: false,
-      fitMode: "contain"
+      secondaryCtaLink: "/products",
+      displayMode: "cinematic",
+      showOverlayText: true,
+      fitMode: "cover"
     };
     const updated = [...editableHeroSlides, newSlide];
     setEditableHeroSlides(updated);
@@ -561,14 +561,11 @@ export default function AdminPanel({
                         const mode = e.target.value;
                         handleHeroChange('displayMode', mode);
                         handleHeroChange('showOverlayText', mode === 'cinematic');
-                        if (mode === 'banner') {
-                          handleHeroChange('fitMode', 'contain');
-                        }
                       }}
                       className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
                     >
-                      <option value="banner">Panoramic Banner (Auto-Fit without Cropping - Shahi Reference Style)</option>
-                      <option value="cinematic">Cinematic Photo with Overlay Text & Buttons</option>
+                      <option value="cinematic">Cinematic Photo with Overlay Text & Buttons (Full Width)</option>
+                      <option value="banner">Panoramic Banner (Edge-to-Edge Full Width)</option>
                     </select>
                   </div>
 
@@ -576,12 +573,12 @@ export default function AdminPanel({
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-stone-800">Image Fit Mode</label>
                     <select
-                      value={currentHeroSlide.fitMode || 'contain'}
+                      value={currentHeroSlide.fitMode || 'cover'}
                       onChange={(e) => handleHeroChange('fitMode', e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
                     >
-                      <option value="contain">Contain (100% Complete Visual - Zero Cropping)</option>
-                      <option value="cover">Cover (Fills Entire Banner Container)</option>
+                      <option value="cover">Cover (Fills Entire Banner Container - Zero Letterboxing)</option>
+                      <option value="contain">Contain (Full Image - Letterbox Borders on Wide Screens)</option>
                     </select>
                   </div>
 

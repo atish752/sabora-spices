@@ -332,8 +332,8 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileMenuOpen && (
-        <div className="xl:hidden fixed inset-0 top-[96px] z-40 bg-black/50 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white w-full max-h-[calc(100vh-96px)] overflow-y-auto border-b border-stone-200 shadow-2xl p-5 space-y-4">
+        <div className="xl:hidden fixed inset-x-0 bottom-0 top-[88px] sm:top-[96px] z-40 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={() => setMobileMenuOpen(false)}>
+          <div className="bg-white w-full max-h-[calc(100vh-88px)] sm:max-h-[calc(100vh-96px)] overflow-y-auto border-b border-stone-200 shadow-2xl p-5 space-y-4" onClick={(e) => e.stopPropagation()}>
             
             {/* Sabora Brand Quick Bar */}
             <div className="pb-3 border-b border-stone-100 flex items-center justify-between">

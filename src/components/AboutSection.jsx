@@ -93,14 +93,14 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onScrollToSection('contact')}
+                onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
                 className="px-5 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-semibold shadow transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>Request a Quote</span>
                 <ArrowRight className="w-4 h-4 text-amber-300" />
               </button>
               <button
-                onClick={() => onScrollToSection('sourcing')}
+                onClick={() => onScrollToSection && onScrollToSection('sourcing')}
                 className="px-5 py-2.5 rounded-lg border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs sm:text-sm font-semibold transition-all cursor-pointer"
               >
                 Explore Sourcing & Origin

@@ -145,27 +145,27 @@ export default function HomePage({
                       {product.name}
                     </h3>
                     <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed font-normal">
-                      {product.shortDescription || product.description}
+                      {product.tagline || product.subtitle || product.shortDescription || product.description}
                     </p>
                   </div>
 
                   {/* Quick Specs Snippet */}
-                  {product.specifications && (
-                    <div className="bg-stone-50 rounded-lg p-2.5 grid grid-cols-2 gap-2 text-[11px] text-stone-600 border border-stone-100">
-                      {product.specifications.sizeGrade && (
-                        <div>
-                          <span className="text-stone-400 block text-[10px]">Grade / Sizing</span>
-                          <span className="font-semibold text-stone-800">{product.specifications.sizeGrade}</span>
-                        </div>
-                      )}
-                      {product.specifications.moisture && (
-                        <div>
-                          <span className="text-stone-400 block text-[10px]">Moisture</span>
-                          <span className="font-semibold text-stone-800">{product.specifications.moisture}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  <div className="bg-stone-50 rounded-lg p-2.5 space-y-1.5 text-[11px] text-stone-600 border border-stone-100">
+                    {product.gradesAvailable && product.gradesAvailable.length > 0 && (
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="text-stone-400 text-[10px] shrink-0">Grade / Sizing:</span>
+                        <span className="font-semibold text-stone-800 text-right truncate">
+                          {product.gradesAvailable.slice(0, 2).join(', ')}
+                        </span>
+                      </div>
+                    )}
+                    {product.moq && (
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-stone-400 text-[10px] shrink-0">MOQ:</span>
+                        <span className="font-semibold text-stone-800 text-right">{product.moq}</span>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Actions */}
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between gap-2">
