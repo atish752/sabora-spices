@@ -17,6 +17,10 @@ import CompliancePage from './pages/CompliancePage';
 import ExportPage from './pages/ExportPage';
 import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
+import CookieConsentBanner from './components/CookieConsentBanner';
+import TenSecondLeadModal from './components/TenSecondLeadModal';
 
 import { MessageCircle } from 'lucide-react';
 import { SITE_CONFIG } from './config/siteConfig';
@@ -50,6 +54,8 @@ function parseCurrentRoute() {
     'export',
     'faq',
     'contact',
+    'privacy',
+    'terms',
     'admin'
   ];
 
@@ -145,6 +151,8 @@ export default function App() {
       export: "Global Export Supply & Logistics | SABORA SPICES",
       faq: "Frequently Asked Questions (FAQ) | SABORA SPICES",
       contact: "Contact Us & Request a Wholesale Quote | SABORA SPICES",
+      privacy: "Privacy Policy & GDPR Compliance | SABORA SPICES",
+      terms: "Terms & Conditions & Commercial Trade Terms | SABORA SPICES",
       admin: "Admin Management Portal | SABORA SPICES"
     };
 
@@ -347,6 +355,24 @@ export default function App() {
           />
         )}
 
+        {/* 12. Dedicated Privacy Policy Page */}
+        {currentRoute === 'privacy' && (
+          <PrivacyPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
+
+        {/* 13. Dedicated Terms and Conditions Page */}
+        {currentRoute === 'terms' && (
+          <TermsPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
+
       </main>
 
       {/* Footer Section with Complete Menu, Policies, and Admin Link */}
@@ -379,6 +405,12 @@ export default function App() {
           </span>
         </button>
       </aside>
+
+      {/* International Cookie Consent Banner */}
+      <CookieConsentBanner onNavigate={navigateTo} />
+
+      {/* Automatic 10-Second High-Converting Lead / WhatsApp Modal */}
+      <TenSecondLeadModal onSubmitInquiry={submitInquiry} />
 
       {/* Product Detail Dossier Modal (Callable from any page) */}
       {selectedProduct && (

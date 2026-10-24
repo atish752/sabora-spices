@@ -120,93 +120,130 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
       className="relative w-full bg-[#041A12] overflow-hidden select-none"
     >
       {/* 
-        ── Responsive Video Hero Container ──
-        Permanent video showcase:
-        - Mobile screens (< 768px): 9:16 Portrait video (/videos/Portrait.mp4)
-        - Desktop screens (>= 768px): 16:9 Landscape video (/videos/Landscape.mp4)
+        ── Responsive Video Hero: 100% Fully Visible in Original Ratio ──
+        - Desktop screens (>= 768px): 16:9 Landscape video (/videos/Landscape.mp4) in full 16:9 ratio
+        - Mobile screens (< 768px): 9:16 Portrait video (/videos/Portrait.mp4) in full 9:16 ratio
+        Nothing is cropped, clipped, or hidden behind the bottom section.
       */}
-      <div className="relative w-full min-h-[380px] sm:min-h-[440px] md:h-[500px] lg:h-[560px] xl:h-[600px] flex items-end overflow-hidden">
-        
-        {/* 1. Desktop 16:9 Landscape Video */}
-        <video
-          ref={desktopVideoRef}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
-          webkit-playsinline="true"
-          preload="auto"
-          poster="/images/hero-sabora-master.jpg"
-          className="hidden md:block absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-        >
-          <source src="/videos/Landscape.mp4" type="video/mp4" />
-        </video>
-
-        {/* 2. Mobile 9:16 Portrait Video */}
-        <video
-          ref={mobileVideoRef}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
-          webkit-playsinline="true"
-          preload="auto"
-          poster="/images/hero-sabora-pouches.jpg"
-          className="block md:hidden absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-        >
-          <source src="/videos/Portrait.mp4" type="video/mp4" />
-        </video>
-
-        {/* 3. Very simple, minimal text on video: NO white text, NO paragraphs, NO dulling overlays */}
-        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full pb-4 sm:pb-6 pointer-events-none">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide shadow-md">
-            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Direct Origin Harvest</span>
-          </span>
-        </div>
-
-        {/* 4. Floating Video Player Controls (Bottom-Right Corner) */}
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-30 flex items-center gap-2">
-          {!isPlaying ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
-              <Play className="w-3 h-3 fill-current" />
-              <span>Tap to Play</span>
-            </span>
-          ) : (
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-emerald-300 text-[10px] font-semibold border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-              <span>HARVEST FOOTAGE</span>
-            </span>
-          )}
-          <button
-            onClick={togglePlay}
-            aria-label={isPlaying ? "Pause Hero Video" : "Play Hero Video"}
-            className={`p-2 sm:p-2.5 rounded-full backdrop-blur-md border transition-all active:scale-90 cursor-pointer shadow-lg flex items-center justify-center ${
-              !isPlaying 
-                ? 'bg-amber-500 text-stone-950 border-amber-400 shadow-amber-500/30' 
-                : 'bg-black/50 hover:bg-black/75 text-white/90 hover:text-white border-white/20'
-            }`}
-            title={isPlaying ? "Pause video" : "Play video"}
+      
+      {/* 1. Desktop 16:9 Landscape Video Showcase */}
+      <div className="hidden md:block relative w-full bg-[#020D09]">
+        <div className="max-w-[1440px] mx-auto relative aspect-video w-full overflow-hidden flex items-center justify-center">
+          <video
+            ref={desktopVideoRef}
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+            webkit-playsinline="true"
+            preload="auto"
+            poster="/images/hero-sabora-master.jpg"
+            className="w-full h-full object-contain pointer-events-none"
           >
-            {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />}
-          </button>
-          <button
-            onClick={toggleMute}
-            aria-label={isMuted ? "Unmute Hero Video" : "Mute Hero Video"}
-            className="p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
-            title={isMuted ? "Unmute video" : "Mute video"}
-          >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
-          </button>
-        </div>
+            <source src="/videos/Landscape.mp4" type="video/mp4" />
+          </video>
 
+          {/* Desktop Overlay Badge: Direct Origin Harvest */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 pointer-events-none">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide shadow-md">
+              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Direct Origin Harvest</span>
+            </span>
+          </div>
+
+          {/* Floating Video Player Controls (Bottom-Right Corner) */}
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex items-center gap-2">
+            {!isPlaying ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
+                <Play className="w-3 h-3 fill-current" />
+                <span>Tap to Play</span>
+              </span>
+            ) : (
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-emerald-300 text-[10px] font-semibold border border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <span>HARVEST FOOTAGE</span>
+              </span>
+            )}
+            <button
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause Hero Video" : "Play Hero Video"}
+              className={`p-2 sm:p-2.5 rounded-full backdrop-blur-md border transition-all active:scale-90 cursor-pointer shadow-lg flex items-center justify-center ${
+                !isPlaying 
+                  ? 'bg-amber-500 text-stone-950 border-amber-400 shadow-amber-500/30' 
+                  : 'bg-black/50 hover:bg-black/75 text-white/90 hover:text-white border-white/20'
+              }`}
+              title={isPlaying ? "Pause video" : "Play video"}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />}
+            </button>
+            <button
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute Hero Video" : "Mute Hero Video"}
+              className="p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
+              title={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Mobile 9:16 Portrait Video Showcase */}
+      <div className="block md:hidden relative w-full bg-[#020D09] px-3 py-3">
+        <div className="max-w-[420px] mx-auto relative aspect-[9/16] w-full overflow-hidden rounded-2xl shadow-2xl border border-emerald-900/40 bg-black flex items-center justify-center">
+          <video
+            ref={mobileVideoRef}
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+            webkit-playsinline="true"
+            preload="auto"
+            poster="/images/hero-sabora-pouches.jpg"
+            className="w-full h-full object-contain pointer-events-none"
+          >
+            <source src="/videos/Portrait.mp4" type="video/mp4" />
+          </video>
+
+          {/* Mobile Overlay Badge */}
+          <div className="absolute top-3 left-3 z-20 pointer-events-none">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-amber-400/30 text-amber-300 text-[11px] font-semibold shadow-md">
+              <Leaf className="w-3 h-3 text-emerald-400" />
+              <span>Direct Origin Harvest</span>
+            </span>
+          </div>
+
+          {/* Mobile Floating Video Player Controls */}
+          <div className="absolute bottom-3 right-3 z-30 flex items-center gap-1.5">
+            <button
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause Hero Video" : "Play Hero Video"}
+              className={`p-2 rounded-full backdrop-blur-md border transition-all active:scale-90 cursor-pointer shadow-lg flex items-center justify-center ${
+                !isPlaying 
+                  ? 'bg-amber-500 text-stone-950 border-amber-400 shadow-amber-500/30' 
+                  : 'bg-black/50 hover:bg-black/75 text-white/90 hover:text-white border-white/20'
+              }`}
+              title={isPlaying ? "Pause video" : "Play video"}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+            </button>
+            <button
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute Hero Video" : "Mute Hero Video"}
+              className="p-2 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
+              title={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* 
-        ── Action Buttons Bar (Below the Video, not on that) ──
+        ── Action Buttons & Information Bar (Strictly BELOW the video, never overlapping) ──
       */}
-      <div className="relative z-20 bg-[#03140E] border-t border-emerald-900/50 py-5 sm:py-6 px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+      <div className="relative z-20 bg-[#03140E] border-t border-emerald-900/60 py-6 sm:py-7 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
           
           {/* Brand Heading & Concise Punchline (Cleanly below the video) */}
           <div className="space-y-1 text-center md:text-left">

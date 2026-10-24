@@ -110,28 +110,49 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
       }`}>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
           
-          {/* Logo & Brand Identity */}
-          <a 
-            href="/" 
-            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-            className="flex items-center gap-3 group focus:outline-none"
-          >
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-50 to-stone-100 p-1 border border-amber-200/80 shadow-sm group-hover:scale-105 transition-transform">
+          {/* Logo & Brand Identity: Logo + SABORA SPICES + Request Quote in single horizontal line, subtitle below */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            <a 
+              href="/" 
+              onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+              className="relative flex items-center justify-center shrink-0 group focus:outline-none"
+              title="Sabora Spices Home"
+            >
               <img 
                 src="/images/logo.png" 
                 alt="Sabora Spices Logo" 
-                className="w-full h-full object-contain drop-shadow"
+                className="h-10 sm:h-12 md:h-13 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
               />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#0F3D2E] group-hover:text-amber-700 transition-colors">
-                SABORA SPICES
+            </a>
+
+            <div className="flex flex-col justify-center">
+              {/* Single Horizontal Line: Brand Name + Request Quote Button */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <a 
+                  href="/" 
+                  onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+                  className="font-serif text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
+                >
+                  SABORA SPICES
+                </a>
+
+                {/* Request Quote Button in the single horizontal line */}
+                <button
+                  onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
+                  className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-[11px] sm:text-xs font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
+                  title="Request Instant Wholesale Quote"
+                >
+                  <FileText className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
+                  <span>Request Quote</span>
+                </button>
+              </div>
+
+              {/* Subtitle in short text directly below */}
+              <span className="text-[9.5px] sm:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-1">
+                whole spices & makhana
               </span>
-              <span className="text-[10px] sm:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase">
-                Whole Spices & Makhana
-              </span>
             </div>
-          </a>
+          </div>
 
           {/* Desktop Navigation Links (All 11 Dedicated Pages) */}
           <nav className="hidden xl:flex items-center gap-1 lg:gap-1.5 text-[13px] font-medium text-stone-700">
@@ -307,20 +328,21 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </button>
           </nav>
 
-          {/* Right Action: Request a Quote CTA Button */}
+          {/* Right Action: Quick WhatsApp Desk & Mobile Hamburger Button */}
           <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer border border-emerald-700/30"
+              onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100/90 text-[#0F3D2E] text-xs font-bold transition-all border border-emerald-300/60 active:scale-95 cursor-pointer shadow-2xs"
+              title="1-Click WhatsApp Sourcing Desk"
             >
-              <FileText className="w-4 h-4 text-amber-300" />
-              <span>Request Quote</span>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+              <span>WhatsApp Desk</span>
             </button>
 
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors focus:outline-none"
+              className="xl:hidden p-2 rounded-lg text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors focus:outline-none cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -449,6 +471,18 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors"
               >
                 11. Contact Us
+              </button>
+              <button 
+                onClick={() => handleNavClick('privacy')} 
+                className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors text-stone-600"
+              >
+                12. Privacy Policy
+              </button>
+              <button 
+                onClick={() => handleNavClick('terms')} 
+                className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors text-stone-600"
+              >
+                13. Terms & Conditions
               </button>
             </div>
 

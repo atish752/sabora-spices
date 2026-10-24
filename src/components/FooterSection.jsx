@@ -37,8 +37,8 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               onClick={() => handleLinkClick('home')}
               className="flex items-center gap-3 cursor-pointer group w-fit"
             >
-              <div className="w-14 h-14 rounded-full bg-white/10 p-1 flex items-center justify-center border border-amber-400/40 group-hover:scale-105 transition-transform">
-                <img src="/images/logo.png" alt="Sabora Spices" className="w-full h-full object-contain" />
+              <div className="w-14 h-14 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <img src="/images/logo.png" alt="Sabora Spices Logo" className="w-full h-full object-contain drop-shadow" />
               </div>
               <div>
                 <span className="font-serif text-2xl font-bold tracking-tight text-white block group-hover:text-amber-400 transition-colors">
@@ -216,11 +216,26 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-stone-400">
-            <span className="hover:text-stone-200 cursor-pointer">Privacy & Policy</span>
+            <button 
+              onClick={() => handleLinkClick('privacy')} 
+              className="hover:text-amber-400 transition-colors cursor-pointer text-xs"
+            >
+              Privacy Policy
+            </button>
             <span>•</span>
-            <span className="hover:text-stone-200 cursor-pointer">Terms & Conditions</span>
+            <button 
+              onClick={() => handleLinkClick('terms')} 
+              className="hover:text-amber-400 transition-colors cursor-pointer text-xs"
+            >
+              Terms & Conditions
+            </button>
             <span>•</span>
-            <span className="hover:text-stone-200 cursor-pointer">Customer Grievance</span>
+            <button
+              onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to contact your customer grievance desk.")}
+              className="hover:text-stone-200 transition-colors cursor-pointer text-xs"
+            >
+              Customer Grievance
+            </button>
             <span>•</span>
             <button
               onClick={onOpenAdmin}
