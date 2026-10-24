@@ -103,13 +103,14 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn"
+      onClick={handleClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn cursor-pointer"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-headline"
     >
       <div 
-        className="relative w-full max-w-lg bg-gradient-to-b from-[#041A12] via-[#082E20] to-[#03140E] text-white rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.6)] border border-amber-400/40 overflow-hidden animate-scaleUp"
+        className="relative w-full max-w-lg bg-gradient-to-b from-[#041A12] via-[#082E20] to-[#03140E] text-white rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.6)] border border-amber-400/40 overflow-hidden animate-scaleUp cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Decorative Amber Glow */}

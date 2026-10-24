@@ -68,6 +68,14 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                     <a
                       key={idx}
                       href={item.id}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(item.id);
+                        if (target) {
+                          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          window.history.replaceState(null, '', item.id);
+                        }
+                      }}
                       className="block py-1.5 px-2 rounded-lg text-stone-600 hover:text-[#0F3D2E] hover:bg-emerald-50 transition-colors"
                     >
                       {item.label}

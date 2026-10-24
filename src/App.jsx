@@ -171,6 +171,15 @@ export default function App() {
     if (cleanRoute === 'hero') cleanRoute = 'home';
 
     let mergedParams = { ...params };
+    let targetHash = '';
+
+    // Handle hash fragments (e.g. #cookies or privacy#cookies)
+    if (cleanRoute.includes('#')) {
+      const parts = cleanRoute.split('#');
+      cleanRoute = parts[0];
+      targetHash = parts[1];
+    }
+
     if (cleanRoute.includes('?')) {
       const [r, q] = cleanRoute.split('?');
       cleanRoute = r;
@@ -178,6 +187,11 @@ export default function App() {
       for (const [k, v] of sp.entries()) {
         mergedParams[k] = v;
       }
+    }
+
+    // Default to current route if only hash was passed
+    if (!cleanRoute) {
+      cleanRoute = currentRoute;
     }
 
     setCurrentRoute(cleanRoute);
@@ -193,14 +207,29 @@ export default function App() {
       newPath += `?category=${encodeURIComponent(mergedParams.category)}`;
     }
 
+    if (targetHash) {
+      newPath += `#${targetHash}`;
+    }
+
     try {
       window.history.pushState({ route: cleanRoute, params: mergedParams }, '', newPath);
     } catch (e) {
       console.warn("History pushState exception:", e);
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    if (targetHash) {
+      setTimeout(() => {
+        const el = document.getElementById(targetHash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 80);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentRoute]);
 
   const handleOpenQuoteModal = useCallback((product = null) => {
     if (product) {

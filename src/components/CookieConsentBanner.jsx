@@ -45,7 +45,7 @@ export default function CookieConsentBanner({ onNavigate }) {
   const handleOpenPrivacy = (e) => {
     e.preventDefault();
     if (onNavigate) {
-      onNavigate('privacy');
+      onNavigate('privacy#cookies');
     }
   };
 

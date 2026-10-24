@@ -16,17 +16,27 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
   const desktopVideoRef = useRef(null);
   const mobileVideoRef = useRef(null);
 
-  // Synchronize playback & audio across desktop/mobile video elements
+  // Ref to track latest play state inside event listeners
+  const isPlayingRef = useRef(isPlaying);
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  // Synchronize playback across desktop/mobile video elements
   const togglePlay = () => {
-    const nextState = !isPlaying;
-    setIsPlaying(nextState);
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const targetVideo = isDesktop ? desktopVideoRef.current : mobileVideoRef.current;
-    if (targetVideo) {
-      if (nextState) {
-        targetVideo.play().catch(() => setIsPlaying(false));
-      } else {
-        targetVideo.pause();
+    if (!targetVideo) return;
+
+    if (isPlaying) {
+      targetVideo.pause();
+      setIsPlaying(false);
+    } else {
+      const playPromise = targetVideo.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false));
       }
     }
   };
@@ -39,45 +49,48 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
     });
   };
 
-  // Safe autoplay for the active device video (conserves mobile bandwidth & battery)
+  // Safe initial autoplay on mount and responsive active video switching on resize
   useEffect(() => {
-    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
-    const activeVideo = isDesktop ? desktopVideoRef.current : mobileVideoRef.current;
-    const inactiveVideo = isDesktop ? mobileVideoRef.current : desktopVideoRef.current;
-    
-    // Pause inactive video to conserve bandwidth, CPU and mobile battery
-    if (inactiveVideo) {
-      try { inactiveVideo.pause(); } catch (e) {}
+    const getActiveVideo = () => {
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+      return {
+        active: isDesktop ? desktopVideoRef.current : mobileVideoRef.current,
+        inactive: isDesktop ? mobileVideoRef.current : desktopVideoRef.current
+      };
+    };
+
+    const { active, inactive } = getActiveVideo();
+
+    if (inactive) {
+      try { inactive.pause(); } catch (e) {}
     }
 
-    if (activeVideo) {
-      activeVideo.muted = true;
-      const playPromise = activeVideo.play();
+    if (active) {
+      active.muted = true;
+      const playPromise = active.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => setIsPlaying(true))
           .catch(() => {
-            // Autoplay restricted by browser/low-power mode; ready for tap-to-play
+            // Browser or mobile policy prevented auto-play; ready for user tap
             setIsPlaying(false);
           });
       }
     }
 
     const handleResize = () => {
-      const desktopNow = window.innerWidth >= 768;
-      const curActive = desktopNow ? desktopVideoRef.current : mobileVideoRef.current;
-      const curInactive = desktopNow ? mobileVideoRef.current : desktopVideoRef.current;
+      const { active: curActive, inactive: curInactive } = getActiveVideo();
       if (curInactive) {
         try { curInactive.pause(); } catch (e) {}
       }
-      if (curActive && isPlaying) {
+      if (curActive && isPlayingRef.current) {
         curActive.play().catch(() => {});
       }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isPlaying]);
+  }, []); // Run only once on mount
 
   const handleCtaClick = (link) => {
     if (!link) return;
@@ -138,6 +151,8 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
             webkit-playsinline="true"
             preload="auto"
             poster="/images/hero-sabora-master.jpg"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
             className="w-full h-full object-contain pointer-events-none"
           >
             <source src="/videos/Landscape.mp4" type="video/mp4" />
@@ -190,7 +205,7 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
 
       {/* 2. Mobile 9:16 Portrait Video Showcase */}
       <div className="block md:hidden relative w-full bg-[#020D09] px-3 py-3">
-        <div className="max-w-[420px] mx-auto relative aspect-[9/16] w-full overflow-hidden rounded-2xl shadow-2xl border border-emerald-900/40 bg-black flex items-center justify-center">
+        <div className="max-w-[420px] mx-auto relative aspect-[9/16] w-full max-h-[75vh] overflow-hidden rounded-2xl shadow-2xl border border-emerald-900/40 bg-black flex items-center justify-center">
           <video
             ref={mobileVideoRef}
             autoPlay
@@ -200,6 +215,8 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
             webkit-playsinline="true"
             preload="auto"
             poster="/images/hero-sabora-pouches.jpg"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
             className="w-full h-full object-contain pointer-events-none"
           >
             <source src="/videos/Portrait.mp4" type="video/mp4" />

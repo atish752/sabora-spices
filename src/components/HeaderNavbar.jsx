@@ -111,54 +111,54 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
           
           {/* Logo & Brand Identity: Logo + SABORA SPICES + Request Quote in single horizontal line, subtitle below */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5">
-            <a 
-              href="/" 
-              onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-              className="relative flex items-center justify-center shrink-0 group focus:outline-none"
-              title="Sabora Spices Home"
-            >
-              <img 
-                src="/images/logo.png" 
-                alt="Sabora Spices Logo" 
-                className="h-10 sm:h-12 md:h-13 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
-              />
-            </a>
+          <div className="flex flex-col justify-center">
+            {/* Single Horizontal Line: Logo + Brand Name + Request Quote Button */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5">
+              <a 
+                href="/" 
+                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+                className="relative flex items-center justify-center shrink-0 group focus:outline-none"
+                title="Sabora Spices Home"
+              >
+                <img 
+                  src="/images/logo.png" 
+                  alt="Sabora Spices Logo" 
+                  className="h-8 sm:h-9 md:h-10 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
+                />
+              </a>
 
-            <div className="flex flex-col justify-center">
-              {/* Single Horizontal Line: Brand Name + Request Quote Button */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <a 
-                  href="/" 
-                  onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                  className="font-serif text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
-                >
-                  SABORA SPICES
-                </a>
+              <a 
+                href="/" 
+                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+                className="font-serif text-[15px] sm:text-lg md:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
+              >
+                SABORA SPICES
+              </a>
 
-                {/* Request Quote Button in the single horizontal line */}
-                <button
-                  onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
-                  className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-[11px] sm:text-xs font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
-                  title="Request Instant Wholesale Quote"
-                >
-                  <FileText className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
-                  <span>Request Quote</span>
-                </button>
-              </div>
+              {/* Request Quote Button in the single horizontal line */}
+              <button
+                onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-[10px] sm:text-xs font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
+                title="Request Instant Wholesale Quote"
+              >
+                <FileText className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
+                <span>Request Quote</span>
+              </button>
+            </div>
 
-              {/* Subtitle in short text directly below */}
-              <span className="text-[9.5px] sm:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-1">
+            {/* Subtitle in short text directly below */}
+            <div className="pl-9 sm:pl-11 -mt-0.5">
+              <span className="text-[8.5px] sm:text-[10px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
                 whole spices & makhana
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation Links (All 11 Dedicated Pages) */}
-          <nav className="hidden xl:flex items-center gap-1 lg:gap-1.5 text-[13px] font-medium text-stone-700">
+          <nav className="hidden xl:flex items-center gap-0.5 2xl:gap-1 text-xs 2xl:text-[13px] font-medium text-stone-700 whitespace-nowrap">
             <button 
               onClick={() => handleNavClick('home')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('home')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -169,7 +169,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('about')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('about')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -186,7 +186,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             >
               <button 
                 onClick={() => handleNavClick('products')}
-                className={`px-2.5 py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
                   isActive('products')
                     ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                     : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -241,7 +241,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('sourcing')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('sourcing')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -252,7 +252,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('why-sabora')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('why-sabora')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -263,7 +263,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('quality')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('quality')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -274,7 +274,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('lab-testing')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('lab-testing')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -285,7 +285,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('compliance')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('compliance')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -296,7 +296,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('export')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('export')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -307,7 +307,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('faq')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('faq')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -318,7 +318,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('contact')} 
-              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('contact')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
