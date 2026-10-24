@@ -76,6 +76,16 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
               <MessageCircle className="w-3 h-3 text-emerald-400 fill-emerald-400" />
               <span className="font-semibold text-amber-300">WhatsApp Desk</span>
             </button>
+
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-amber-300 text-[11px] font-medium transition-colors cursor-pointer"
+                title="Admin Management Portal"
+              >
+                <span>Admin</span>
+              </button>
+            )}
           </div>
 
         </div>
@@ -401,6 +411,18 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
                 <MessageCircle className="w-4 h-4 fill-white" />
                 <span>Chat on WhatsApp (1-Click)</span>
               </button>
+
+              {onOpenAdmin && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAdmin();
+                  }}
+                  className="w-full py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <span>Admin Management Portal</span>
+                </button>
+              )}
             </div>
 
           </div>
