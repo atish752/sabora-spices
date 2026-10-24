@@ -9,7 +9,7 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="006. QUALITY & FOOD SAFETY"
+        badge="Food Safety & Quality Protocols"
         title="Food Safety Standards & Quality Assurance"
         subtitle="Adherence to FSSAI regulations, ISO 9001/22000 quality principles, controlled humidity storage, and multi-stage manual & mechanical sorting to ensure food-grade purity."
         breadcrumbCurrent="Quality & Safety"

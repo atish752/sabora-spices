@@ -10,7 +10,7 @@ export default function FaqPage({ onNavigate, onOpenQuoteModal, onSubmitInquiry 
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="0010. FREQUENTLY ASKED QUESTIONS"
+        badge="Buyer Guidance & Frequently Asked Questions"
         title="Frequently Asked Questions & Sourcing Guide"
         subtitle="Detailed answers to the 25 most frequent business enquiries covering product specifications, minimum order quantities (MOQ), custom packaging, laboratory analysis, and export logistics."
         breadcrumbCurrent="FAQ"

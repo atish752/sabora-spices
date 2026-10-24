@@ -11,7 +11,7 @@ import {
   ShieldCheck, 
   FileText,
   Building,
-  Sparkles
+  Leaf
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -257,7 +257,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                 {/* 1-Click WhatsApp Transmission Option */}
                 <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-3 max-w-md mx-auto text-left">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#0F3D2E] uppercase font-mono">
-                    <Sparkles className="w-4 h-4 text-amber-600" />
+                    <Leaf className="w-4 h-4 text-emerald-700" />
                     <span>Fast Track Sourcing Desk</span>
                   </div>
                   <p className="text-xs text-stone-700 leading-relaxed">

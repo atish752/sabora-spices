@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShieldCheck, MapPin, FlaskConical, PackageCheck } from 'lucide-react';
 
 export default function TrustHighlightsBar({ onScrollToSection }) {
+  const [isPaused, setIsPaused] = useState(false);
+
   const highlights = [
     {
       icon: ShieldCheck,
@@ -13,7 +15,7 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
     {
       icon: MapPin,
       iconBg: "bg-amber-100 text-amber-800",
-      title: "Origin-Focused Procurement",
+      title: "Origin–Focused Procurement",
       desc: "Kerala Western Ghats for green cardamom, Bihar for makhana, and Salem for whole turmeric fingers.",
       target: "sourcing"
     },
@@ -27,32 +29,52 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
     {
       icon: PackageCheck,
       iconBg: "bg-stone-100 text-stone-800",
-      title: "Packaging & Private-Label",
+      title: "Packaging & Private–Label",
       desc: "Food-grade Sabora-branded pouches, bulk wholesale packaging, and buyer-specific private-label solutions.",
       target: "products"
     }
   ];
 
+  // Duplicate items for continuous seamless infinite loop
+  const marqueeItems = [...highlights, ...highlights];
+
   return (
-    <section className="relative z-20 bg-stone-50 border-b border-stone-200 py-6 sm:py-8 shadow-sm w-full">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {highlights.map((item, idx) => {
+    <section 
+      aria-label="Trust Highlights & Operational Standards"
+      className="relative z-20 bg-[#F9FBFA] border-b border-stone-200/80 py-3 sm:py-4.5 overflow-hidden w-full select-none"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
+      {/* Subtle edge fade gradients for smooth seamless entry & exit */}
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#F9FBFA] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#F9FBFA] to-transparent z-10 pointer-events-none" />
+
+      {/* 
+        Single Row Continuous Infinite Auto-Scroll from Right to Left
+        Takes minimal vertical space on mobile screens while auto-scrolling horizontally in an infinite loop!
+      */}
+      <div className={`marquee-container flex overflow-hidden w-full ${isPaused ? 'is-paused' : ''}`}>
+        
+        {/* Track 1 */}
+        <div className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 animate-marquee">
+          {marqueeItems.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
-                key={idx}
+                key={`t1-${idx}`}
                 onClick={() => onScrollToSection && onScrollToSection(item.target)}
-                className="bg-white p-5 rounded-xl border border-stone-200/80 shadow-xs hover:shadow-md hover:border-emerald-500/40 transition-all duration-300 flex items-start gap-4 cursor-pointer group"
+                className="w-[280px] xs:w-[300px] sm:w-[330px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
               >
-                <div className={`p-3 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-5 h-5" />
+                <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug">
+                <div className="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
+                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-stone-600 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-stone-600 leading-snug sm:leading-relaxed line-clamp-2">
                     {item.desc}
                   </p>
                 </div>
@@ -60,6 +82,33 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
             );
           })}
         </div>
+
+        {/* Track 2 (Clone for infinite seamless marquee loop) */}
+        <div aria-hidden="true" className="flex shrink-0 items-center gap-3.5 sm:gap-4.5 animate-marquee ml-3.5 sm:ml-4.5">
+          {marqueeItems.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={`t2-${idx}`}
+                onClick={() => onScrollToSection && onScrollToSection(item.target)}
+                className="w-[280px] xs:w-[300px] sm:w-[330px] md:w-[360px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-start gap-3 sm:gap-3.5 cursor-pointer group active:scale-[0.98]"
+              >
+                <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
+                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
+                    {item.title}
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-stone-600 leading-snug sm:leading-relaxed line-clamp-2">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );

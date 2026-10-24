@@ -18,7 +18,7 @@ export default function ExportPage({ onNavigate, onOpenQuoteModal, onSubmitInqui
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="009. INTERNATIONAL & EXPORT SUPPLY"
+        badge="Global Export Logistics & Port Supply"
         title="Global Export Supply & International Logistics"
         subtitle="End-to-end export coordination for overseas wholesalers, distributors, and food importers. Custom seaworthy packaging, international documentation, and container freight management."
         breadcrumbCurrent="Export Supply"

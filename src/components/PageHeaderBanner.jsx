@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, Home, Sparkles, MessageCircle, FileText } from 'lucide-react';
+import { ChevronRight, Home, Leaf, MessageCircle, FileText } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function PageHeaderBanner({
@@ -43,7 +43,7 @@ export default function PageHeaderBanner({
         {/* Section Badge */}
         {badge && (
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wide uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
             <span>{badge}</span>
           </div>
         )}

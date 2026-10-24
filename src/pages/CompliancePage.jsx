@@ -36,7 +36,7 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="008. REGULATORY COMPLIANCE"
+        badge="FSSAI & Regulatory Alignment"
         title="Food Safety Licenses & Legal Framework"
         subtitle="Operating with complete statutory compliance under Indian food safety laws and trade regulations. Transparent documentation, FoSCoS portal alignment, and clean commercial invoices."
         breadcrumbCurrent="Compliance"

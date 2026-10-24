@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeaderBanner from '../components/PageHeaderBanner';
 import ProductsSection from '../components/ProductsSection';
 import ContactRfqSection from '../components/ContactRfqSection';
-import { Package, ShieldCheck, Sparkles, Layers, ArrowRight, FileCheck, CheckCircle2 } from 'lucide-react';
+import { Package, ShieldCheck, Leaf, Layers, ArrowRight, FileCheck, CheckCircle2 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function ProductsPage({
@@ -17,7 +17,7 @@ export default function ProductsPage({
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="003. SABORA PRODUCT PORTFOLIO"
+        badge="Sabora Whole Products Portfolio"
         title="Whole Spices & Makhana (Fox Nuts)"
         subtitle="100% whole agricultural products sourced with purpose. Detailed specifications, millimeter grading, moisture control, and flexible packaging options for business buyers."
         breadcrumbCurrent="Products"

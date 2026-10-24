@@ -136,10 +136,12 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
-        display: ['"Cinzel"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        cinzel: ['"Cinzel"', '"Cormorant Garamond"', 'serif'],
+        sans: ['"Outfit"', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Fraunces"', 'Georgia', 'serif'],
+        heading: ['"Fraunces"', 'Georgia', 'serif'],
+        display: ['"Fraunces"', 'Georgia', 'serif'],
+        hand: ['"Caveat"', 'cursive'],
+        cinzel: ['"Fraunces"', 'serif'],
       },
       boxShadow: {
         'soft': '0 4px 20px -2px rgba(4, 26, 18, 0.05), 0 2px 6px -1px rgba(4, 26, 18, 0.03)',
@@ -151,8 +153,9 @@ export default {
         'gold-glow': '0 0 35px -5px rgba(245, 158, 11, 0.45)',
       },
       animation: {
-        'marquee': 'marquee 35s linear infinite',
-        'marquee-fast': 'marquee 22s linear infinite',
+        'marquee': 'marquee 28s linear infinite',
+        'marquee-fast': 'marquee 18s linear infinite',
+        'marquee-mobile': 'marquee 22s linear infinite',
         'float': 'softFloat 5s ease-in-out infinite',
         'shimmer': 'subtleShimmer 3s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',

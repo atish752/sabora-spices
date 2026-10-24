@@ -14,7 +14,7 @@ export default function ContactPage({
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="0011. CONTACT & QUOTATION DESK"
+        badge="Wholesale Quotation Desk & Direct Inquiry"
         title="Request a Wholesale Quote & Contact Sabora Spices"
         subtitle="Connect with our Delhi sourcing desk. Inquire about current batch availability, custom millimeter grading, private-label barrier packaging, and export shipment terms."
         breadcrumbCurrent="Contact Us"

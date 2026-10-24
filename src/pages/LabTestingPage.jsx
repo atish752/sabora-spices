@@ -30,7 +30,7 @@ export default function LabTestingPage({ onNavigate, onOpenQuoteModal, onSubmitI
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="007. LABORATORY TESTING & VERIFICATION"
+        badge="NABL Laboratory Testing & CoA Verification"
         title="Accredited Laboratory Testing & Certificate of Analysis (CoA)"
         subtitle="Independent third-party analytical testing through NABL-accredited food laboratories. Verifying physical specifications, volatile oil potency, and freedom from harmful residues."
         breadcrumbCurrent="Lab Testing"

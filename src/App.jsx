@@ -253,7 +253,7 @@ export default function App() {
           />
         )}
 
-        {/* 2. Dedicated About Us Page (Section 002) */}
+        {/* 2. Dedicated About Us Page */}
         {currentRoute === 'about' && (
           <AboutPage
             onNavigate={navigateTo}
@@ -262,7 +262,7 @@ export default function App() {
           />
         )}
 
-        {/* 3. Dedicated Products Page & Submenu (Section 003) */}
+        {/* 3. Dedicated Products Page & Submenu */}
         {currentRoute === 'products' && (
           <ProductsPage
             products={products}
@@ -274,7 +274,7 @@ export default function App() {
           />
         )}
 
-        {/* 4. Dedicated Sourcing & Origin Page (Section 004) */}
+        {/* 4. Dedicated Sourcing & Origin Page */}
         {currentRoute === 'sourcing' && (
           <SourcingPage
             onNavigate={navigateTo}
@@ -283,7 +283,7 @@ export default function App() {
           />
         )}
 
-        {/* 5. Dedicated Why Sabora Page (Section 005: 14 Pillars) */}
+        {/* 5. Dedicated Why Sabora Page (14 Pillars) */}
         {currentRoute === 'why-sabora' && (
           <WhySaboraPage
             onNavigate={navigateTo}
@@ -292,7 +292,7 @@ export default function App() {
           />
         )}
 
-        {/* 6. Dedicated Quality & Food Safety Page (Section 006) */}
+        {/* 6. Dedicated Quality & Food Safety Page */}
         {currentRoute === 'quality' && (
           <QualityPage
             onNavigate={navigateTo}
@@ -301,7 +301,7 @@ export default function App() {
           />
         )}
 
-        {/* 7. Dedicated Laboratory Testing Page (Section 007) */}
+        {/* 7. Dedicated Laboratory Testing Page */}
         {currentRoute === 'lab-testing' && (
           <LabTestingPage
             onNavigate={navigateTo}
@@ -310,7 +310,7 @@ export default function App() {
           />
         )}
 
-        {/* 8. Dedicated Regulatory Compliance Page (Section 008) */}
+        {/* 8. Dedicated Regulatory Compliance Page */}
         {currentRoute === 'compliance' && (
           <CompliancePage
             onNavigate={navigateTo}
@@ -319,7 +319,7 @@ export default function App() {
           />
         )}
 
-        {/* 9. Dedicated International & Export Supply Page (Section 009) */}
+        {/* 9. Dedicated International & Export Supply Page */}
         {currentRoute === 'export' && (
           <ExportPage
             onNavigate={navigateTo}
@@ -328,7 +328,7 @@ export default function App() {
           />
         )}
 
-        {/* 10. Dedicated Frequently Asked Questions Page (Section 0010: 25 FAQs) */}
+        {/* 10. Dedicated Frequently Asked Questions Page (25 FAQs) */}
         {currentRoute === 'faq' && (
           <FaqPage
             onNavigate={navigateTo}
@@ -337,7 +337,7 @@ export default function App() {
           />
         )}
 
-        {/* 11. Dedicated Contact Us & RFQ Desk Page (Section 0011) */}
+        {/* 11. Dedicated Contact Us & RFQ Desk Page */}
         {currentRoute === 'contact' && (
           <ContactPage
             onNavigate={navigateTo}

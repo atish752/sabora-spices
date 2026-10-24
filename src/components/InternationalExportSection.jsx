@@ -54,7 +54,7 @@ export default function InternationalExportSection({ onOpenQuoteModal, onScrollT
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
             <Globe2 className="w-3.5 h-3.5 text-emerald-700" />
-            <span>009. International & Export Supply</span>
+            <span>Global Export & Port Shipments</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">

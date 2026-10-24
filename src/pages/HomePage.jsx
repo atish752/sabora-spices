@@ -3,7 +3,7 @@ import HeroSection from '../components/HeroSection';
 import TrustHighlightsBar from '../components/TrustHighlightsBar';
 import ContactRfqSection from '../components/ContactRfqSection';
 import { 
-  Sparkles, 
+  Leaf, 
   ArrowRight, 
   CheckCircle2, 
   MapPin, 
@@ -37,26 +37,25 @@ export default function HomePage({
 
   return (
     <div className="w-full">
-      {/* 1. Full-Width Responsive Hero Showcase (Zero Side Whitespace) */}
+      {/* 1. Permanent Responsive Video Hero (Landscape on Desktop, Portrait on Mobile) */}
       <HeroSection
-        slides={heroSlides}
         onNavigate={onNavigate}
         onOpenQuoteModal={onOpenQuoteModal}
       />
 
-      {/* 2. Trust Highlights Bar (4 Feature Cards matching Shahi Food Services) */}
+      {/* 2. Trust Highlights Bar (Single Row Infinite Continuous Auto-Scroll) */}
       <TrustHighlightsBar
         onScrollToSection={(target) => onNavigate && onNavigate(target)}
       />
 
-      {/* 3. Featured Products Showcase (Preview on Homepage as requested) */}
+      {/* 3. Featured Products Showcase */}
       <section className="py-16 sm:py-24 bg-[#F8FAF9] border-b border-stone-200">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                <Leaf className="w-3.5 h-3.5 text-emerald-700" />
                 <span>Core Sabora Product Lines</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">
@@ -193,7 +192,7 @@ export default function HomePage({
           <div className="bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] rounded-2xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800/50 shadow-lg">
             <div className="space-y-2 text-center md:text-left">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
+                <Package className="w-3.5 h-3.5 text-amber-300" />
                 <span>Dedicated Products Page Available</span>
               </div>
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
@@ -224,7 +223,7 @@ export default function HomePage({
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-[#0F3D2E] tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
-                <span>002. Who We Are</span>
+                <span>Our Heritage & Purpose</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight">
@@ -261,18 +260,45 @@ export default function HomePage({
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-stone-200">
+            {/* Permanent Relocation of Hero Master Photo */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-stone-200 group">
                 <img
-                  src="/images/hero-cardamom-sorting.jpg"
-                  alt="Sabora Spices Hand Sorting"
-                  className="w-full h-80 sm:h-96 object-cover"
+                  src="/images/hero-sabora-master.jpg"
+                  alt="Sabora Spices Signature Brand & Harvest"
+                  className="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-5">
                   <div className="text-white space-y-1">
-                    <span className="text-xs font-mono text-amber-300 uppercase tracking-wider">Origin to Delhi Dispatch</span>
-                    <h4 className="font-serif text-lg font-bold">100% Whole Agricultural Sourcing</h4>
-                    <p className="text-xs text-stone-300">Pure, whole green cardamom and makhana hand-inspected for quality.</p>
+                    <span className="text-[11px] font-mono text-amber-300 uppercase tracking-wider bg-black/40 px-2 py-0.5 rounded backdrop-blur-sm">
+                      Signature Sabora Harvest & Packaging
+                    </span>
+                    <h4 className="font-serif text-base sm:text-lg font-bold">100% Whole Agricultural Sourcing</h4>
+                    <p className="text-xs text-stone-200">Pure, whole green cardamom and makhana in food-grade barrier pouches.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Complementary Dual Photo Strip */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative rounded-xl overflow-hidden border border-stone-200 h-24 sm:h-28 group">
+                  <img
+                    src="/images/hero-cardamom-sorting.jpg"
+                    alt="Hand-sorted green cardamom"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end p-2 sm:p-2.5">
+                    <span className="text-[10px] sm:text-xs font-semibold text-white">Hand-sorted by sieve</span>
+                  </div>
+                </div>
+                <div className="relative rounded-xl overflow-hidden border border-stone-200 h-24 sm:h-28 group">
+                  <img
+                    src="/images/hero-sabora-pouches.jpg"
+                    alt="Sabora sealed pouches"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end p-2 sm:p-2.5">
+                    <span className="text-[10px] sm:text-xs font-semibold text-white">Food-grade pouches</span>
                   </div>
                 </div>
               </div>
@@ -289,7 +315,7 @@ export default function HomePage({
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
               <MapPin className="w-3.5 h-3.5 text-amber-600" />
-              <span>004. Recognized Production Regions</span>
+              <span>Direct Sourcing Belts</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Direct Sourcing from India's Premier Spice & Makhana Belts
@@ -373,7 +399,7 @@ export default function HomePage({
             <div className="max-w-2xl space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
                 <Award className="w-3.5 h-3.5 text-amber-600" />
-                <span>005. Trust & Reliability</span>
+                <span>Wholesale Supply Standards</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
                 Why Business Buyers Partner with SABORA SPICES
@@ -436,8 +462,8 @@ export default function HomePage({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
-                <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
-                <span>0010. Common Queries</span>
+                <HelpCircle className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Wholesale Buyer Questions</span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">
                 Frequently Asked Questions

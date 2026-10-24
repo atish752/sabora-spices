@@ -12,13 +12,17 @@
     overflow-x: hidden;
     background-color: #F9FBFA;
     color: #0A1410;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "kern", "liga";
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     letter-spacing: -0.01em;
   }
 
-  h1, h2, h3, h4, .font-serif {
-    font-feature-settings: "kern", "liga", "clig";
+  h1, h2, h3, h4, .font-serif, .font-heading {
+    font-family: 'Fraunces', Georgia, serif;
     letter-spacing: -0.015em;
+  }
+
+  .font-hand {
+    font-family: 'Caveat', cursive;
   }
 }
 
@@ -136,12 +140,13 @@
   border-color: rgba(16, 185, 129, 0.35);
 }
 
-/* Continuous Marquee Ticker with pause on hover */
+/* Continuous Marquee Ticker with pause on hover & touch */
 .marquee-container {
   display: flex;
   overflow: hidden;
   user-select: none;
   width: 100%;
+  position: relative;
 }
 
 .marquee-content {
@@ -149,11 +154,17 @@
   display: flex;
   justify-content: space-around;
   min-width: 100%;
-  gap: 2.5rem;
+  gap: 1.25rem;
+  will-change: transform;
 }
 
 .marquee-container:hover .animate-marquee,
-.marquee-container:hover .animate-marquee-fast {
+.marquee-container:hover .animate-marquee-fast,
+.marquee-container:hover .animate-marquee-mobile,
+.marquee-container:active .animate-marquee,
+.marquee-container:active .animate-marquee-mobile,
+.marquee-container.is-paused .animate-marquee,
+.marquee-container.is-paused .animate-marquee-mobile {
   animation-play-state: paused;
 }
 

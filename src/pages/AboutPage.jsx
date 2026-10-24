@@ -8,7 +8,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="002. ABOUT SABORA SPICES"
+        badge="Our Heritage & Sourcing Roots"
         title="Connecting Quality Products with Business Opportunities"
         subtitle="India-based sourcing and supply enterprise specialising in whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts) for business buyers worldwide."
         breadcrumbCurrent="About Us"

@@ -3,7 +3,7 @@ import {
   Award, 
   ShieldCheck, 
   MapPin, 
-  Sparkles, 
+  Leaf, 
   FileCheck, 
   Microscope, 
   MessageSquare, 
@@ -33,7 +33,7 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
     },
     {
       num: "03",
-      icon: Sparkles,
+      icon: Leaf,
       title: "Specialised Cardamom Focus",
       desc: "Green Cardamom is a core pillar. We understand buyer expectations for capsule millimeter sizing (7.5mm, 8mm+), deep green color, rich aroma, and volatile essential oils."
     },
@@ -113,7 +113,7 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
             <Award className="w-3.5 h-3.5 text-amber-600" />
-            <span>005. Why SABORA SPICES</span>
+            <span>14 Pillars of Reliability</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">

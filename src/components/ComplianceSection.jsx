@@ -47,7 +47,7 @@ export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection 
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold tracking-wide uppercase">
             <Scale className="w-3.5 h-3.5 text-amber-700" />
-            <span>008. Regulatory Compliance</span>
+            <span>Statutory Compliance & Standards</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">

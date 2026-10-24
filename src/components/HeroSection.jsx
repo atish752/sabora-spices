@@ -1,59 +1,58 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
-  ChevronLeft, 
-  ChevronRight, 
-  ShieldCheck, 
+  Leaf, 
   ArrowRight, 
   MessageCircle, 
   CheckCircle2, 
-  Sparkles 
+  Volume2, 
+  VolumeX, 
+  Play, 
+  Pause,
+  ShieldCheck,
+  MapPin,
+  Package
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
-export default function HeroSection({ slides, onScrollToSection, onOpenQuoteModal, onNavigate }) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchStartXRef = useRef(null);
-  const touchEndXRef = useRef(null);
+export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNavigate }) {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const desktopVideoRef = useRef(null);
+  const mobileVideoRef = useRef(null);
 
-  const activeSlides = (slides && slides.length > 0) ? slides : [];
+  // Synchronize playback & audio across desktop/mobile video elements
+  const togglePlay = () => {
+    const nextState = !isPlaying;
+    setIsPlaying(nextState);
+    [desktopVideoRef.current, mobileVideoRef.current].forEach(v => {
+      if (!v) return;
+      if (nextState) {
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  };
 
-  // Auto-advance slider every 6.0 seconds (pauses when user hovers or interacts)
+  const toggleMute = () => {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    [desktopVideoRef.current, mobileVideoRef.current].forEach(v => {
+      if (v) v.muted = nextMuted;
+    });
+  };
+
+  // Ensure autoplay starts smoothly when component mounts
   useEffect(() => {
-    if (isPaused || activeSlides.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % activeSlides.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused, activeSlides.length]);
+    const playPromises = [
+      desktopVideoRef.current?.play(),
+      mobileVideoRef.current?.play()
+    ].filter(Boolean);
 
-  const goToNextSlide = () => {
-    setCurrentSlideIndex((prev) => (prev + 1) % activeSlides.length);
-  };
-
-  const goToPrevSlide = () => {
-    setCurrentSlideIndex((prev) => (prev - 1 + activeSlides.length) % activeSlides.length);
-  };
-
-  const handleTouchStart = (e) => {
-    touchStartXRef.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndXRef.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStartXRef.current || !touchEndXRef.current) return;
-    const distance = touchStartXRef.current - touchEndXRef.current;
-    if (distance > 50) {
-      goToNextSlide();
-    } else if (distance < -50) {
-      goToPrevSlide();
-    }
-    touchStartXRef.current = null;
-    touchEndXRef.current = null;
-  };
+    Promise.all(playPromises).catch(() => {
+      // Browsers restrict unmuted autoplay, muted is safe
+    });
+  }, []);
 
   const handleCtaClick = (link) => {
     if (!link) return;
@@ -89,192 +88,155 @@ export default function HeroSection({ slides, onScrollToSection, onOpenQuoteModa
     else if (onScrollToSection) onScrollToSection(link);
   };
 
-  if (activeSlides.length === 0) return null;
-
   return (
     <section 
       id="hero"
-      aria-label="Sabora Spices Hero Showcase"
+      aria-label="Sabora Spices Hero Video Showcase"
       className="relative w-full bg-[#041A12] overflow-hidden select-none"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       {/* 
-        ── 100% Full-Width Responsive Hero Container (Edge-to-Edge, Zero Side Whitespace) ──
-        Spans 100% viewport width across desktop, tablet, and mobile.
-        Uses object-cover with smooth background gradients so imagery always fills the frame completely.
+        ── Responsive Video Hero Container ──
+        Permanent video showcase:
+        - Mobile screens (< 768px): 9:16 Portrait video (/videos/Portrait.mp4)
+        - Desktop screens (>= 768px): 16:9 Landscape video (/videos/Landscape.mp4)
       */}
-      <div className="relative w-full h-[480px] sm:h-[540px] md:h-[600px] lg:h-[660px] xl:h-[720px] 2xl:h-[760px] overflow-hidden">
+      <div className="relative w-full min-h-[580px] sm:min-h-[620px] md:h-[660px] lg:h-[720px] xl:h-[780px] flex items-center overflow-hidden">
         
-        {/* Render Slides with Smooth Crossfade */}
-        {activeSlides.map((slide, index) => {
-          const isActive = index === currentSlideIndex;
-          const isBannerMode = slide.displayMode === 'banner' && slide.showOverlayText === false;
+        {/* 1. Desktop 16:9 Landscape Video */}
+        <video
+          ref={desktopVideoRef}
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          webkit-playsinline="true"
+          preload="auto"
+          poster="/images/hero-sabora-master.jpg"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+        >
+          <source src="/videos/Landscape.mp4" type="video/mp4" />
+        </video>
 
-          return (
-            <div
-              key={slide.id || index}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
-            >
-              {/* Visual Layer: 100% full-width edge-to-edge */}
-              <div 
-                onClick={() => isBannerMode && handleCtaClick(slide.primaryCtaLink || '/contact')}
-                className={`relative w-full h-full overflow-hidden ${
-                  isBannerMode ? 'cursor-pointer' : ''
-                }`}
-              >
-                <img
-                  src={slide.image}
-                  alt={slide.title ? slide.title.replace('\n', ' ') : 'Sabora Spices'}
-                  className={`w-full h-full object-cover object-center transition-transform duration-[7000ms] ease-out ${
-                    isActive ? 'scale-[1.03]' : 'scale-100'
-                  }`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
+        {/* 2. Mobile 9:16 Portrait Video */}
+        <video
+          ref={mobileVideoRef}
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          webkit-playsinline="true"
+          preload="auto"
+          poster="/images/hero-sabora-pouches.jpg"
+          className="block md:hidden absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+        >
+          <source src="/videos/Portrait.mp4" type="video/mp4" />
+        </video>
 
-                {/* Overlays: Seamless dark imperial gradients to assure text contrast edge-to-edge */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020F0A]/95 via-[#020F0A]/50 to-black/25 pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#020F0A]/90 via-[#020F0A]/60 md:via-[#020F0A]/35 to-transparent pointer-events-none" />
+        {/* 3. Atmospheric Dark Imperial Overlays for Flawless Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020F0A]/95 via-[#020F0A]/55 to-black/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020F0A]/95 via-[#020F0A]/70 md:via-[#020F0A]/45 to-transparent pointer-events-none" />
 
-                {/* Subtle Action Pill on Banner Mode (bottom right / desktop) */}
-                {isBannerMode && slide.primaryCtaText && (
-                  <div className="hidden sm:flex absolute bottom-6 sm:bottom-8 right-6 sm:right-12 z-20 items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCtaClick(slide.primaryCtaLink || '/contact');
-                      }}
-                      className="px-5 py-2.5 rounded-full bg-[#0F3D2E]/90 hover:bg-[#0F3D2E] text-amber-300 hover:text-white text-xs font-bold backdrop-blur-md shadow-xl border border-amber-400/40 flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
-                    >
-                      <span>{slide.primaryCtaText}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-                    </button>
-                    {slide.secondaryCtaText && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCtaClick(slide.secondaryCtaLink || 'whatsapp');
-                        }}
-                        className="px-4 py-2.5 rounded-full bg-white/95 hover:bg-white text-stone-800 text-xs font-bold shadow-lg border border-stone-200 flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-                      >
-                        <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
-                        <span>{slide.secondaryCtaText}</span>
-                      </button>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Text & Button Overlay Layer (Spans full container width with max-w-[1440px] interior) */}
-              {(!isBannerMode || slide.showOverlayText !== false) && (
-                <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
-                  <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full py-6 sm:py-10 pointer-events-auto">
-                    <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl space-y-3 sm:space-y-4">
-                      
-                      {/* Badge / Origin Pill */}
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-wide">
-                          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                          <span>{slide.tag || "SABORA SPICES"}</span>
-                        </span>
-                        {slide.badge && (
-                          <span className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-medium backdrop-blur-sm">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                            <span>{slide.badge}</span>
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Headline */}
-                      <h1 className="font-serif text-2xl sm:text-3.5xl md:text-4.5xl lg:text-5xl xl:text-5.5xl font-extrabold text-white leading-[1.15] tracking-tight drop-shadow-md whitespace-pre-line">
-                        {slide.title}
-                      </h1>
-
-                      {/* Subtitle / Descriptive Copy */}
-                      <p className="text-xs sm:text-sm md:text-base text-stone-200/90 font-normal leading-relaxed max-w-xl drop-shadow line-clamp-3 sm:line-clamp-none">
-                        {slide.subtitle}
-                      </p>
-
-                      {/* Action Buttons */}
-                      <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-2.5 sm:gap-3.5">
-                        {slide.primaryCtaText && (
-                          <button
-                            onClick={() => handleCtaClick(slide.primaryCtaLink || '/contact')}
-                            className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/30 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/40"
-                          >
-                            <span>{slide.primaryCtaText}</span>
-                            <ArrowRight className="w-4 h-4" />
-                          </button>
-                        )}
-
-                        {slide.secondaryCtaText && (
-                          <button
-                            onClick={() => handleCtaClick(slide.secondaryCtaLink || '/products')}
-                            className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-semibold border border-white/30 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-                          >
-                            {slide.secondaryCtaLink === 'whatsapp' ? (
-                              <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
-                            ) : null}
-                            <span>{slide.secondaryCtaText}</span>
-                          </button>
-                        )}
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              )}
-
-            </div>
-          );
-        })}
-
-        {/* ── Slider Navigation Controls (Chevrons & Dots) ── */}
-        {activeSlides.length > 1 && (
-          <>
-            {/* Prev Chevron */}
-            <button
-              onClick={goToPrevSlide}
-              aria-label="Previous Hero Slide"
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-black/40 hover:bg-black/75 text-white/80 hover:text-white backdrop-blur-sm border border-white/20 transition-all active:scale-90 cursor-pointer focus:outline-none"
-            >
-              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-
-            {/* Next Chevron */}
-            <button
-              onClick={goToNextSlide}
-              aria-label="Next Hero Slide"
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-black/40 hover:bg-black/75 text-white/80 hover:text-white backdrop-blur-sm border border-white/20 transition-all active:scale-90 cursor-pointer focus:outline-none"
-            >
-              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-
-            {/* Pagination Dots & Slide Counter */}
-            <div className="absolute bottom-2.5 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/15">
-              {activeSlides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlideIndex(i)}
-                  aria-label={`Jump to slide ${i + 1}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-none ${
-                    i === currentSlideIndex 
-                      ? 'w-6 sm:w-7 h-1.5 sm:h-2 bg-amber-400 shadow-sm' 
-                      : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/40 hover:bg-white/70'
-                  }`}
-                />
-              ))}
-              <span className="text-[10px] font-mono text-stone-300 pl-1">
-                0{currentSlideIndex + 1} / 0{activeSlides.length}
+        {/* 4. Hero Content Layer */}
+        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full py-12 sm:py-16">
+          <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-5">
+            
+            {/* Cute Artisanal Badge (Replaced generic AI Sparkles with natural Leaf & origin info) */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wide shadow-sm">
+                <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+                <span>DIRECT ORIGIN HARVEST • DELHI HUB</span>
+              </span>
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-medium backdrop-blur-sm">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                <span>100% Whole Agricultural Spices</span>
               </span>
             </div>
-          </>
-        )}
+
+            {/* Headline with Cute Warm Handwritten Touch */}
+            <div className="space-y-2">
+              <h1 className="font-serif text-3xl sm:text-4.5xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.12] tracking-tight drop-shadow-md">
+                Whole Spices & Makhana.<br />
+                <span className="text-gold-gradient font-normal italic">Sourced with Purpose.</span>
+              </h1>
+              <p className="font-hand text-lg sm:text-xl text-amber-200/95 tracking-wide">
+                ~ Hand-sorted whole cardamom, pure Bihar makhana pops & golden turmeric fingers ~
+              </p>
+            </div>
+
+            {/* Subtitle / Descriptive Copy */}
+            <p className="text-xs sm:text-sm md:text-base text-stone-200/90 font-normal leading-relaxed max-w-2xl drop-shadow">
+              We connect India's premier agricultural growing belts with domestic wholesalers, retail brands, food businesses, and overseas importers. Direct origin procurement with batch laboratory analysis and food-grade barrier pouch packaging.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => handleCtaClick('/contact')}
+                className="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/30 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
+              >
+                <span>Request Wholesale Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => handleCtaClick('/products')}
+                className="px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-semibold border border-white/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                <span>Browse Products & Sizing</span>
+              </button>
+
+              <button
+                onClick={() => handleCtaClick('whatsapp')}
+                className="px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl bg-[#0F3D2E]/90 hover:bg-[#0F3D2E] text-emerald-300 hover:text-white text-xs sm:text-sm font-semibold border border-emerald-500/40 backdrop-blur-md shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+                <span className="hidden xs:inline">WhatsApp Desk</span>
+                <span className="xs:hidden">WhatsApp</span>
+              </button>
+            </div>
+
+            {/* Key Trust Highlights Chips */}
+            <div className="pt-3 sm:pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-2xl text-[11px] sm:text-xs text-stone-300">
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="truncate">FSSAI & ISO Aligned</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="truncate">Kerala & Bihar Belts</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
+                <Package className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="truncate">Barrier Pouch & Bulk</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="truncate">NABL Lab Verification</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* 5. Floating Video Player Controls (Bottom-Right Corner) */}
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-30 flex items-center gap-2">
+          <button
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause Hero Video" : "Play Hero Video"}
+            className="p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
+            title={isPlaying ? "Pause video" : "Play video"}
+          >
+            {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+          </button>
+          <button
+            onClick={toggleMute}
+            aria-label={isMuted ? "Unmute Hero Video" : "Mute Hero Video"}
+            className="p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/75 text-white/90 hover:text-white backdrop-blur-md border border-white/20 transition-all active:scale-90 cursor-pointer shadow-lg"
+            title={isMuted ? "Unmute video" : "Mute video"}
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />}
+          </button>
+        </div>
 
       </div>
     </section>

@@ -53,7 +53,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-[#0F3D2E] tracking-wide uppercase">
               <span className="w-2 h-2 rounded-full bg-amber-500" />
-              <span>002. About SABORA SPICES</span>
+              <span>Our Heritage & Values</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 leading-[1.2] tracking-tight">
@@ -109,13 +109,13 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
 
           </div>
 
-          {/* Right Image Showcase: Full Portrait Master Brand Poster */}
+          {/* Right Image Showcase: Full Brand Master Packaging Visual */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="relative rounded-2xl overflow-hidden border border-amber-200/80 shadow-2xl bg-[#041A12] group flex items-center justify-center p-2 sm:p-3">
+            <div className="relative rounded-2xl overflow-hidden border border-amber-200/80 shadow-2xl bg-[#041A12] group flex items-center justify-center">
               <img 
-                src="/images/hero-heritage.jpg" 
-                alt="Sabora Spices Pure Heritage Master Poster" 
-                className="w-full h-auto max-h-[520px] object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-lg"
+                src="/images/hero-sabora-master.jpg" 
+                alt="Sabora Spices Pure Heritage Master Packaging" 
+                className="w-full h-auto max-h-[500px] object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-lg"
                 loading="lazy"
               />
             </div>

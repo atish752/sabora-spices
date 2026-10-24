@@ -78,7 +78,7 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold tracking-wide uppercase">
             <Compass className="w-3.5 h-3.5 text-amber-700" />
-            <span>004. Sourcing & Origin Awareness</span>
+            <span>Sourcing & Regional Origins</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">

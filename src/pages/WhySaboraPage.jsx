@@ -52,7 +52,7 @@ export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitIn
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="005. WHY SABORA SPICES"
+        badge="Wholesale Trust & Reliability"
         title="14 Core Pillars of Buyer Trust & Reliability"
         subtitle="A buyer-focused supply model eliminating the risks of unorganized open-market trade. Pure agricultural sourcing, verified specifications, food-grade packaging, and Delhi hub execution."
         breadcrumbCurrent="Why Sabora"

@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   ShieldCheck, 
   FileCheck, 
-  Sparkles, 
   Layers, 
   CheckCircle2, 
   Microscope, 
@@ -43,7 +42,7 @@ export default function QualitySafetySection({ onScrollToSection, onOpenQuoteMod
       desc: "Appropriate food-grade pouches, poly liners, and moisture-barrier packaging certified for direct food contact application."
     },
     {
-      icon: Sparkles,
+      icon: ShieldCheck,
       title: "Hygienic Handling & Protection",
       desc: "Clean product-contact surfaces, personal hygiene protocols, separation of products, and contamination-free packing zones."
     },
@@ -82,7 +81,7 @@ export default function QualitySafetySection({ onScrollToSection, onOpenQuoteMod
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>006. Quality & Food Safety</span>
+            <span>Quality Assurance & Safety</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">

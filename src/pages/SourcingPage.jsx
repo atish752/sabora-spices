@@ -30,7 +30,7 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
     <div className="w-full">
       {/* Page Header Banner */}
       <PageHeaderBanner
-        badge="004. SOURCING & ORIGIN"
+        badge="Origin Belts & Farm Procurement"
         title="Direct Procurement from Recognized Production Regions"
         subtitle="Kerala Western Ghats for green cardamom, Bihar wetland clusters for Makhana, and Salem belts for whole turmeric. Identifying suitable product sources based on specifications, grade, and commercial viability."
         breadcrumbCurrent="Sourcing & Origin"

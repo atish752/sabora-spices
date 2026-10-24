@@ -7,7 +7,6 @@ import {
   MessageCircle, 
   FileText, 
   Package, 
-  Sparkles,
   ArrowRight
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';

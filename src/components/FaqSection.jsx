@@ -4,8 +4,7 @@ import {
   ChevronDown, 
   Search, 
   MessageCircle, 
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from 'lucide-react';
 import { FAQS, FAQ_CATEGORIES } from '../data/faqData';
 import { SITE_CONFIG } from '../config/siteConfig';
@@ -37,7 +36,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#0F3D2E] text-xs font-bold tracking-wide uppercase">
             <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
-            <span>0010. Frequently Asked Questions</span>
+            <span>Buyer Help & Guidance</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-4.5xl font-extrabold text-stone-900 tracking-tight">
