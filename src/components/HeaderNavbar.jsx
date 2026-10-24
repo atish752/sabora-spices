@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
-export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOpenAdmin }) {
+export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScrollToSection, onOpenQuoteModal, onOpenAdmin }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
@@ -25,17 +25,28 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId, filter = null) => {
+  const handleNavClick = (route, filter = null) => {
     setMobileMenuOpen(false);
     setProductsDropdownOpen(false);
-    onScrollToSection(sectionId, filter);
+    if (onNavigate) {
+      if (filter) onNavigate('products', { category: filter });
+      else if (route === 'hero') onNavigate('home');
+      else onNavigate(route);
+    } else if (onScrollToSection) {
+      onScrollToSection(route, filter);
+    }
+  };
+
+  const isActive = (route) => {
+    if (route === 'home' || route === 'hero') return currentRoute === 'home' || currentRoute === '';
+    return currentRoute === route;
   };
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Announcement & Contact Bar (Inspired by Shahi Food Services) ── */}
-      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-2 flex flex-wrap items-center justify-between gap-3">
           
           {/* Left: Location & Phones */}
           <div className="flex flex-wrap items-center gap-4 text-xs font-medium">
@@ -63,7 +74,7 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
 
           {/* Right: Regulatory Badges & WhatsApp Quick Desk */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-700/40 text-[11px] text-emerald-300 font-medium">
+            <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-700/40 text-[11px] text-emerald-300 font-medium">
               <ShieldCheck className="w-3 h-3 text-amber-400" />
               FSSAI & ISO Standards Compliant
             </span>
@@ -91,18 +102,18 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
         </div>
       </div>
 
-      {/* ── Main Sticky Header ── */}
+      {/* ── Main Sticky Header (Spans full width with max-w-[1440px] interior) ── */}
       <div className={`w-full transition-all duration-300 ${
         scrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-stone-200' 
           : 'bg-white py-3 border-b border-stone-100'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
           
           {/* Logo & Brand Identity */}
           <a 
-            href="#hero" 
-            onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
+            href="/" 
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
             className="flex items-center gap-3 group focus:outline-none"
           >
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-50 to-stone-100 p-1 border border-amber-200/80 shadow-sm group-hover:scale-105 transition-transform">
@@ -122,18 +133,26 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
             </div>
           </a>
 
-          {/* Desktop Navigation Links (All 11 Menu Items) */}
-          <nav className="hidden xl:flex items-center gap-1.5 lg:gap-2 text-[13px] font-medium text-stone-700">
+          {/* Desktop Navigation Links (All 11 Dedicated Pages) */}
+          <nav className="hidden xl:flex items-center gap-1 lg:gap-1.5 text-[13px] font-medium text-stone-700">
             <button 
-              onClick={() => handleNavClick('hero')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              onClick={() => handleNavClick('home')} 
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('home')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Home
             </button>
 
             <button 
               onClick={() => handleNavClick('about')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('about')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               About Us
             </button>
@@ -146,7 +165,11 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
             >
               <button 
                 onClick={() => handleNavClick('products')}
-                className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors flex items-center gap-1 cursor-pointer"
+                className={`px-2.5 py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
+                  isActive('products')
+                    ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                    : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+                }`}
               >
                 <span>Products</span>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-400 group-hover:text-stone-700" />
@@ -154,8 +177,14 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
 
               {productsDropdownOpen && (
                 <div className="absolute top-full left-0 w-64 bg-white rounded-lg shadow-xl border border-stone-200 py-2 z-50 animate-fadeIn">
-                  <div className="px-3 py-1.5 text-[11px] font-semibold text-amber-700 uppercase tracking-wider border-b border-stone-100 mb-1">
-                    Core Product Portfolio
+                  <div className="px-3 py-1.5 text-[11px] font-semibold text-amber-700 uppercase tracking-wider border-b border-stone-100 mb-1 flex items-center justify-between">
+                    <span>Products Submenu</span>
+                    <button 
+                      onClick={() => handleNavClick('products')}
+                      className="text-[10px] text-emerald-700 hover:underline normal-case font-medium"
+                    >
+                      View All
+                    </button>
                   </div>
                   <button
                     onClick={() => handleNavClick('products', 'cardamom')}
@@ -191,56 +220,88 @@ export default function HeaderNavbar({ onScrollToSection, onOpenQuoteModal, onOp
 
             <button 
               onClick={() => handleNavClick('sourcing')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('sourcing')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Sourcing & Origin
             </button>
 
             <button 
               onClick={() => handleNavClick('why-sabora')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('why-sabora')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Why Sabora
             </button>
 
             <button 
               onClick={() => handleNavClick('quality')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('quality')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Quality & Safety
             </button>
 
             <button 
               onClick={() => handleNavClick('lab-testing')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('lab-testing')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Lab Testing
             </button>
 
             <button 
               onClick={() => handleNavClick('compliance')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('compliance')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Compliance
             </button>
 
             <button 
               onClick={() => handleNavClick('export')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('export')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Export Supply
             </button>
 
             <button 
               onClick={() => handleNavClick('faq')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('faq')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               FAQ
             </button>
 
             <button 
               onClick={() => handleNavClick('contact')} 
-              className="px-2.5 py-1.5 rounded-md hover:text-[#0F3D2E] hover:bg-emerald-50/70 transition-colors cursor-pointer"
+              className={`px-2.5 py-1.5 rounded-md transition-all cursor-pointer ${
+                isActive('contact')
+                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
+                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
+              }`}
             >
               Contact Us
             </button>

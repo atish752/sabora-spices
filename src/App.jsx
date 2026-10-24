@@ -1,31 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import HeaderNavbar from './components/HeaderNavbar';
-import HeroSection from './components/HeroSection';
-import TrustHighlightsBar from './components/TrustHighlightsBar';
-import AboutSection from './components/AboutSection';
-import ProductsSection from './components/ProductsSection';
-import SourcingOriginSection from './components/SourcingOriginSection';
-import WhySaboraSection from './components/WhySaboraSection';
-import QualitySafetySection from './components/QualitySafetySection';
-import LabTestingSection from './components/LabTestingSection';
-import ComplianceSection from './components/ComplianceSection';
-import InternationalExportSection from './components/InternationalExportSection';
-import FaqSection from './components/FaqSection';
-import ContactRfqSection from './components/ContactRfqSection';
 import FooterSection from './components/FooterSection';
-import ProductDetailModal from './components/ProductDetailModal';
 import MobileFloatingBar from './components/MobileFloatingBar';
+import ProductDetailModal from './components/ProductDetailModal';
 import AdminPanel from './components/AdminPanel';
+
+// Dedicated Separate Pages
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ProductsPage from './pages/ProductsPage';
+import SourcingPage from './pages/SourcingPage';
+import WhySaboraPage from './pages/WhySaboraPage';
+import QualityPage from './pages/QualityPage';
+import LabTestingPage from './pages/LabTestingPage';
+import CompliancePage from './pages/CompliancePage';
+import ExportPage from './pages/ExportPage';
+import FaqPage from './pages/FaqPage';
+import ContactPage from './pages/ContactPage';
 
 import { MessageCircle } from 'lucide-react';
 import { SITE_CONFIG } from './config/siteConfig';
 import { useProducts } from './hooks/useProducts';
 
-function isAdminRoute() {
-  return (
-    typeof window !== 'undefined' &&
-    new URLSearchParams(window.location.search).get('page') === 'admin'
-  );
+/**
+ * Route resolution helper supporting:
+ * 1. Pathname: /about, /products, /sourcing, /why-sabora, /quality, /lab-testing, /compliance, /export, /faq, /contact, /admin
+ * 2. Search query params fallback: ?page=about, ?page=admin
+ * 3. Hash fallback: #/about, #about
+ */
+function parseCurrentRoute() {
+  if (typeof window === 'undefined') {
+    return { route: 'home', params: {} };
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const queryPage = urlParams.get('page');
+  const queryCategory = urlParams.get('category');
+  const path = window.location.pathname.replace(/^\/|\/$/g, '').toLowerCase();
+  const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+
+  const validRoutes = [
+    'about',
+    'products',
+    'sourcing',
+    'why-sabora',
+    'quality',
+    'lab-testing',
+    'compliance',
+    'export',
+    'faq',
+    'contact',
+    'admin'
+  ];
+
+  let resolvedRoute = 'home';
+  let params = {};
+
+  if (queryCategory) {
+    params.category = queryCategory;
+  }
+
+  // Check query parameter ?page=...
+  if (queryPage && validRoutes.includes(queryPage)) {
+    resolvedRoute = queryPage;
+  }
+  // Check pathname /...
+  else if (path && validRoutes.includes(path)) {
+    resolvedRoute = path;
+  }
+  // Check hash #/...
+  else if (hash && validRoutes.includes(hash)) {
+    resolvedRoute = hash;
+  }
+
+  return { route: resolvedRoute, params };
 }
 
 export default function App() {
@@ -42,11 +90,26 @@ export default function App() {
     resetAllToDefaults
   } = useProducts();
 
-  const [showAdmin, setShowAdmin] = useState(isAdminRoute);
+  const initialRouteInfo = parseCurrentRoute();
+  const [currentRoute, setCurrentRoute] = useState(initialRouteInfo.route);
+  const [routeParams, setRouteParams] = useState(initialRouteInfo.params);
+
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [activeProductFilter, setActiveProductFilter] = useState('all');
   const [preselectedQuoteProduct, setPreselectedQuoteProduct] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Synchronize route with browser history (back/forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      const parsed = parseCurrentRoute();
+      setCurrentRoute(parsed.route);
+      setRouteParams(parsed.params);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Hairline scroll progress
   useEffect(() => {
@@ -60,25 +123,44 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScrollToSection = (sectionId, filter = null) => {
-    if (filter) {
-      setActiveProductFilter(filter);
-    }
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  /**
+   * Universal navigation function to transition between separate dedicated pages
+   */
+  const navigateTo = useCallback((targetRoute, params = {}) => {
+    let cleanRoute = (targetRoute || 'home').toLowerCase();
+    if (cleanRoute === 'hero') cleanRoute = 'home';
 
-  const handleOpenQuoteModal = (product = null) => {
+    setCurrentRoute(cleanRoute);
+    setRouteParams(params);
+
+    // Build standard URL
+    let newPath = '/';
+    if (cleanRoute !== 'home') {
+      newPath = `/${cleanRoute}`;
+    }
+
+    if (params.category) {
+      newPath += `?category=${encodeURIComponent(params.category)}`;
+    }
+
+    try {
+      window.history.pushState({ route: cleanRoute, params }, '', newPath);
+    } catch (e) {
+      console.warn("History pushState exception:", e);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleOpenQuoteModal = useCallback((product = null) => {
     if (product) {
       setPreselectedQuoteProduct(product);
     }
-    handleScrollToSection('contact');
-  };
+    navigateTo('contact');
+  }, [navigateTo]);
 
-  // ── Admin Mode View ───────────────────────────────────────────────────────
-  if (showAdmin) {
+  // ── Admin Panel View ───────────────────────────────────────────────────────
+  if (currentRoute === 'admin') {
     return (
       <AdminPanel
         products={products}
@@ -90,19 +172,14 @@ export default function App() {
         onUpdateInquiryStatus={updateInquiryStatus}
         onDeleteInquiry={deleteInquiry}
         onResetAll={resetAllToDefaults}
-        onClose={() => {
-          setShowAdmin(false);
-          if (window.location.search.includes('page=admin')) {
-            window.history.replaceState(null, '', window.location.pathname);
-          }
-        }}
+        onClose={() => navigateTo('home')}
       />
     );
   }
 
-  // ── Public Sabora Spices Website ─────────────────────────────────────────
+  // ── Public Sabora Spices Multi-Page Website ────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#F8FAF9] text-stone-900 flex flex-col font-sans antialiased selection:bg-[#041A12] selection:text-amber-300 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAF9] text-stone-900 flex flex-col font-sans antialiased selection:bg-[#041A12] selection:text-amber-300 relative overflow-x-hidden w-full">
       
       {/* Hairline Scroll Progress Bar */}
       <div
@@ -111,102 +188,135 @@ export default function App() {
         aria-hidden="true"
       />
 
-      {/* Sticky Header with Top Announcement & 11-Item Menu */}
+      {/* Sticky Header with Top Announcement & 11-Item Navigation */}
       <HeaderNavbar
-        onScrollToSection={handleScrollToSection}
+        currentRoute={currentRoute}
+        onNavigate={navigateTo}
         onOpenQuoteModal={handleOpenQuoteModal}
-        onOpenAdmin={() => setShowAdmin(true)}
+        onOpenAdmin={() => navigateTo('admin')}
       />
 
-      {/* Main Content Blueprint */}
+      {/* Main Multi-Page Routed Content Blueprint */}
       <main className="flex-1 w-full relative z-10">
         
-        {/* 1. Hero Section (Responsive Aspect Ratio - Fits Desktop, Tablet, Mobile without cropping) */}
-        <HeroSection
-          slides={heroSlides}
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 1. Home Page */}
+        {currentRoute === 'home' && (
+          <HomePage
+            heroSlides={heroSlides}
+            products={products}
+            onNavigate={navigateTo}
+            onSelectProduct={(p) => setSelectedProduct(p)}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 2. Trust Highlights Bar (4 Feature Cards matching Shahi Food Services) */}
-        <TrustHighlightsBar
-          onScrollToSection={handleScrollToSection}
-        />
+        {/* 2. Dedicated About Us Page (Section 002) */}
+        {currentRoute === 'about' && (
+          <AboutPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 3. About Us (Section 002 of SABORA SPICES.txt) */}
-        <AboutSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 3. Dedicated Products Page & Submenu (Section 003) */}
+        {currentRoute === 'products' && (
+          <ProductsPage
+            products={products}
+            initialFilter={routeParams.category || 'all'}
+            onSelectProduct={(p) => setSelectedProduct(p)}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onNavigate={navigateTo}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 4. Products Portfolio & Submenu (Section 003 of SABORA SPICES.txt) */}
-        <ProductsSection
-          products={products}
-          activeFilter={activeProductFilter}
-          onSelectProduct={(p) => setSelectedProduct(p)}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 4. Dedicated Sourcing & Origin Page (Section 004) */}
+        {currentRoute === 'sourcing' && (
+          <SourcingPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 5. Sourcing & Origin (Section 004 of SABORA SPICES.txt) */}
-        <SourcingOriginSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 5. Dedicated Why Sabora Page (Section 005: 14 Pillars) */}
+        {currentRoute === 'why-sabora' && (
+          <WhySaboraPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 6. Why Sabora (Section 005 of SABORA SPICES.txt: All 14 Pillars) */}
-        <WhySaboraSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 6. Dedicated Quality & Food Safety Page (Section 006) */}
+        {currentRoute === 'quality' && (
+          <QualityPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 7. Quality & Food Safety (Section 006 of SABORA SPICES.txt) */}
-        <QualitySafetySection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 7. Dedicated Laboratory Testing Page (Section 007) */}
+        {currentRoute === 'lab-testing' && (
+          <LabTestingPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 8. Laboratory Testing & Verification (Section 007 of SABORA SPICES.txt) */}
-        <LabTestingSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 8. Dedicated Regulatory Compliance Page (Section 008) */}
+        {currentRoute === 'compliance' && (
+          <CompliancePage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 9. Regulatory Compliance (Section 008 of SABORA SPICES.txt) */}
-        <ComplianceSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 9. Dedicated International & Export Supply Page (Section 009) */}
+        {currentRoute === 'export' && (
+          <ExportPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 10. International & Export Supply (Section 009 of SABORA SPICES.txt) */}
-        <InternationalExportSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
+        {/* 10. Dedicated Frequently Asked Questions Page (Section 0010: 25 FAQs) */}
+        {currentRoute === 'faq' && (
+          <FaqPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+          />
+        )}
 
-        {/* 11. Frequently Asked Questions (Section 0010 of SABORA SPICES.txt: All 25 FAQs) */}
-        <FaqSection
-          onScrollToSection={handleScrollToSection}
-          onOpenQuoteModal={handleOpenQuoteModal}
-        />
-
-        {/* 12. Contact Us & Request a Quote Desk */}
-        <ContactRfqSection
-          onSubmitInquiry={submitInquiry}
-          preselectedProduct={preselectedQuoteProduct}
-        />
+        {/* 11. Dedicated Contact Us & RFQ Desk Page (Section 0011) */}
+        {currentRoute === 'contact' && (
+          <ContactPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSubmitInquiry={submitInquiry}
+            preselectedProduct={preselectedQuoteProduct}
+          />
+        )}
 
       </main>
 
       {/* Footer Section with Complete Menu, Policies, and Admin Link */}
       <FooterSection
-        onScrollToSection={handleScrollToSection}
-        onOpenAdmin={() => setShowAdmin(true)}
+        onNavigate={navigateTo}
+        onOpenAdmin={() => navigateTo('admin')}
       />
 
       {/* Sticky Mobile Bottom Floating Action Bar */}
       <MobileFloatingBar
         onOpenQuoteModal={handleOpenQuoteModal}
-        onScrollToSection={handleScrollToSection}
+        onScrollToSection={(sectionId) => navigateTo(sectionId)}
       />
 
       {/* Desktop Floating WhatsApp Button */}
@@ -228,7 +338,7 @@ export default function App() {
         </button>
       </aside>
 
-      {/* Product Detail Dossier Modal */}
+      {/* Product Detail Dossier Modal (Callable from any page) */}
       {selectedProduct && (
         <ProductDetailModal
           product={selectedProduct}

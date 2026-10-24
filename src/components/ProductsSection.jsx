@@ -40,8 +40,8 @@ export default function ProductsSection({
   };
 
   return (
-    <section id="products" className="py-16 sm:py-24 bg-stone-50 border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="products" className="py-16 sm:py-24 bg-stone-50 border-b border-stone-200 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">

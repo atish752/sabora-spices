@@ -26,12 +26,12 @@ export const DEFAULT_HERO_SLIDES = [
     image: "/images/hero-sabora-master.jpg",
     badge: "Direct Sourcing & Export Ready",
     primaryCtaText: "Request Wholesale Quote",
-    primaryCtaLink: "#contact",
+    primaryCtaLink: "/contact",
     secondaryCtaText: "Explore Products",
-    secondaryCtaLink: "#products",
-    displayMode: "banner", // 'banner' (auto-fit without cropping) or 'cinematic'
-    showOverlayText: false,
-    fitMode: "contain"
+    secondaryCtaLink: "/products",
+    displayMode: "cinematic",
+    showOverlayText: true,
+    fitMode: "cover"
   },
   {
     id: "slide-2",
@@ -41,12 +41,12 @@ export const DEFAULT_HERO_SLIDES = [
     image: "/images/hero-sabora-pouches.jpg",
     badge: "100% Natural Whole Products",
     primaryCtaText: "Explore Products",
-    primaryCtaLink: "#products",
+    primaryCtaLink: "/products",
     secondaryCtaText: "WhatsApp Sourcing Desk",
     secondaryCtaLink: "whatsapp",
-    displayMode: "banner",
-    showOverlayText: false,
-    fitMode: "contain"
+    displayMode: "cinematic",
+    showOverlayText: true,
+    fitMode: "cover"
   },
   {
     id: "slide-3",
@@ -56,7 +56,7 @@ export const DEFAULT_HERO_SLIDES = [
     image: "/images/hero-cardamom-sorting.jpg",
     badge: "7.5mm & 8mm+ Extra Bold",
     primaryCtaText: "View Cardamom Specs",
-    primaryCtaLink: "#products",
+    primaryCtaLink: "/products",
     secondaryCtaText: "WhatsApp Sourcing Desk",
     secondaryCtaLink: "whatsapp",
     displayMode: "cinematic",
@@ -71,9 +71,9 @@ export const DEFAULT_HERO_SLIDES = [
     image: "/images/hero-cardamom-harvest.jpg",
     badge: "Batch Release Protocol",
     primaryCtaText: "Quality & Lab Testing",
-    primaryCtaLink: "#lab-testing",
+    primaryCtaLink: "/lab-testing",
     secondaryCtaText: "Contact Us",
-    secondaryCtaLink: "#contact",
+    secondaryCtaLink: "/contact",
     displayMode: "cinematic",
     showOverlayText: true,
     fitMode: "cover"
@@ -95,18 +95,23 @@ export function useProducts() {
     return DEFAULT_PRODUCTS;
   });
 
-  // Load hero slides from localStorage or default
+  // Load hero slides from localStorage or default (ensuring edge-to-edge full width cover)
   const [heroSlides, setHeroSlides] = useState(() => {
     try {
       const saved = localStorage.getItem(LS_HERO_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map(slide => ({
+            ...slide,
+            fitMode: "cover"
+          }));
+        }
       }
     } catch (e) {
       console.warn("Failed reading hero slides from localStorage", e);
     }
-    return DEFAULT_HERO_SLIDES;
+    return DEFAULT_HERO_SLIDES.map(slide => ({ ...slide, fitMode: "cover" }));
   });
 
   // Load inquiries

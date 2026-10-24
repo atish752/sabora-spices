@@ -30,8 +30,8 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
   };
 
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-white border-b border-stone-200">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="faq" className="py-16 sm:py-24 bg-white border-b border-stone-200 w-full">
+      <div className="max-w-5xl 2xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
         
         {/* Header */}
         <div className="text-center space-y-3">

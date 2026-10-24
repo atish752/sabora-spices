@@ -11,12 +11,22 @@ import {
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
-export default function FooterSection({ onScrollToSection, onOpenAdmin }) {
+export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdmin }) {
   const currentYear = new Date().getFullYear();
 
+  const handleLinkClick = (route, filter = null) => {
+    if (onNavigate) {
+      if (filter) onNavigate('products', { category: filter });
+      else if (route === 'hero') onNavigate('home');
+      else onNavigate(route);
+    } else if (onScrollToSection) {
+      onScrollToSection(route, filter);
+    }
+  };
+
   return (
-    <footer className="bg-[#03150E] text-stone-300 border-t border-emerald-950/80 pt-16 pb-24 sm:pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <footer className="bg-[#03150E] text-stone-300 border-t border-emerald-950/80 pt-16 pb-24 sm:pb-12 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
         
         {/* Top 4-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
@@ -57,61 +67,61 @@ export default function FooterSection({ onScrollToSection, onOpenAdmin }) {
           {/* Col 2: Navigation Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-serif text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
-              Navigation
+              Pages
             </h4>
             <ul className="space-y-1.5 text-xs text-stone-300">
               <li>
-                <button onClick={() => onScrollToSection('hero')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('home')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Home
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('about')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('about')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   About Us
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('products')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Products
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('sourcing')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('sourcing')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Sourcing & Origin
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('why-sabora')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('why-sabora')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Why Sabora
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('quality')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('quality')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Quality & Safety
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('lab-testing')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('lab-testing')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Lab Testing
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('compliance')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('compliance')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Compliance
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('export')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('export')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Export Supply
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('faq')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('faq')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   FAQ
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('contact')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('contact')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Contact Us
                 </button>
               </li>
@@ -125,27 +135,27 @@ export default function FooterSection({ onScrollToSection, onOpenAdmin }) {
             </h4>
             <ul className="space-y-1.5 text-xs text-stone-300">
               <li>
-                <button onClick={() => onScrollToSection('products', 'cardamom')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products', 'cardamom')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Whole Green Cardamom
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('products', 'makhana')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products', 'makhana')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Makhana (Fox Nuts)
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('products', 'turmeric')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products', 'turmeric')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Whole Turmeric Fingers
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('products', 'other')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products', 'other')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Whole Cloves (Laung)
                 </button>
               </li>
               <li>
-                <button onClick={() => onScrollToSection('products', 'other')} className="hover:text-amber-400 transition-colors">
+                <button onClick={() => handleLinkClick('products', 'other')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Whole Black Pepper
                 </button>
               </li>
