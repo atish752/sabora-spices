@@ -16,6 +16,8 @@ export const PRODUCTS = [
     image: "/images/cardamom-pouch.jpg",
     gallery: [
       "/images/cardamom-pouch.jpg",
+      "/images/cardamom-pouch-square.jpg",
+      "/images/hero-heritage.jpg",
       "/images/cardamom-pods.jpg",
       "/images/cardamom-bowl.jpg",
       "/images/cardamom-macro.jpg",
@@ -55,15 +57,7 @@ export const PRODUCTS = [
       "Food Processing & Commercial Kitchens",
       "Sweet, Confectionery & Beverage Manufacturers",
       "Retail Supermarket Chains & Private-Label Brands"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello SABORA SPICES team,\n\nI am requesting commercial supply terms and a quotation for *Whole Green Cardamom (Elaichi)*.\n\n`;
-      if (customDetails) {
-        msg += `*Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please share:\n1. Pricing for 7.5mm & 8mm+ grades\n2. Available packaging formats & MOQ\n3. Lab test report & delivery timeline\n\nThank you!`;
-      return msg;
-    }
+    ]
   },
   {
     id: "makhana-fox-nuts",
@@ -113,15 +107,7 @@ export const PRODUCTS = [
       "Modern Trade, Supermarkets & FMCG Distributors",
       "Catering Companies, Hotels & Food Services",
       "Private-Label Organic & Health Food Brands"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello SABORA SPICES team,\n\nI am inquiring about commercial supply for *Makhana (Fox Nuts)*.\n\n`;
-      if (customDetails) {
-        msg += `*Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please share:\n1. Current rates for 5-Suta & 6-Suta Jumbo grades\n2. Private-label & bulk packaging options\n3. Minimum order quantity and dispatch schedule\n\nThank you!`;
-      return msg;
-    }
+    ]
   },
   {
     id: "turmeric-whole",
@@ -170,15 +156,7 @@ export const PRODUCTS = [
       "Ayurvedic & Herbal Extraction Units",
       "Wholesale Mandi Traders & Distributors",
       "International Food Importers"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello SABORA SPICES team,\n\nI am requesting wholesale rates for *Whole Turmeric Fingers (Haldi)*.\n\n`;
-      if (customDetails) {
-        msg += `*Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please provide bulk pricing per metric ton / kg, curcumin test details, and dispatch lead time.\n\nThank you!`;
-      return msg;
-    }
+    ]
   },
   {
     id: "clove-whole",
@@ -225,15 +203,7 @@ export const PRODUCTS = [
       "Bakery, Beverage & Culinary Blenders",
       "Pharmaceutical, Essential Oil & Oral Care Products",
       "Domestic & International Buyers"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello SABORA SPICES team,\n\nI am inquiring about *Whole Cloves (Laung)* in 1kg Sabora pouches / bulk.\n\n`;
-      if (customDetails) {
-        msg += `*Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please share current rates, head intactness specs, and delivery schedule.\n\nThank you!`;
-      return msg;
-    }
+    ]
   },
   {
     id: "black-pepper-bold",
@@ -276,15 +246,7 @@ export const PRODUCTS = [
       "Food Manufacturers & Sauce Blenders",
       "Seasoning & Culinary Mix Brands",
       "Commodity Wholesalers"
-    ],
-    whatsappTemplate: (customDetails = "") => {
-      let msg = `Hello SABORA SPICES team,\n\nI am requesting details and availability for *Whole Black Pepper (Kali Mirch)*.\n\n`;
-      if (customDetails) {
-        msg += `*Requirement Details:*\n${customDetails}\n\n`;
-      }
-      msg += `Please confirm current availability, grade options, and commercial terms.\n\nThank you!`;
-      return msg;
-    }
+    ]
   }
 ];
 

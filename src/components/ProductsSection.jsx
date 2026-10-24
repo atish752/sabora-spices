@@ -35,9 +35,7 @@ export default function ProductsSection({
   });
 
   const handleProductWhatsApp = (product) => {
-    const text = product.whatsappTemplate 
-      ? product.whatsappTemplate() 
-      : `Hello SABORA SPICES, I am interested in sourcing ${product.name}. Please share wholesale quotation and availability.`;
+    const text = SITE_CONFIG.getProductWhatsAppMessage(product);
     SITE_CONFIG.openWhatsApp(text);
   };
 

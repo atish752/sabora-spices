@@ -22,9 +22,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
     : [product.image];
 
   const handleWhatsApp = () => {
-    const text = product.whatsappTemplate 
-      ? product.whatsappTemplate() 
-      : `Hello SABORA SPICES, I am interested in sourcing ${product.name}. Please share wholesale pricing and specifications.`;
+    const text = SITE_CONFIG.getProductWhatsAppMessage(product);
     SITE_CONFIG.openWhatsApp(text);
   };
 

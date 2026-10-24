@@ -83,6 +83,22 @@ export const SITE_CONFIG = {
   openWhatsApp: (message) => {
     const url = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
+  },
+
+  getProductWhatsAppMessage: (product, customDetails = "") => {
+    if (!product) return "Hello SABORA SPICES, I am interested in sourcing whole spices and makhana.";
+    let msg = `Hello SABORA SPICES team,\n\nI am requesting commercial supply terms and a quotation for *${product.name}*.\n\n`;
+    if (customDetails) {
+      msg += `*Requirement Details:*\n${customDetails}\n\n`;
+    }
+    if (product.gradesAvailable && product.gradesAvailable.length > 0) {
+      msg += `*Preferred Grades:* ${product.gradesAvailable.slice(0, 2).join(', ')}\n`;
+    }
+    if (product.moq) {
+      msg += `*Indicative MOQ:* ${product.moq}\n`;
+    }
+    msg += `\nPlease share:\n1. Current wholesale pricing & batch availability\n2. Available packaging formats\n3. Lab test COA & delivery schedule\n\nThank you!`;
+    return msg;
   }
 };
 

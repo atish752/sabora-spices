@@ -109,31 +109,19 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
 
           </div>
 
-          {/* Right Image Showcase */}
+          {/* Right Image Showcase: Full Portrait Master Brand Poster */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="relative rounded-2xl overflow-hidden border border-stone-200 shadow-xl bg-stone-900 group">
+            <div className="relative rounded-2xl overflow-hidden border border-amber-200/80 shadow-2xl bg-[#041A12] group flex items-center justify-center p-2 sm:p-3">
               <img 
-                src="/images/hero-cardamom-sorting.jpg" 
-                alt="Cardamom Sorting at Sabora Spices" 
-                className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                src="/images/hero-heritage.jpg" 
+                alt="Sabora Spices Pure Heritage Master Poster" 
+                className="w-full h-auto max-h-[520px] object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-lg"
+                loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white space-y-1">
-                <div className="text-xs font-semibold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span>Western Ghats, Kerala</span>
-                </div>
-                <div className="font-serif text-base sm:text-lg font-bold">
-                  Traditional Hand Sorting & Size Grading
-                </div>
-                <div className="text-xs text-stone-300">
-                  Careful inspection ensures consistent pod color, aroma, and seed density.
-                </div>
-              </div>
             </div>
 
             {/* Sabora Insignia Card */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-900 to-[#0F3D2E] text-white flex items-center gap-4 shadow-md border border-emerald-700/50">
+            <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950 to-[#0F3D2E] text-white flex items-center gap-4 shadow-md border border-amber-400/30">
               <div className="w-14 h-14 rounded-full bg-white/10 p-1 shrink-0 flex items-center justify-center border border-amber-400/40">
                 <img src="/images/logo.png" alt="Sabora Logo" className="w-full h-full object-contain" />
               </div>

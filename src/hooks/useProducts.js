@@ -13,9 +13,9 @@ import {
   query
 } from 'firebase/firestore';
 
-const LS_PRODUCTS_KEY = 'sabora_products_v2';
-const LS_HERO_KEY = 'sabora_hero_slides_v2';
-const LS_INQUIRIES_KEY = 'sabora_inquiries_v2';
+const LS_PRODUCTS_KEY = 'sabora_products_v3';
+const LS_HERO_KEY = 'sabora_hero_slides_v3';
+const LS_INQUIRIES_KEY = 'sabora_inquiries_v3';
 
 export const DEFAULT_HERO_SLIDES = [
   {
@@ -23,16 +23,33 @@ export const DEFAULT_HERO_SLIDES = [
     tag: "INDIA-BASED SOURCING & SUPPLY",
     title: "Whole Spices & Makhana.\nSourced with Purpose.",
     subtitle: "Specialising in whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts) for domestic and international business buyers.",
-    image: "/images/hero-heritage.jpg",
+    image: "/images/hero-sabora-master.jpg",
     badge: "Direct Sourcing & Export Ready",
     primaryCtaText: "Request Wholesale Quote",
     primaryCtaLink: "#contact",
     secondaryCtaText: "Explore Products",
     secondaryCtaLink: "#products",
-    fitMode: "cover" // 'cover' or 'contain'
+    displayMode: "banner", // 'banner' (auto-fit without cropping) or 'cinematic'
+    showOverlayText: false,
+    fitMode: "contain"
   },
   {
     id: "slide-2",
+    tag: "CORE CATEGORIES",
+    title: "Whole Green Cardamom & Makhana\nPure Agricultural Sourcing",
+    subtitle: "Kerala cardamom and Bihar wetland Makhana pops in food-grade barrier pouches and bulk export packaging.",
+    image: "/images/hero-sabora-pouches.jpg",
+    badge: "100% Natural Whole Products",
+    primaryCtaText: "Explore Products",
+    primaryCtaLink: "#products",
+    secondaryCtaText: "WhatsApp Sourcing Desk",
+    secondaryCtaLink: "whatsapp",
+    displayMode: "banner",
+    showOverlayText: false,
+    fitMode: "contain"
+  },
+  {
+    id: "slide-3",
     tag: "KERALA & WESTERN GHATS ORIGIN",
     title: "Whole Green Cardamom\nSelected for Quality.",
     subtitle: "Sourced from Kerala's recognized cardamom-growing regions (Idukki district). Hand-sorted for size, grade, appearance, and volatile oil aroma.",
@@ -42,19 +59,8 @@ export const DEFAULT_HERO_SLIDES = [
     primaryCtaLink: "#products",
     secondaryCtaText: "WhatsApp Sourcing Desk",
     secondaryCtaLink: "whatsapp",
-    fitMode: "cover"
-  },
-  {
-    id: "slide-3",
-    tag: "BIHAR WETLAND HARVEST",
-    title: "Premium Whole Makhana\n(Popped Fox Nuts).",
-    subtitle: "Crunchy, pure lotus seed pops with zero chemical bleaching. Uniform 5-Suta and 6-Suta Jumbo grades in Sabora pouches & bulk supply.",
-    image: "/images/makhana-pouch.jpg",
-    badge: "100% Natural Superfood",
-    primaryCtaText: "Request Makhana Quote",
-    primaryCtaLink: "#contact",
-    secondaryCtaText: "Our Sourcing Story",
-    secondaryCtaLink: "#sourcing",
+    displayMode: "cinematic",
+    showOverlayText: true,
     fitMode: "cover"
   },
   {
@@ -68,6 +74,8 @@ export const DEFAULT_HERO_SLIDES = [
     primaryCtaLink: "#lab-testing",
     secondaryCtaText: "Contact Us",
     secondaryCtaLink: "#contact",
+    displayMode: "cinematic",
+    showOverlayText: true,
     fitMode: "cover"
   }
 ];
@@ -197,12 +205,20 @@ export function useProducts() {
 
     if (db) {
       try {
+        const prodCol = collection(db, 'sabora_products');
+        const snap = await getDocs(prodCol);
+        const newIds = new Set(newProducts.map(p => p.id));
+        for (const d of snap.docs) {
+          if (!newIds.has(d.id)) {
+            await deleteDoc(doc(db, 'sabora_products', d.id));
+          }
+        }
         for (const p of newProducts) {
           const docRef = doc(db, 'sabora_products', p.id);
           await setDoc(docRef, p, { merge: true });
         }
       } catch (err) {
-        console.warn("Firestore saveProducts warning:", err);
+        console.warn("Firestore saveProducts info:", err);
       }
     }
   }, []);
@@ -218,12 +234,20 @@ export function useProducts() {
 
     if (db) {
       try {
+        const heroCol = collection(db, 'sabora_hero_slides');
+        const snap = await getDocs(heroCol);
+        const newIds = new Set(newSlides.map(s => s.id));
+        for (const d of snap.docs) {
+          if (!newIds.has(d.id)) {
+            await deleteDoc(doc(db, 'sabora_hero_slides', d.id));
+          }
+        }
         for (const s of newSlides) {
           const docRef = doc(db, 'sabora_hero_slides', s.id);
           await setDoc(docRef, s, { merge: true });
         }
       } catch (err) {
-        console.warn("Firestore saveHeroSlides warning:", err);
+        console.warn("Firestore saveHeroSlides info:", err);
       }
     }
   }, []);

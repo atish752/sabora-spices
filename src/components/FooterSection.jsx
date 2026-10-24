@@ -15,7 +15,7 @@ export default function FooterSection({ onScrollToSection, onOpenAdmin }) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#03150E] text-stone-300 border-t border-emerald-950/80 pt-16 pb-12">
+    <footer className="bg-[#03150E] text-stone-300 border-t border-emerald-950/80 pt-16 pb-24 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Top 4-Column Grid */}

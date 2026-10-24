@@ -24,6 +24,33 @@ import {
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
+const compressImageFile = (file, maxWidth = 1600, quality = 0.85) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = () => resolve(e.target.result);
+      img.src = e.target.result;
+    };
+    reader.onerror = () => resolve('');
+    reader.readAsDataURL(file);
+  });
+};
+
 export default function AdminPanel({
   products,
   heroSlides,
@@ -83,16 +110,17 @@ export default function AdminPanel({
     setEditableHeroSlides(updated);
   };
 
-  const handleHeroImageUpload = (e) => {
+  const handleHeroImageUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      handleHeroChange('image', reader.result);
-      triggerSaveNotification('Hero image uploaded into slide preview!');
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressed = await compressImageFile(file, 1920, 0.85);
+      handleHeroChange('image', compressed);
+      triggerSaveNotification('Hero image uploaded & optimized for preview!');
+    } catch (err) {
+      console.warn("Upload error:", err);
+    }
   };
 
   const handleAddHeroSlide = () => {
@@ -101,13 +129,15 @@ export default function AdminPanel({
       tag: "NEW SOURCING HIGHLIGHT",
       title: "New Harvest Announcement\nDirect From Origin.",
       subtitle: "Add descriptive details about your new crop, harvest season, or sourcing region here.",
-      image: "/images/hero-heritage.jpg",
+      image: "/images/hero-sabora-master.jpg",
       badge: "Crop 2026",
       primaryCtaText: "Request Wholesale Quote",
       primaryCtaLink: "#contact",
       secondaryCtaText: "Explore Products",
       secondaryCtaLink: "#products",
-      fitMode: "cover"
+      displayMode: "banner",
+      showOverlayText: false,
+      fitMode: "contain"
     };
     const updated = [...editableHeroSlides, newSlide];
     setEditableHeroSlides(updated);
@@ -141,16 +171,17 @@ export default function AdminPanel({
     setEditableProducts(updated);
   };
 
-  const handleProductImageUpload = (e) => {
+  const handleProductImageUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      handleProductChange('image', reader.result);
-      triggerSaveNotification('Product photo uploaded successfully!');
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressed = await compressImageFile(file, 1200, 0.85);
+      handleProductChange('image', compressed);
+      triggerSaveNotification('Product photo uploaded & optimized!');
+    } catch (err) {
+      console.warn("Product upload error:", err);
+    }
   };
 
   const handleAddProduct = () => {
@@ -521,17 +552,54 @@ export default function AdminPanel({
                     </div>
                   </div>
 
+                  {/* Display Mode / Shahi Reference Style */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-stone-800">Slide Display Mode</label>
+                    <select
+                      value={currentHeroSlide.displayMode || (currentHeroSlide.showOverlayText === false ? 'banner' : 'cinematic')}
+                      onChange={(e) => {
+                        const mode = e.target.value;
+                        handleHeroChange('displayMode', mode);
+                        handleHeroChange('showOverlayText', mode === 'cinematic');
+                        if (mode === 'banner') {
+                          handleHeroChange('fitMode', 'contain');
+                        }
+                      }}
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                    >
+                      <option value="banner">Panoramic Banner (Auto-Fit without Cropping - Shahi Reference Style)</option>
+                      <option value="cinematic">Cinematic Photo with Overlay Text & Buttons</option>
+                    </select>
+                  </div>
+
                   {/* Fit Mode Toggle */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-stone-800">Image Fit Mode</label>
                     <select
-                      value={currentHeroSlide.fitMode || 'cover'}
+                      value={currentHeroSlide.fitMode || 'contain'}
                       onChange={(e) => handleHeroChange('fitMode', e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
                     >
-                      <option value="cover">Cover (Fills whole banner width/height seamlessly)</option>
-                      <option value="contain">Contain (Fits complete image without cropping edges)</option>
+                      <option value="contain">Contain (100% Complete Visual - Zero Cropping)</option>
+                      <option value="cover">Cover (Fills Entire Banner Container)</option>
                     </select>
+                  </div>
+
+                  {/* Show Overlay Text Checkbox */}
+                  <div className="flex items-center gap-2 pt-1 md:col-span-2 bg-stone-50 p-3 rounded-lg border border-stone-200">
+                    <input
+                      type="checkbox"
+                      id="showOverlayText"
+                      checked={currentHeroSlide.showOverlayText !== false && currentHeroSlide.displayMode !== 'banner'}
+                      onChange={(e) => {
+                        handleHeroChange('showOverlayText', e.target.checked);
+                        handleHeroChange('displayMode', e.target.checked ? 'cinematic' : 'banner');
+                      }}
+                      className="w-4 h-4 rounded text-emerald-700 focus:ring-emerald-500 cursor-pointer"
+                    />
+                    <label htmlFor="showOverlayText" className="text-xs font-semibold text-stone-800 cursor-pointer">
+                      Render headline text & action buttons over this image (Uncheck for banners like Shahi Food Services that already include text)
+                    </label>
                   </div>
 
                   {/* Tag Pill */}
@@ -801,6 +869,114 @@ export default function AdminPanel({
                         onChange={(e) => handleProductChange('image', e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
                       />
+                    </div>
+
+                    {/* Botanical Name & Packaging Form */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Botanical Name</label>
+                      <input
+                        type="text"
+                        value={currentProduct.botanicalName || ''}
+                        onChange={(e) => handleProductChange('botanicalName', e.target.value)}
+                        placeholder="e.g. Elettaria cardamomum"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-stone-800">Net Weight / Packaging Unit</label>
+                      <input
+                        type="text"
+                        value={currentProduct.netWeight || ''}
+                        onChange={(e) => handleProductChange('netWeight', e.target.value)}
+                        placeholder="e.g. 500g Sabora Pouch & Bulk"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    {/* Available Grades */}
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <label className="text-xs font-bold text-stone-800">Available Grades (Comma-separated)</label>
+                      <input
+                        type="text"
+                        value={Array.isArray(currentProduct.gradesAvailable) ? currentProduct.gradesAvailable.join(', ') : (currentProduct.gradesAvailable || '')}
+                        onChange={(e) => handleProductChange('gradesAvailable', e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
+                        placeholder="e.g. 8mm+ Extra Bold, 7.5mm - 8mm Bold, 7mm Medium"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    {/* Packaging Options */}
+                    <div className="space-y-1.5 sm:col-span-2">
+                      <label className="text-xs font-bold text-stone-800">Packaging Formats (One per line)</label>
+                      <textarea
+                        rows={3}
+                        value={Array.isArray(currentProduct.packagingOptions) ? currentProduct.packagingOptions.join('\n') : (currentProduct.packagingOptions || '')}
+                        onChange={(e) => handleProductChange('packagingOptions', e.target.value.split('\n').map(s => s.trim()).filter(Boolean))}
+                        placeholder="500g Food-Grade Sabora-Branded Stand-Up Zipper Pouches&#10;25 Kg Export Master Cases"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:bg-white focus:outline-none"
+                      />
+                    </div>
+
+                    {/* Technical Specifications List */}
+                    <div className="space-y-2 sm:col-span-2 pt-2 border-t border-stone-100">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-bold text-stone-800 uppercase tracking-wider">
+                          Technical Specifications ({currentProduct.specifications?.length || 0})
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const specs = [...(currentProduct.specifications || [])];
+                            specs.push({ label: "New Parameter", value: "Standard Spec" });
+                            handleProductChange('specifications', specs);
+                          }}
+                          className="px-2.5 py-1 rounded-md bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>Add Spec Row</span>
+                        </button>
+                      </div>
+
+                      <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
+                        {(currentProduct.specifications || []).map((spec, sIdx) => (
+                          <div key={sIdx} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={spec.label}
+                              onChange={(e) => {
+                                const specs = [...currentProduct.specifications];
+                                specs[sIdx] = { ...specs[sIdx], label: e.target.value };
+                                handleProductChange('specifications', specs);
+                              }}
+                              placeholder="Label (e.g. Moisture Content)"
+                              className="w-2/5 px-3 py-1.5 rounded-lg border border-stone-300 text-xs text-stone-900 bg-stone-50 focus:bg-white"
+                            />
+                            <input
+                              type="text"
+                              value={spec.value}
+                              onChange={(e) => {
+                                const specs = [...currentProduct.specifications];
+                                specs[sIdx] = { ...specs[sIdx], value: e.target.value };
+                                handleProductChange('specifications', specs);
+                              }}
+                              placeholder="Value (e.g. Max 10.0%)"
+                              className="flex-1 px-3 py-1.5 rounded-lg border border-stone-300 text-xs text-stone-900 bg-stone-50 focus:bg-white"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const specs = currentProduct.specifications.filter((_, i) => i !== sIdx);
+                                handleProductChange('specifications', specs);
+                              }}
+                              aria-label="Remove spec"
+                              className="p-1.5 text-stone-400 hover:text-rose-600 rounded cursor-pointer"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                   </div>
