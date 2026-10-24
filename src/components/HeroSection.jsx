@@ -3,14 +3,10 @@ import {
   Leaf, 
   ArrowRight, 
   MessageCircle, 
-  CheckCircle2, 
   Volume2, 
   VolumeX, 
   Play, 
-  Pause,
-  ShieldCheck,
-  MapPin,
-  Package
+  Pause
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -161,26 +157,15 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           <source src="/videos/Portrait.mp4" type="video/mp4" />
         </video>
 
-        {/* 3. Natural vibrant video: subtle bottom fade ONLY for text legibility, no dull dark overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-        {/* 4. Minimal Hero Text on Video */}
-        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full pb-6 sm:pb-8 pointer-events-none">
-          <div className="max-w-xl space-y-1 sm:space-y-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-amber-300 text-[11px] sm:text-xs font-semibold tracking-wider uppercase">
-              <Leaf className="w-3 h-3 text-emerald-400" />
-              <span>Direct Origin Harvest</span>
-            </span>
-            <h1 className="font-serif text-3xl sm:text-4.5xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)]">
-              Whole Spices & Makhana
-            </h1>
-            <p className="font-hand text-base sm:text-xl text-amber-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              ~ Pure whole harvest direct from Kerala & Bihar to Delhi hub ~
-            </p>
-          </div>
+        {/* 3. Very simple, minimal text on video: NO white text, NO paragraphs, NO dulling overlays */}
+        <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full pb-4 sm:pb-6 pointer-events-none">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide shadow-md">
+            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Direct Origin Harvest</span>
+          </span>
         </div>
 
-        {/* 5. Floating Video Player Controls (Bottom-Right Corner) */}
+        {/* 4. Floating Video Player Controls (Bottom-Right Corner) */}
         <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-30 flex items-center gap-2">
           {!isPlaying ? (
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
@@ -223,8 +208,18 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
       <div className="relative z-20 bg-[#03140E] border-t border-emerald-900/50 py-5 sm:py-6 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           
+          {/* Brand Heading & Concise Punchline (Cleanly below the video) */}
+          <div className="space-y-1 text-center md:text-left">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-3.5xl font-extrabold text-amber-100 tracking-tight">
+              Whole Spices & Makhana
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-300">
+              Direct Origin Procurement • Delhi Logistics Hub • Wholesale Supply
+            </p>
+          </div>
+
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 w-full md:w-auto">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button
               onClick={() => handleCtaClick('/contact')}
               className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
@@ -247,22 +242,6 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
               <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
               <span>WhatsApp Desk</span>
             </button>
-          </div>
-
-          {/* Clean Quick Badges */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 sm:gap-3 text-[11px] sm:text-xs text-stone-300">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>FSSAI Aligned</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-              <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>Kerala & Bihar Belts</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-              <Package className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Barrier Pouch & Bulk</span>
-            </div>
           </div>
 
         </div>
