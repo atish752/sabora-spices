@@ -65,16 +65,16 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
             {seasons.map((item, idx) => (
               <div key={idx} className="bg-stone-50 rounded-2xl p-6 border border-stone-200 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-serif text-lg font-bold text-stone-900">{item.product}</span>
-                  <span className="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">
+                  <span className="font-serif text-lg sm:text-xl font-bold text-stone-900">{item.product}</span>
+                  <span className="text-xs sm:text-sm bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">
                     {item.peakMonths}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-amber-700 flex items-center gap-1">
+                <div className="text-sm font-semibold text-amber-700 flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{item.region}</span>
                 </div>
-                <p className="text-xs text-stone-600 leading-relaxed pt-1 border-t border-stone-200">
+                <p className="text-sm text-stone-600 leading-relaxed pt-1 border-t border-stone-200">
                   {item.notes}
                 </p>
               </div>

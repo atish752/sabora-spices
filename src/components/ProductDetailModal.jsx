@@ -55,7 +55,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
                   className="w-full h-full object-contain drop-shadow-md transition-all duration-300"
                 />
                 <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 rounded-md bg-[#0F3D2E] text-amber-300 text-[11px] font-bold">
+                  <span className="px-2.5 py-1 rounded-md bg-[#0F3D2E] text-amber-300 text-xs font-bold">
                     {product.badge || product.category}
                   </span>
                 </div>
@@ -85,11 +85,11 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
             <div className="md:col-span-7 space-y-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
+                  <span className="text-xs sm:text-sm font-bold text-amber-700 uppercase tracking-wider">
                     {product.category}
                   </span>
                   {product.netWeight && (
-                    <span className="text-[11px] px-2 py-0.5 rounded bg-stone-100 font-mono text-stone-700">
+                    <span className="text-xs px-2 py-0.5 rounded bg-stone-100 font-mono text-stone-700">
                       {product.netWeight}
                     </span>
                   )}
@@ -100,35 +100,35 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
                 </h2>
 
                 {product.botanicalName && (
-                  <p className="text-xs italic font-serif text-stone-500">
+                  <p className="text-xs sm:text-sm italic font-serif text-stone-500">
                     Botanical Name: {product.botanicalName}
                   </p>
                 )}
               </div>
 
-              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                 {product.tagline || product.subtitle}
               </p>
 
               {/* Quick Specs Badges */}
-              <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                  <span className="block text-stone-500 text-[11px]">Primary Origin:</span>
-                  <span className="font-bold text-stone-900">{product.origin}</span>
+              <div className="grid grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
+                <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/80">
+                  <span className="block text-stone-500 text-xs">Primary Origin:</span>
+                  <span className="font-bold text-stone-900 text-sm sm:text-base">{product.origin}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                  <span className="block text-stone-500 text-[11px]">Minimum Order (MOQ):</span>
-                  <span className="font-bold text-stone-900">{product.moq}</span>
+                <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/80">
+                  <span className="block text-stone-500 text-xs">Minimum Order (MOQ):</span>
+                  <span className="font-bold text-stone-900 text-sm sm:text-base">{product.moq}</span>
                 </div>
               </div>
 
               {/* Grades Available */}
               {product.gradesAvailable && (
                 <div className="space-y-1.5 pt-1">
-                  <span className="text-xs font-bold text-stone-800">Available Grades:</span>
+                  <span className="text-xs sm:text-sm font-bold text-stone-800">Available Grades:</span>
                   <div className="flex flex-wrap gap-1.5">
                     {product.gradesAvailable.map((g, i) => (
-                      <span key={i} className="px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
+                      <span key={i} className="px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold">
                         {g}
                       </span>
                     ))}
@@ -143,7 +143,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
                     onClose();
                     if (onOpenQuoteModal) onOpenQuoteModal(product);
                   }}
-                  className="flex-1 py-3 px-5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-xs sm:text-sm shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="flex-1 py-3 px-5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <FileText className="w-4 h-4 text-amber-300" />
                   <span>Request Product Quote</span>
@@ -151,7 +151,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
 
                 <button
                   onClick={handleWhatsApp}
-                  className="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>WhatsApp Quote</span>
@@ -170,7 +170,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
                 <span>Technical Specifications Dossier</span>
               </h3>
 
-              <div className="rounded-xl border border-stone-200 overflow-hidden divide-y divide-stone-100 text-xs">
+              <div className="rounded-xl border border-stone-200 overflow-hidden divide-y divide-stone-100 text-xs sm:text-sm">
                 {product.specifications.map((spec, idx) => (
                   <div key={idx} className="grid grid-cols-1 sm:grid-cols-12 p-3 gap-2 bg-stone-50/50 hover:bg-stone-50">
                     <span className="sm:col-span-5 font-bold text-stone-700">{spec.label}</span>
@@ -189,7 +189,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
                 <span>Available Packaging Arrangements</span>
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
                 {product.packagingOptions.map((pkg, idx) => (
                   <div key={idx} className="p-3 rounded-lg bg-stone-50 border border-stone-200 flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -203,7 +203,7 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-stone-50 p-4 border-t border-stone-200 flex items-center justify-between text-xs text-stone-500">
+        <div className="bg-stone-50 p-4 border-t border-stone-200 flex items-center justify-between text-xs sm:text-sm text-stone-500">
           <span>SABORA SPICES • Jahangirpuri, Delhi – 110033</span>
           <button
             onClick={onClose}

@@ -65,16 +65,16 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
               <div
                 key={`t1-${idx}`}
                 onClick={() => onScrollToSection && onScrollToSection(item.target)}
-                className="w-[260px] xs:w-[280px] sm:w-[300px] shrink-0 bg-white p-3 sm:p-3.5 rounded-xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-center gap-3 cursor-pointer group active:scale-[0.98]"
+                className="w-[280px] xs:w-[300px] sm:w-[325px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-center gap-3 cursor-pointer group active:scale-[0.98]"
               >
-                <div className={`p-2 sm:p-2.5 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
-                  <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <div className={`p-2.5 sm:p-3 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
+                  <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </div>
                 <div className="space-y-0.5 min-w-0 flex-1">
-                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
+                  <h3 className="text-sm sm:text-base font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
                     {item.title}
                   </h3>
-                  <p className="text-[11px] sm:text-xs text-stone-500 font-medium truncate">
+                  <p className="text-xs sm:text-sm text-stone-500 font-medium truncate">
                     {item.subtitle}
                   </p>
                 </div>
@@ -91,16 +91,16 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
               <div
                 key={`t2-${idx}`}
                 onClick={() => onScrollToSection && onScrollToSection(item.target)}
-                className="w-[260px] xs:w-[280px] sm:w-[300px] shrink-0 bg-white p-3 sm:p-3.5 rounded-xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-center gap-3 cursor-pointer group active:scale-[0.98]"
+                className="w-[280px] xs:w-[300px] sm:w-[325px] shrink-0 bg-white p-3.5 sm:p-4 rounded-xl border border-stone-200/90 shadow-[0_2px_8px_-2px_rgba(4,26,18,0.06)] hover:shadow-md hover:border-emerald-500/50 transition-all duration-300 flex items-center gap-3 cursor-pointer group active:scale-[0.98]"
               >
-                <div className={`p-2 sm:p-2.5 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
-                  <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <div className={`p-2.5 sm:p-3 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs`}>
+                  <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </div>
                 <div className="space-y-0.5 min-w-0 flex-1">
-                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
+                  <h3 className="text-sm sm:text-base font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug truncate">
                     {item.title}
                   </h3>
-                  <p className="text-[11px] sm:text-xs text-stone-500 font-medium truncate">
+                  <p className="text-xs sm:text-sm text-stone-500 font-medium truncate">
                     {item.subtitle}
                   </p>
                 </div>

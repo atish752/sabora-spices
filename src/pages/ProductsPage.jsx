@@ -55,10 +55,10 @@ export default function ProductsPage({
             {/* Cardamom Grades */}
             <div className="bg-stone-50 rounded-2xl p-6 border border-stone-200/90 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-                <span className="font-serif text-lg font-bold text-[#0F3D2E]">Green Cardamom (Elaichi)</span>
-                <span className="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">Kerala</span>
+                <span className="font-serif text-lg sm:text-xl font-bold text-[#0F3D2E]">Green Cardamom (Elaichi)</span>
+                <span className="text-xs sm:text-sm bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">Kerala</span>
               </div>
-              <ul className="space-y-3 text-xs text-stone-700">
+              <ul className="space-y-3 text-sm text-stone-700">
                 <li className="flex items-start justify-between gap-2">
                   <span className="font-semibold text-stone-900">• 8mm+ Extra Bold (Jumbo)</span>
                   <span className="text-stone-500 text-right">Top tier, intense aroma, deep green</span>
@@ -76,7 +76,7 @@ export default function ProductsPage({
                   <span className="text-stone-500 text-right">Food processing & culinary blends</span>
                 </li>
               </ul>
-              <div className="pt-2 text-[11px] text-stone-500 border-t border-stone-200">
+              <div className="pt-2 text-xs sm:text-sm text-stone-500 border-t border-stone-200 font-medium">
                 Moisture: &lt; 10-11% | Volatile Oil: &gt; 6.5-8.0% v/w
               </div>
             </div>
@@ -84,10 +84,10 @@ export default function ProductsPage({
             {/* Makhana Grades */}
             <div className="bg-stone-50 rounded-2xl p-6 border border-stone-200/90 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-                <span className="font-serif text-lg font-bold text-amber-800">Makhana (Fox Nuts)</span>
-                <span className="text-[11px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono font-semibold">Bihar</span>
+                <span className="font-serif text-lg sm:text-xl font-bold text-amber-800">Makhana (Fox Nuts)</span>
+                <span className="text-xs sm:text-sm bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono font-semibold">Bihar</span>
               </div>
-              <ul className="space-y-3 text-xs text-stone-700">
+              <ul className="space-y-3 text-sm text-stone-700">
                 <li className="flex items-start justify-between gap-2">
                   <span className="font-semibold text-stone-900">• 6-Suta (Super Jumbo / Handpicked)</span>
                   <span className="text-stone-500 text-right">&gt; 19mm pop size, pristine white</span>
@@ -105,7 +105,7 @@ export default function ProductsPage({
                   <span className="text-stone-500 text-right">Zero chemical whitening / bleaching</span>
                 </li>
               </ul>
-              <div className="pt-2 text-[11px] text-stone-500 border-t border-stone-200">
+              <div className="pt-2 text-xs sm:text-sm text-stone-500 border-t border-stone-200 font-medium">
                 Moisture: &lt; 8-9% | Crispness: Superior pop texture
               </div>
             </div>
@@ -113,10 +113,10 @@ export default function ProductsPage({
             {/* Turmeric & Other Spices */}
             <div className="bg-stone-50 rounded-2xl p-6 border border-stone-200/90 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-                <span className="font-serif text-lg font-bold text-yellow-800">Whole Turmeric & Spices</span>
-                <span className="text-[11px] bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-mono font-semibold">Salem / Belts</span>
+                <span className="font-serif text-lg sm:text-xl font-bold text-yellow-800">Whole Turmeric & Spices</span>
+                <span className="text-xs sm:text-sm bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-mono font-semibold">Salem / Belts</span>
               </div>
-              <ul className="space-y-3 text-xs text-stone-700">
+              <ul className="space-y-3 text-sm text-stone-700">
                 <li className="flex items-start justify-between gap-2">
                   <span className="font-semibold text-stone-900">• Salem Whole Turmeric Fingers</span>
                   <span className="text-stone-500 text-right">High curcumin (3.5% - 5.2%+), hard</span>
@@ -134,7 +134,7 @@ export default function ProductsPage({
                   <span className="text-stone-500 text-right">Subject to origin feasibility</span>
                 </li>
               </ul>
-              <div className="pt-2 text-[11px] text-stone-500 border-t border-stone-200">
+              <div className="pt-2 text-xs sm:text-sm text-stone-500 border-t border-stone-200 font-medium">
                 Strictly 100% whole form (zero powdered/ground adulteration)
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function ProductsPage({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Package className="w-3.5 h-3.5 text-amber-600" />
               <span>Packaging & Private-Label Formats</span>
             </div>
@@ -158,7 +158,7 @@ export default function ProductsPage({
             <p className="font-hand text-base sm:text-lg text-amber-800 font-bold">
               ~ Custom printed retail pouches, bulk gunny sacks, or clean master cartons ~
             </p>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
               Whether you need retail shelf-ready barrier pouches or containerized bulk packaging, we configure solutions suited to your supply chain.
             </p>
           </div>
@@ -168,8 +168,8 @@ export default function ProductsPage({
               <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold">
                 1
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Sabora-Branded Pouches</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Sabora-Branded Pouches</h4>
+              <p className="text-sm text-stone-600 leading-relaxed">
                 Premium multi-layer metallic barrier zip pouches (50g, 100g, 250g, 500g, 1kg) designed to preserve volatile aroma and shield against humidity.
               </p>
             </div>
@@ -178,8 +178,8 @@ export default function ProductsPage({
               <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 font-bold">
                 2
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Buyer-Specific & Private-Label</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Buyer-Specific & Private-Label</h4>
+              <p className="text-sm text-stone-600 leading-relaxed">
                 Custom packaging with your brand artwork, barcodes, nutritional information, and packaging weights, subject to feasibility and agreement.
               </p>
             </div>
@@ -188,8 +188,8 @@ export default function ProductsPage({
               <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center text-stone-800 font-bold">
                 3
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Bulk Commercial & Export Cartons</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Bulk Commercial & Export Cartons</h4>
+              <p className="text-sm text-stone-600 leading-relaxed">
                 10kg, 25kg, and 50kg bulk packaging in food-grade poly-lined gunny bags, HDPE woven sacks, and heavy-duty 5-ply export corrugated cartons.
               </p>
             </div>

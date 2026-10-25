@@ -348,15 +348,15 @@ export default function AdminPanel({
               <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
             <div>
-              <span className="font-serif font-bold text-sm block leading-none">SABORA SPICES</span>
-              <span className="text-[10px] text-amber-400 uppercase font-mono block">Admin Management Desk</span>
+              <span className="font-serif font-bold text-sm sm:text-base block leading-none">SABORA SPICES</span>
+              <span className="text-xs text-amber-400 uppercase font-mono block">Admin Management Desk</span>
             </div>
           </div>
         </div>
 
         {/* Status Badge & Logout */}
         <div className="flex items-center gap-3">
-          <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-600/40 text-[11px] text-emerald-300 font-mono">
+          <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-600/40 text-xs text-emerald-300 font-mono">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>{firebaseStatus?.message || "Firebase Connected"}</span>
           </span>

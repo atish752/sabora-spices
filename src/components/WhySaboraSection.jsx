@@ -148,11 +148,11 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
                     </div>
                   </div>
 
-                  <h3 className="font-serif text-base font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors leading-snug">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                     {item.desc}
                   </p>
                 </div>
@@ -164,19 +164,19 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
         {/* The Sabora Commitment Statement Box */}
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#041A12] via-[#0F3D2E] to-[#041A12] text-white shadow-xl border border-emerald-800/40 space-y-6">
           <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
+            <span className="text-xs sm:text-sm font-bold text-amber-400 uppercase tracking-wider font-mono">
               The SABORA SPICES Commitment
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold leading-snug">
+            <h3 className="font-serif text-2xl sm:text-3.5xl font-bold leading-snug">
               "Trust must be earned through actual performance."
             </h3>
-            <p className="text-xs sm:text-base text-stone-200 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-200 leading-relaxed font-normal">
               Our commitment is to pursue the best suitable quality, maintain clear product specifications, coordinate appropriate quality checks, and provide professional sourcing and supply support. Our aim is to establish that trust through transparency, careful product selection, realistic commitments, and continuous attention to buyer requirements.
             </p>
           </div>
 
           <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4 text-xs text-stone-300">
+            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-stone-300">
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 Zero Unsupported Claims
@@ -193,7 +193,7 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
 
             <button
               onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
-              className="px-6 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm sm:text-base shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
               <span>Partner with SABORA SPICES</span>
               <ArrowRight className="w-4 h-4" />

@@ -74,24 +74,24 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
           {/* Right: Regulatory Badges & WhatsApp Quick Desk */}
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-700/40 text-[11px] text-emerald-300 font-medium">
-              <ShieldCheck className="w-3 h-3 text-amber-400" />
+            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-950/80 border border-emerald-700/40 text-xs text-emerald-300 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
               FSSAI & ISO Standards Compliant
             </span>
             
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-[11px] text-emerald-200 hover:text-white transition-all font-medium cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-xs text-emerald-200 hover:text-white transition-all font-medium cursor-pointer"
               title="Direct 1-Click WhatsApp Sourcing Desk"
             >
-              <MessageCircle className="w-3 h-3 text-emerald-400 fill-emerald-400" />
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
               <span className="font-semibold text-amber-300">WhatsApp Desk</span>
             </button>
 
             {onOpenAdmin && (
               <button
                 onClick={onOpenAdmin}
-                className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-amber-300 text-[11px] font-medium transition-colors cursor-pointer"
+                className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-amber-300 text-xs font-medium transition-colors cursor-pointer"
                 title="Admin Management Portal"
               >
                 <span>Admin</span>
@@ -130,7 +130,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <a 
                 href="/" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                className="font-serif text-[15px] sm:text-lg md:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
+                className="font-serif text-base sm:text-lg md:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
               >
                 SABORA SPICES
               </a>
@@ -138,27 +138,27 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               {/* Request Quote Button in the single horizontal line */}
               <button
                 onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-[10px] sm:text-xs font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
                 title="Request Instant Wholesale Quote"
               >
-                <FileText className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
+                <FileText className="w-3.5 h-3.5 text-amber-300" />
                 <span>Request Quote</span>
               </button>
             </div>
 
             {/* Subtitle in short text directly below */}
             <div className="pl-9 sm:pl-11 -mt-0.5">
-              <span className="text-[8.5px] sm:text-[10px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
+              <span className="text-[11px] sm:text-xs font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
                 whole spices & makhana
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation Links (All 11 Dedicated Pages) */}
-          <nav className="hidden xl:flex items-center gap-0.5 2xl:gap-1 text-xs 2xl:text-[13px] font-medium text-stone-700 whitespace-nowrap">
+          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 text-sm 2xl:text-base font-semibold text-stone-700 whitespace-nowrap">
             <button 
               onClick={() => handleNavClick('home')} 
-              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2.5 2xl:px-3 py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('home')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -169,7 +169,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('about')} 
-              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`px-2.5 2xl:px-3 py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('about')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -186,7 +186,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             >
               <button 
                 onClick={() => handleNavClick('products')}
-                className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 2xl:px-3 py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
                   isActive('products')
                     ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                     : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -197,43 +197,43 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               </button>
 
               {productsDropdownOpen && (
-                <div className="absolute top-full left-0 w-64 bg-white rounded-lg shadow-xl border border-stone-200 py-2 z-50 animate-fadeIn">
-                  <div className="px-3 py-1.5 text-[11px] font-semibold text-amber-700 uppercase tracking-wider border-b border-stone-100 mb-1 flex items-center justify-between">
+                <div className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl border border-stone-200 py-2.5 z-50 animate-fadeIn">
+                  <div className="px-3.5 py-1.5 text-xs font-semibold text-amber-700 uppercase tracking-wider border-b border-stone-100 mb-1 flex items-center justify-between">
                     <span>Products Submenu</span>
                     <button 
                       onClick={() => handleNavClick('products')}
-                      className="text-[10px] text-emerald-700 hover:underline normal-case font-medium"
+                      className="text-xs text-emerald-700 hover:underline normal-case font-medium"
                     >
                       View All
                     </button>
                   </div>
                   <button
                     onClick={() => handleNavClick('products', 'cardamom')}
-                    className="w-full text-left px-3 py-2 text-xs text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
                   >
                     <span>Whole Green Cardamom</span>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-mono">Kerala</span>
+                    <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono">Kerala</span>
                   </button>
                   <button
                     onClick={() => handleNavClick('products', 'makhana')}
-                    className="w-full text-left px-3 py-2 text-xs text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
                   >
                     <span>Makhana (Fox Nuts)</span>
-                    <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-mono">Bihar</span>
+                    <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono">Bihar</span>
                   </button>
                   <button
                     onClick={() => handleNavClick('products', 'turmeric')}
-                    className="w-full text-left px-3 py-2 text-xs text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
                   >
                     <span>Whole Turmeric Fingers</span>
-                    <span className="text-[10px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded font-mono">Salem</span>
+                    <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-mono">Salem</span>
                   </button>
                   <button
                     onClick={() => handleNavClick('products', 'other')}
-                    className="w-full text-left px-3 py-2 text-xs text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
                   >
                     <span>Cloves & Other Whole Spices</span>
-                    <span className="text-[10px] bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded font-mono">Handpicked</span>
+                    <span className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded font-mono">Handpicked</span>
                   </button>
                 </div>
               )}
@@ -360,16 +360,16 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             {/* Sabora Brand Quick Bar */}
             <div className="pb-3 border-b border-stone-100 flex items-center justify-between">
               <div>
-                <div className="font-serif font-bold text-lg text-[#0F3D2E]">SABORA SPICES</div>
-                <div className="text-xs text-amber-700 font-medium">Whole Spices & Makhana Sourcing</div>
+                <div className="font-serif font-bold text-xl text-[#0F3D2E]">SABORA SPICES</div>
+                <div className="text-xs sm:text-sm text-amber-700 font-medium">Whole Spices & Makhana Sourcing</div>
               </div>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">
+              <span className="text-xs px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-semibold">
                 Delhi, India
               </span>
             </div>
 
             {/* Menu Items */}
-            <div className="grid grid-cols-1 gap-1 text-sm font-medium text-stone-800">
+            <div className="grid grid-cols-1 gap-1 text-base font-medium text-stone-800">
               <button 
                 onClick={() => handleNavClick('hero')} 
                 className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors"
@@ -384,42 +384,42 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               </button>
               
               {/* Products Submenu Accordion */}
-              <div className="bg-stone-50 rounded-lg p-2.5 my-1">
+              <div className="bg-stone-50 rounded-xl p-3 my-1">
                 <button 
                   onClick={() => handleNavClick('products')}
-                  className="w-full text-left font-bold text-[#0F3D2E] pb-1.5 flex items-center justify-between"
+                  className="w-full text-left font-bold text-[#0F3D2E] text-base pb-1.5 flex items-center justify-between"
                 >
                   <span>3. Products & Submenu</span>
                   <span className="text-xs text-stone-500 font-normal">View All</span>
                 </button>
-                <div className="pl-3 space-y-1.5 pt-1 text-xs text-stone-700">
+                <div className="pl-3 space-y-2 pt-1 text-sm text-stone-700">
                   <button 
                     onClick={() => handleNavClick('products', 'cardamom')}
                     className="w-full text-left py-1 hover:text-emerald-700 flex items-center justify-between"
                   >
                     <span>• Whole Green Cardamom (Elaichi)</span>
-                    <span className="text-[10px] text-emerald-800 bg-emerald-100 px-1 rounded">Kerala</span>
+                    <span className="text-xs text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded font-mono">Kerala</span>
                   </button>
                   <button 
                     onClick={() => handleNavClick('products', 'makhana')}
                     className="w-full text-left py-1 hover:text-amber-700 flex items-center justify-between"
                   >
                     <span>• Makhana (Fox Nuts)</span>
-                    <span className="text-[10px] text-amber-800 bg-amber-100 px-1 rounded">Bihar</span>
+                    <span className="text-xs text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded font-mono">Bihar</span>
                   </button>
                   <button 
                     onClick={() => handleNavClick('products', 'turmeric')}
                     className="w-full text-left py-1 hover:text-yellow-700 flex items-center justify-between"
                   >
                     <span>• Whole Turmeric Fingers</span>
-                    <span className="text-[10px] text-yellow-800 bg-yellow-100 px-1 rounded">Salem</span>
+                    <span className="text-xs text-yellow-800 bg-yellow-100 px-1.5 py-0.5 rounded font-mono">Salem</span>
                   </button>
                   <button 
                     onClick={() => handleNavClick('products', 'other')}
                     className="w-full text-left py-1 hover:text-stone-700 flex items-center justify-between"
                   >
                     <span>• Cloves & Other Whole Spices</span>
-                    <span className="text-[10px] text-stone-600 bg-stone-200 px-1 rounded">Handpicked</span>
+                    <span className="text-xs text-stone-600 bg-stone-200 px-1.5 py-0.5 rounded font-mono">Handpicked</span>
                   </button>
                 </div>
               </div>
@@ -490,7 +490,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             <div className="pt-3 border-t border-stone-200 space-y-2">
               <a 
                 href={`tel:${SITE_CONFIG.primaryPhoneRaw}`}
-                className="w-full py-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-sm font-semibold flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-emerald-700" />
                 <span>Call Us: +91 78809 06610</span>
@@ -501,7 +501,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                   setMobileMenuOpen(false);
                   SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.");
                 }}
-                className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 fill-white" />
                 <span>Chat on WhatsApp (1-Click)</span>
@@ -513,7 +513,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                     setMobileMenuOpen(false);
                     onOpenAdmin();
                   }}
-                  className="w-full py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+                  className="w-full py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <span>Admin Management Portal</span>
                 </button>

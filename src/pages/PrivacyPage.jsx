@@ -51,8 +51,8 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                   </p>
                 </div>
 
-                <div className="space-y-2 text-xs">
-                  <div className="font-semibold text-stone-900 uppercase tracking-wider text-[11px] mb-2">
+                <div className="space-y-2 text-sm">
+                  <div className="font-semibold text-stone-900 uppercase tracking-wider text-xs mb-2">
                     Policy Navigation
                   </div>
                   {[
@@ -84,19 +84,19 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                 </div>
 
                 <div className="pt-4 border-t border-stone-100 space-y-3">
-                  <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-[#0F3D2E] space-y-1">
+                  <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs sm:text-sm text-[#0F3D2E] space-y-1">
                     <div className="font-bold flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-600" />
                       <span>Commercial Confidentiality</span>
                     </div>
-                    <p className="text-stone-600 text-[11px] leading-relaxed">
+                    <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
                       All buyer inquiries, target volumes, custom packaging specifications, and price quotes remain strictly confidential.
                     </p>
                   </div>
 
                   <button
                     onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onNavigate && onNavigate('contact')}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0F3D2E] hover:bg-[#165641] text-white text-xs font-bold transition-all text-center cursor-pointer shadow-xs"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#0F3D2E] hover:bg-[#165641] text-white text-xs sm:text-sm font-bold transition-all text-center cursor-pointer shadow-xs"
                   >
                     Contact Privacy Desk
                   </button>

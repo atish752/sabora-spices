@@ -66,13 +66,13 @@ export default function CookieConsentBanner({ onNavigate }) {
               <Cookie className="w-5 h-5 text-amber-400" />
             </div>
             <div>
-              <h3 className="font-serif text-sm sm:text-base font-bold text-amber-100 flex items-center gap-1.5">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-amber-100 flex items-center gap-1.5">
                 <span>International Cookie Preferences</span>
-                <span className="hidden sm:inline-flex text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/50 uppercase font-mono">
+                <span className="hidden sm:inline-flex text-xs px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/50 uppercase font-mono">
                   GDPR & B2B
                 </span>
               </h3>
-              <p className="text-[11px] text-stone-300">
+              <p className="text-xs sm:text-sm text-stone-300">
                 SABORA SPICES Trade Portal
               </p>
             </div>
@@ -84,12 +84,12 @@ export default function CookieConsentBanner({ onNavigate }) {
             aria-label="Dismiss cookie notice with essential cookies"
             title="Dismiss notice"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Informative text */}
-        <p className="text-xs text-stone-300 leading-relaxed">
+        <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
           We use cookies to maintain quotation sessions, optimize bandwidth for international spice and makhana buyers, and ensure regulatory compliance under GDPR and Indian DPDP guidelines.
         </p>
 
@@ -97,25 +97,25 @@ export default function CookieConsentBanner({ onNavigate }) {
         <div className="pt-1 flex flex-wrap items-center gap-2.5">
           <button
             onClick={handleAcceptAll}
-            className="flex-1 min-w-[120px] py-2 px-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+            className="flex-1 min-w-[120px] py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
           >
-            <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+            <Check className="w-4 h-4 stroke-[2.5]" />
             <span>Accept All</span>
           </button>
 
           <button
             onClick={handleEssentialOnly}
-            className="flex-1 min-w-[120px] py-2 px-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-stone-200 hover:text-white border border-white/20 text-xs font-medium transition-all active:scale-95 cursor-pointer flex items-center justify-center"
+            className="flex-1 min-w-[120px] py-2.5 px-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-stone-200 hover:text-white border border-white/20 text-xs sm:text-sm font-medium transition-all active:scale-95 cursor-pointer flex items-center justify-center"
           >
             <span>Essential Only</span>
           </button>
 
           <button
             onClick={handleOpenPrivacy}
-            className="py-2 px-3 rounded-xl text-xs text-amber-300 hover:text-amber-200 hover:underline transition-colors cursor-pointer flex items-center gap-1"
+            className="py-2.5 px-3 rounded-xl text-xs sm:text-sm text-amber-300 hover:text-amber-200 hover:underline transition-colors cursor-pointer flex items-center gap-1"
           >
             <span>Privacy Policy</span>
-            <ExternalLink className="w-3 h-3" />
+            <ExternalLink className="w-3.5 h-3.5" />
           </button>
         </div>
 

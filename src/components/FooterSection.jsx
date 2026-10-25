@@ -50,29 +50,29 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-md font-normal">
+            <p className="text-sm sm:text-base text-stone-300 leading-relaxed max-w-md font-normal">
               India-based sourcing and supply for domestic and international buyers. We specialise in whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts), with additional whole spices available according to buyer requirements.
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-700/50 text-[11px] text-emerald-300 font-medium">
+              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
                 FSSAI Regulated
               </span>
-              <span className="px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-700/50 text-[11px] text-emerald-300 font-medium">
+              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
                 ISO 9001/22000 Principles
               </span>
-              <span className="px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-700/50 text-[11px] text-emerald-300 font-medium">
+              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
                 FoSCoS Linked
               </span>
             </div>
           </div>
 
           {/* Col 2: Navigation Links (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-serif text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
+          <div className="lg:col-span-2 space-y-3.5">
+            <h4 className="font-serif text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
               Pages
             </h4>
-            <ul className="space-y-1.5 text-xs text-stone-300">
+            <ul className="space-y-2 text-sm text-stone-300">
               <li>
                 <button onClick={() => handleLinkClick('home')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Home
@@ -132,11 +132,11 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
           </div>
 
           {/* Col 3: Products (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-serif text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
+          <div className="lg:col-span-2 space-y-3.5">
+            <h4 className="font-serif text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
               Products
             </h4>
-            <ul className="space-y-1.5 text-xs text-stone-300">
+            <ul className="space-y-2 text-sm text-stone-300">
               <li>
                 <button onClick={() => handleLinkClick('products', 'cardamom')} className="hover:text-amber-400 transition-colors cursor-pointer">
                   Whole Green Cardamom
@@ -163,7 +163,7 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                 </button>
               </li>
               <li className="pt-2">
-                <span className="text-[11px] text-amber-300/80 italic block">
+                <span className="text-xs text-amber-300/80 italic block">
                   100% Whole Spices Only
                 </span>
               </li>
@@ -171,16 +171,16 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
           </div>
 
           {/* Col 4: Contact & Delhi Office (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-serif text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
+          <div className="lg:col-span-3 space-y-3.5">
+            <h4 className="font-serif text-base font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
               Contact Desk
             </h4>
-            <div className="space-y-2 text-xs text-stone-300">
-              <div className="flex items-start gap-2">
+            <div className="space-y-3 text-sm text-stone-300">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <span>Jahangirpuri, Delhi – 110033, India</span>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div className="flex flex-col">
                   <a href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} className="hover:text-amber-400 transition-colors">
@@ -191,16 +191,16 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                   </a>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Globe className="w-4 h-4 text-stone-400 shrink-0" />
                 <span>www.saboraspices.com</span>
               </div>
               <div className="pt-2">
                 <button
                   onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I am contacting you from your website.")}
-                  className="w-full py-2 px-3 rounded-lg bg-emerald-700/40 hover:bg-emerald-700/60 border border-emerald-500/40 text-emerald-200 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  className="w-full py-2.5 px-3 rounded-xl bg-emerald-700/40 hover:bg-emerald-700/60 border border-emerald-500/40 text-emerald-200 text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 fill-emerald-300 text-emerald-300" />
+                  <MessageCircle className="w-4 h-4 fill-emerald-300 text-emerald-300" />
                   <span>WhatsApp Commercial Desk</span>
                 </button>
               </div>
@@ -210,7 +210,7 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
         </div>
 
         {/* Bottom Strip: Legal & Admin Link */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-stone-400">
           <div>
             © {currentYear} <strong className="text-stone-200">SABORA SPICES</strong>. All Rights Reserved.
           </div>
@@ -218,21 +218,21 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
           <div className="flex flex-wrap items-center gap-4 text-stone-400">
             <button 
               onClick={() => handleLinkClick('privacy')} 
-              className="hover:text-amber-400 transition-colors cursor-pointer text-xs"
+              className="hover:text-amber-400 transition-colors cursor-pointer text-xs sm:text-sm"
             >
               Privacy Policy
             </button>
             <span>•</span>
             <button 
               onClick={() => handleLinkClick('terms')} 
-              className="hover:text-amber-400 transition-colors cursor-pointer text-xs"
+              className="hover:text-amber-400 transition-colors cursor-pointer text-xs sm:text-sm"
             >
               Terms & Conditions
             </button>
             <span>•</span>
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to contact your customer grievance desk.")}
-              className="hover:text-stone-200 transition-colors cursor-pointer text-xs"
+              className="hover:text-stone-200 transition-colors cursor-pointer text-xs sm:text-sm"
             >
               Customer Grievance
             </button>

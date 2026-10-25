@@ -83,29 +83,29 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
             <div className="grid grid-cols-3 gap-4 pt-2">
               <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
                 <div className="text-xl sm:text-2xl font-extrabold font-serif text-[#0F3D2E]">2 Core</div>
-                <div className="text-[11px] sm:text-xs text-stone-600 font-medium">Categories (Spices & Makhana)</div>
+                <div className="text-xs sm:text-sm text-stone-600 font-medium">Categories (Spices & Makhana)</div>
               </div>
               <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
                 <div className="text-xl sm:text-2xl font-extrabold font-serif text-amber-600">100%</div>
-                <div className="text-[11px] sm:text-xs text-stone-600 font-medium">Whole Products Only</div>
+                <div className="text-xs sm:text-sm text-stone-600 font-medium">Whole Products Only</div>
               </div>
               <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
                 <div className="text-xl sm:text-2xl font-extrabold font-serif text-emerald-700">FSSAI</div>
-                <div className="text-[11px] sm:text-xs text-stone-600 font-medium">Standards Guided</div>
+                <div className="text-xs sm:text-sm text-stone-600 font-medium">Standards Guided</div>
               </div>
             </div>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
-                className="px-5 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-semibold shadow transition-all flex items-center gap-2 cursor-pointer"
+                className="px-5 sm:px-6 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-sm sm:text-base font-semibold shadow transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>Request a Quote</span>
                 <ArrowRight className="w-4 h-4 text-amber-300" />
               </button>
               <button
                 onClick={() => onScrollToSection && onScrollToSection('sourcing')}
-                className="px-5 py-2.5 rounded-lg border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+                className="px-5 sm:px-6 py-3 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-700 text-sm sm:text-base font-semibold transition-all cursor-pointer"
               >
                 Explore Sourcing & Origin
               </button>
@@ -125,14 +125,14 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
             </div>
 
             {/* Sabora Insignia Card */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950 to-[#0F3D2E] text-white flex items-center gap-4 shadow-md border border-amber-400/30">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950 to-[#0F3D2E] text-white flex items-center gap-4 shadow-md border border-amber-400/30">
               <div className="w-14 h-14 rounded-full bg-white/10 p-1 shrink-0 flex items-center justify-center border border-amber-400/40">
                 <img src="/images/logo.png" alt="Sabora Logo" className="w-full h-full object-contain" />
               </div>
               <div className="space-y-0.5">
-                <div className="font-serif font-bold text-base text-amber-300">SABORA SPICES</div>
-                <div className="text-xs text-stone-200">Jahangirpuri, Delhi – 110033, India</div>
-                <div className="text-[11px] text-emerald-300 font-mono">+91 78809 06610 | +91 95327 01582</div>
+                <div className="font-serif font-bold text-lg text-amber-300">SABORA SPICES</div>
+                <div className="text-xs sm:text-sm text-stone-200">Jahangirpuri, Delhi – 110033, India</div>
+                <div className="text-xs text-emerald-300 font-mono">+91 78809 06610 | +91 95327 01582</div>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
               Our Business Philosophy
             </h3>
-            <p className="text-xs sm:text-sm text-stone-600">
+            <p className="text-sm sm:text-base text-stone-600">
               Rather than assuming one solution suits every customer, we work to understand the buyer's exact requirements before discussing sourcing options.
             </p>
           </div>
@@ -160,17 +160,17 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
                   className="bg-stone-50 hover:bg-emerald-50/50 p-6 rounded-2xl border border-stone-200/90 hover:border-emerald-500/40 transition-all duration-300 space-y-4 group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-amber-600 bg-amber-100/70 px-2 py-0.5 rounded">
+                    <span className="text-xs font-mono font-bold text-amber-600 bg-amber-100/70 px-2.5 py-1 rounded">
                       Principle {p.num}
                     </span>
                     <div className="p-2.5 rounded-xl bg-white shadow-xs text-[#0F3D2E] group-hover:bg-[#0F3D2E] group-hover:text-white transition-colors">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
-                  <h4 className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors">
+                  <h4 className="font-serif text-xl font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors">
                     {p.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                     {p.desc}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
             <h3 className="font-serif text-2xl sm:text-3xl font-bold">
               Who We Serve
             </h3>
-            <p className="text-xs sm:text-sm text-stone-300">
+            <p className="text-sm sm:text-base text-stone-300">
               Our business is structured to support diverse B2B buyers across domestic and export markets with transparent terms and dependable fulfillment.
             </p>
           </div>
@@ -199,9 +199,9 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <h4 className="text-sm font-bold text-white font-serif">{item.title}</h4>
+                  <h4 className="text-base font-bold text-white font-serif">{item.title}</h4>
                 </div>
-                <p className="text-xs text-stone-300 leading-relaxed pl-6">
+                <p className="text-xs sm:text-sm text-stone-300 leading-relaxed pl-6">
                   {item.desc}
                 </p>
               </div>
@@ -215,7 +215,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
                 <Eye className="w-4 h-4" />
                 <span>Our Vision</span>
               </div>
-              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
                 To develop SABORA SPICES into a recognized and dependable sourcing and supply partner for whole spices and Makhana, building long-term business relationships through product understanding, professional communication, and responsible coordination.
               </p>
             </div>
@@ -224,7 +224,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
                 <Target className="w-4 h-4" />
                 <span>Our Mission</span>
               </div>
-              <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
                 To connect business buyers with suitable whole-spice and Makhana supply options while prioritizing transparency, buyer requirements, and professional business practices, making the sourcing process clear from initial inquiry through dispatch.
               </p>
             </div>

@@ -87,7 +87,7 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
               <div>
                 <div className="p-6 bg-gradient-to-r from-stone-900 to-[#041A12] text-white flex items-center justify-between">
                   <div>
-                    <span className="text-[11px] font-mono font-bold text-amber-400 uppercase tracking-wider">
+                    <span className="text-xs sm:text-sm font-mono font-bold text-amber-400 uppercase tracking-wider">
                       {panel.badge}
                     </span>
                     <h3 className="font-serif text-xl sm:text-2xl font-bold">
@@ -100,14 +100,14 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
                 </div>
 
                 <div className="p-6 space-y-3">
-                  <div className="text-xs font-bold text-stone-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <div className="text-sm font-bold text-stone-900 uppercase tracking-wider flex items-center gap-1.5">
                     <ClipboardList className="w-4 h-4 text-emerald-600" />
                     <span>Verified Test Parameters:</span>
                   </div>
 
                   <div className="divide-y divide-stone-100">
                     {panel.parameters.map((param, i) => (
-                      <div key={i} className="py-2.5 flex items-start justify-between gap-3 text-xs">
+                      <div key={i} className="py-2.5 flex items-start justify-between gap-3 text-sm">
                         <span className="font-semibold text-stone-700 shrink-0">{param.label}</span>
                         <span className="text-stone-900 text-right font-medium">{param.spec}</span>
                       </div>
@@ -116,7 +116,7 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
                 </div>
               </div>
 
-              <div className="p-6 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-xs text-stone-600">
+              <div className="p-6 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-xs sm:text-sm text-stone-600">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Tested via FSSAI-Notified Food Labs
@@ -130,11 +130,11 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
         {/* ── 6-Step Batch Release Protocol ── */}
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm space-y-8">
           <div className="max-w-2xl space-y-2">
-            <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">Quality Assurance Workflow</span>
+            <span className="text-sm font-bold text-amber-700 uppercase tracking-wider">Quality Assurance Workflow</span>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
               Batch Release & Dispatch Control Protocol
             </h3>
-            <p className="text-xs sm:text-sm text-stone-600">
+            <p className="text-sm sm:text-base text-stone-600">
               A systematic 6-step gated process ensuring full compliance before physical shipment leaves our facility.
             </p>
           </div>
@@ -145,13 +145,13 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
                 key={idx}
                 className="p-4 rounded-xl bg-stone-50 border border-stone-200 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all space-y-2"
               >
-                <span className="text-xs font-mono font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">
+                <span className="text-xs sm:text-sm font-mono font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
                   Step {st.step}
                 </span>
-                <h4 className="font-serif text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+                <h4 className="font-serif text-sm sm:text-base font-bold text-stone-900 leading-snug">
                   {st.title}
                 </h4>
-                <p className="text-[11px] text-stone-600 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
                   {st.desc}
                 </p>
               </div>
@@ -161,17 +161,17 @@ export default function LabTestingSection({ onOpenQuoteModal, onScrollToSection 
           {/* FoSCoS Regulatory Integration */}
           <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-50 via-stone-50 to-amber-50 border border-emerald-200 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-1 text-center md:text-left">
-              <div className="text-xs font-bold text-[#0F3D2E] uppercase font-mono flex items-center justify-center md:justify-start gap-1.5">
+              <div className="text-sm font-bold text-[#0F3D2E] uppercase font-mono flex items-center justify-center md:justify-start gap-1.5">
                 <UploadCloud className="w-4 h-4 text-emerald-700" />
                 <span>FoSCoS Portal Regulatory Compliance</span>
               </div>
-              <p className="text-xs sm:text-sm text-stone-700 max-w-2xl">
+              <p className="text-sm sm:text-base text-stone-700 max-w-2xl">
                 Where required for the relevant FSSAI licence category, applicable laboratory testing reports are uploaded or linked through the <strong>Food Safety Compliance System (FoSCoS)</strong> in accordance with statutory guidelines.
               </p>
             </div>
             <button
               onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
-              className="px-6 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs sm:text-sm font-semibold shadow shrink-0 cursor-pointer flex items-center gap-2"
+              className="px-6 py-2.5 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-sm sm:text-base font-semibold shadow shrink-0 cursor-pointer flex items-center gap-2"
             >
               <span>Request Sample & COA Dossier</span>
               <ArrowRight className="w-4 h-4 text-amber-300" />

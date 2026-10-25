@@ -286,7 +286,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900">
                     Request a Quotation & Sourcing Discussion
                   </h3>
-                  <p className="text-xs text-stone-500">
+                  <p className="text-sm text-stone-500">
                     Fill out the parameters below to receive our formal quotation and availability terms.
                   </p>
                 </div>
@@ -294,13 +294,13 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                 {/* Product Selection & Quantity */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Product Required *</label>
+                    <label className="text-sm font-bold text-stone-700">Product Required *</label>
                     <select
                       name="product"
                       value={formData.product}
                       onChange={handleChange}
                       required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     >
                       {productOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
@@ -309,7 +309,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Estimated Quantity *</label>
+                    <label className="text-sm font-bold text-stone-700">Estimated Quantity *</label>
                     <input
                       type="text"
                       name="quantity"
@@ -317,7 +317,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                       onChange={handleChange}
                       placeholder="e.g. 500 Kg / 2 Metric Tons"
                       required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
                 </div>
@@ -325,24 +325,24 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                 {/* Grade & Packaging */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Preferred Grade / Size</label>
+                    <label className="text-sm font-bold text-stone-700">Preferred Grade / Size</label>
                     <input
                       type="text"
                       name="grade"
                       value={formData.grade}
                       onChange={handleChange}
                       placeholder="e.g. 8mm+ Extra Bold, 6-Suta Jumbo"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Packaging Format</label>
+                    <label className="text-sm font-bold text-stone-700">Packaging Format</label>
                     <select
                       name="packaging"
                       value={formData.packaging}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     >
                       {packagingOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
@@ -353,7 +353,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
 
                 {/* Destination */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-stone-700">Delivery Destination *</label>
+                  <label className="text-sm font-bold text-stone-700">Delivery Destination *</label>
                   <input
                     type="text"
                     name="destination"
@@ -361,14 +361,14 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                     onChange={handleChange}
                     placeholder="e.g. Mumbai, Bangalore / CIF Rotterdam, London, Dubai"
                     required
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                   />
                 </div>
 
                 {/* Contact Name & Company */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Your Name *</label>
+                    <label className="text-sm font-bold text-stone-700">Your Name *</label>
                     <input
                       type="text"
                       name="name"
@@ -376,19 +376,19 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                       onChange={handleChange}
                       placeholder="Contact Person Name"
                       required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Business / Company Name</label>
+                    <label className="text-sm font-bold text-stone-700">Business / Company Name</label>
                     <input
                       type="text"
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
                       placeholder="e.g. Royal Spices Ltd."
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
                 </div>
@@ -396,19 +396,19 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                 {/* Email & Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Email Address</label>
+                    <label className="text-sm font-bold text-stone-700">Email Address</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="name@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">Phone / WhatsApp Number *</label>
+                    <label className="text-sm font-bold text-stone-700">Phone / WhatsApp Number *</label>
                     <input
                       type="tel"
                       name="phone"
@@ -416,21 +416,21 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                       onChange={handleChange}
                       placeholder="+91 98765 43210"
                       required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Additional Notes */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-stone-700">Additional Specifications / Requirements</label>
+                  <label className="text-sm font-bold text-stone-700">Additional Specifications / Requirements</label>
                   <textarea
                     name="notes"
                     value={formData.notes}
                     onChange={handleChange}
                     rows={3}
                     placeholder="Specify any laboratory testing (COA), moisture limits, private label artwork requirements, or delivery schedule..."
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-stone-50 text-sm sm:text-base text-stone-900 focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white focus:outline-none"
                   />
                 </div>
 
@@ -439,7 +439,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 py-3 px-6 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="flex-1 py-3 px-6 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-sm sm:text-base shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     <Send className="w-4 h-4 text-amber-300" />
                     <span>{isSubmitting ? "Submitting RFQ..." : "Submit Quotation Request"}</span>
@@ -456,7 +456,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                         `Please share current availability and rates.`;
                       SITE_CONFIG.openWhatsApp(msg);
                     }}
-                    className="py-3 px-5 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-800 font-bold text-xs sm:text-sm border border-emerald-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="py-3 px-5 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-800 font-bold text-sm sm:text-base border border-emerald-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
                     <span>WhatsApp Directly</span>

@@ -112,16 +112,16 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-1 rounded-md bg-[#0F3D2E] text-amber-300 text-[11px] font-bold">
+                    <span className="px-2.5 py-1 rounded-md bg-[#0F3D2E] text-amber-300 text-xs sm:text-sm font-bold">
                       {orig.badge}
                     </span>
                   </div>
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <div className="text-xs text-amber-400 font-semibold uppercase font-mono flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
+                    <div className="text-xs sm:text-sm text-amber-400 font-semibold uppercase font-mono flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
                       <span>{orig.region}</span>
                     </div>
-                    <div className="font-serif text-lg font-bold">
+                    <div className="font-serif text-lg sm:text-xl font-bold">
                       {orig.product}
                     </div>
                   </div>
@@ -129,21 +129,21 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
 
                 {/* Content */}
                 <div className="p-6 space-y-4">
-                  <div className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded inline-block">
+                  <div className="text-xs sm:text-sm font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded inline-block">
                     {orig.subregion}
                   </div>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
                     {orig.desc}
                   </p>
                   
                   <div className="space-y-2 pt-2 border-t border-stone-200">
-                    <div className="text-[11px] font-bold text-stone-800 uppercase tracking-wider">
+                    <div className="text-xs sm:text-sm font-bold text-stone-800 uppercase tracking-wider">
                       Key Quality Parameters:
                     </div>
-                    <div className="grid grid-cols-1 gap-1.5 text-xs text-stone-700">
+                    <div className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm text-stone-700">
                       {orig.factors.map((f, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                           <span>{f}</span>
                         </div>
                       ))}
@@ -155,7 +155,7 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
               <div className="p-6 pt-0">
                 <button
                   onClick={() => onOpenQuoteModal ? onOpenQuoteModal({ origin: orig.region, name: orig.product }) : null}
-                  className="w-full py-2.5 rounded-lg border border-stone-300 hover:border-[#0F3D2E] hover:bg-[#0F3D2E] hover:text-white text-stone-800 text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-lg border border-stone-300 hover:border-[#0F3D2E] hover:bg-[#0F3D2E] hover:text-white text-stone-800 text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   <span>Inquire for {orig.product}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -168,11 +168,11 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
         {/* ── 5-Step Sourcing Workflow ── */}
         <div className="bg-[#041A12] text-white rounded-3xl p-8 sm:p-12 space-y-10 shadow-xl border border-emerald-900/50">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">Systematic Execution</span>
+            <span className="text-xs sm:text-sm font-bold text-amber-400 uppercase tracking-wider">Systematic Execution</span>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold">
               How We Approach Sourcing (5-Step Framework)
             </h3>
-            <p className="text-xs sm:text-sm text-stone-300">
+            <p className="text-sm sm:text-base text-stone-300">
               Clear milestone progression ensuring specification alignment, availability checks, and dependable supply coordination.
             </p>
           </div>
@@ -187,11 +187,11 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
                   <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-400 font-mono font-extrabold text-base flex items-center justify-center">
                     {st.num}
                   </div>
-                  <h4 className="font-serif text-sm font-bold text-white leading-snug">
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-white leading-snug">
                     {st.title}
                   </h4>
                 </div>
-                <p className="text-xs text-stone-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
                   {st.desc}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export default function SourcingOriginSection({ onOpenQuoteModal, onScrollToSect
           {/* Sourcing Philosophy Callout */}
           <div className="p-6 rounded-2xl bg-white/5 border border-amber-400/30 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-1 text-center sm:text-left">
-              <div className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
+              <div className="text-xs sm:text-sm font-bold text-amber-300 uppercase tracking-wider font-mono">
                 Our Sourcing Philosophy
               </div>
               <p className="text-xs sm:text-sm text-stone-200 max-w-3xl leading-relaxed">

@@ -71,13 +71,13 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
             {complianceBodies.map((body, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 border border-stone-200 space-y-3 shadow-xs">
                 <div className="flex items-center justify-between">
-                  <span className="font-serif text-lg font-bold text-stone-900">{body.name}</span>
-                  <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">
+                  <span className="font-serif text-lg sm:text-xl font-bold text-stone-900">{body.name}</span>
+                  <span className="text-xs sm:text-sm bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">
                     {body.badge}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-amber-700">{body.role}</div>
-                <p className="text-xs text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
+                <div className="text-sm font-semibold text-amber-700">{body.role}</div>
+                <p className="text-sm text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
                   {body.desc}
                 </p>
               </div>

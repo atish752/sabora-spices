@@ -51,8 +51,8 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                   </p>
                 </div>
 
-                <div className="space-y-2 text-xs">
-                  <div className="font-semibold text-stone-900 uppercase tracking-wider text-[11px] mb-2">
+                <div className="space-y-2 text-sm">
+                  <div className="font-semibold text-stone-900 uppercase tracking-wider text-xs mb-2">
                     Terms Navigation
                   </div>
                   {[
@@ -85,19 +85,19 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                 </div>
 
                 <div className="pt-4 border-t border-stone-100 space-y-3">
-                  <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 space-y-1">
+                  <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs sm:text-sm text-amber-900 space-y-1">
                     <div className="font-bold flex items-center gap-1.5 text-amber-800">
                       <Scale className="w-4 h-4 text-amber-700" />
                       <span>Commercial Wholesale Only</span>
                     </div>
-                    <p className="text-stone-700 text-[11px] leading-relaxed">
+                    <p className="text-stone-700 text-xs sm:text-sm leading-relaxed">
                       All contracts entered into by SABORA SPICES constitute business-to-business (B2B) commercial sales of agricultural commodities.
                     </p>
                   </div>
 
                   <button
                     onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onNavigate && onNavigate('contact')}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0F3D2E] hover:bg-[#165641] text-white text-xs font-bold transition-all text-center cursor-pointer shadow-xs"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#0F3D2E] hover:bg-[#165641] text-white text-xs sm:text-sm font-bold transition-all text-center cursor-pointer shadow-xs"
                   >
                     Request Contract Terms
                   </button>

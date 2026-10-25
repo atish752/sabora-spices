@@ -169,12 +169,12 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           {/* Floating Video Player Controls (Bottom-Right Corner) */}
           <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex items-center gap-2">
             {!isPlaying ? (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-[10px] sm:text-xs font-bold shadow-md animate-pulse">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/90 text-stone-950 text-xs sm:text-sm font-bold shadow-md animate-pulse">
                 <Play className="w-3 h-3 fill-current" />
                 <span>Tap to Play</span>
               </span>
             ) : (
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-emerald-300 text-[10px] font-semibold border border-white/10">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-emerald-300 text-xs font-semibold border border-white/10">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                 <span>HARVEST FOOTAGE</span>
               </span>
@@ -224,7 +224,7 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
 
           {/* Mobile Overlay Badge */}
           <div className="absolute top-3 left-3 z-20 pointer-events-none">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-amber-400/30 text-amber-300 text-[11px] font-semibold shadow-md">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-amber-400/30 text-amber-300 text-xs font-semibold shadow-md">
               <Leaf className="w-3 h-3 text-emerald-400" />
               <span>Direct Origin Harvest</span>
             </span>
@@ -263,11 +263,11 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
         <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
           
           {/* Brand Heading & Concise Punchline (Cleanly below the video) */}
-          <div className="space-y-1 text-center md:text-left">
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-3.5xl font-extrabold text-amber-100 tracking-tight">
+          <div className="space-y-1.5 text-center md:text-left">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-amber-100 tracking-tight">
               Whole Spices & Makhana
             </h1>
-            <p className="text-xs sm:text-sm text-stone-300">
+            <p className="text-sm sm:text-base text-stone-300">
               Direct Origin Procurement • Delhi Logistics Hub • Wholesale Supply
             </p>
           </div>
@@ -276,24 +276,24 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button
               onClick={() => handleCtaClick('/contact')}
-              className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
+              className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
             >
               <span>Request Wholesale Quote</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             <button
               onClick={() => handleCtaClick('/products')}
-              className="px-4 sm:px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md text-white text-xs sm:text-sm font-semibold border border-white/20 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              className="px-4.5 sm:px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md text-white text-sm sm:text-base font-semibold border border-white/20 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
             >
               <span>Browse Products</span>
             </button>
 
             <button
               onClick={() => handleCtaClick('whatsapp')}
-              className="px-4 sm:px-5 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-xs sm:text-sm font-semibold border border-emerald-500/40 shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
+              className="px-4.5 sm:px-5 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-sm sm:text-base font-semibold border border-emerald-500/40 shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 fill-emerald-400" />
               <span>WhatsApp Desk</span>
             </button>
           </div>

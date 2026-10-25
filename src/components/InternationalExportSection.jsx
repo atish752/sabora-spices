@@ -89,15 +89,15 @@ export default function InternationalExportSection({ onOpenQuoteModal, onScrollT
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                    <span className="text-xs sm:text-sm font-mono font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
                       Step {st.num}
                     </span>
-                    <span className="text-[11px] text-stone-400 font-mono">Export Desk</span>
+                    <span className="text-xs text-stone-500 font-mono">Export Desk</span>
                   </div>
-                  <h4 className="font-serif text-base font-bold text-stone-900">
+                  <h4 className="font-serif text-base sm:text-lg font-bold text-stone-900">
                     {st.title}
                   </h4>
-                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
                     {st.desc}
                   </p>
                 </div>
@@ -109,24 +109,24 @@ export default function InternationalExportSection({ onOpenQuoteModal, onScrollT
         {/* Global Freight & Documentation Callout */}
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-700 uppercase font-mono">
+            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-amber-700 uppercase font-mono">
               <Anchor className="w-4 h-4 text-emerald-700" />
               <span>Multi-Modal Global Freight Desk</span>
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
               Ocean Container Freight & Air Cargo Ready
             </h3>
-            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal max-w-2xl">
+            <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal max-w-2xl">
               We coordinate sea freight container shipments (20ft / 40ft FCL & LCL) via major Indian ports (Cochin, Tuticorin, Chennai, Nhava Sheva, Kolkata) and rapid air cargo freight for urgent samples and high-value cardamom shipments.
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs font-semibold">
+              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs sm:text-sm font-semibold">
                 FOB & CIF Port Pricing
               </span>
-              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs font-semibold">
+              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs sm:text-sm font-semibold">
                 Palletized Cargo Loading
               </span>
-              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs font-semibold">
+              <span className="px-3 py-1 rounded bg-stone-100 text-stone-700 text-xs sm:text-sm font-semibold">
                 Private-Label Artwork Integration
               </span>
             </div>
@@ -134,20 +134,20 @@ export default function InternationalExportSection({ onOpenQuoteModal, onScrollT
 
           <div className="lg:col-span-4 bg-emerald-900 text-white rounded-2xl p-6 space-y-4 shadow-md">
             <div className="space-y-1">
-              <div className="text-xs font-mono text-amber-300 font-bold uppercase">
+              <div className="text-xs sm:text-sm font-mono text-amber-300 font-bold uppercase">
                 International Inquiries
               </div>
-              <div className="font-serif text-lg font-bold">
+              <div className="font-serif text-lg sm:text-xl font-bold">
                 Connect With Export Desk
               </div>
-              <p className="text-xs text-emerald-100 leading-relaxed">
+              <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed">
                 Direct WhatsApp and email consultation for destination country compliance, sample evaluation, and formal CIF quotes.
               </p>
             </div>
 
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES Export Desk, I would like to inquire about international export supply and CIF terms.")}
-              className="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs shadow transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm shadow transition-all cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Chat on WhatsApp</span>
               <ArrowRight className="w-4 h-4" />
