@@ -49,14 +49,14 @@ export default function LabTestingPage({ onNavigate, onOpenQuoteModal, onSubmitI
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <FlaskConical className="w-3.5 h-3.5 text-amber-600" />
               <span>Testing Capabilities</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Standard Laboratory Testing Parameters
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Analytical testing arrangements can be customized according to buyer specifications or regulatory requirements of destination markets.
             </p>
           </div>
@@ -64,27 +64,27 @@ export default function LabTestingPage({ onNavigate, onOpenQuoteModal, onSubmitI
           <div className="space-y-8">
             {testParameters.map((group, idx) => (
               <div key={idx} className="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs">
-                <div className="bg-[#041A12] px-6 py-3.5 text-white font-serif font-bold text-base flex items-center justify-between">
+                <div className="bg-[#041A12] px-6 py-3.5 text-white font-serif font-bold text-lg flex items-center justify-between">
                   <span>{group.group}</span>
-                  <span className="text-xs text-amber-300 font-mono font-normal">NABL Methodologies</span>
+                  <span className="text-xs sm:text-sm text-amber-300 font-mono font-bold">NABL Methodologies</span>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs sm:text-sm">
+                  <table className="w-full text-left text-sm sm:text-base">
                     <thead>
-                      <tr className="bg-stone-50 text-stone-600 border-b border-stone-200">
-                        <th className="py-3 px-6 font-semibold">Test Parameter</th>
-                        <th className="py-3 px-6 font-semibold">Testing Method / Standard</th>
-                        <th className="py-3 px-6 font-semibold">Target Specification</th>
-                        <th className="py-3 px-6 font-semibold">Quality Significance</th>
+                      <tr className="bg-stone-50 text-stone-700 border-b border-stone-200">
+                        <th className="py-3 px-6 font-bold text-xs sm:text-sm">Test Parameter</th>
+                        <th className="py-3 px-6 font-bold text-xs sm:text-sm">Testing Method / Standard</th>
+                        <th className="py-3 px-6 font-bold text-xs sm:text-sm">Target Specification</th>
+                        <th className="py-3 px-6 font-bold text-xs sm:text-sm">Quality Significance</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-stone-100 text-stone-700">
                       {group.tests.map((test, i) => (
                         <tr key={i} className="hover:bg-emerald-50/20 transition-colors">
                           <td className="py-3.5 px-6 font-bold text-stone-900">{test.name}</td>
-                          <td className="py-3.5 px-6 font-mono text-xs text-stone-500">{test.standard}</td>
+                          <td className="py-3.5 px-6 font-mono text-xs sm:text-sm text-stone-500">{test.standard}</td>
                           <td className="py-3.5 px-6 text-[#0F3D2E] font-semibold">{test.limit}</td>
-                          <td className="py-3.5 px-6 text-stone-600 text-xs">{test.significance}</td>
+                          <td className="py-3.5 px-6 text-stone-600 text-xs sm:text-sm">{test.significance}</td>
                         </tr>
                       ))}
                     </tbody>

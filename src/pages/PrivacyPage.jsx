@@ -105,7 +105,7 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
             </div>
 
             {/* Comprehensive Policy Clauses (Right Col - 8 cols on lg) */}
-            <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-10 border border-stone-200 shadow-sm space-y-10 text-stone-800">
+            <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-10 border border-stone-200 shadow-sm space-y-10 text-stone-800 text-sm sm:text-base leading-relaxed">
               
               {/* Introduction */}
               <div className="space-y-4">
@@ -115,7 +115,7 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                 <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   At <strong>SABORA SPICES</strong>, operated from Jahangirpuri, Delhi – 110033, India, we recognize the importance of commercial privacy and data security. Whether you are an Indian wholesale buyer, an international importer, a culinary distributor, or a food manufacturer, your trade inquiries, entity credentials, and transactional details are handled with institutional rigor and strict confidentiality.
                 </p>
-                <p className="text-sm leading-relaxed text-stone-700">
+                <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   This Privacy Policy delineates how we collect, process, maintain, and safeguard personal and commercial data when you visit our website (<strong>www.saboraspices.com</strong>), communicate via our WhatsApp desk, or submit formal Requests for Quotation (RFQs).
                 </p>
               </div>
@@ -129,7 +129,7 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                 <h3 className="font-serif text-xl font-bold text-stone-900">
                   1. Scope & Applicability
                 </h3>
-                <p className="text-sm leading-relaxed text-stone-700">
+                <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   This policy applies to all visitors, commercial prospective buyers, existing institutional clients, and supply chain partners globally. SABORA SPICES engages exclusively in wholesale agricultural sourcing and supply (Whole Green Cardamom, Makhana/Fox Nuts, Whole Turmeric, and associated whole spices) and does not engage in retail consumer profiling or unauthorized data commodification.
                 </p>
               </div>

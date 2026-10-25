@@ -106,7 +106,7 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
             </div>
 
             {/* Comprehensive Legal Clauses (Right Col - 8 cols on lg) */}
-            <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-10 border border-stone-200 shadow-sm space-y-10 text-stone-800">
+            <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-10 border border-stone-200 shadow-sm space-y-10 text-stone-800 text-sm sm:text-base leading-relaxed">
               
               {/* Introduction */}
               <div className="space-y-4">
@@ -116,7 +116,7 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                 <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   Welcome to <strong>SABORA SPICES</strong>, headquartered at Jahangirpuri, Delhi – 110033, India. These Terms and Conditions govern all commercial quotations, sample dispatches, purchase orders, proforma invoices, supply agreements, and export shipments executed between SABORA SPICES ("Seller", "we", "our") and the procurement entity ("Buyer", "you").
                 </p>
-                <p className="text-sm leading-relaxed text-stone-700">
+                <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   By requesting a quotation, issuing a Purchase Order, making an advance payment, or accepting delivery of whole spices or makhana consignments, the Buyer explicitly accepts and agrees to be bound by these commercial conditions.
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                 <h3 className="font-serif text-xl font-bold text-stone-900">
                   1. Scope & Nature of Transactions
                 </h3>
-                <p className="text-sm leading-relaxed text-stone-700">
+                <p className="text-sm sm:text-base leading-relaxed text-stone-700">
                   SABORA SPICES engages exclusively in commercial B2B procurement, processing, grading, packaging, and supply of whole agricultural commodities — principally <strong>Whole Green Cardamom</strong>, <strong>Makhana (Fox Nuts)</strong>, <strong>Whole Turmeric Fingers</strong>, and select whole spices. These terms apply to all transactions irrespective of whether the buyer is a domestic distributor in India or an international importer abroad.
                 </p>
               </div>

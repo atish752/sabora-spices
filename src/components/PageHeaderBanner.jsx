@@ -28,22 +28,22 @@ export default function PageHeaderBanner({
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 space-y-4">
         
         {/* Breadcrumb Trail */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-stone-300 font-medium">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-stone-300 font-medium">
           <button
             onClick={() => onNavigate && onNavigate('home')}
             className="flex items-center gap-1.5 hover:text-amber-400 transition-colors cursor-pointer"
           >
-            <Home className="w-3.5 h-3.5" />
+            <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Home</span>
           </button>
-          <ChevronRight className="w-3.5 h-3.5 text-stone-500" />
+          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-500" />
           <span className="text-amber-300 font-semibold">{breadcrumbCurrent || title}</span>
         </nav>
 
         {/* Section Badge */}
         {badge && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wide uppercase">
-            <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-bold tracking-wide uppercase">
+            <Leaf className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
             <span>{badge}</span>
           </div>
         )}
@@ -54,7 +54,7 @@ export default function PageHeaderBanner({
             {title}
           </h1>
           {subtitle && (
-            <p className="text-sm sm:text-base text-stone-300 font-normal leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg text-stone-300 font-normal leading-relaxed max-w-3xl">
               {subtitle}
             </p>
           )}
@@ -64,7 +64,7 @@ export default function PageHeaderBanner({
         <div className="pt-2 flex flex-wrap items-center gap-3">
           <button
             onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onNavigate && onNavigate('contact')}
-            className="px-4 sm:px-5 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer border border-amber-300/40"
+            className="px-4 sm:px-5 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-md transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer border border-amber-300/40"
           >
             <FileText className="w-4 h-4" />
             <span>Request Wholesale Quote</span>
@@ -72,7 +72,7 @@ export default function PageHeaderBanner({
 
           <button
             onClick={() => SITE_CONFIG.openWhatsApp(`Hello SABORA SPICES, I am viewing the ${breadcrumbCurrent || title} page and would like to inquire.`)}
-            className="px-4 sm:px-5 py-2.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-semibold transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer"
+            className="px-4 sm:px-5 py-2.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-sm sm:text-base font-semibold transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
             <span>WhatsApp Commercial Desk</span>

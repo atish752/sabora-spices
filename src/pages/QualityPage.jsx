@@ -28,14 +28,14 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Thermometer className="w-3.5 h-3.5 text-amber-600" />
               <span>Controlled Environment</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Warehouse Storage & Environmental Controls
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Whole green cardamom and makhana are highly sensitive to moisture and light. Our Delhi storage hub implements strict Good Warehousing Practices (GWP):
             </p>
           </div>
@@ -45,8 +45,8 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
               <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold">
                 <Thermometer className="w-5 h-5" />
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Moisture & Humidity Controls</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Moisture & Humidity Controls</h4>
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Cardamom is maintained in cool, dark, dry storage below 60% relative humidity. Makhana is sealed in barrier packaging to prevent moisture uptake and loss of crispness.
               </p>
             </div>
@@ -55,8 +55,8 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
               <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Pest & Rodent Protection</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Pest & Rodent Protection</h4>
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Regular non-toxic pest monitoring and professional sanitation. Products are stored on elevated food-grade plastic or heat-treated pallets away from floor and walls.
               </p>
             </div>
@@ -65,8 +65,8 @@ export default function QualityPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
               <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center text-stone-800 font-bold">
                 <Layers className="w-5 h-5" />
               </div>
-              <h4 className="font-serif text-lg font-bold text-stone-900">Batch Segregation & FIFO</h4>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Batch Segregation & FIFO</h4>
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Strict First-In, First-Out (FIFO) stock rotation. Each intake lot is assigned a traceable internal identifier linking origin, moisture check, and packing date.
               </p>
             </div>

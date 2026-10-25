@@ -61,7 +61,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search all 25 questions (e.g. cardamom, makhana, MOQ, testing, export)..."
-              className="w-full pl-11 pr-4 py-3 rounded-xl border border-stone-300 bg-stone-50 text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition-all shadow-xs"
+              className="w-full pl-11 pr-4 py-3 rounded-xl border border-stone-300 bg-stone-50 text-stone-900 text-sm sm:text-base placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition-all shadow-xs"
             />
           </div>
 
@@ -72,7 +72,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  className={`px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                     isSelected
                       ? 'bg-[#0F3D2E] text-white shadow-sm'
                       : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
@@ -105,10 +105,10 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
                     aria-expanded={isOpen}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded shrink-0">
+                      <span className="font-mono text-xs sm:text-sm font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded shrink-0">
                         Q{faq.id}
                       </span>
-                      <span className="font-serif text-sm sm:text-base font-bold text-stone-900">
+                      <span className="font-serif text-base sm:text-lg font-bold text-stone-900">
                         {faq.question}
                       </span>
                     </div>
@@ -118,7 +118,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-5 pt-1 border-t border-stone-100 text-xs sm:text-sm text-stone-600 leading-relaxed whitespace-pre-line animate-fadeIn">
+                    <div className="px-5 sm:px-6 pb-5 pt-1 border-t border-stone-100 text-sm sm:text-base text-stone-600 leading-relaxed whitespace-pre-line animate-fadeIn">
                       {faq.answer}
                     </div>
                   )}
@@ -126,7 +126,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
               );
             })
           ) : (
-            <div className="p-8 text-center bg-stone-50 rounded-2xl border border-stone-200 text-stone-500 text-xs sm:text-sm space-y-2">
+            <div className="p-8 text-center bg-stone-50 rounded-2xl border border-stone-200 text-stone-500 text-sm sm:text-base space-y-2">
               <p>No questions matched your search query "{searchQuery}".</p>
               <button
                 onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
@@ -144,7 +144,7 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
             <h3 className="font-serif text-lg sm:text-xl font-bold">
               Still Have Specific Sourcing Questions?
             </h3>
-            <p className="text-xs sm:text-sm text-stone-300 max-w-xl">
+            <p className="text-sm sm:text-base text-stone-300 max-w-xl">
               Our team welcomes commercial enquiries about Green Cardamom, Makhana, and other whole spices. Contact SABORA SPICES directly.
             </p>
           </div>
@@ -152,13 +152,13 @@ export default function FaqSection({ onScrollToSection, onOpenQuoteModal }) {
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
-              className="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shadow transition-all cursor-pointer"
+              className="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm sm:text-base shadow transition-all cursor-pointer"
             >
               Request a Quote
             </button>
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I have a specific sourcing question.")}
-              className="px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/20 transition-all cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm sm:text-base font-semibold border border-white/20 transition-all cursor-pointer flex items-center gap-1.5"
             >
               <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
               <span>WhatsApp Us</span>

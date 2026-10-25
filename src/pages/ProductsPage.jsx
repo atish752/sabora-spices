@@ -169,7 +169,7 @@ export default function ProductsPage({
                 1
               </div>
               <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Sabora-Branded Pouches</h4>
-              <p className="text-sm text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Premium multi-layer metallic barrier zip pouches (50g, 100g, 250g, 500g, 1kg) designed to preserve volatile aroma and shield against humidity.
               </p>
             </div>
@@ -179,7 +179,7 @@ export default function ProductsPage({
                 2
               </div>
               <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Buyer-Specific & Private-Label</h4>
-              <p className="text-sm text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Custom packaging with your brand artwork, barcodes, nutritional information, and packaging weights, subject to feasibility and agreement.
               </p>
             </div>
@@ -189,7 +189,7 @@ export default function ProductsPage({
                 3
               </div>
               <h4 className="font-serif text-lg sm:text-xl font-bold text-stone-900">Bulk Commercial & Export Cartons</h4>
-              <p className="text-sm text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 10kg, 25kg, and 50kg bulk packaging in food-grade poly-lined gunny bags, HDPE woven sacks, and heavy-duty 5-ply export corrugated cartons.
               </p>
             </div>

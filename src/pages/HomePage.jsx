@@ -140,8 +140,8 @@ export default function HomePage({
                   </div>
 
                   {/* Clean Specs Badge */}
-                  <div className="flex items-center justify-between gap-2 text-xs sm:text-sm text-stone-600 bg-stone-50 rounded-lg px-3 py-2 border border-stone-100">
-                    <span className="text-stone-500 text-xs font-medium">Grade:</span>
+                  <div className="flex items-center justify-between gap-2 text-sm sm:text-base text-stone-600 bg-stone-50 rounded-lg px-3 py-2 border border-stone-100">
+                    <span className="text-stone-500 text-xs sm:text-sm font-medium">Grade:</span>
                     <span className="font-semibold text-stone-800 truncate">
                       {product.gradesAvailable?.[0] || 'Commercial Bold'} • {product.moq || '500 Kg MOQ'}
                     </span>
@@ -151,7 +151,7 @@ export default function HomePage({
                   <div className="pt-2 border-t border-stone-100 flex items-center justify-between gap-2">
                     <button
                       onClick={() => onSelectProduct && onSelectProduct(product)}
-                      className="text-xs sm:text-sm font-semibold text-[#0F3D2E] hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                      className="text-sm sm:text-base font-semibold text-[#0F3D2E] hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
                     >
                       <span>Specifications</span>
                       <ArrowRight className="w-4 h-4" />
@@ -159,7 +159,7 @@ export default function HomePage({
 
                     <button
                       onClick={() => onOpenQuoteModal && onOpenQuoteModal(product)}
-                      className="px-4 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold transition-colors cursor-pointer border border-emerald-200"
+                      className="px-4 py-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#0F3D2E] text-sm sm:text-base font-bold transition-colors cursor-pointer border border-emerald-200"
                     >
                       Request Quote
                     </button>

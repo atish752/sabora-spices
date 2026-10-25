@@ -49,14 +49,14 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Calendar className="w-3.5 h-3.5 text-amber-600" />
               <span>Crop Harvest Cycles</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Seasonal Procurement Timelines
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Understanding seasonal cycles enables business buyers to plan bulk procurement during peak harvest windows for favorable pricing and fresh crop quality.
             </p>
           </div>
@@ -70,11 +70,11 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
                     {item.peakMonths}
                   </span>
                 </div>
-                <div className="text-sm font-semibold text-amber-700 flex items-center gap-1">
+                <div className="text-sm sm:text-base font-semibold text-amber-700 flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{item.region}</span>
                 </div>
-                <p className="text-sm text-stone-600 leading-relaxed pt-1 border-t border-stone-200">
+                <p className="text-sm sm:text-base text-stone-600 leading-relaxed pt-1 border-t border-stone-200">
                   {item.notes}
                 </p>
               </div>
@@ -89,14 +89,14 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-8">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs sm:text-sm font-bold uppercase tracking-wide">
               <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
               <span>Due Diligence Protocol</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Pre-Dispatch Sourcing Inspection Checklist
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Every batch consolidated from regional growing belts undergoes rigorous pre-intake verification before transit to Delhi:
             </p>
           </div>
@@ -110,8 +110,8 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
             ].map((check, i) => (
               <div key={i} className="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h4 className="font-serif font-bold text-stone-900 text-sm">{check.title}</h4>
-                <p className="text-xs text-stone-600 leading-relaxed">{check.desc}</p>
+                <h4 className="font-serif font-bold text-stone-900 text-base sm:text-lg">{check.title}</h4>
+                <p className="text-sm sm:text-base text-stone-600 leading-relaxed">{check.desc}</p>
               </div>
             ))}
           </div>

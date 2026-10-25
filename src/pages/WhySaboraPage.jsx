@@ -71,14 +71,14 @@ export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitIn
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Award className="w-3.5 h-3.5 text-amber-600" />
               <span>Commercial Advantage</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               SABORA SPICES vs Unorganized Open-Market Traders
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Compare our structured, transparent enterprise approach with conventional open-market brokers.
             </p>
           </div>
@@ -86,14 +86,14 @@ export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitIn
           {/* Responsive Comparison Table */}
           <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs sm:text-sm">
+              <table className="w-full text-left text-sm sm:text-base">
                 <thead>
                   <tr className="bg-[#041A12] text-white">
-                    <th className="py-4 px-6 font-semibold uppercase tracking-wider text-xs">Evaluation Criterion</th>
-                    <th className="py-4 px-6 font-semibold text-amber-300 uppercase tracking-wider text-xs bg-[#0F3D2E]">
+                    <th className="py-4 px-6 font-bold uppercase tracking-wider text-xs sm:text-sm">Evaluation Criterion</th>
+                    <th className="py-4 px-6 font-bold text-amber-300 uppercase tracking-wider text-xs sm:text-sm bg-[#0F3D2E]">
                       SABORA SPICES Advantage
                     </th>
-                    <th className="py-4 px-6 font-semibold text-stone-400 uppercase tracking-wider text-xs">
+                    <th className="py-4 px-6 font-bold text-stone-300 uppercase tracking-wider text-xs sm:text-sm">
                       Unorganized Commodity Traders
                     </th>
                   </tr>
@@ -104,13 +104,13 @@ export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitIn
                       <td className="py-4 px-6 font-bold text-stone-900 whitespace-nowrap sm:whitespace-normal">
                         {item.criterion}
                       </td>
-                      <td className="py-4 px-6 bg-emerald-50/40 text-[#0F3D2E] font-medium">
+                      <td className="py-4 px-6 bg-emerald-50/40 text-[#0F3D2E] font-medium text-sm sm:text-base">
                         <div className="flex items-start gap-2">
                           <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                           <span>{item.sabora}</span>
                         </div>
                       </td>
-                      <td className="py-4 px-6 text-stone-600">
+                      <td className="py-4 px-6 text-stone-600 text-sm sm:text-base">
                         <div className="flex items-start gap-2">
                           <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                           <span>{item.traders}</span>

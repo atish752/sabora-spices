@@ -5,10 +5,7 @@ import {
   Send, 
   CheckCircle2, 
   Sparkles, 
-  ShieldCheck, 
-  Package, 
-  ArrowRight,
-  Phone
+  ArrowRight
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -21,8 +18,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
     name: '',
     phone: '',
     product: 'Green Cardamom',
-    quantity: '',
-    requirement: ''
+    quantity: ''
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -61,7 +57,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
   }, [isOpen]);
 
   const handleDirectWhatsApp = () => {
-    const message = `Hello SABORA SPICES, I am visiting your website and would like an instant quotation for whole spices / makhana. Please share current rates and grade availability.`;
+    const message = `Hello SABORA SPICES, I am visiting your website and would like an instant quotation for whole spices / makhana. Please share current mandi rates and grade availability.`;
     SITE_CONFIG.openWhatsApp(message);
     handleClose();
   };
@@ -78,7 +74,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
           phone: formData.phone,
           product: formData.product,
           quantity: formData.quantity || 'Wholesale batch inquiry',
-          notes: formData.requirement || 'Quick 10-Second Lead Desk Submission',
+          notes: 'Quick 10-Second Lead Desk Submission',
           source: '10s_lead_popup'
         });
       }
@@ -90,7 +86,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
       // Automatically close after a pleasant confirmation pause
       setTimeout(() => {
         setIsOpen(false);
-      }, 3500);
+      }, 2500);
     } catch (err) {
       console.error("Popup inquiry submit error:", err);
       setSubmitted(true);
@@ -104,127 +100,109 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
   return (
     <div 
       onClick={handleClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fadeIn cursor-pointer"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn cursor-pointer"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-headline"
     >
       <div 
-        className="relative w-full max-w-md max-h-[85vh] flex flex-col bg-gradient-to-b from-[#041A12] via-[#082E20] to-[#03140E] text-white rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] border border-amber-400/40 overflow-hidden animate-scaleUp cursor-default"
+        className="relative w-full max-w-sm sm:max-w-md max-h-[90vh] flex flex-col bg-gradient-to-b from-[#052117] via-[#082E20] to-[#041A12] text-white rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.7)] border border-amber-400/40 overflow-hidden animate-scaleUp cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Decorative Ambient Glows */}
-        <div className="absolute -top-16 -right-16 w-36 h-36 bg-amber-500/20 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none" />
+        {/* Decorative Ambient Corner Glows */}
+        <div className="absolute -top-12 -right-12 w-28 h-28 bg-amber-500/15 rounded-full blur-xl pointer-events-none" />
+        <div className="absolute -bottom-12 -left-12 w-28 h-28 bg-emerald-500/15 rounded-full blur-xl pointer-events-none" />
 
         {/* Prominent High-Contrast Close Button ("Cut") on Top Right */}
         <button
+          type="button"
           onClick={handleClose}
-          className="absolute top-3.5 right-3.5 z-30 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/50 hover:bg-rose-600 text-stone-200 hover:text-white transition-all duration-200 border border-white/20 hover:border-rose-400 shadow-lg cursor-pointer group active:scale-90 focus:outline-none focus:ring-2 focus:ring-amber-400"
-          aria-label="Close inquiry popup"
+          className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-30 inline-flex items-center justify-center w-10 h-10 rounded-full bg-stone-900/90 hover:bg-rose-600 text-stone-100 hover:text-white transition-all duration-200 border-2 border-stone-600 hover:border-rose-400 shadow-xl cursor-pointer group active:scale-90 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          aria-label="Close popup (Cut)"
           title="Close (Esc)"
         >
-          <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" />
+          <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-200" />
         </button>
 
-        {/* Modal Interior (Scrollable container so it fits comfortably on any screen height) */}
-        <div className="overflow-y-auto custom-scrollbar p-5 sm:p-6 space-y-4 flex-1">
+        {/* Modal Interior (Scrollable container in case of very short screens) */}
+        <div className="overflow-y-auto custom-scrollbar p-4 sm:p-5 space-y-3 sm:space-y-3.5 flex-1">
           
           {/* Header */}
-          <div className="space-y-1.5 pr-8">
+          <div className="space-y-1 pr-12">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               <span>Direct Wholesale Desk</span>
             </div>
             
-            <h2 id="modal-headline" className="font-serif text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+            <h2 id="modal-headline" className="font-serif text-lg sm:text-xl font-black text-white tracking-tight leading-snug">
               Looking for Wholesale Spices or Makhana?
             </h2>
             
             <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-              Get direct mandi rates, laboratory CoA details, and fast dispatch from our Delhi hub.
+              Get direct mandi rates & lab CoA for Cardamom, Makhana & Turmeric.
             </p>
           </div>
 
-          {/* Quick Value Props Chips */}
-          <div className="grid grid-cols-3 gap-1.5 text-center text-xs font-semibold text-emerald-200">
-            <div className="py-1.5 px-2 rounded-lg bg-emerald-950/70 border border-emerald-800/40 truncate">
-              Kerala Cardamom
-            </div>
-            <div className="py-1.5 px-2 rounded-lg bg-emerald-950/70 border border-emerald-800/40 truncate">
-              Mithila Makhana
-            </div>
-            <div className="py-1.5 px-2 rounded-lg bg-emerald-950/70 border border-emerald-800/40 truncate">
-              Salem Turmeric
-            </div>
-          </div>
-
           {/* WhatsApp 1-Click Direct Button (Instant Option) */}
-          <div className="space-y-1 pt-0.5">
+          <div>
             <button
               type="button"
               onClick={handleDirectWhatsApp}
-              className="w-full py-2.5 sm:py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-950/40 border border-emerald-400/40 flex items-center justify-center gap-2 transition-all cursor-pointer group"
+              className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md border border-emerald-400/40 flex items-center justify-center gap-2 transition-all cursor-pointer group"
             >
               <MessageCircle className="w-4 h-4 fill-white text-emerald-500 group-hover:scale-110 transition-transform" />
               <span>Chat on WhatsApp (+91 78809 06610)</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <div className="text-center text-[11px] sm:text-xs text-stone-400">
-              Instant response • Live spot rates • Catalog on WhatsApp
-            </div>
           </div>
 
           {/* Divider */}
-          <div className="relative flex items-center justify-center py-1">
+          <div className="relative flex items-center justify-center py-0.5">
             <div className="border-t border-white/15 w-full" />
-            <span className="bg-[#062419] px-2.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-amber-300 whitespace-nowrap">
+            <span className="bg-[#082E20] px-2.5 text-xs font-bold uppercase tracking-wider text-amber-300 whitespace-nowrap">
               or Send Quick RFQ Form
             </span>
           </div>
 
           {/* Lead Form */}
           {submitted ? (
-            <div className="p-5 rounded-2xl bg-emerald-950/90 border border-emerald-500/50 text-center space-y-2.5 animate-fadeIn">
-              <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto animate-bounce" />
-              <h3 className="font-serif text-lg font-bold text-white">
+            <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-500/50 text-center space-y-2 animate-fadeIn">
+              <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto animate-bounce" />
+              <h3 className="font-serif text-base font-bold text-white">
                 Inquiry Received!
               </h3>
               <p className="text-xs sm:text-sm text-stone-300">
-                Our sourcing manager will contact you via WhatsApp / Phone shortly with current pricing and batch details.
+                Our sourcing manager will contact you on WhatsApp / Phone shortly with current mandi pricing.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3 text-xs sm:text-sm">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div className="space-y-1">
-                  <label className="text-stone-300 font-medium text-xs">Your Name / Firm *</label>
+            <form onSubmit={handleSubmit} className="space-y-2.5 text-xs sm:text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Ramesh Patel"
+                    placeholder="Your Name / Firm *"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-500"
+                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-400"
                   />
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-stone-300 font-medium text-xs">Phone / WhatsApp *</label>
+                <div>
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98765 43210"
+                    placeholder="Phone / WhatsApp *"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-500"
+                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-400"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div className="space-y-1">
-                  <label className="text-stone-300 font-medium text-xs">Crop of Interest</label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
                   <select
                     value={formData.product}
                     onChange={(e) => setFormData({ ...formData, product: e.target.value })}
@@ -237,14 +215,13 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
                   </select>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-stone-300 font-medium text-xs">Approx. Quantity</label>
+                <div>
                   <input
                     type="text"
-                    placeholder="e.g. 500 kg / 2 Tons"
+                    placeholder="Approx Qty (e.g. 500 kg)"
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-500"
+                    className="w-full px-3 py-2 rounded-xl bg-black/40 border border-emerald-800/60 focus:border-amber-400 focus:outline-none text-white text-xs sm:text-sm placeholder-stone-400"
                   />
                 </div>
               </div>
@@ -252,7 +229,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-2.5 sm:py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 border border-amber-300/40 disabled:opacity-50"
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 border border-amber-300/40 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
                 <span>{submitting ? 'Submitting Inquiry...' : 'Submit Wholesale Inquiry'}</span>
@@ -260,14 +237,14 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
             </form>
           )}
 
-          {/* Prominent Dismiss Button ("No thanks / Cut") */}
-          <div className="pt-1 border-t border-white/10">
+          {/* Prominent Dismiss Button ("No thanks / No times") */}
+          <div className="pt-0.5">
             <button
               type="button"
               onClick={handleClose}
-              className="w-full py-2 px-3 rounded-lg text-stone-300 hover:text-white hover:bg-white/10 text-xs sm:text-sm font-medium transition-colors cursor-pointer text-center flex items-center justify-center gap-1.5 border border-white/10"
+              className="w-full py-2 px-3 rounded-xl text-stone-300 hover:text-white hover:bg-white/10 text-xs sm:text-sm font-semibold transition-all cursor-pointer text-center flex items-center justify-center gap-1.5 border border-white/10"
             >
-              <span>✕ No thanks, continue browsing website</span>
+              <span>✕ No thanks, continue browsing</span>
             </button>
           </div>
 

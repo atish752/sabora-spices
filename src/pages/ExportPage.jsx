@@ -37,14 +37,14 @@ export default function ExportPage({ onNavigate, onOpenQuoteModal, onSubmitInqui
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <FileCheck className="w-3.5 h-3.5 text-amber-600" />
               <span>Full Export Dossier</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Standard International Export Documentation
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Every international consignment is accompanied by complete, authenticated trade documentation required for swift customs clearance:
             </p>
           </div>
@@ -54,9 +54,9 @@ export default function ExportPage({ onNavigate, onOpenQuoteModal, onSubmitInqui
               <div key={idx} className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3 shadow-xs">
                 <div className="flex items-center gap-2 text-[#0F3D2E]">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                  <h4 className="font-serif font-bold text-base text-stone-900">{doc.title}</h4>
+                  <h4 className="font-serif font-bold text-lg text-stone-900">{doc.title}</h4>
                 </div>
-                <p className="text-xs text-stone-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                   {doc.desc}
                 </p>
               </div>
@@ -71,45 +71,45 @@ export default function ExportPage({ onNavigate, onOpenQuoteModal, onSubmitInqui
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Anchor className="w-3.5 h-3.5 text-amber-600" />
               <span>Dispatch Ports & Hubs</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Indian Export Gateways & Incoterms
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               From our Delhi hub, consignments are routed through premier maritime and air cargo facilities:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
-              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg font-serif">
+              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg sm:text-xl font-serif">
                 <Ship className="w-5 h-5 text-emerald-700" />
                 <span>Nhava Sheva (JNPT) & Mundra</span>
               </div>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Direct ocean freight gateways for 20ft (FCL) and 40ft High Cube containers to the Middle East, GCC, Europe, and Southeast Asia.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
-              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg font-serif">
+              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg sm:text-xl font-serif">
                 <Anchor className="w-5 h-5 text-amber-700" />
                 <span>ICD Delhi (Patparganj & Tughlakabad)</span>
               </div>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Inland Container Depots located in Delhi for seamless container stuffing, customs inspection, and direct rail movement to ocean terminals.
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
-              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg font-serif">
+              <div className="flex items-center gap-2 text-[#0F3D2E] font-bold text-lg sm:text-xl font-serif">
                 <Plane className="w-5 h-5 text-emerald-700" />
                 <span>Delhi Cargo Terminal (IGI Airport)</span>
               </div>
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                 Air cargo dispatch for urgent high-value cardamom shipments and commercial product sampling with rapid international delivery.
               </p>
             </div>

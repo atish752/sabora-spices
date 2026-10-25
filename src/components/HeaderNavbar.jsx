@@ -148,7 +148,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             {/* Subtitle in short text directly below */}
             <div className="pl-9 sm:pl-11 -mt-0.5">
-              <span className="text-[11px] sm:text-xs font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
+              <span className="text-xs sm:text-sm font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
                 whole spices & makhana
               </span>
             </div>

@@ -55,14 +55,14 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
           
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0F3D2E] text-xs sm:text-sm font-bold uppercase tracking-wide">
               <Landmark className="w-3.5 h-3.5 text-amber-600" />
               <span>Statutory Alignment</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
               Regulatory Frameworks Guiding Our Operations
             </h2>
-            <p className="text-sm text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               Compliance is not merely a formality at SABORA SPICES; it is the cornerstone of how we protect our buyers' business reputations.
             </p>
           </div>
@@ -76,8 +76,8 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
                     {body.badge}
                   </span>
                 </div>
-                <div className="text-sm font-semibold text-amber-700">{body.role}</div>
-                <p className="text-sm text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
+                <div className="text-sm sm:text-base font-semibold text-amber-700">{body.role}</div>
+                <p className="text-sm sm:text-base text-stone-600 leading-relaxed pt-2 border-t border-stone-100">
                   {body.desc}
                 </p>
               </div>
