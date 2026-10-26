@@ -61,20 +61,20 @@ export default function PageHeaderBanner({
         </div>
 
         {/* Action Pills */}
-        <div className="pt-2 flex flex-wrap items-center gap-3">
+        <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <button
             onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : onNavigate && onNavigate('contact')}
-            className="px-4 sm:px-5 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-md transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer border border-amber-300/40"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer border border-amber-300/40 text-center"
           >
-            <FileText className="w-4 h-4" />
+            <FileText className="w-4 h-4 shrink-0" />
             <span>Request Wholesale Quote</span>
           </button>
 
           <button
             onClick={() => SITE_CONFIG.openWhatsApp(`Hello SABORA SPICES, I am viewing the ${breadcrumbCurrent || title} page and would like to inquire.`)}
-            className="px-4 sm:px-5 py-2.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-sm sm:text-base font-semibold transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-sm sm:text-base font-semibold transition-all active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer text-center"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+            <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400 shrink-0" />
             <span>WhatsApp Commercial Desk</span>
           </button>
         </div>

@@ -95,17 +95,17 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button
                 onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : (onScrollToSection && onScrollToSection('contact'))}
-                className="px-5 sm:px-6 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-sm sm:text-base font-semibold shadow transition-all flex items-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-sm sm:text-base font-semibold shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Request a Quote</span>
-                <ArrowRight className="w-4 h-4 text-amber-300" />
+                <ArrowRight className="w-4 h-4 text-amber-300 shrink-0" />
               </button>
               <button
                 onClick={() => onScrollToSection && onScrollToSection('sourcing')}
-                className="px-5 sm:px-6 py-3 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-700 text-sm sm:text-base font-semibold transition-all cursor-pointer"
+                className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-700 text-sm sm:text-base font-semibold transition-all cursor-pointer text-center"
               >
                 Explore Sourcing & Origin
               </button>

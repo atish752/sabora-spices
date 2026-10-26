@@ -273,29 +273,33 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-end gap-3 w-full md:w-auto">
+            {/* Primary Action Button */}
             <button
               onClick={() => handleCtaClick('/contact')}
-              className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center gap-2 cursor-pointer border border-amber-300/50"
+              className="w-full sm:w-auto px-5 sm:px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-sm sm:text-base font-bold shadow-lg hover:shadow-amber-500/25 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer border border-amber-300/50 whitespace-nowrap"
             >
               <span>Request Wholesale Quote</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
             </button>
 
-            <button
-              onClick={() => handleCtaClick('/products')}
-              className="px-4.5 sm:px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md text-white text-sm sm:text-base font-semibold border border-white/20 transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-            >
-              <span>Browse Products</span>
-            </button>
+            {/* Secondary Buttons Row: Browse Products & WhatsApp Desk with extended outer width & clean separation */}
+            <div className="grid grid-cols-2 gap-3 w-full sm:w-auto sm:flex sm:items-center">
+              <button
+                onClick={() => handleCtaClick('/products')}
+                className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md text-white text-xs sm:text-sm md:text-base font-semibold border border-white/25 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-sm text-center"
+              >
+                <span className="whitespace-nowrap">Browse Products</span>
+              </button>
 
-            <button
-              onClick={() => handleCtaClick('whatsapp')}
-              className="px-4.5 sm:px-5 py-3 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-sm sm:text-base font-semibold border border-emerald-500/40 shadow-md transition-all active:scale-95 flex items-center gap-2 cursor-pointer"
-            >
-              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 fill-emerald-400" />
-              <span>WhatsApp Desk</span>
-            </button>
+              <button
+                onClick={() => handleCtaClick('whatsapp')}
+                className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-xs sm:text-sm md:text-base font-semibold border border-emerald-500/50 shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-sm text-center"
+              >
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 fill-emerald-400 shrink-0" />
+                <span className="whitespace-nowrap">WhatsApp Desk</span>
+              </button>
+            </div>
           </div>
 
         </div>

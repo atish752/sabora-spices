@@ -46,10 +46,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Announcement & Contact Bar (Inspired by Shahi Food Services) ── */}
       <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-2 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-[1440px] mx-auto px-3.5 sm:px-6 lg:px-8 xl:px-12 py-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3">
           
           {/* Left: Location & Phones */}
-          <div className="flex flex-wrap items-center gap-4 text-xs font-medium">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs font-medium w-full sm:w-auto">
             <span className="flex items-center gap-1.5 text-stone-300">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               <span>Jahangirpuri, Delhi – 110033, India</span>
@@ -72,20 +72,29 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </div>
           </div>
 
-          {/* Right: Regulatory Badges & WhatsApp Quick Desk */}
-          <div className="flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-950/80 border border-emerald-700/40 text-xs text-emerald-300 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              FSSAI & ISO Standards Compliant
+          {/* Right: WhatsApp Desk and Request Quote side-by-side below address on mobile */}
+          <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-2.5">
+            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-700/40 text-xs text-emerald-300 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              FSSAI & ISO Compliant
             </span>
             
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-xs text-emerald-200 hover:text-white transition-all font-medium cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-xs text-emerald-200 hover:text-white transition-all font-semibold cursor-pointer shadow-2xs whitespace-nowrap"
               title="Direct 1-Click WhatsApp Sourcing Desk"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
-              <span className="font-semibold text-amber-300">WhatsApp Desk</span>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400 shrink-0" />
+              <span className="text-amber-300">WhatsApp Desk</span>
+            </button>
+
+            <button
+              onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-xs font-bold transition-all cursor-pointer shadow-2xs whitespace-nowrap border border-amber-300/40"
+              title="Request Instant Wholesale Quote"
+            >
+              <FileText className="w-3.5 h-3.5 text-stone-950 shrink-0" />
+              <span>Request Quote</span>
             </button>
 
             {onOpenAdmin && (
@@ -110,45 +119,30 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
       }`}>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
           
-          {/* Logo & Brand Identity: Logo + SABORA SPICES + Request Quote in single horizontal line, subtitle below */}
-          <div className="flex flex-col justify-center">
-            {/* Single Horizontal Line: Logo + Brand Name + Request Quote Button */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5">
-              <a 
-                href="/" 
-                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                className="relative flex items-center justify-center shrink-0 group focus:outline-none"
-                title="Sabora Spices Home"
-              >
-                <img 
-                  src="/images/logo.png" 
-                  alt="Sabora Spices Logo" 
-                  className="h-8 sm:h-9 md:h-10 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
-                />
-              </a>
+          {/* Logo & Brand Identity: Cleanly separated, never overlapping */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <a 
+              href="/" 
+              onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+              className="relative flex items-center justify-center shrink-0 group focus:outline-none"
+              title="Sabora Spices Home"
+            >
+              <img 
+                src="/images/logo.png" 
+                alt="Sabora Spices Logo" 
+                className="h-8 sm:h-9 md:h-10 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm"
+              />
+            </a>
 
+            <div className="flex flex-col">
               <a 
                 href="/" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                className="font-serif text-base sm:text-lg md:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none"
+                className="font-serif text-base sm:text-lg md:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none leading-tight"
               >
                 SABORA SPICES
               </a>
-
-              {/* Request Quote Button in the single horizontal line */}
-              <button
-                onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-[#0F3D2E] to-[#1B4D3E] hover:from-[#14533C] hover:to-[#236350] text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer border border-emerald-700/40 whitespace-nowrap"
-                title="Request Instant Wholesale Quote"
-              >
-                <FileText className="w-3.5 h-3.5 text-amber-300" />
-                <span>Request Quote</span>
-              </button>
-            </div>
-
-            {/* Subtitle in short text directly below */}
-            <div className="pl-9 sm:pl-11 -mt-0.5">
-              <span className="text-xs sm:text-sm font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none block">
+              <span className="text-[10px] sm:text-xs font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-0.5">
                 whole spices & makhana
               </span>
             </div>
@@ -342,7 +336,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors focus:outline-none cursor-pointer"
+              className="xl:hidden p-2 sm:p-2.5 rounded-xl text-[#0F3D2E] hover:text-[#041A12] bg-stone-50 hover:bg-stone-100 border border-stone-200/90 transition-colors focus:outline-none cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -354,8 +348,8 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
       {/* ── Mobile Navigation Drawer ── */}
       {mobileMenuOpen && (
-        <div className="xl:hidden fixed inset-x-0 bottom-0 top-[88px] sm:top-[96px] z-40 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={() => setMobileMenuOpen(false)}>
-          <div className="bg-white w-full max-h-[calc(100vh-88px)] sm:max-h-[calc(100vh-96px)] overflow-y-auto border-b border-stone-200 shadow-2xl p-5 space-y-4" onClick={(e) => e.stopPropagation()}>
+        <div className="xl:hidden fixed inset-x-0 bottom-0 top-[116px] sm:top-[96px] z-40 bg-black/60 backdrop-blur-sm animate-fadeIn" onClick={() => setMobileMenuOpen(false)}>
+          <div className="bg-white w-full max-h-[calc(100vh-116px)] sm:max-h-[calc(100vh-96px)] overflow-y-auto border-b border-stone-200 shadow-2xl p-5 space-y-4" onClick={(e) => e.stopPropagation()}>
             
             {/* Sabora Brand Quick Bar */}
             <div className="pb-3 border-b border-stone-100 flex items-center justify-between">

@@ -137,23 +137,23 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
               )}
 
               {/* Action Buttons */}
-              <div className="pt-3 flex flex-wrap gap-3">
+              <div className="pt-3 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
                 <button
                   onClick={() => {
                     onClose();
                     if (onOpenQuoteModal) onOpenQuoteModal(product);
                   }}
-                  className="flex-1 py-3 px-5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:flex-1 py-3 px-5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <FileText className="w-4 h-4 text-amber-300" />
+                  <FileText className="w-4 h-4 text-amber-300 shrink-0" />
                   <span>Request Product Quote</span>
                 </button>
 
                 <button
                   onClick={handleWhatsApp}
-                  className="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <MessageCircle className="w-4 h-4 fill-white shrink-0" />
                   <span>WhatsApp Quote</span>
                 </button>
               </div>
