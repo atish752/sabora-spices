@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, 
   Plus, 
@@ -20,11 +20,12 @@ import {
   Lock, 
   Unlock, 
   ChevronUp, 
-  ChevronDown 
+  ChevronDown,
+  Loader2
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
-const compressImageFile = (file, maxWidth = 1600, quality = 0.85) => {
+const compressImageFile = (file, maxWidth = 900, quality = 0.80) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -69,14 +70,30 @@ export default function AdminPanel({
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
 
-  const [activeTab, setActiveTab] = useState('hero'); // 'hero', 'products', 'inquiries', 'settings'
+  const [activeTab, setActiveTab] = useState('products'); // default to products tab
   const [saveSuccessMsg, setSaveSuccessMsg] = useState('');
+  const [toast, setToast] = useState(null);
+  const [isSavingProducts, setIsSavingProducts] = useState(false);
+  const [isSavingHero, setIsSavingHero] = useState(false);
 
   // Editable local state
   const [editableHeroSlides, setEditableHeroSlides] = useState(heroSlides || []);
   const [editableProducts, setEditableProducts] = useState(products || []);
   const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
   const [selectedProductIndex, setSelectedProductIndex] = useState(0);
+
+  // Keep local editable state in sync if parent props change
+  useEffect(() => {
+    if (products && products.length > 0) {
+      setEditableProducts(products);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    if (heroSlides && heroSlides.length > 0) {
+      setEditableHeroSlides(heroSlides);
+    }
+  }, [heroSlides]);
 
   // Authentication check
   const handleLogin = (e) => {
@@ -95,9 +112,13 @@ export default function AdminPanel({
     sessionStorage.removeItem('sabora_admin_auth');
   };
 
-  const triggerSaveNotification = (msg = 'Changes saved successfully!') => {
+  const triggerSaveNotification = (msg = 'Changes saved successfully!', type = 'success') => {
     setSaveSuccessMsg(msg);
-    setTimeout(() => setSaveSuccessMsg(''), 4000);
+    setToast({ message: msg, type });
+    setTimeout(() => {
+      setSaveSuccessMsg('');
+      setToast(null);
+    }, 6000);
   };
 
   // ── Hero Slide Actions ──
@@ -155,19 +176,31 @@ export default function AdminPanel({
   };
 
   const handleSaveHero = async () => {
-    if (onSaveHeroSlides) {
-      await onSaveHeroSlides(editableHeroSlides);
-      triggerSaveNotification('Hero section slides saved & synced to cloud!');
+    if (!onSaveHeroSlides) return;
+    setIsSavingHero(true);
+    try {
+      const res = await onSaveHeroSlides(editableHeroSlides);
+      const msg = res?.message || 'Hero section slides saved successfully!';
+      triggerSaveNotification(msg, res?.cloudSynced ? 'success' : 'info');
+    } catch (err) {
+      console.warn("Hero save error:", err);
+      triggerSaveNotification('Saved locally in browser storage.', 'info');
+    } finally {
+      setIsSavingHero(false);
     }
   };
 
   // ── Product Actions ──
   const handleProductChange = (field, value) => {
     const updated = [...editableProducts];
+    const cur = updated[selectedProductIndex] || {};
     updated[selectedProductIndex] = {
-      ...updated[selectedProductIndex],
+      ...cur,
       [field]: value
     };
+    if (field === 'image') {
+      updated[selectedProductIndex].gallery = [value, ...(cur.gallery ? cur.gallery.slice(1) : [])];
+    }
     setEditableProducts(updated);
   };
 
@@ -176,11 +209,19 @@ export default function AdminPanel({
     if (!file) return;
 
     try {
-      const compressed = await compressImageFile(file, 1200, 0.85);
-      handleProductChange('image', compressed);
-      triggerSaveNotification('Product photo uploaded & optimized!');
+      const compressed = await compressImageFile(file, 900, 0.80);
+      const updated = [...editableProducts];
+      const cur = updated[selectedProductIndex] || {};
+      updated[selectedProductIndex] = {
+        ...cur,
+        image: compressed,
+        gallery: [compressed, ...(cur.gallery ? cur.gallery.slice(1) : [])]
+      };
+      setEditableProducts(updated);
+      triggerSaveNotification('Photo uploaded to preview! Click "Save Products Catalog" below to apply changes.', 'info');
     } catch (err) {
       console.warn("Product upload error:", err);
+      alert("Failed processing image file.");
     }
   };
 
@@ -226,9 +267,17 @@ export default function AdminPanel({
   };
 
   const handleSaveProducts = async () => {
-    if (onSaveProducts) {
-      await onSaveProducts(editableProducts);
-      triggerSaveNotification('Products catalog saved & synced to cloud!');
+    if (!onSaveProducts) return;
+    setIsSavingProducts(true);
+    try {
+      const res = await onSaveProducts(editableProducts);
+      const msg = res?.message || 'Products catalog saved successfully!';
+      triggerSaveNotification(msg, res?.cloudSynced ? 'success' : 'info');
+    } catch (err) {
+      console.warn("Products save error:", err);
+      triggerSaveNotification('Saved locally in browser storage.', 'info');
+    } finally {
+      setIsSavingProducts(false);
     }
   };
 
@@ -462,10 +511,20 @@ export default function AdminPanel({
 
                 <button
                   onClick={handleSaveHero}
-                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
+                  disabled={isSavingHero}
+                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] disabled:opacity-75 disabled:cursor-wait text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
                 >
-                  <Save className="w-4 h-4 text-amber-300" />
-                  <span>Save All Slides</span>
+                  {isSavingHero ? (
+                    <>
+                      <Loader2 className="w-4 h-4 text-amber-300 animate-spin" />
+                      <span>Saving Slides...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4 text-amber-300" />
+                      <span>Save All Slides</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -736,10 +795,20 @@ export default function AdminPanel({
 
                 <button
                   onClick={handleSaveProducts}
-                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
+                  disabled={isSavingProducts}
+                  className="px-4 py-2 rounded-lg bg-[#0F3D2E] hover:bg-[#15543F] disabled:opacity-75 disabled:cursor-wait text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all cursor-pointer"
                 >
-                  <Save className="w-4 h-4 text-amber-300" />
-                  <span>Save All Products</span>
+                  {isSavingProducts ? (
+                    <>
+                      <Loader2 className="w-4 h-4 text-amber-300 animate-spin" />
+                      <span>Saving Catalog...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4 text-amber-300" />
+                      <span>Save All Products</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -824,7 +893,7 @@ export default function AdminPanel({
                         <option value="cardamom">Whole Green Cardamom</option>
                         <option value="makhana">Makhana (Fox Nuts)</option>
                         <option value="turmeric">Whole Turmeric Fingers</option>
-                        <option value="other">Cloves & Other Whole Spices</option>
+                        <option value="other">Cloves, Pepper, Cumin & Spices</option>
                       </select>
                     </div>
 
@@ -992,10 +1061,20 @@ export default function AdminPanel({
 
                   <button
                     onClick={handleSaveProducts}
-                    className="px-5 py-2.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-white text-xs font-bold shadow transition-all cursor-pointer flex items-center gap-2"
+                    disabled={isSavingProducts}
+                    className="px-5 py-2.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] disabled:opacity-75 disabled:cursor-wait text-white text-xs font-bold shadow transition-all cursor-pointer flex items-center gap-2"
                   >
-                    <Save className="w-4 h-4 text-amber-300" />
-                    <span>Save Products Catalog</span>
+                    {isSavingProducts ? (
+                      <>
+                        <Loader2 className="w-4 h-4 text-amber-300 animate-spin" />
+                        <span>Saving Catalog...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4 text-amber-300" />
+                        <span>Save Products Catalog</span>
+                      </>
+                    )}
                   </button>
                 </div>
 
@@ -1191,6 +1270,38 @@ export default function AdminPanel({
                 </div>
               </div>
 
+              {/* Firestore Setup Instructions Card */}
+              <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200/80 space-y-3">
+                <div className="flex items-center gap-2 text-amber-950 font-bold text-sm">
+                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>How to Enable Firebase Cloud Sync (Manual Step)</span>
+                </div>
+                <p className="text-xs text-stone-700 leading-relaxed font-normal">
+                  All changes you make are instantly preserved in your browser's persistent storage. To sync changes across other devices in real-time, follow these 3 quick steps in your Firebase Console:
+                </p>
+                <ol className="text-xs text-stone-700 space-y-2 pl-4 list-decimal">
+                  <li>
+                    Go to <a href="https://console.firebase.google.com/project/sabora-spices/firestore" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-800 hover:underline">Firebase Console &rarr; Firestore Database</a>.
+                  </li>
+                  <li>
+                    Click <strong>Create Database</strong>, select location (e.g. <code>asia-south1 (Mumbai)</code>), and click Next.
+                  </li>
+                  <li>
+                    In the <strong>Rules</strong> tab, paste the following rules and click <strong>Publish</strong>:
+                    <pre className="mt-1.5 p-2.5 bg-stone-900 text-amber-300 rounded-lg font-mono text-[11px] overflow-x-auto">
+{`rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}`}
+                    </pre>
+                  </li>
+                </ol>
+              </div>
+
               {/* Reset to Factory Defaults */}
               <div className="pt-4 border-t border-stone-200 space-y-3">
                 <div>
@@ -1221,6 +1332,31 @@ export default function AdminPanel({
         )}
 
       </main>
+
+      {/* ── Prominent Floating Notification Toast (Visible from anywhere on the page) ── */}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-md w-[92%] bg-stone-900/95 backdrop-blur-md text-white rounded-2xl p-4 shadow-2xl border border-stone-700 animate-slideUp flex items-start gap-3">
+          {toast.type === 'success' ? (
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+          ) : toast.type === 'warning' ? (
+            <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+          ) : (
+            <CheckCircle2 className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
+          )}
+          <div className="flex-1 text-xs sm:text-sm font-medium leading-relaxed">
+            <span className="font-bold block text-white mb-0.5">
+              {toast.type === 'success' ? 'Update Saved!' : 'Status'}
+            </span>
+            <span className="text-stone-300">{toast.message}</span>
+          </div>
+          <button
+            onClick={() => setToast(null)}
+            className="p-1 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
     </div>
   );

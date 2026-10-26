@@ -23,6 +23,18 @@ export default function SourcingPage({ onNavigate, onOpenQuoteModal, onSubmitInq
       region: "Salem & Nizamabad Belts",
       peakMonths: "January to April",
       notes: "Rhizome digging, boiling, solar curing, and polishing. Fresh arrivals feature peak natural curcumin potency."
+    },
+    {
+      product: "Whole Cumin Seeds (Jeera)",
+      region: "Gujarat (Unjha) & Rajasthan Belts",
+      peakMonths: "February to May",
+      notes: "Arid post-winter harvest dried, machine-sortexed, and graded with minimum 2.5-3.5% volatile oil content."
+    },
+    {
+      product: "Whole Black Pepper & Cinnamon",
+      region: "Kerala & Western Ghats Foothills",
+      peakMonths: "December to March",
+      notes: "Sun-dried bold garbled peppercorns and hand-harvested aromatic cinnamon quills from coastal hillside estates."
     }
   ];
 

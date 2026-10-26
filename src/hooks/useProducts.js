@@ -13,9 +13,28 @@ import {
   query
 } from 'firebase/firestore';
 
-const LS_PRODUCTS_KEY = 'sabora_products_v3';
+const LS_PRODUCTS_KEY = 'sabora_products_v4';
 const LS_HERO_KEY = 'sabora_hero_slides_v3';
 const LS_INQUIRIES_KEY = 'sabora_inquiries_v3';
+
+// Helper to prevent hanging if Firestore API is disabled or firewalled
+function withTimeout(promise, timeoutMs = 4500) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error(`Timeout: Firestore did not respond within ${timeoutMs}ms.`));
+    }, timeoutMs);
+
+    Promise.resolve(promise)
+      .then((res) => {
+        clearTimeout(timer);
+        resolve(res);
+      })
+      .catch((err) => {
+        clearTimeout(timer);
+        reject(err);
+      });
+  });
+}
 
 export const DEFAULT_HERO_SLIDES = [
   {
@@ -137,58 +156,81 @@ export function useProducts() {
 
     async function fetchFromFirebase() {
       if (!db) {
-        if (isMounted) setFirebaseStatus({ connected: false, message: 'Firebase DB not initialized (using local cache)' });
+        if (isMounted) setFirebaseStatus({ connected: false, message: 'Firebase DB not initialized (Local Mode)' });
         return;
       }
 
       setIsLoadingFromFirebase(true);
       try {
-        // 1. Fetch Products from Firestore
-        const productsCol = collection(db, 'sabora_products');
-        const prodSnap = await getDocs(productsCol);
-        if (!prodSnap.empty && isMounted) {
-          const remoteProducts = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-          if (remoteProducts.length > 0) {
-            setProducts(remoteProducts);
-            localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(remoteProducts));
+        await withTimeout((async () => {
+          // 1. Fetch Products from Firestore
+          const productsCol = collection(db, 'sabora_products');
+          const prodSnap = await getDocs(productsCol);
+          if (!prodSnap.empty && isMounted) {
+            let remoteProducts = prodSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+            // Ensure new default products (cumin, cinnamon) exist and black pepper has its pouch photo
+            const remoteIds = new Set(remoteProducts.map(p => p.id));
+            const missingDefaults = DEFAULT_PRODUCTS.filter(dp => !remoteIds.has(dp.id));
+            remoteProducts = remoteProducts.map(p => {
+              if (p.id === 'black-pepper-bold' && (p.image?.includes('cardamom-plantation') || !p.image?.includes('black-pepper-pouch'))) {
+                return { 
+                  ...p, 
+                  image: '/images/black-pepper-pouch.jpg', 
+                  gallery: ['/images/black-pepper-pouch.jpg'],
+                  badge: p.badge === 'Subject to Sourcing Feasibility' ? 'Whole Spices • 1kg Pack' : p.badge,
+                  netWeight: p.netWeight === 'Bulk & Sabora Pouches' ? '1kg Sabora Pouch & Bulk' : p.netWeight
+                };
+              }
+              return p;
+            });
+            const merged = [...remoteProducts, ...missingDefaults];
+            if (merged.length > 0) {
+              setProducts(merged);
+              localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(merged));
+            }
           }
-        }
 
-        // 2. Fetch Hero Slides from Firestore
-        const heroDoc = doc(db, 'sabora_settings', 'hero_slides');
-        const heroSnap = await getDocs(collection(db, 'sabora_hero_slides'));
-        if (!heroSnap.empty && isMounted) {
-          const remoteSlides = heroSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-          if (remoteSlides.length > 0) {
-            setHeroSlides(remoteSlides);
-            localStorage.setItem(LS_HERO_KEY, JSON.stringify(remoteSlides));
+          // 2. Fetch Hero Slides from Firestore
+          const heroSnap = await getDocs(collection(db, 'sabora_hero_slides'));
+          if (!heroSnap.empty && isMounted) {
+            const remoteSlides = heroSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+            if (remoteSlides.length > 0) {
+              setHeroSlides(remoteSlides);
+              localStorage.setItem(LS_HERO_KEY, JSON.stringify(remoteSlides));
+            }
           }
-        }
 
-        // 3. Fetch Inquiries from Firestore
-        try {
-          const inqQuery = query(collection(db, 'sabora_inquiries'), orderBy('createdAt', 'desc'));
-          const inqSnap = await getDocs(inqQuery);
-          if (!inqSnap.empty && isMounted) {
-            const remoteInquiries = inqSnap.docs.map(d => ({ 
-              id: d.id, 
-              ...d.data(),
-              createdAt: d.data().createdAt?.toDate ? d.data().createdAt.toDate().toISOString() : d.data().createdAt || new Date().toISOString()
-            }));
-            setInquiries(remoteInquiries);
-            localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(remoteInquiries));
+          // 3. Fetch Inquiries from Firestore
+          try {
+            const inqQuery = query(collection(db, 'sabora_inquiries'), orderBy('createdAt', 'desc'));
+            const inqSnap = await getDocs(inqQuery);
+            if (!inqSnap.empty && isMounted) {
+              const remoteInquiries = inqSnap.docs.map(d => ({ 
+                id: d.id, 
+                ...d.data(),
+                createdAt: d.data().createdAt?.toDate ? d.data().createdAt.toDate().toISOString() : d.data().createdAt || new Date().toISOString()
+              }));
+              setInquiries(remoteInquiries);
+              localStorage.setItem(LS_INQUIRIES_KEY, JSON.stringify(remoteInquiries));
+            }
+          } catch (inqErr) {
+            // silent fallback
           }
-        } catch (inqErr) {
-          // May require index or permissions; silent fallback to local
-        }
+        })(), 3500);
 
         if (isMounted) {
           setFirebaseStatus({ connected: true, message: 'Connected to Firebase' });
         }
       } catch (err) {
-        console.warn("Firestore sync info (running happily in offline/cache mode):", err);
+        console.warn("Firestore sync info (running in local storage mode):", err.message);
         if (isMounted) {
-          setFirebaseStatus({ connected: false, message: 'Local storage active (Firebase synced on save)' });
+          const isPermissionOrDisabled = err.message?.includes('PERMISSION_DENIED') || err.message?.includes('disabled') || err.message?.includes('Timeout');
+          setFirebaseStatus({ 
+            connected: false, 
+            message: isPermissionOrDisabled 
+              ? 'Local Mode (Firestore disabled or needs setup in Firebase Console)' 
+              : 'Local Mode (Saved locally)' 
+          });
         }
       } finally {
         if (isMounted) setIsLoadingFromFirebase(false);
@@ -202,59 +244,110 @@ export function useProducts() {
   // Save products to state, localStorage, and Firestore
   const saveProducts = useCallback(async (newProducts) => {
     setProducts(newProducts);
+    let localSaved = false;
+    let cloudSynced = false;
+    let syncError = null;
+
     try {
       localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(newProducts));
+      localSaved = true;
     } catch (e) {
-      console.warn("Failed saving to localStorage", e);
+      console.warn("Failed saving products to localStorage:", e);
     }
 
     if (db) {
       try {
-        const prodCol = collection(db, 'sabora_products');
-        const snap = await getDocs(prodCol);
-        const newIds = new Set(newProducts.map(p => p.id));
-        for (const d of snap.docs) {
-          if (!newIds.has(d.id)) {
-            await deleteDoc(doc(db, 'sabora_products', d.id));
+        await withTimeout((async () => {
+          const prodCol = collection(db, 'sabora_products');
+          const snap = await getDocs(prodCol);
+          const newIds = new Set(newProducts.map(p => p.id));
+          for (const d of snap.docs) {
+            if (!newIds.has(d.id)) {
+              await deleteDoc(doc(db, 'sabora_products', d.id));
+            }
           }
-        }
-        for (const p of newProducts) {
-          const docRef = doc(db, 'sabora_products', p.id);
-          await setDoc(docRef, p, { merge: true });
-        }
+          for (const p of newProducts) {
+            const docRef = doc(db, 'sabora_products', p.id);
+            await setDoc(docRef, p, { merge: true });
+          }
+        })(), 4500);
+
+        cloudSynced = true;
+        setFirebaseStatus({ connected: true, message: 'Cloud Firestore Synced' });
       } catch (err) {
-        console.warn("Firestore saveProducts info:", err);
+        console.warn("Firestore saveProducts warning:", err.message);
+        syncError = err.message;
+        const isPermission = err.message?.includes('PERMISSION_DENIED') || err.message?.includes('disabled') || err.message?.includes('Timeout');
+        setFirebaseStatus({ 
+          connected: false, 
+          message: isPermission ? 'Firestore disabled / rules need setup' : 'Local Mode' 
+        });
       }
     }
+
+    return {
+      success: localSaved || cloudSynced,
+      localSaved,
+      cloudSynced,
+      syncError,
+      message: cloudSynced 
+        ? 'Products catalog saved and synced to Firebase Cloud!' 
+        : localSaved 
+          ? 'Products saved locally in browser! (To sync across all devices, enable Firestore in Firebase Console)' 
+          : 'Failed saving products.'
+    };
   }, []);
 
   // Save hero slides to state, localStorage, and Firestore
   const saveHeroSlides = useCallback(async (newSlides) => {
     setHeroSlides(newSlides);
+    let localSaved = false;
+    let cloudSynced = false;
+    let syncError = null;
+
     try {
       localStorage.setItem(LS_HERO_KEY, JSON.stringify(newSlides));
+      localSaved = true;
     } catch (e) {
-      console.warn("Failed saving hero slides to localStorage", e);
+      console.warn("Failed saving hero slides to localStorage:", e);
     }
 
     if (db) {
       try {
-        const heroCol = collection(db, 'sabora_hero_slides');
-        const snap = await getDocs(heroCol);
-        const newIds = new Set(newSlides.map(s => s.id));
-        for (const d of snap.docs) {
-          if (!newIds.has(d.id)) {
-            await deleteDoc(doc(db, 'sabora_hero_slides', d.id));
+        await withTimeout((async () => {
+          const heroCol = collection(db, 'sabora_hero_slides');
+          const snap = await getDocs(heroCol);
+          const newIds = new Set(newSlides.map(s => s.id));
+          for (const d of snap.docs) {
+            if (!newIds.has(d.id)) {
+              await deleteDoc(doc(db, 'sabora_hero_slides', d.id));
+            }
           }
-        }
-        for (const s of newSlides) {
-          const docRef = doc(db, 'sabora_hero_slides', s.id);
-          await setDoc(docRef, s, { merge: true });
-        }
+          for (const s of newSlides) {
+            const docRef = doc(db, 'sabora_hero_slides', s.id);
+            await setDoc(docRef, s, { merge: true });
+          }
+        })(), 4500);
+
+        cloudSynced = true;
+        setFirebaseStatus({ connected: true, message: 'Cloud Firestore Synced' });
       } catch (err) {
-        console.warn("Firestore saveHeroSlides info:", err);
+        console.warn("Firestore saveHeroSlides info:", err.message);
+        syncError = err.message;
       }
     }
+
+    return {
+      success: localSaved || cloudSynced,
+      localSaved,
+      cloudSynced,
+      syncError,
+      message: cloudSynced 
+        ? 'Hero slides saved & synced to cloud!' 
+        : localSaved 
+          ? 'Hero slides saved locally in browser!' 
+          : 'Failed saving hero slides'
+    };
   }, []);
 
   // Submit an inquiry (contact / quote request)
@@ -327,6 +420,7 @@ export function useProducts() {
     setHeroSlides(DEFAULT_HERO_SLIDES);
     try {
       localStorage.removeItem(LS_PRODUCTS_KEY);
+      localStorage.removeItem('sabora_products_v3');
       localStorage.removeItem(LS_HERO_KEY);
     } catch (e) {}
   }, []);

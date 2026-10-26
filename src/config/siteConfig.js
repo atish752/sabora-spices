@@ -32,7 +32,9 @@ export const SITE_CONFIG = {
     "Whole Green Cardamom",
     "Makhana (Fox Nuts)",
     "Whole Turmeric Fingers",
-    "Other Whole Spices (Clove, Black Pepper)"
+    "Whole Cumin Seeds (Jeera)",
+    "Whole Cinnamon (Dalchini)",
+    "Whole Black Pepper & Cloves"
   ],
 
   // Sourcing Origins
@@ -63,7 +65,7 @@ export const SITE_CONFIG = {
         { label: "Whole Green Cardamom", href: "#products", filter: "cardamom" },
         { label: "Makhana (Fox Nuts)", href: "#products", filter: "makhana" },
         { label: "Whole Turmeric Fingers", href: "#products", filter: "turmeric" },
-        { label: "Cloves & Other Whole Spices", href: "#products", filter: "other" }
+        { label: "Cloves, Pepper, Cumin & Spices", href: "#products", filter: "other" }
       ]
     },
     { id: "sourcing", label: "Sourcing & Origin", href: "#sourcing" },

@@ -29,7 +29,7 @@ export const FAQS = [
     id: 3,
     category: "general",
     question: "Which products do you specialise in?",
-    answer: "Our main products are:\n• Whole Green Cardamom\n• Whole Turmeric Fingers\n• Makhana (Fox Nuts)\n• Other whole spices, subject to buyer requirements and sourcing availability.\nOur primary focus is Green Cardamom and Makhana."
+    answer: "Our main products are:\n• Whole Green Cardamom\n• Makhana (Fox Nuts)\n• Whole Turmeric Fingers\n• Whole Cumin Seeds (Jeera)\n• Whole Cinnamon (Dalchini)\n• Whole Black Pepper (Kali Mirch)\n• Whole Cloves (Laung)\n• Other whole spices, subject to buyer requirements and sourcing availability.\nOur primary focus is 100% pure whole harvest agricultural products."
   },
   {
     id: 4,

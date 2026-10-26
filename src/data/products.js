@@ -208,25 +208,25 @@ export const PRODUCTS = [
   {
     id: "black-pepper-bold",
     name: "Whole Black Pepper (Kali Mirch)",
-    subtitle: "Tellicherry & Malabar Garbled Bold Black Pepper",
+    subtitle: "Tellicherry & Malabar Garbled Bold Black Pepper — 1kg Food-Grade Pouch & Bulk",
     botanicalName: "Piper nigrum",
     category: "Whole Spices",
     categoryKey: "other",
-    featured: false,
-    badge: "Subject to Sourcing Feasibility",
+    featured: true,
+    badge: "Whole Spices • 1kg Pack",
     tagline: "Bold whole black peppercorns with sharp piperine pungency, sorted and cleaned to buyer requirements.",
-    image: "/images/cardamom-plantation.jpg",
+    image: "/images/black-pepper-pouch.jpg",
     gallery: [
-      "/images/cardamom-plantation.jpg"
+      "/images/black-pepper-pouch.jpg"
     ],
-    rating: 4.89,
-    reviewsCount: 18,
-    moq: "100 Kg",
+    rating: 4.93,
+    reviewsCount: 31,
+    moq: "50 Kg (Sample Available on Request)",
     origin: "Kerala & Karnataka, India",
     terroir: "Western Ghats pepper vine plantations",
-    netWeight: "Bulk & Sabora Pouches",
+    netWeight: "1kg Sabora Pouch & Bulk",
     aromaNotes: ["Pungent Woody Heat", "Sharp Peppery Terpenes", "Warm Lingering Finish"],
-    leadTime: "3 - 5 Business Days",
+    leadTime: "2 - 4 Business Days",
     gradesAvailable: ["TGSEB Bold", "Malabar Garbled (MG-1)", "550g/L Regular Bold"],
     specifications: [
       { label: "Product Form", value: "100% Whole Dried Black Peppercorns" },
@@ -235,17 +235,117 @@ export const PRODUCTS = [
       { label: "Piperine Content", value: "4.5% to 5.5%" },
       { label: "Moisture Content", value: "Max 11.0%" },
       { label: "Light Berries / Pinheads", value: "< 1.5%" },
-      { label: "Shelf Life", value: "24 Months" }
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Testing & Certification", value: "Accredited Lab Report & FoSCoS Linked COA" },
+      { label: "Shelf Life", value: "24 Months in Moisture-Barrier Packaging" }
     ],
     packagingOptions: [
-      "25 Kg & 50 Kg Multiwall Bags",
-      "Sabora-Branded Pouches on Request",
-      "Buyer-Specific Packaging"
+      "1 Kg Sabora-Branded Food-Grade Pouches",
+      "5 Kg & 10 Kg Master Cartons with Food-Grade Liner",
+      "25 Kg & 50 Kg Multiwall Kraft Bags",
+      "Buyer-Specific & Private-Label Packaging"
     ],
     b2bIdealFor: [
       "Food Manufacturers & Sauce Blenders",
       "Seasoning & Culinary Mix Brands",
-      "Commodity Wholesalers"
+      "Commodity Wholesalers",
+      "Retail Chains & Private-Label Brands"
+    ]
+  },
+  {
+    id: "cumin-whole",
+    name: "Whole Cumin Seeds (Jeera)",
+    subtitle: "Sortex Cleaned Machine-Processed Whole Cumin — Gujarat & Rajasthan Origin",
+    botanicalName: "Cuminum cyminum",
+    category: "Whole Spices",
+    categoryKey: "other",
+    featured: true,
+    badge: "Whole Spices • 1kg Pack",
+    tagline: "Aromatic, bold whole cumin seeds rich in natural essential oils. Double-sortex cleaned and hygienically packed.",
+    image: "/images/cumin-pouch.jpg",
+    gallery: [
+      "/images/cumin-pouch.jpg"
+    ],
+    rating: 4.95,
+    reviewsCount: 29,
+    moq: "50 Kg (Sample Available on Request)",
+    origin: "Unjha (Gujarat) & Rajasthan, India",
+    terroir: "Arid semi-tropical spice belts of Western India",
+    netWeight: "1kg Sabora Pouch & Bulk",
+    aromaNotes: ["Warm Earthy Aroma", "Robust Herbal Pungency", "Subtle Nutty Sweetness"],
+    leadTime: "2 - 4 Business Days",
+    gradesAvailable: ["Singapore 99% Clean", "Europe Quality (99.5% Sortex)", "Machine Cleaned Bold", "Grinding Grade"],
+    specifications: [
+      { label: "Product Form", value: "100% Whole Dried Cumin Seeds (Jeera)" },
+      { label: "Botanical Name", value: "Cuminum cyminum" },
+      { label: "Origin Region", value: "Gujarat & Rajasthan, India" },
+      { label: "Purity / Sortex", value: "99.0% - 99.5% Clean (Sortex Sorted)" },
+      { label: "Volatile Essential Oil", value: "Min 2.5% - 3.5% v/w" },
+      { label: "Moisture Content", value: "Max 9.0%" },
+      { label: "Foreign Matter", value: "< 0.5% (Free of Dust and Stones)" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Testing & Certification", value: "Accredited Lab Report & FoSCoS Linked COA" },
+      { label: "Shelf Life", value: "24 Months in Sealed Barrier Packaging" }
+    ],
+    packagingOptions: [
+      "1 Kg Sabora-Branded Food-Grade Pouches",
+      "5 Kg & 10 Kg Master Cartons with Food-Grade Liner",
+      "25 Kg & 50 Kg Multiwall Paper / PP Bags with Liner",
+      "Buyer-Specific & Private-Label Packaging (subject to MOQ)"
+    ],
+    b2bIdealFor: [
+      "Wholesale Spice Merchants & Mandi Distributors",
+      "Seasoning, Curry Powder & Spice Blenders",
+      "Commercial Catering, Food Services & Ready-to-Eat Brands",
+      "Domestic & International Private-Label Retailers"
+    ]
+  },
+  {
+    id: "cinnamon-whole",
+    name: "Whole Cinnamon (Dalchini)",
+    subtitle: "Fragrant Whole Cinnamon Quills & Rolls — High Cinnamaldehyde",
+    botanicalName: "Cinnamomum verum / cassia",
+    category: "Whole Spices",
+    categoryKey: "other",
+    featured: true,
+    badge: "Whole Spices • 1kg Pack",
+    tagline: "Sweet, woody, and intensely fragrant whole cinnamon quills. Handpicked for rich essential oil content and pure taste.",
+    image: "/images/cinnamon-pouch.jpg",
+    gallery: [
+      "/images/cinnamon-pouch.jpg"
+    ],
+    rating: 4.92,
+    reviewsCount: 25,
+    moq: "50 Kg (Sample Available on Request)",
+    origin: "Western Ghats & Selected Indian Sourcing Belts",
+    terroir: "Tropical hillside rainforest plantations",
+    netWeight: "1kg Sabora Pouch & Bulk",
+    aromaNotes: ["Sweet Delicate Wood", "Warm Cinnamic Spice", "Subtle Citrus Undertones"],
+    leadTime: "2 - 4 Business Days",
+    gradesAvailable: ["Selected Whole Quills (C5 / C4 grade)", "Cut Quills 8cm - 10cm", "Whole Flat Bark Select"],
+    specifications: [
+      { label: "Product Form", value: "100% Whole Dried Cinnamon Quills / Rolls (Dalchini)" },
+      { label: "Botanical Name", value: "Cinnamomum verum / cassia" },
+      { label: "Color / Appearance", value: "Warm Golden Reddish-Brown, Uniform Quills" },
+      { label: "Volatile Essential Oil", value: "Min 1.5% - 2.5% (High Cinnamaldehyde)" },
+      { label: "Moisture Content", value: "Max 12.0%" },
+      { label: "Extraneous Matter", value: "< 0.5%" },
+      { label: "Coumarin Safety", value: "Tested & Compliant with Food Safety Regulations" },
+      { label: "Food Safety Standards", value: "FSSAI Compliant, ISO 9001 & ISO 22000 Principles" },
+      { label: "Testing & Certification", value: "Accredited Lab Report & FoSCoS Linked COA" },
+      { label: "Shelf Life", value: "24 Months in Sealed Barrier Packaging" }
+    ],
+    packagingOptions: [
+      "1 Kg Sabora-Branded Food-Grade Pouches",
+      "5 Kg & 10 Kg Master Corrugated Boxes with Inner Moisture Barrier",
+      "25 Kg Export Bales / Heavy-Duty Cartons",
+      "Buyer-Specific & Private-Label Packaging"
+    ],
+    b2bIdealFor: [
+      "Bakery, Confectionery & Beverage Producers",
+      "Herbal Tea, Chai Masala & Extraction Companies",
+      "Wholesale Spice Merchants & Modern Trade Chains",
+      "Global Importers & Private-Label Brands"
     ]
   }
 ];

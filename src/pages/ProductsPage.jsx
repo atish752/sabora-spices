@@ -126,12 +126,12 @@ export default function ProductsPage({
                   <span className="text-stone-500 text-right">Smooth golden surface, intact tips</span>
                 </li>
                 <li className="flex items-start justify-between gap-2">
-                  <span className="font-semibold text-stone-900">• Whole Cloves (Laung)</span>
-                  <span className="text-stone-500 text-right">Handpicked whole heads with crowns</span>
+                  <span className="font-semibold text-stone-900">• Whole Cloves & Cinnamon</span>
+                  <span className="text-stone-500 text-right">Handpicked intact crowns & quills</span>
                 </li>
                 <li className="flex items-start justify-between gap-2">
-                  <span className="font-semibold text-stone-900">• Other Whole Spices on Demand</span>
-                  <span className="text-stone-500 text-right">Subject to origin feasibility</span>
+                  <span className="font-semibold text-stone-900">• Cumin & Black Pepper</span>
+                  <span className="text-stone-500 text-right">99.5% sortex & Tellicherry bold</span>
                 </li>
               </ul>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 border-t border-stone-200 font-medium">

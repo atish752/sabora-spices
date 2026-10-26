@@ -31,7 +31,7 @@ export default function ProductsSection({
     { id: 'cardamom', label: 'Whole Green Cardamom' },
     { id: 'makhana', label: 'Makhana (Fox Nuts)' },
     { id: 'turmeric', label: 'Whole Turmeric Fingers' },
-    { id: 'other', label: 'Cloves & Other Whole Spices' }
+    { id: 'other', label: 'Cloves, Pepper, Cumin & Spices' }
   ];
 
   const filteredProducts = (products || []).filter(p => {

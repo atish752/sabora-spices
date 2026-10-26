@@ -239,7 +239,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                     onClick={() => handleNavClick('products', 'other')}
                     className="w-full text-left px-3.5 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-[#0F3D2E] flex items-center justify-between cursor-pointer"
                   >
-                    <span>Cloves & Other Whole Spices</span>
+                    <span>Cloves, Pepper, Cumin & Spices</span>
                     <span className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded font-mono">Handpicked</span>
                   </button>
                 </div>
@@ -433,7 +433,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                     onClick={() => handleNavClick('products', 'other')}
                     className="w-full text-left py-1 hover:text-stone-700 flex items-center justify-between"
                   >
-                    <span>• Cloves & Other Whole Spices</span>
+                    <span>• Cloves, Pepper, Cumin & Spices</span>
                     <span className="text-xs text-stone-600 bg-stone-200 px-1.5 py-0.5 rounded font-mono">Handpicked</span>
                   </button>
                 </div>

@@ -211,6 +211,9 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
                     <option value="Green Cardamom" className="bg-stone-900">Green Cardamom (Kerala)</option>
                     <option value="Makhana" className="bg-stone-900">Makhana / Fox Nuts (Bihar)</option>
                     <option value="Turmeric" className="bg-stone-900">Turmeric Fingers (Salem)</option>
+                    <option value="Black Pepper" className="bg-stone-900">Whole Black Pepper (Kali Mirch)</option>
+                    <option value="Cumin" className="bg-stone-900">Whole Cumin Seeds / Jeera</option>
+                    <option value="Cinnamon" className="bg-stone-900">Whole Cinnamon / Dalchini</option>
                     <option value="Cloves & Other Spices" className="bg-stone-900">Cloves & Other Whole Spices</option>
                   </select>
                 </div>

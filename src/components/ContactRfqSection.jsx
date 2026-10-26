@@ -50,6 +50,8 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
     "Whole Turmeric Fingers (Haldi)",
     "Whole Cloves (Laung)",
     "Whole Black Pepper (Kali Mirch)",
+    "Whole Cumin Seeds (Jeera)",
+    "Whole Cinnamon (Dalchini)",
     "Other Whole Spices (Custom Inquiry)"
   ];
 

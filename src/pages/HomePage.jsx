@@ -28,7 +28,7 @@ export default function HomePage({
   const featuredProducts = (products || []).filter(p => {
     if (activeTab === 'all') return true;
     return p.categoryKey === activeTab;
-  }).slice(0, 6);
+  });
 
   return (
     <div className="w-full">
@@ -80,7 +80,7 @@ export default function HomePage({
               { id: 'cardamom', label: 'Green Cardamom' },
               { id: 'makhana', label: 'Makhana (Fox Nuts)' },
               { id: 'turmeric', label: 'Turmeric Fingers' },
-              { id: 'other', label: 'Cloves & Pepper' }
+              { id: 'other', label: 'Cloves, Pepper, Cumin & Spices' }
             ].map(tab => (
               <button
                 key={tab.id}
