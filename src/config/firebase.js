@@ -2,14 +2,14 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// User's Firebase configuration
+// Firebase configuration (supports Vercel environment variables with fallback)
 export const firebaseConfig = {
-  apiKey: "AIzaSyBwkC2tMAUGG485mulGXYYeecpTAOxx5NE",
-  authDomain: "sabora-spices.firebaseapp.com",
-  projectId: "sabora-spices",
-  storageBucket: "sabora-spices.firebasestorage.app",
-  messagingSenderId: "328447232293",
-  appId: "1:328447232293:web:6def55bcad96e6d2e072cc"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyBwkC2tMAUGG485mulGXYYeecpTAOxx5NE",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "sabora-spices.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "sabora-spices",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "sabora-spices.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "328447232293",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:328447232293:web:6def55bcad96e6d2e072cc"
 };
 
 // Initialize Firebase safely (avoid duplicate app init during fast refresh)
