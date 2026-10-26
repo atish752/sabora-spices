@@ -45,7 +45,7 @@ export default function ProductsSection({
   };
 
   return (
-    <section id="products" className="py-16 sm:py-24 bg-[#F4F6F4] border-b border-stone-200/90 w-full">
+    <section id="products" className="py-16 sm:py-24 bg-[#EEF2EE] border-b border-stone-200/90 w-full">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 space-y-12">
         
         {/* Section Header */}
@@ -88,17 +88,17 @@ export default function ProductsSection({
           })}
         </div>
 
-        {/* Products Grid */}
+        {/* Products Grid with distinct physical card boundaries and elevated contrast */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-3xl border-2 border-stone-200/90 hover:border-emerald-600/70 shadow-[0_4px_24px_rgba(4,26,18,0.06)] hover:shadow-2xl transition-all duration-300 flex flex-col overflow-hidden group relative"
+              className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-[0_4px_20px_rgba(4,26,18,0.06)] hover:shadow-xl hover:border-emerald-700/60 transition-all duration-300 flex flex-col overflow-hidden group relative ring-1 ring-black/5"
             >
               {/* Product Visual Area */}
               <div 
                 onClick={() => onSelectProduct && onSelectProduct(product)}
-                className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-stone-100 via-stone-50 to-white overflow-hidden cursor-pointer flex items-center justify-center p-5 border-b border-stone-200/70"
+                className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-stone-100 via-stone-50 to-white overflow-hidden cursor-pointer flex items-center justify-center p-6 border-b border-stone-200/80"
               >
                 <img
                   src={product.image}
@@ -109,7 +109,7 @@ export default function ProductsSection({
 
                 {/* Badges Overlay */}
                 <div className="absolute top-3.5 left-3.5 flex flex-col gap-1.5 items-start">
-                  <span className="px-3 py-1 rounded-lg bg-[#041A12]/90 backdrop-blur-md text-amber-300 text-xs font-bold shadow-sm">
+                  <span className="px-3 py-1 rounded-lg bg-[#041A12]/90 backdrop-blur-md text-amber-300 text-2xs sm:text-xs font-bold shadow-sm">
                     {product.badge || product.category}
                   </span>
                   {product.netWeight && (
@@ -120,7 +120,7 @@ export default function ProductsSection({
                 </div>
 
                 <div className="absolute top-3.5 right-3.5">
-                  <span className="px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md text-stone-800 text-xs font-semibold border border-stone-200 shadow-xs flex items-center gap-1">
+                  <span className="px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md text-stone-800 text-2xs sm:text-xs font-semibold border border-stone-200 shadow-2xs flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                     <span>{product.origin?.split(',')[0]}</span>
                   </span>
@@ -135,13 +135,13 @@ export default function ProductsSection({
 
               {/* Product Info Body */}
               <div className="p-5 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
+                    <span className="text-2xs sm:text-xs font-bold text-amber-700 uppercase tracking-wider">
                       {product.category}
                     </span>
                     {product.botanicalName && (
-                      <span className="text-xs italic font-serif text-stone-500 truncate">
+                      <span className="text-2xs sm:text-xs italic font-serif text-stone-500 truncate max-w-[150px]">
                         {product.botanicalName}
                       </span>
                     )}
@@ -160,11 +160,11 @@ export default function ProductsSection({
                 </div>
 
                 {/* Key Specification Structured Dossier Box */}
-                <div className="bg-[#FAFBF9] rounded-2xl p-4 border border-stone-200/80 space-y-2.5 text-xs sm:text-sm">
+                <div className="bg-[#FAFBF9] rounded-2xl p-3.5 sm:p-4 border border-stone-200/80 space-y-2 text-2xs sm:text-xs">
                   {product.gradesAvailable && (
                     <div className="flex items-start justify-between gap-2">
                       <span className="text-stone-500 font-medium shrink-0">Grades:</span>
-                      <span className="font-bold text-stone-800 text-right">
+                      <span className="font-bold text-stone-800 text-right truncate">
                         {product.gradesAvailable.slice(0, 2).join(', ')}
                         {product.gradesAvailable.length > 2 && '...'}
                       </span>
@@ -172,7 +172,7 @@ export default function ProductsSection({
                   )}
                   {product.moq && (
                     <div className="flex items-center justify-between gap-2 pt-1 border-t border-stone-200/50">
-                      <span className="text-stone-500 font-medium">Wholesale MOQ:</span>
+                      <span className="text-stone-500 font-medium shrink-0">Wholesale MOQ:</span>
                       <span className="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50">
                         {product.moq}
                       </span>
@@ -181,7 +181,7 @@ export default function ProductsSection({
                   {product.origin && (
                     <div className="flex items-start justify-between gap-2 pt-1 border-t border-stone-200/50">
                       <span className="text-stone-500 font-medium shrink-0">Direct Origin:</span>
-                      <span className="font-semibold text-stone-800 text-right">{product.origin}</span>
+                      <span className="font-semibold text-stone-800 text-right truncate">{product.origin}</span>
                     </div>
                   )}
                 </div>
@@ -191,15 +191,16 @@ export default function ProductsSection({
                   <div className="grid grid-cols-2 gap-2.5">
                     <button
                       onClick={() => onSelectProduct && onSelectProduct(product)}
-                      className="w-full py-2.5 px-3 rounded-xl border border-stone-300 hover:border-[#0F3D2E] bg-stone-50/70 hover:bg-white text-stone-800 hover:text-[#0F3D2E] text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                      className="w-full py-2.5 px-2.5 rounded-xl border border-stone-300 hover:border-[#0F3D2E] bg-stone-50/70 hover:bg-white text-stone-800 hover:text-[#0F3D2E] text-2xs sm:text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs whitespace-nowrap active:scale-95"
                     >
                       <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-800 shrink-0" />
-                      <span>Specifications</span>
+                      <span className="hidden min-[380px]:inline">Specifications</span>
+                      <span className="min-[380px]:hidden">Specs</span>
                     </button>
 
                     <button
                       onClick={() => handleProductWhatsApp(product)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-800 text-xs sm:text-sm font-semibold border border-emerald-600/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                      className="w-full py-2.5 px-2.5 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-800 text-2xs sm:text-xs font-semibold border border-emerald-600/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs whitespace-nowrap active:scale-95"
                       title="Direct WhatsApp Quote"
                     >
                       <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 fill-emerald-600 shrink-0" />
