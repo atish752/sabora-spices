@@ -266,6 +266,11 @@ assert(freshHeader.includes('socialMedia.facebook') && freshHeader.includes('soc
 assert(freshContactPage.includes('socialMedia.facebook') && freshContactPage.includes('socialMedia.instagram'), 'ContactPage wires Facebook and Instagram links');
 assert(freshRfq.includes('socialMedia.facebook') && freshRfq.includes('socialMedia.instagram'), 'ContactRfqSection wires Facebook and Instagram links');
 
+// 38. Verify Google Search Console Verification File
+assert(existsSync(join(rootDir, 'public/google55e0686ed15bf061.html')), 'Google Search Console verification file exists in public/ directory');
+const gscContent = readFileSync(join(rootDir, 'public/google55e0686ed15bf061.html'), 'utf-8');
+assert(gscContent.includes('google-site-verification: google55e0686ed15bf061.html'), 'Google Search Console verification file contains expected verification string');
+
 console.log('\nVerification suite finished.');
 if (failed) {
   process.exit(1);
