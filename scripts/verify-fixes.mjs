@@ -128,7 +128,7 @@ assert(!adminJsx.includes("pinInput === '1234'"), 'AdminPanel no longer accepts 
 
 // 15. Verify HeaderNavbar Clean-up (FAQ and duplicate WhatsApp Desk removed)
 const headerJsx = readFileSync(join(rootDir, 'src/components/HeaderNavbar.jsx'), 'utf-8');
-const desktopNavMatch = headerJsx.match(/<nav className="hidden xl:flex[\s\S]*?<\/nav>/);
+const desktopNavMatch = headerJsx.match(/<nav className="hidden (?:lg:flex|xl:flex)[\s\S]*?<\/nav>/);
 assert(desktopNavMatch && !desktopNavMatch[0].includes("handleNavClick('faq')"), 'HeaderNavbar removed FAQ button from top desktop navigation bar');
 assert(!headerJsx.includes('hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50'), 'HeaderNavbar removed duplicate WhatsApp desk button from sticky bar');
 

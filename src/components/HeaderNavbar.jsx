@@ -58,42 +58,29 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
   return (
     <header ref={headerRef} className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Announcement & Contact Bar (Inspired by Shahi Food Services) ── */}
-      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full">
-        <div className="max-w-[1440px] mx-auto px-3.5 sm:px-5 lg:px-6 xl:px-8 py-1.5 sm:py-2 flex flex-col sm:flex-row items-center justify-between gap-2 xl:gap-3">
+      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full overflow-x-hidden">
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-6 2xl:px-8 py-1.5 flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2">
           
           {/* Left: Location & Phones */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs font-medium w-full sm:w-auto shrink-0">
+          <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 text-xs font-medium w-full sm:w-auto shrink-0">
             <span className="flex items-center gap-1.5 text-stone-300 whitespace-nowrap">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>Jahangirpuri, Delhi – 110033, India</span>
+              <span className="hidden xl:inline">Jahangirpuri, Delhi – 110033, India</span>
+              <span className="xl:hidden">Delhi – 110033, India</span>
             </span>
-            {/* Mobile Statutory Badges Row (< sm) */}
-            <div className="flex sm:hidden items-center justify-center gap-1.5 flex-wrap text-2xs w-full">
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-3xs font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
-                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain shrink-0" />
-                <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
-              </span>
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-3xs text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" title={`ISO 9001:2015 Certificate: ${SITE_CONFIG.isoNumber}`}>
-                <ShieldCheck className="w-2.5 h-2.5 text-amber-400 shrink-0" />
-                <span>ISO: {SITE_CONFIG.isoNumber}</span>
-              </span>
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-3xs text-stone-300 font-mono whitespace-nowrap shrink-0" title={`GSTIN: ${SITE_CONFIG.gstin}`}>
-                <span>GST: {SITE_CONFIG.gstin}</span>
-              </span>
-            </div>
-            <div className="hidden sm:flex items-center gap-2.5 border-l border-emerald-800/60 pl-3 whitespace-nowrap shrink-0">
+            <div className="flex items-center gap-2 border-l border-emerald-800/60 pl-2 whitespace-nowrap shrink-0">
               <a 
                 href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} 
-                className="flex items-center gap-1.5 text-stone-300 hover:text-amber-400 transition-colors"
+                className="flex items-center gap-1 text-stone-300 hover:text-amber-400 transition-colors"
                 title="Primary Sourcing Desk Phone"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>+91 78809 06610</span>
               </a>
-              <span className="text-stone-500">|</span>
+              <span className="hidden 2xl:inline text-stone-500">|</span>
               <a 
                 href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} 
-                className="text-stone-300 hover:text-amber-400 transition-colors"
+                className="hidden 2xl:inline text-stone-300 hover:text-amber-400 transition-colors"
                 title="Secondary Sourcing Desk Phone"
               >
                 +91 95327 01582
@@ -101,42 +88,52 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </div>
           </div>
 
+          {/* Mobile Statutory Badges Row (< sm) */}
+          <div className="flex sm:hidden items-center justify-center gap-1.5 flex-wrap text-2xs w-full py-0.5">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-3xs font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
+              <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain shrink-0" />
+              <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
+            </span>
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-3xs text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" title={`ISO 9001:2015 Certificate: ${SITE_CONFIG.isoNumber}`}>
+              <ShieldCheck className="w-2.5 h-2.5 text-amber-400 shrink-0" />
+              <span>ISO: {SITE_CONFIG.isoNumber}</span>
+            </span>
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-3xs text-stone-300 font-mono whitespace-nowrap shrink-0" title={`GSTIN: ${SITE_CONFIG.gstin}`}>
+              <span>GST: {SITE_CONFIG.gstin}</span>
+            </span>
+          </div>
+
           {/* Right: Statutory Badges, WhatsApp Desk and Request Quote */}
-          <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-2 xl:gap-2.5 shrink-0">
+          <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
             {/* Official Statutory Badges: FSSAI, ISO 9001:2015 & GSTIN */}
-            <div className="hidden lg:flex items-center gap-1.5 xl:gap-2 shrink-0">
+            <div className="hidden md:flex items-center gap-1.5 shrink-0">
               <span 
-                className="inline-flex items-center gap-1.5 px-2 xl:px-2.5 py-0.5 xl:py-1 rounded-md bg-white border border-stone-200/90 shadow-2xs text-[11px] xl:text-2xs font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" 
+                className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-[10.5px] font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" 
                 title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}
               >
-                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 xl:h-3.5 w-auto object-contain shrink-0" />
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain shrink-0" />
                 <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
               </span>
 
               <span 
-                className="inline-flex items-center gap-1 px-2 xl:px-2 py-0.5 xl:py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-[11px] xl:text-2xs text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" 
+                className="hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-[10.5px] text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" 
                 title={`ISO 9001:2015 Certificate of Compliance: ${SITE_CONFIG.isoNumber}`}
               >
-                <ShieldCheck className="w-3 xl:w-3.5 h-3 xl:h-3.5 text-amber-400 shrink-0" />
+                <ShieldCheck className="w-3 h-3 text-amber-400 shrink-0" />
                 <span>ISO: {SITE_CONFIG.isoNumber}</span>
               </span>
 
               <span 
-                className="hidden xl:inline-flex items-center gap-1 px-2 py-0.5 xl:py-1 rounded-md bg-stone-900/90 border border-stone-700/60 text-[11px] xl:text-2xs text-stone-300 font-mono whitespace-nowrap shrink-0" 
+                className="hidden 2xl:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-[10.5px] text-stone-300 font-mono whitespace-nowrap shrink-0" 
                 title={`GSTIN: ${SITE_CONFIG.gstin}`}
               >
                 <span>GST: {SITE_CONFIG.gstin}</span>
               </span>
             </div>
             
-            <div className="hidden md:flex lg:hidden items-center gap-1.5 px-2 py-0.5 rounded-md bg-white border border-stone-200 text-2xs font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
-              <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain shrink-0" />
-              <span>{SITE_CONFIG.fssaiNumber}</span>
-            </div>
-            
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
-              className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 xl:py-2 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-2xs sm:text-xs text-emerald-200 hover:text-white transition-all font-semibold cursor-pointer shadow-2xs whitespace-nowrap shrink-0 active:scale-95"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-2xs sm:text-xs text-emerald-200 hover:text-white transition-all font-semibold cursor-pointer shadow-2xs whitespace-nowrap shrink-0 active:scale-95"
               title="Direct 1-Click WhatsApp Sourcing Desk"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400 shrink-0" />
@@ -145,7 +142,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button
               onClick={() => onOpenQuoteModal ? onOpenQuoteModal() : handleNavClick('contact')}
-              className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 xl:py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-2xs sm:text-xs font-bold transition-all cursor-pointer shadow-2xs whitespace-nowrap shrink-0 border border-amber-300/40 active:scale-95"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 text-2xs sm:text-xs font-bold transition-all cursor-pointer shadow-2xs whitespace-nowrap shrink-0 border border-amber-300/40 active:scale-95"
               title="Request Instant Wholesale Quote"
             >
               <FileText className="w-3.5 h-3.5 text-stone-950 shrink-0" />
@@ -155,7 +152,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             {onOpenAdmin && (
               <button
                 onClick={onOpenAdmin}
-                className="hidden sm:inline-flex items-center gap-1 px-2 xl:px-2.5 py-1 xl:py-1.5 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-amber-300 text-2xs sm:text-xs font-medium transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                className="hidden sm:inline-flex items-center gap-1 px-1.5 py-1 rounded bg-stone-800/80 hover:bg-stone-700 text-stone-300 hover:text-amber-300 text-2xs font-medium transition-colors cursor-pointer whitespace-nowrap shrink-0"
                 title="Admin Management Portal"
               >
                 <span>Admin</span>
@@ -169,10 +166,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
       {/* ── Main Sticky Header (Spans full width with max-w-[1440px] interior) ── */}
       <div className={`w-full transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-stone-200' 
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-1.5 sm:py-2 border-b border-stone-200' 
           : 'bg-white py-2 xl:py-2.5 border-b border-stone-100'
       }`}>
-        <div className="max-w-[1440px] mx-auto px-3.5 sm:px-5 lg:px-6 xl:px-8 flex items-center justify-between gap-2 xl:gap-3">
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-6 2xl:px-8 flex items-center justify-between gap-1.5 lg:gap-2 xl:gap-3">
           
           {/* Logo & Brand Identity: Cleanly separated, never overlapping */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
@@ -185,7 +182,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <img 
                 src="/images/logo.png" 
                 alt="Sabora Spices Logo" 
-                className="h-8 sm:h-9 xl:h-9.5 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm shrink-0"
+                className="h-[30px] sm:h-[34px] xl:h-[38px] max-h-[38px] w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm shrink-0"
               />
             </a>
 
@@ -193,18 +190,18 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <a 
                 href="/" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                className="font-serif text-base sm:text-lg xl:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none leading-tight"
+                className="font-serif text-[15px] sm:text-base lg:text-[16px] xl:text-lg 2xl:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none leading-tight"
               >
                 SABORA SPICES
               </a>
-              <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-0.5 whitespace-nowrap">
+              <span className="text-[8.5px] sm:text-[9.5px] xl:text-[10px] 2xl:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-0.5 whitespace-nowrap">
                 whole spices & makhana
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation Links (All 10 Dedicated Pages) */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 text-xs xl:text-[12.5px] 2xl:text-[13.5px] font-semibold text-stone-700 whitespace-nowrap shrink-0">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 text-xs xl:text-[12px] 2xl:text-[13px] font-semibold text-stone-700 whitespace-nowrap shrink-0">
             <button 
               onClick={() => handleNavClick('home')} 
               className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
@@ -295,8 +292,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
               }`}
+              title="Sourcing & Origin Belts"
             >
-              Sourcing & Origin
+              <span className="hidden xl:inline">Sourcing & Origin</span>
+              <span className="xl:hidden">Sourcing</span>
             </button>
 
             <button 
@@ -317,8 +316,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
               }`}
+              title="Quality Assurance & Food Safety"
             >
-              Quality & Safety
+              <span className="hidden xl:inline">Quality & Safety</span>
+              <span className="xl:hidden">Quality</span>
             </button>
 
             <button 
@@ -350,13 +351,15 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
               }`}
+              title="International & Export Supply"
             >
-              Export Supply
+              <span className="hidden xl:inline">Export Supply</span>
+              <span className="xl:hidden">Export</span>
             </button>
 
             <button 
               onClick={() => handleNavClick('contact')} 
-              className={`ml-1 xl:ml-1.5 px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-lg text-xs xl:text-[12.5px] 2xl:text-[13.5px] font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-2xs ${
+              className={`ml-0.5 xl:ml-1 px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-lg text-xs xl:text-[12px] 2xl:text-[13px] font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-2xs ${
                 isActive('contact')
                   ? 'bg-[#0F3D2E] text-amber-300 ring-2 ring-emerald-700 shadow-xs'
                   : 'bg-[#0F3D2E] text-white hover:bg-[#165640] hover:text-amber-200'
