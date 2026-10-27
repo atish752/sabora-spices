@@ -63,12 +63,13 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                   <img src="/images/fssai-logo.png" alt="FSSAI" className="h-4 w-auto object-contain shrink-0" />
                   <span className="font-mono text-2xs font-bold text-[#0B2568]">Lic. {SITE_CONFIG.fssaiNumber}</span>
                 </div>
-                <span 
-                  className="px-2.5 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold"
+                <div 
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-stone-900 border border-stone-200/90 shadow-2xs"
                   title={`ISO 9001:2015 Certificate of Compliance: ${SITE_CONFIG.isoNumber}`}
                 >
-                  ISO 9001:2015: {SITE_CONFIG.isoNumber}
-                </span>
+                  <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-4 w-auto object-contain shrink-0" />
+                  <span className="font-mono text-2xs font-bold text-stone-900">ISO {SITE_CONFIG.isoNumber}</span>
+                </div>
                 <span 
                   className="px-2.5 py-1 rounded-md bg-stone-900/90 border border-stone-700/70 text-2xs text-stone-300 font-mono font-medium"
                   title={`GSTIN: ${SITE_CONFIG.gstin}`}
@@ -248,7 +249,10 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                   <span className="text-amber-400 font-bold">{SITE_CONFIG.fssaiNumber}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-stone-400">ISO 9001:2015:</span>
+                  <div className="flex items-center gap-1.5">
+                    <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3 w-auto object-contain bg-white px-1 py-0.5 rounded shrink-0" />
+                    <span className="text-stone-400">ISO 9001:2015:</span>
+                  </div>
                   <span className="text-emerald-300 font-semibold">{SITE_CONFIG.isoNumber}</span>
                 </div>
                 <div className="flex items-center justify-between">
@@ -261,8 +265,47 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
 
         </div>
 
+        {/* Credibility & Statutory Compliance Boost Strip */}
+        <div className="pt-6 border-t border-emerald-950/80">
+          <div className="bg-[#052117]/80 rounded-2xl p-4 sm:p-5 border border-emerald-900/50 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-5">
+              {/* FSSAI Credential Boost Badge */}
+              <div className="flex items-center gap-2.5 bg-white px-3.5 py-2 rounded-xl shadow-xs">
+                <img src="/images/fssai-logo.png" alt="FSSAI Logo" className="h-6 sm:h-7 w-auto object-contain" />
+                <div className="flex flex-col text-left">
+                  <span className="text-3xs uppercase font-extrabold tracking-wider text-stone-500">Food Safety Authority of India</span>
+                  <span className="text-xs font-mono font-bold text-[#0B2568]">Lic. #{SITE_CONFIG.fssaiNumber}</span>
+                </div>
+              </div>
+
+              {/* ISO 9001:2015 Credential Boost Badge */}
+              <div className="flex items-center gap-2.5 bg-white px-3.5 py-2 rounded-xl shadow-xs">
+                <img src="/images/iso-logo.svg" alt="ISO 9001:2015 Logo" className="h-6 sm:h-7 w-auto object-contain" />
+                <div className="flex flex-col text-left">
+                  <span className="text-3xs uppercase font-extrabold tracking-wider text-stone-500">ISO 9001:2015 Certified QMS</span>
+                  <span className="text-xs font-mono font-bold text-[#003366]">Cert. #{SITE_CONFIG.isoNumber}</span>
+                </div>
+              </div>
+
+              {/* GSTIN Badge */}
+              <div className="hidden lg:flex items-center gap-2 bg-emerald-950/80 px-3.5 py-2 rounded-xl border border-emerald-800/60 text-stone-300">
+                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-3xs uppercase font-extrabold tracking-wider text-emerald-400">GSTIN Registered</span>
+                  <span className="text-xs font-mono font-bold text-stone-200">{SITE_CONFIG.gstin}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center md:text-right text-xs text-stone-300 max-w-sm">
+              <span className="text-emerald-300 font-semibold block">Statutory Export & Food Safety Alignment</span>
+              Full compliance with Indian food regulations, FoSCoS portal reporting, and accredited lab test parameters.
+            </div>
+          </div>
+        </div>
+
         {/* Bottom Strip: Legal & Admin Link */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-stone-400">
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-stone-400">
           <div>
             © {currentYear} <strong className="text-stone-200">SABORA SPICES</strong>. All Rights Reserved.
           </div>

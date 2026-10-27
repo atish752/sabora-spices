@@ -8,16 +8,18 @@ import {
   ChevronDown, 
   ShieldCheck, 
   FileText,
-  ExternalLink
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
+import { LanguageDropdown } from './LanguageTranslator';
 
 export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScrollToSection, onOpenQuoteModal, onOpenAdmin }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const headerRef = React.useRef(null);
-  const [headerHeight, setHeaderHeight] = useState(136);
+  const [headerHeight, setHeaderHeight] = useState(92);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +92,9 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
           {/* Right: WhatsApp Desk and Request Quote */}
           <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
-            
+            {/* Universal Multi-Language Selector */}
+            <LanguageDropdown compact />
+
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-2xs sm:text-xs text-emerald-200 hover:text-white transition-all font-semibold cursor-pointer shadow-2xs whitespace-nowrap shrink-0 active:scale-95"
@@ -368,6 +372,15 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               </span>
             </div>
 
+            {/* Mobile Language Selector */}
+            <div className="flex items-center justify-between p-2.5 bg-[#041A12] rounded-xl text-stone-200 border border-emerald-900/60 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-semibold">
+                <Globe className="w-4 h-4 text-amber-400" />
+                <span>Site Language / Sprache:</span>
+              </div>
+              <LanguageDropdown compact />
+            </div>
+
             {/* Official Statutory Badges in Mobile Drawer */}
             <div className="bg-stone-50 rounded-xl p-3 border border-stone-200/80 space-y-1.5">
               <div className="text-3xs font-mono font-bold text-amber-700 uppercase tracking-wider">
@@ -378,10 +391,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                   <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
                   <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
                 </div>
-                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-100 text-emerald-800 text-2xs font-mono font-semibold">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                  <span>ISO: {SITE_CONFIG.isoNumber}</span>
-                </span>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200 shadow-2xs font-mono text-2xs font-bold text-stone-900">
+                  <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3.5 w-auto object-contain" />
+                  <span>ISO {SITE_CONFIG.isoNumber}</span>
+                </div>
                 <span className="px-2 py-1 rounded-md bg-stone-200 text-stone-800 text-2xs font-mono">
                   GST: {SITE_CONFIG.gstin}
                 </span>

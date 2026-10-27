@@ -70,6 +70,7 @@ export const SITE_CONFIG = {
   isoCertificateNumber: "Q2A20262410AD742",
   isoStandard: "ISO 9001:2015",
   isoLabel: "ISO 9001:2015 Cert. No. Q2A20262410AD742",
+  isoLogoUrl: "/images/iso-logo.svg",
 
   gstin: "07BDVPK4053J1Z3",
   gstinLabel: "GSTIN: 07BDVPK4053J1Z3",
@@ -87,7 +88,8 @@ export const SITE_CONFIG = {
       name: "ISO 9001:2015 Certified", 
       desc: "Certificate of Compliance No: Q2A20262410AD742 (Quality Management Systems)", 
       badge: "Cert. #Q2A20262410AD742",
-      regNo: "Q2A20262410AD742"
+      regNo: "Q2A20262410AD742",
+      logo: "/images/iso-logo.svg"
     },
     { 
       name: "GSTIN Registered", 

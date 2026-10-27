@@ -18,7 +18,8 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
       name: "ISO 9001:2015 Quality Management",
       role: "Certificate of Compliance (QMS)",
       desc: `Certificate No. ${SITE_CONFIG.isoNumber}. International quality management framework guiding clear product specifications, systematic grower evaluation, sieve-calibrated grading, and zero-defect dispatch controls.`,
-      badge: `Cert. #${SITE_CONFIG.isoNumber}`
+      badge: `Cert. #${SITE_CONFIG.isoNumber}`,
+      logo: "/images/iso-logo.svg"
     },
     {
       name: "Goods and Services Tax Network (GSTIN)",
@@ -75,7 +76,7 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5">
                     {body.logo && (
-                      <img src={body.logo} alt="FSSAI Logo" className="h-6 w-auto object-contain shrink-0" />
+                      <img src={body.logo} alt={body.name} className="h-6 w-auto object-contain shrink-0" />
                     )}
                     <span className="font-serif text-lg sm:text-xl font-bold text-stone-900">{body.name}</span>
                   </div>

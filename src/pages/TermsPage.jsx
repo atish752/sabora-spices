@@ -294,9 +294,24 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                     </div>
                     <div className="flex items-start gap-2">
                       <Mail className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div className="flex flex-col">
-                        <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
-                        <span className="text-stone-600 text-3xs">contact@saboraspices.com / support@saboraspices.com</span>
+                      <div className="flex flex-col space-y-0.5 text-xs">
+                        <span className="font-semibold text-stone-900">Email Directory:</span>
+                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-3xs sm:text-2xs">
+                          <a href="mailto:info@saboraspices.com" className="text-stone-700 hover:text-emerald-700 transition-colors">
+                            <span className="text-stone-400 font-sans">Info: </span>info@saboraspices.com
+                          </a>
+                          <a href="mailto:sales@saboraspices.com" className="text-stone-700 hover:text-emerald-700 transition-colors">
+                            <span className="text-stone-400 font-sans">Sales: </span>sales@saboraspices.com
+                          </a>
+                        </div>
+                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-3xs sm:text-2xs text-stone-600">
+                          <a href="mailto:contact@saboraspices.com" className="text-stone-700 hover:text-emerald-700 transition-colors">
+                            <span className="text-stone-400 font-sans">Desk: </span>contact@saboraspices.com
+                          </a>
+                          <a href="mailto:support@saboraspices.com" className="text-stone-700 hover:text-emerald-700 transition-colors">
+                            <span className="text-stone-400 font-sans">Support: </span>support@saboraspices.com
+                          </a>
+                        </div>
                       </div>
                     </div>
                     <div className="pt-2 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-3xs text-stone-700">
@@ -305,7 +320,10 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                         <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain" />
                         <span><strong className="text-stone-900">FSSAI Lic:</strong> {SITE_CONFIG.fssaiNumber}</span>
                       </div>
-                      <div><strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}</div>
+                      <div className="flex items-center gap-1">
+                        <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3 w-auto object-contain" />
+                        <span><strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

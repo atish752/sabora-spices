@@ -173,17 +173,24 @@ assert('1234' !== targetPassword, 'Admin password rejects 1234');
 // 24. Verify Tawk.to Live Chat integration in index.html
 assert(indexHtml.includes('https://embed.tawk.to/6ae0701e5c05523470231899/1k5ubbtri') && indexHtml.includes('Tawk_API'), 'index.html embeds authentic Tawk.to live chat snippet');
 
-// 25. Verify Official 4-Email Directory in siteConfig, Footer, ContactPage and ContactRfqSection
+// 25. Verify Official 4-Email Directory across siteConfig, Footer, ContactPage, ContactRfqSection, PrivacyPage, and TermsPage
 const expectedEmails = ['info@saboraspices.com', 'sales@saboraspices.com', 'contact@saboraspices.com', 'support@saboraspices.com'];
 for (const email of expectedEmails) {
   assert(siteConfigJs.includes(email), `siteConfig.js contains official email: ${email}`);
   assert(footerJsx.includes(email), `FooterSection.jsx displays official email: ${email}`);
 }
 const contactPageJsx = readFileSync(join(rootDir, 'src/pages/ContactPage.jsx'), 'utf-8');
+const privacyPageJsx = readFileSync(join(rootDir, 'src/pages/PrivacyPage.jsx'), 'utf-8');
+const termsPageJsx = readFileSync(join(rootDir, 'src/pages/TermsPage.jsx'), 'utf-8');
 for (const email of expectedEmails) {
   assert(contactPageJsx.includes(email), `ContactPage.jsx displays official email: ${email}`);
   assert(contactRfqJsx.includes(email), `ContactRfqSection.jsx displays official email: ${email}`);
+  assert(privacyPageJsx.includes(`mailto:${email}`), `PrivacyPage.jsx provides direct clickable mailto link for: ${email}`);
+  assert(termsPageJsx.includes(`mailto:${email}`), `TermsPage.jsx provides direct clickable mailto link for: ${email}`);
 }
+
+// 26. Verify Desktop Floating WhatsApp is non-colliding with Tawk.to Live Chat
+assert(appJsx.includes('fixed bottom-6 left-6') && !appJsx.includes('fixed bottom-6 right-6'), 'App.jsx positions desktop WhatsApp button at bottom-left to prevent collision with bottom-right Tawk.to widget');
 
 console.log('\nVerification suite finished.');
 if (failed) {

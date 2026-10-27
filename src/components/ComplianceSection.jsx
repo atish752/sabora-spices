@@ -106,7 +106,7 @@ export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection 
             {/* ISO 9001:2015 Credential */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15 text-white space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="font-serif font-bold text-lg text-emerald-300">ISO 9001:2015</span>
+                <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-7 w-auto object-contain" />
                 <span className="text-2xs font-mono font-bold bg-emerald-500/20 text-emerald-200 px-2 py-0.5 rounded border border-emerald-400/30">
                   Quality Management
                 </span>

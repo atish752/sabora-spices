@@ -126,13 +126,7 @@ export default function HomePage({
                     )}
                   </div>
 
-                  {/* Origin Badge overlay */}
-                  <div className="absolute top-3.5 right-3.5">
-                    <span className="px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md text-stone-800 text-2xs sm:text-xs font-semibold border border-stone-200 shadow-2xs flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                      <span>{product.origin?.split(',')[0] || "India"}</span>
-                    </span>
-                  </div>
+
                 </div>
 
                 {/* Details */}
@@ -271,12 +265,22 @@ export default function HomePage({
               className="p-6 sm:p-7 rounded-2xl bg-stone-50 hover:bg-emerald-50/40 border border-stone-200 hover:border-emerald-500/40 transition-all cursor-pointer group space-y-3.5"
             >
               <div className="flex items-center justify-between">
-                <div className="w-11 h-11 rounded-xl bg-white text-emerald-800 border border-stone-200 flex items-center justify-center group-hover:scale-105 transition-transform p-1.5 shadow-2xs">
-                  <img src="/images/fssai-logo.png" alt="FSSAI" className="h-6 w-auto object-contain" />
+                <div className="flex items-center gap-2">
+                  <div className="h-11 px-2.5 rounded-xl bg-white text-emerald-800 border border-stone-200 flex items-center justify-center group-hover:scale-105 transition-transform p-1.5 shadow-2xs">
+                    <img src="/images/fssai-logo.png" alt="FSSAI" className="h-6 w-auto object-contain" />
+                  </div>
+                  <div className="h-11 px-2 rounded-xl bg-[#003366] text-white border border-blue-900 flex items-center justify-center group-hover:scale-105 transition-transform p-1 shadow-2xs">
+                    <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-7 w-auto object-contain" />
+                  </div>
                 </div>
-                <span className="text-3xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                  Lic. 13326008000336
-                </span>
+                <div className="flex flex-col items-end gap-1">
+                  <span className="text-3xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                    FSSAI Lic. {SITE_CONFIG.fssaiNumber}
+                  </span>
+                  <span className="text-3xs font-mono font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-900">
+                    ISO 9001:2015
+                  </span>
+                </div>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors">
                 Certified Standards

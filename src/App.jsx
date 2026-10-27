@@ -21,6 +21,7 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import TenSecondLeadModal from './components/TenSecondLeadModal';
+import LanguageTranslator from './components/LanguageTranslator';
 
 import { MessageCircle } from 'lucide-react';
 import { SITE_CONFIG } from './config/siteConfig';
@@ -416,8 +417,8 @@ export default function App() {
         onScrollToSection={(sectionId) => navigateTo(sectionId)}
       />
 
-      {/* Desktop Floating WhatsApp Button */}
-      <aside aria-label="WhatsApp quick chat" className="hidden sm:block fixed bottom-6 right-6 z-40">
+      {/* Desktop Floating WhatsApp Button (Positioned at bottom-left to avoid colliding with Tawk.to live chat at bottom-right) */}
+      <aside aria-label="WhatsApp quick chat" className="hidden sm:block fixed bottom-6 left-6 z-40">
         <button
           onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I am interested in sourcing whole spices and makhana.")}
           className="p-3.5 bg-gradient-to-r from-[#041A12] via-[#082E20] to-[#041A12] hover:brightness-110 active:scale-95 text-white rounded-full shadow-[0_12px_35px_rgba(4,26,18,0.35)] hover:shadow-[0_16px_45px_rgba(4,26,18,0.45)] hover:scale-105 transition-all flex items-center justify-center group cursor-pointer border border-amber-400/50"
@@ -434,6 +435,9 @@ export default function App() {
           </span>
         </button>
       </aside>
+
+      {/* Multi-Language Translation Engine & Native Language Suggestion Banner */}
+      <LanguageTranslator />
 
       {/* International Cookie Consent Banner */}
       <CookieConsentBanner onNavigate={navigateTo} />
