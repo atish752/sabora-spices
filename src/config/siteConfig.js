@@ -21,8 +21,24 @@ export const SITE_CONFIG = {
   whatsappNumber: "917880906610",
   whatsappDisplayNumber: "+91 78809 06610",
   
+  // Official Email Directory (General, Sales, Contact, Support)
   email: "info@saboraspices.com",
   inquiryEmail: "sales@saboraspices.com",
+  salesEmail: "sales@saboraspices.com",
+  contactEmail: "contact@saboraspices.com",
+  supportEmail: "support@saboraspices.com",
+  emails: {
+    info: "info@saboraspices.com",
+    sales: "sales@saboraspices.com",
+    contact: "contact@saboraspices.com",
+    support: "support@saboraspices.com"
+  },
+  emailDepartments: [
+    { department: "General Inquiries & Trade Desk", email: "info@saboraspices.com" },
+    { department: "Sales & Wholesale Quotations", email: "sales@saboraspices.com" },
+    { department: "Corporate & Sourcing Desk", email: "contact@saboraspices.com" },
+    { department: "Client Support & Logistics", email: "support@saboraspices.com" }
+  ],
   website: "www.saboraspices.com",
   
   workingHours: "Monday – Saturday: 9:00 AM – 7:30 PM IST (WhatsApp Desk Active 24/7)",

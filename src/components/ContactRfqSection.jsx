@@ -191,13 +191,37 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   </div>
                 </div>
 
-                {/* Website & Email */}
+                {/* Official Emails Directory */}
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-emerald-600/30 text-amber-300 shrink-0 mt-0.5 border border-emerald-500/30">
+                    <Mail className="w-4 h-4 text-amber-300" />
+                  </div>
+                  <div className="w-full">
+                    <span className="block font-semibold text-white">Official Email Directory:</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1 pt-1 text-xs font-mono">
+                      <a href="mailto:info@saboraspices.com" className="text-stone-300 hover:text-amber-300 transition-colors">
+                        <span className="text-amber-400 font-sans font-medium">Info:</span> info@saboraspices.com
+                      </a>
+                      <a href="mailto:sales@saboraspices.com" className="text-stone-300 hover:text-amber-300 transition-colors">
+                        <span className="text-amber-400 font-sans font-medium">Sales:</span> sales@saboraspices.com
+                      </a>
+                      <a href="mailto:contact@saboraspices.com" className="text-stone-300 hover:text-amber-300 transition-colors">
+                        <span className="text-amber-400 font-sans font-medium">Desk:</span> contact@saboraspices.com
+                      </a>
+                      <a href="mailto:support@saboraspices.com" className="text-stone-300 hover:text-amber-300 transition-colors">
+                        <span className="text-amber-400 font-sans font-medium">Support:</span> support@saboraspices.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Website */}
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-white/10 text-stone-300 shrink-0 mt-0.5">
                     <Globe className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block font-semibold text-white">Website & Inquiries:</span>
+                    <span className="block font-semibold text-white">Official Portal:</span>
                     <span className="text-stone-300 font-mono">www.saboraspices.com</span>
                   </div>
                 </div>

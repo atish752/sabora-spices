@@ -292,9 +292,12 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                       <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Phones: +91 78809 06610 / +91 95327 01582</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
+                    <div className="flex items-start gap-2">
+                      <Mail className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div className="flex flex-col">
+                        <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
+                        <span className="text-stone-600 text-3xs">contact@saboraspices.com / support@saboraspices.com</span>
+                      </div>
                     </div>
                     <div className="pt-2 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-3xs text-stone-700">
                       <div><strong className="text-stone-900">GSTIN:</strong> {SITE_CONFIG.gstin}</div>

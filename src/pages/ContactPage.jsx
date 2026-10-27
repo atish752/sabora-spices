@@ -45,7 +45,7 @@ export default function ContactPage({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3 shadow-xs">
               <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-800">
                 <MapPin className="w-5 h-5" />
@@ -55,7 +55,7 @@ export default function ContactPage({
                 Jahangirpuri, Delhi – 110033, India
               </p>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
-                Central Northern India Logistics Hub
+                Central Northern India Hub
               </div>
             </div>
 
@@ -94,16 +94,40 @@ export default function ContactPage({
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800">
+                <Mail className="w-5 h-5" />
+              </div>
+              <h4 className="font-serif font-bold text-stone-900 text-base sm:text-lg">Email Directory</h4>
+              <div className="space-y-1 text-xs">
+                <a href="mailto:info@saboraspices.com" className="block text-stone-700 hover:text-emerald-700 font-medium">
+                  <span className="text-stone-400">Info: </span>info@saboraspices.com
+                </a>
+                <a href="mailto:sales@saboraspices.com" className="block text-stone-700 hover:text-emerald-700 font-medium">
+                  <span className="text-stone-400">Sales: </span>sales@saboraspices.com
+                </a>
+                <a href="mailto:contact@saboraspices.com" className="block text-stone-700 hover:text-emerald-700 font-medium">
+                  <span className="text-stone-400">Desk: </span>contact@saboraspices.com
+                </a>
+                <a href="mailto:support@saboraspices.com" className="block text-stone-700 hover:text-emerald-700 font-medium">
+                  <span className="text-stone-400">Support: </span>support@saboraspices.com
+                </a>
+              </div>
+              <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
+                Responses within 2-4 hrs
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3 shadow-xs">
               <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center text-stone-800">
                 <Clock className="w-5 h-5" />
               </div>
               <h4 className="font-serif font-bold text-stone-900 text-base sm:text-lg">Operating Hours</h4>
               <p className="text-sm text-stone-600 leading-relaxed">
-                Monday to Saturday: 9:00 AM – 7:30 PM (IST)<br />
-                Sunday: Closed (Inquiries queued)
+                Mon – Sat: 9:00 AM – 7:30 PM (IST)<br />
+                Sun: Closed (Inquiries queued)
               </p>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
-                SLA: Quotations within 4-8 hrs
+                SLA: Quotes within 4-8 hrs
               </div>
             </div>
           </div>

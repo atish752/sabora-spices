@@ -326,9 +326,12 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                       <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Phone: +91 78809 06610 / +91 95327 01582</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
+                    <div className="flex items-start gap-2">
+                      <Mail className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div className="flex flex-col">
+                        <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
+                        <span className="text-stone-600 text-3xs">contact@saboraspices.com / support@saboraspices.com</span>
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-stone-500 shrink-0" />

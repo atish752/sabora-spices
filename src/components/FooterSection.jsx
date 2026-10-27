@@ -211,6 +211,23 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                 <Globe className="w-4 h-4 text-stone-400 shrink-0" />
                 <span>www.saboraspices.com</span>
               </div>
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1 text-xs">
+                  <a href="mailto:info@saboraspices.com" className="hover:text-amber-400 transition-colors">
+                    <span className="text-stone-400">General:</span> info@saboraspices.com
+                  </a>
+                  <a href="mailto:sales@saboraspices.com" className="hover:text-amber-400 transition-colors">
+                    <span className="text-stone-400">Sales:</span> sales@saboraspices.com
+                  </a>
+                  <a href="mailto:contact@saboraspices.com" className="hover:text-amber-400 transition-colors">
+                    <span className="text-stone-400">Desk:</span> contact@saboraspices.com
+                  </a>
+                  <a href="mailto:support@saboraspices.com" className="hover:text-amber-400 transition-colors">
+                    <span className="text-stone-400">Support:</span> support@saboraspices.com
+                  </a>
+                </div>
+              </div>
               <div className="pt-2">
                 <button
                   onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I am contacting you from your website.")}

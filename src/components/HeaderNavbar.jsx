@@ -65,8 +65,8 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
           <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 text-xs font-medium w-full sm:w-auto shrink-0">
             <span className="flex items-center gap-1.5 text-stone-300 whitespace-nowrap">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span className="hidden xl:inline">Jahangirpuri, Delhi – 110033, India</span>
-              <span className="xl:hidden">Delhi – 110033, India</span>
+              <span className="hidden md:inline">Jahangirpuri, Delhi – 110033, India</span>
+              <span className="md:hidden">Delhi – 110033, India</span>
             </span>
             <div className="flex items-center gap-2 border-l border-emerald-800/60 pl-2 whitespace-nowrap shrink-0">
               <a 
@@ -77,10 +77,10 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>+91 78809 06610</span>
               </a>
-              <span className="hidden 2xl:inline text-stone-500">|</span>
+              <span className="hidden sm:inline text-stone-500">|</span>
               <a 
                 href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} 
-                className="hidden 2xl:inline text-stone-300 hover:text-amber-400 transition-colors"
+                className="hidden sm:inline text-stone-300 hover:text-amber-400 transition-colors"
                 title="Secondary Sourcing Desk Phone"
               >
                 +91 95327 01582
@@ -88,48 +88,8 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </div>
           </div>
 
-          {/* Mobile Statutory Badges Row (< sm) */}
-          <div className="flex sm:hidden items-center justify-center gap-1.5 flex-wrap text-2xs w-full py-0.5">
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-3xs font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
-              <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain shrink-0" />
-              <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
-            </span>
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-3xs text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" title={`ISO 9001:2015 Certificate: ${SITE_CONFIG.isoNumber}`}>
-              <ShieldCheck className="w-2.5 h-2.5 text-amber-400 shrink-0" />
-              <span>ISO: {SITE_CONFIG.isoNumber}</span>
-            </span>
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-3xs text-stone-300 font-mono whitespace-nowrap shrink-0" title={`GSTIN: ${SITE_CONFIG.gstin}`}>
-              <span>GST: {SITE_CONFIG.gstin}</span>
-            </span>
-          </div>
-
-          {/* Right: Statutory Badges, WhatsApp Desk and Request Quote */}
+          {/* Right: WhatsApp Desk and Request Quote */}
           <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
-            {/* Official Statutory Badges: FSSAI, ISO 9001:2015 & GSTIN */}
-            <div className="hidden md:flex items-center gap-1.5 shrink-0">
-              <span 
-                className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-[10.5px] font-mono font-bold text-[#0B2568] whitespace-nowrap shrink-0" 
-                title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}
-              >
-                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain shrink-0" />
-                <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
-              </span>
-
-              <span 
-                className="hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-[10.5px] text-emerald-300 font-mono font-semibold whitespace-nowrap shrink-0" 
-                title={`ISO 9001:2015 Certificate of Compliance: ${SITE_CONFIG.isoNumber}`}
-              >
-                <ShieldCheck className="w-3 h-3 text-amber-400 shrink-0" />
-                <span>ISO: {SITE_CONFIG.isoNumber}</span>
-              </span>
-
-              <span 
-                className="hidden 2xl:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-[10.5px] text-stone-300 font-mono whitespace-nowrap shrink-0" 
-                title={`GSTIN: ${SITE_CONFIG.gstin}`}
-              >
-                <span>GST: {SITE_CONFIG.gstin}</span>
-              </span>
-            </div>
             
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}

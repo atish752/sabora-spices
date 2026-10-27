@@ -75,4 +75,8 @@ const firebaseConfig = {
 - **Phones**: +91 78809 06610 | +91 95327 01582
 - **WhatsApp**: +91 78809 06610
 - **Website**: www.saboraspices.com
-- **Email**: info@saboraspices.com
+- **Emails**:
+  - General Inquiries: info@saboraspices.com
+  - Sales & Quotations: sales@saboraspices.com
+  - Corporate Desk: contact@saboraspices.com
+  - Client Support: support@saboraspices.com

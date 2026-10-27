@@ -155,7 +155,7 @@ export const FAQS = [
     id: 24,
     category: "contact",
     question: "How can I contact SABORA SPICES?",
-    answer: "You can contact us via:\n• Address: Jahangirpuri, Delhi – 110033, India\n• Phone: +91 78809 06610 | +91 95327 01582\n• WhatsApp: +91 78809 06610\n• Website: www.saboraspices.com\n• Email: info@saboraspices.com"
+    answer: "You can contact us via:\n• Address: Jahangirpuri, Delhi – 110033, India\n• Phone: +91 78809 06610 | +91 95327 01582\n• WhatsApp: +91 78809 06610\n• Website: www.saboraspices.com\n• Emails:\n  - General: info@saboraspices.com\n  - Sales & Quotations: sales@saboraspices.com\n  - Commercial Desk: contact@saboraspices.com\n  - Client Support: support@saboraspices.com"
   },
   {
     id: 25,
