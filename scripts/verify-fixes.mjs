@@ -251,6 +251,21 @@ assert(freshConfig.includes("primaryPhone: '+91 95327 01582'") || freshConfig.in
 assert(freshHeader.includes('justify-between') && freshHeader.includes('flex-1'), 'HeaderNavbar desktop nav stretches flexibly with justify-between across the homebar');
 assert(freshHeader.includes('text-[12.5px]') || freshHeader.includes('text-[13px]') || freshHeader.includes('text-[14px]'), 'HeaderNavbar desktop buttons are enlarged for prominent visibility');
 
+// 37. Verify Social Media Channels (Facebook & Instagram)
+const freshFooter = readFileSync(join(rootDir, 'src/components/FooterSection.jsx'), 'utf-8');
+const freshContactPage = readFileSync(join(rootDir, 'src/pages/ContactPage.jsx'), 'utf-8');
+const freshRfq = readFileSync(join(rootDir, 'src/components/ContactRfqSection.jsx'), 'utf-8');
+
+const fbUrl = 'https://www.facebook.com/profile.php?id=61593929848464';
+const instaUrl = 'https://www.instagram.com/saboraspices/';
+
+assert(freshConfig.includes(fbUrl), 'siteConfig includes official Facebook URL');
+assert(freshConfig.includes(instaUrl), 'siteConfig includes official Instagram URL');
+assert(freshFooter.includes('socialMedia.facebook') && freshFooter.includes('socialMedia.instagram'), 'FooterSection wires Facebook and Instagram links');
+assert(freshHeader.includes('socialMedia.facebook') && freshHeader.includes('socialMedia.instagram'), 'HeaderNavbar wires Facebook and Instagram links');
+assert(freshContactPage.includes('socialMedia.facebook') && freshContactPage.includes('socialMedia.instagram'), 'ContactPage wires Facebook and Instagram links');
+assert(freshRfq.includes('socialMedia.facebook') && freshRfq.includes('socialMedia.instagram'), 'ContactRfqSection wires Facebook and Instagram links');
+
 console.log('\nVerification suite finished.');
 if (failed) {
   process.exit(1);

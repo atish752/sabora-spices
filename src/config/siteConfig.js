@@ -41,6 +41,26 @@ export const SITE_CONFIG = {
   ],
   website: "www.saboraspices.com",
   
+  // Official Social Media Channels
+  socialMedia: {
+    facebook: "https://www.facebook.com/profile.php?id=61593929848464",
+    instagram: "https://www.instagram.com/saboraspices/"
+  },
+  socialLinks: [
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=61593929848464",
+      handle: "Sabora Spices",
+      color: "#1877F2"
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/saboraspices/",
+      handle: "@saboraspices",
+      color: "#E4405F"
+    }
+  ],
+  
   workingHours: "Monday – Saturday: 9:00 AM – 7:30 PM IST (WhatsApp Desk Active 24/7)",
   
   // Key Core Categories

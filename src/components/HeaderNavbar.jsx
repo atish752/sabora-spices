@@ -9,7 +9,9 @@ import {
   ShieldCheck, 
   FileText,
   ExternalLink,
-  Globe
+  Globe,
+  Facebook,
+  Instagram
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { LanguageDropdown } from './LanguageTranslator';
@@ -86,6 +88,28 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 title="Secondary Sourcing Desk Phone"
               >
                 +91 78809 06610
+              </a>
+            </div>
+
+            {/* Social Media Links (Facebook & Instagram) */}
+            <div className="hidden xl:flex items-center gap-2 border-l border-emerald-800/60 pl-2 shrink-0">
+              <a
+                href={SITE_CONFIG.socialMedia.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-300 hover:text-[#1877F2] transition-colors p-0.5"
+                title="Follow Sabora Spices on Facebook"
+              >
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={SITE_CONFIG.socialMedia.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-300 hover:text-[#E4405F] transition-colors p-0.5"
+                title="Follow Sabora Spices on Instagram"
+              >
+                <Instagram className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -533,6 +557,28 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 <MessageCircle className="w-4 h-4 fill-white" />
                 <span>Chat on WhatsApp (1-Click)</span>
               </button>
+
+              {/* Mobile Social Follow Buttons */}
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href={SITE_CONFIG.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 rounded-lg bg-stone-100 hover:bg-[#1877F2]/10 border border-stone-200 text-stone-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Facebook className="w-4 h-4 text-[#1877F2]" />
+                  <span>Facebook</span>
+                </a>
+                <a
+                  href={SITE_CONFIG.socialMedia.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 rounded-lg bg-stone-100 hover:bg-[#E4405F]/10 border border-stone-200 text-stone-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Instagram className="w-4 h-4 text-[#E4405F]" />
+                  <span>Instagram</span>
+                </a>
+              </div>
 
               {onOpenAdmin && (
                 <button

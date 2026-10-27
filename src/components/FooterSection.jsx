@@ -6,7 +6,9 @@ import {
   Globe, 
   Lock, 
   MessageCircle, 
-  ExternalLink 
+  ExternalLink,
+  Facebook,
+  Instagram 
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -237,6 +239,35 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                   <span>WhatsApp Commercial Desk</span>
                 </button>
               </div>
+
+              {/* Official Social Media Channels */}
+              <div className="pt-3 border-t border-white/10 space-y-2">
+                <span className="text-2xs uppercase tracking-wider text-amber-400 font-bold block">
+                  Follow Us Online
+                </span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={SITE_CONFIG.socialMedia.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-white/5 hover:bg-[#1877F2]/20 border border-white/10 hover:border-[#1877F2]/60 text-stone-300 hover:text-white transition-all flex items-center justify-center gap-2 text-xs font-medium group cursor-pointer"
+                    title="Follow Sabora Spices on Facebook"
+                  >
+                    <Facebook className="w-3.5 h-3.5 text-[#1877F2] group-hover:scale-110 transition-transform" />
+                    <span>Facebook</span>
+                  </a>
+                  <a
+                    href={SITE_CONFIG.socialMedia.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-white/5 hover:bg-[#E4405F]/20 border border-white/10 hover:border-[#E4405F]/60 text-stone-300 hover:text-white transition-all flex items-center justify-center gap-2 text-xs font-medium group cursor-pointer"
+                    title="Follow Sabora Spices on Instagram"
+                  >
+                    <Instagram className="w-3.5 h-3.5 text-[#E4405F] group-hover:scale-110 transition-transform" />
+                    <span>Instagram</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -278,6 +309,26 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               <Lock className="w-3 h-3" />
               <span>Admin Panel</span>
             </button>
+            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-white/15">
+              <a 
+                href={SITE_CONFIG.socialMedia.facebook} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-stone-400 hover:text-[#1877F2] transition-colors p-1"
+                title="Follow on Facebook"
+              >
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+              <a 
+                href={SITE_CONFIG.socialMedia.instagram} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-stone-400 hover:text-[#E4405F] transition-colors p-1"
+                title="Follow on Instagram"
+              >
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
 

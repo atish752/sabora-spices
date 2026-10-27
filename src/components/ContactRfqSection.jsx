@@ -11,7 +11,10 @@ import {
   ShieldCheck, 
   FileText,
   Building,
-  Leaf
+  Leaf,
+  Facebook,
+  Instagram,
+  Share2
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -234,6 +237,39 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   <div>
                     <span className="block font-semibold text-white">Working Hours:</span>
                     <span className="text-stone-300">Mon – Sat: 9:00 AM – 7:30 PM IST</span>
+                  </div>
+                </div>
+
+                {/* Official Social Media Channels */}
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-white/10 text-stone-300 shrink-0 mt-0.5">
+                    <Share2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="block font-semibold text-white">Social Channels:</span>
+                    <div className="flex items-center gap-3 pt-1">
+                      <a 
+                        href={SITE_CONFIG.socialMedia.facebook} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-stone-300 hover:text-[#1877F2] transition-colors flex items-center gap-1.5 text-xs group cursor-pointer"
+                        title="Sabora Spices on Facebook"
+                      >
+                        <Facebook className="w-3.5 h-3.5 text-[#1877F2] group-hover:scale-110 transition-transform" />
+                        <span>Facebook</span>
+                      </a>
+                      <span className="text-stone-600">•</span>
+                      <a 
+                        href={SITE_CONFIG.socialMedia.instagram} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-stone-300 hover:text-[#E4405F] transition-colors flex items-center gap-1.5 text-xs group cursor-pointer"
+                        title="Sabora Spices on Instagram"
+                      >
+                        <Instagram className="w-3.5 h-3.5 text-[#E4405F] group-hover:scale-110 transition-transform" />
+                        <span>Instagram</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
 

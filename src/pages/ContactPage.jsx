@@ -1,7 +1,7 @@
 import React from 'react';
 import PageHeaderBanner from '../components/PageHeaderBanner';
 import ContactRfqSection from '../components/ContactRfqSection';
-import { MapPin, Phone, MessageCircle, Clock, ShieldCheck, Mail, Globe } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Clock, ShieldCheck, Mail, Globe, Facebook, Instagram } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function ContactPage({
@@ -129,6 +129,44 @@ export default function ContactPage({
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
                 SLA: Quotes within 4-8 hrs
               </div>
+            </div>
+          </div>
+
+          {/* Official Social Media Channels Banner */}
+          <div className="bg-gradient-to-r from-emerald-950 via-[#032015] to-emerald-950 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between gap-4 shadow-xs border border-emerald-800/40">
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-amber-300 shrink-0 border border-white/10">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-serif font-bold text-lg text-white">
+                  Follow Sabora Spices Online
+                </h4>
+                <p className="text-xs sm:text-sm text-stone-300">
+                  Connect on our official social media channels for harvest news, crop updates, and origin stories.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <a
+                href={SITE_CONFIG.socialMedia.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-[#1877F2] text-white text-xs sm:text-sm font-semibold transition-all border border-white/20 hover:border-[#1877F2] shadow-xs group cursor-pointer"
+              >
+                <Facebook className="w-4 h-4 text-[#1877F2] group-hover:text-white group-hover:scale-110 transition-all" />
+                <span>Facebook</span>
+              </a>
+              <a
+                href={SITE_CONFIG.socialMedia.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-gradient-to-r hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] text-white text-xs sm:text-sm font-semibold transition-all border border-white/20 hover:border-pink-500 shadow-xs group cursor-pointer"
+              >
+                <Instagram className="w-4 h-4 text-[#E4405F] group-hover:text-white group-hover:scale-110 transition-all" />
+                <span>Instagram</span>
+              </a>
             </div>
           </div>
 
