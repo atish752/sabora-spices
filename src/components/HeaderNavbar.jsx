@@ -77,7 +77,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 title="Primary Sourcing Desk Phone"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>+91 78809 06610</span>
+                <span>+91 95327 01582</span>
               </a>
               <span className="hidden sm:inline text-stone-500">|</span>
               <a 
@@ -85,7 +85,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 className="hidden sm:inline text-stone-300 hover:text-amber-400 transition-colors"
                 title="Secondary Sourcing Desk Phone"
               >
-                +91 95327 01582
+                +91 78809 06610
               </a>
             </div>
           </div>
@@ -127,16 +127,16 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
         </div>
       </div>
 
-      {/* ── Main Sticky Header (Spans full width with max-w-[1440px] interior) ── */}
+      {/* ── Main Sticky Header (Spans full width with max-w-[1600px] interior) ── */}
       <div className={`w-full transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-1.5 sm:py-2 border-b border-stone-200' 
-          : 'bg-white py-2 xl:py-2.5 border-b border-stone-100'
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-stone-200' 
+          : 'bg-white py-2.5 xl:py-3 border-b border-stone-100'
       }`}>
-        <div className="max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-6 2xl:px-8 flex items-center justify-between gap-1.5 lg:gap-2 xl:gap-3">
+        <div className="w-full max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 2xl:px-10 flex items-center justify-between gap-2 lg:gap-3 xl:gap-4">
           
           {/* Logo & Brand Identity: Cleanly separated, never overlapping */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 xl:gap-3 shrink-0">
             <a 
               href="/" 
               onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
@@ -146,7 +146,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <img 
                 src="/images/logo.png" 
                 alt="Sabora Spices Logo" 
-                className="h-[30px] sm:h-[34px] xl:h-[38px] max-h-[38px] w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm shrink-0"
+                className="h-[32px] sm:h-[36px] xl:h-[42px] max-h-[42px] w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-sm shrink-0"
               />
             </a>
 
@@ -154,21 +154,21 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <a 
                 href="/" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
-                className="font-serif text-[15px] sm:text-base lg:text-[16px] xl:text-lg 2xl:text-xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none leading-tight"
+                className="font-serif text-[16px] sm:text-lg lg:text-[17px] xl:text-xl 2xl:text-2xl font-black tracking-tight text-[#0F3D2E] hover:text-amber-700 transition-colors whitespace-nowrap focus:outline-none leading-tight"
               >
                 SABORA SPICES
               </a>
-              <span className="text-[8.5px] sm:text-[9.5px] xl:text-[10px] 2xl:text-[11px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-0.5 whitespace-nowrap">
+              <span className="text-[9px] sm:text-[10px] xl:text-[11px] 2xl:text-[12px] font-sans font-semibold tracking-wider text-amber-700 uppercase leading-none mt-0.5 whitespace-nowrap">
                 whole spices & makhana
               </span>
             </div>
           </div>
 
-          {/* Desktop Navigation Links (All 10 Dedicated Pages) */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 text-xs xl:text-[12px] 2xl:text-[13px] font-semibold text-stone-700 whitespace-nowrap shrink-0">
+          {/* Desktop Navigation Links (Spans from beside "SABORA SPICES" till the very right side) */}
+          <nav className="hidden lg:flex flex-1 items-center justify-between ml-3 lg:ml-4 xl:ml-6 2xl:ml-8 text-[12.5px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px] font-semibold text-stone-700 whitespace-nowrap">
             <button 
               onClick={() => handleNavClick('home')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('home')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -179,7 +179,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('about')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('about')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -196,7 +196,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             >
               <button 
                 onClick={() => handleNavClick('products')}
-                className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all flex items-center gap-0.5 xl:gap-1 cursor-pointer whitespace-nowrap shrink-0 ${
+                className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0 ${
                   isActive('products')
                     ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                     : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -251,7 +251,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('sourcing')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('sourcing')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -264,7 +264,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('why-sabora')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('why-sabora')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -275,7 +275,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('quality')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('quality')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -288,7 +288,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('lab-testing')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('lab-testing')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -299,7 +299,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('compliance')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('compliance')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -310,7 +310,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('export')} 
-              className={`px-1.5 xl:px-2 2xl:px-2.5 py-1 xl:py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`px-1.5 xl:px-2.5 2xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 isActive('export')
                   ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
                   : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
@@ -323,9 +323,9 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             <button 
               onClick={() => handleNavClick('contact')} 
-              className={`ml-0.5 xl:ml-1 px-2.5 xl:px-3 py-1 xl:py-1.5 rounded-lg text-xs xl:text-[12px] 2xl:text-[13px] font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-2xs ${
+              className={`px-3 xl:px-4 2xl:px-5 py-1.5 xl:py-2 rounded-xl text-[12.5px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px] font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-xs ${
                 isActive('contact')
-                  ? 'bg-[#0F3D2E] text-amber-300 ring-2 ring-emerald-700 shadow-xs'
+                  ? 'bg-[#0F3D2E] text-amber-300 ring-2 ring-emerald-700 shadow-md'
                   : 'bg-[#0F3D2E] text-white hover:bg-[#165640] hover:text-amber-200'
               }`}
             >
@@ -520,7 +520,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 className="w-full py-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-sm font-semibold flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-emerald-700" />
-                <span>Call Us: +91 78809 06610</span>
+                <span>Call Us: +91 95327 01582</span>
               </a>
 
               <button

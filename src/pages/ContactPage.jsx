@@ -66,10 +66,10 @@ export default function ContactPage({
               <h4 className="font-serif font-bold text-stone-900 text-base sm:text-lg">Direct Phone Lines</h4>
               <div className="space-y-1 text-sm">
                 <a href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} className="block text-stone-700 hover:text-emerald-700 font-semibold">
-                  +91 78809 06610
+                  +91 95327 01582
                 </a>
                 <a href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} className="block text-stone-700 hover:text-emerald-700 font-semibold">
-                  +91 95327 01582
+                  +91 78809 06610
                 </a>
               </div>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">

@@ -145,9 +145,10 @@ assert(existsSync(join(rootDir, 'public/images/fssai-logo.png')), 'Authentic FSS
 const whySaboraJsx = readFileSync(join(rootDir, 'src/components/WhySaboraSection.jsx'), 'utf-8');
 assert(whySaboraJsx.includes('fssai-logo.png') && whySaboraJsx.includes('fssaiNumber'), 'WhySaboraSection includes authentic FSSAI logo and license number');
 
-// 19. Verify FooterSection includes FSSAI Logo in both Column 1 and Column 4
+// 19. Verify FooterSection includes FSSAI Logo in Column 1 and removed redundant Col 4 box
 const footerJsx = readFileSync(join(rootDir, 'src/components/FooterSection.jsx'), 'utf-8');
-assert(footerJsx.match(/fssai-logo\.png[\s\S]*?fssai-logo\.png/), 'FooterSection includes authentic FSSAI logo in both Column 1 and Column 4');
+assert(footerJsx.includes('fssai-logo.png'), 'FooterSection includes authentic FSSAI logo in Column 1');
+assert(!footerJsx.includes('Statutory Registration Summary'), 'FooterSection removed redundant Column 4 statutory box');
 
 // 20. Verify HeaderNavbar Top Bar Cleanliness (FSSAI, ISO, GST removed from top announcement bar as requested)
 assert(!headerJsx.includes('Official Statutory Badges: FSSAI, ISO 9001:2015 & GSTIN') && !headerJsx.includes('Mobile Statutory Badges Row (< sm)'), 'HeaderNavbar removed statutory badges (FSSAI, ISO, GSTIN) from the top announcement bar');
@@ -205,8 +206,8 @@ const complianceSecJsx = readFileSync(join(rootDir, 'src/components/ComplianceSe
 assert(complianceSecJsx.includes('iso-logo.svg'), 'ComplianceSection.jsx displays authentic ISO logo');
 assert(homePageJsx.includes('iso-logo.svg'), 'HomePage.jsx Certified Standards pillar displays ISO logo');
 
-// 29. Verify Footer credibility & statutory compliance boost strip
-assert(footerJsx.includes('Credibility & Statutory Compliance Boost Strip') && footerJsx.includes('Food Safety Authority of India') && footerJsx.includes('ISO 9001:2015 Certified QMS'), 'FooterSection includes credibility & statutory compliance boost strip with both FSSAI and ISO logos');
+// 29. Verify Footer credibility strip removed per user request (keeping only left side credentials)
+assert(!footerJsx.includes('Credibility & Statutory Compliance Boost Strip') && !footerJsx.includes('Food Safety Authority of India'), 'FooterSection removed redundant statutory compliance boost strip');
 
 // 30. Verify Language Translation Engine & Native Language Suggestion
 assert(existsSync(join(rootDir, 'src/components/LanguageTranslator.jsx')), 'LanguageTranslator.jsx exists');
@@ -238,6 +239,17 @@ assert(aboutFresh.includes('iso-logo.svg'), 'AboutSection displays authentic ISO
 // 34. Verify Translation Widget Robustness & Offscreen Positioning
 assert(!langTranslatorJsx.includes("display: 'none'"), 'LanguageTranslator avoids display: none for google_translate_element to ensure layout engine execution');
 assert(!langTranslatorJsx.includes('Sparkles'), 'LanguageTranslator does not import unused Sparkles icon');
+
+// 35. Verify Top Phone Numbers Swap (+91 95327 01582 first, +91 78809 06610 second)
+const freshHeader = readFileSync(join(rootDir, 'src/components/HeaderNavbar.jsx'), 'utf-8');
+const freshConfig = readFileSync(join(rootDir, 'src/config/siteConfig.js'), 'utf-8');
+const phoneRegex = /95327\s*01582[\s\S]*?78809\s*06610/;
+assert(phoneRegex.test(freshHeader), 'HeaderNavbar top announcement bar displays +91 95327 01582 first and +91 78809 06610 second');
+assert(freshConfig.includes("primaryPhone: '+91 95327 01582'") || freshConfig.includes('primaryPhone: "+91 95327 01582"'), 'siteConfig sets primaryPhone to +91 95327 01582');
+
+// 36. Verify Homebar Nav stretches smoothly beside brand logo to right edge
+assert(freshHeader.includes('justify-between') && freshHeader.includes('flex-1'), 'HeaderNavbar desktop nav stretches flexibly with justify-between across the homebar');
+assert(freshHeader.includes('text-[12.5px]') || freshHeader.includes('text-[13px]') || freshHeader.includes('text-[14px]'), 'HeaderNavbar desktop buttons are enlarged for prominent visibility');
 
 console.log('\nVerification suite finished.');
 if (failed) {

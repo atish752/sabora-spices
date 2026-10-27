@@ -10,13 +10,13 @@ export const SITE_CONFIG = {
   // Official Contact Information from SABORA SPICES.txt
   address: "Jahangirpuri, Delhi – 110033, India",
   phones: [
-    { display: "+91 78809 06610", raw: "917880906610", primary: true },
-    { display: "+91 95327 01582", raw: "919532701582", primary: false }
+    { display: "+91 95327 01582", raw: "919532701582", primary: true },
+    { display: "+91 78809 06610", raw: "917880906610", primary: false }
   ],
-  primaryPhone: "+91 78809 06610",
-  secondaryPhone: "+91 95327 01582",
-  primaryPhoneRaw: "917880906610",
-  secondaryPhoneRaw: "919532701582",
+  primaryPhone: "+91 95327 01582",
+  secondaryPhone: "+91 78809 06610",
+  primaryPhoneRaw: "919532701582",
+  secondaryPhoneRaw: "917880906610",
   
   whatsappNumber: "917880906610",
   whatsappDisplayNumber: "+91 78809 06610",
