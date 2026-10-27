@@ -62,11 +62,25 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
         <div className="max-w-[1440px] mx-auto px-3.5 sm:px-6 lg:px-8 xl:px-12 py-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3">
           
           {/* Left: Location & Phones */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs font-medium w-full sm:w-auto">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-4 text-xs font-medium w-full sm:w-auto">
             <span className="flex items-center gap-1.5 text-stone-300">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               <span>Jahangirpuri, Delhi – 110033, India</span>
             </span>
+            {/* Mobile Statutory Badges Row (< sm) */}
+            <div className="flex sm:hidden items-center justify-center gap-1.5 flex-wrap text-2xs w-full">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-stone-200/90 shadow-2xs text-3xs font-mono font-bold text-[#0B2568]" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain" />
+                <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
+              </span>
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-3xs text-emerald-300 font-mono font-semibold" title={`ISO 9001:2015 Certificate: ${SITE_CONFIG.isoNumber}`}>
+                <ShieldCheck className="w-2.5 h-2.5 text-amber-400 shrink-0" />
+                <span>ISO: {SITE_CONFIG.isoNumber}</span>
+              </span>
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/60 text-3xs text-stone-300 font-mono" title={`GSTIN: ${SITE_CONFIG.gstin}`}>
+                <span>GST: {SITE_CONFIG.gstin}</span>
+              </span>
+            </div>
             <div className="hidden sm:flex items-center gap-3 border-l border-emerald-800/60 pl-3">
               <a 
                 href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} 
@@ -89,22 +103,22 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
           <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-2.5">
             {/* Official Statutory Badges: FSSAI, ISO 9001:2015 & GSTIN */}
             <div className="hidden lg:flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200/90 shadow-2xs text-2xs font-mono font-bold text-[#0B2568]" title="FSSAI Central / State License No: 13326008000336">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200/90 shadow-2xs text-2xs font-mono font-bold text-[#0B2568]" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
                 <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
-                <span>Lic. 13326008000336</span>
+                <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold" title="ISO 9001:2015 Certificate of Compliance: Q2A20262410AD742">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold" title={`ISO 9001:2015 Certificate of Compliance: ${SITE_CONFIG.isoNumber}`}>
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>ISO: Q2A20262410AD742</span>
+                <span>ISO: {SITE_CONFIG.isoNumber}</span>
               </span>
-              <span className="hidden xl:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-stone-900/90 border border-stone-700/60 text-2xs text-stone-300 font-mono" title="GSTIN: 07BDVPK4053J1Z3">
-                <span>GST: 07BDVPK4053J1Z3</span>
+              <span className="hidden xl:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-stone-900/90 border border-stone-700/60 text-2xs text-stone-300 font-mono" title={`GSTIN: ${SITE_CONFIG.gstin}`}>
+                <span>GST: {SITE_CONFIG.gstin}</span>
               </span>
             </div>
             
-            <div className="hidden md:flex lg:hidden items-center gap-1.5 px-2 py-0.5 rounded-md bg-white border border-stone-200 text-2xs font-mono font-bold text-[#0B2568]">
+            <div className="hidden md:flex lg:hidden items-center gap-1.5 px-2 py-0.5 rounded-md bg-white border border-stone-200 text-2xs font-mono font-bold text-[#0B2568]" title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}>
               <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
-              <span>13326008000336</span>
+              <span>{SITE_CONFIG.fssaiNumber}</span>
             </div>
             
             <button
@@ -376,6 +390,26 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
               <span className="text-xs px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-semibold">
                 Delhi, India
               </span>
+            </div>
+
+            {/* Official Statutory Badges in Mobile Drawer */}
+            <div className="bg-stone-50 rounded-xl p-3 border border-stone-200/80 space-y-1.5">
+              <div className="text-3xs font-mono font-bold text-amber-700 uppercase tracking-wider">
+                Official Statutory Registrations
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200 shadow-2xs font-mono text-2xs font-bold text-[#0B2568]">
+                  <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
+                  <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
+                </div>
+                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-100 text-emerald-800 text-2xs font-mono font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span>ISO: {SITE_CONFIG.isoNumber}</span>
+                </span>
+                <span className="px-2 py-1 rounded-md bg-stone-200 text-stone-800 text-2xs font-mono">
+                  GST: {SITE_CONFIG.gstin}
+                </span>
+              </div>
             </div>
 
             {/* Menu Items */}

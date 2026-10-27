@@ -58,22 +58,22 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               <div className="flex flex-wrap items-center gap-2">
                 <div 
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-stone-900 border border-stone-200/90 shadow-2xs"
-                  title="FSSAI Central / State License No: 13326008000336"
+                  title={`FSSAI Central / State License No: ${SITE_CONFIG.fssaiNumber}`}
                 >
                   <img src="/images/fssai-logo.png" alt="FSSAI" className="h-4 w-auto object-contain shrink-0" />
-                  <span className="font-mono text-2xs font-bold text-[#0B2568]">Lic. 13326008000336</span>
+                  <span className="font-mono text-2xs font-bold text-[#0B2568]">Lic. {SITE_CONFIG.fssaiNumber}</span>
                 </div>
                 <span 
                   className="px-2.5 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold"
-                  title="ISO 9001:2015 Certificate of Compliance: Q2A20262410AD742"
+                  title={`ISO 9001:2015 Certificate of Compliance: ${SITE_CONFIG.isoNumber}`}
                 >
-                  ISO 9001:2015: Q2A20262410AD742
+                  ISO 9001:2015: {SITE_CONFIG.isoNumber}
                 </span>
                 <span 
                   className="px-2.5 py-1 rounded-md bg-stone-900/90 border border-stone-700/70 text-2xs text-stone-300 font-mono font-medium"
-                  title="GSTIN: 07BDVPK4053J1Z3"
+                  title={`GSTIN: ${SITE_CONFIG.gstin}`}
                 >
-                  GSTIN: 07BDVPK4053J1Z3
+                  GSTIN: {SITE_CONFIG.gstin}
                 </span>
               </div>
               <div className="flex flex-wrap items-center gap-2 text-2xs text-stone-400">
@@ -224,7 +224,10 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               {/* Statutory Registration Summary */}
               <div className="pt-3 border-t border-white/10 space-y-1.5 text-2xs font-mono text-stone-300">
                 <div className="flex items-center justify-between">
-                  <span className="text-stone-400">FSSAI Lic. No:</span>
+                  <div className="flex items-center gap-1.5">
+                    <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain bg-white px-1 py-0.5 rounded shrink-0" />
+                    <span className="text-stone-400">FSSAI Lic. No:</span>
+                  </div>
                   <span className="text-amber-400 font-bold">{SITE_CONFIG.fssaiNumber}</span>
                 </div>
                 <div className="flex items-center justify-between">

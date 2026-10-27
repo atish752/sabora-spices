@@ -11,7 +11,7 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
       iconBg: "bg-white text-emerald-800 border border-stone-200/90",
       customLogo: "/images/fssai-logo.png",
       title: `FSSAI: ${SITE_CONFIG.fssaiNumber}`,
-      subtitle: `ISO 9001:2015: ${SITE_CONFIG.isoNumber}`,
+      subtitle: `ISO: ${SITE_CONFIG.isoNumber} • GST: ${SITE_CONFIG.gstin}`,
       target: "compliance"
     },
     {

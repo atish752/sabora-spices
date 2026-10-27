@@ -178,17 +178,17 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
 
           <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-stone-300">
-              <span className="flex items-center gap-1.5 font-mono">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                FSSAI: {SITE_CONFIG.fssaiNumber}
+              <span className="inline-flex items-center gap-1.5 font-mono bg-white px-2.5 py-1 rounded-md text-[#0B2568] font-bold shadow-2xs">
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-4 w-auto object-contain shrink-0" />
+                <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
               </span>
-              <span className="flex items-center gap-1.5 font-mono">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                ISO: {SITE_CONFIG.isoNumber}
+              <span className="inline-flex items-center gap-1.5 font-mono px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 font-semibold">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>ISO 9001:2015: {SITE_CONFIG.isoNumber}</span>
               </span>
-              <span className="flex items-center gap-1.5 font-mono">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                GSTIN: {SITE_CONFIG.gstin}
+              <span className="inline-flex items-center gap-1.5 font-mono px-2.5 py-1 rounded-md bg-stone-900/80 border border-stone-700/50 text-stone-300">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>GSTIN: {SITE_CONFIG.gstin}</span>
               </span>
             </div>
 

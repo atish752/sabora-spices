@@ -203,11 +203,24 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-stone-50 p-4 border-t border-stone-200 flex items-center justify-between text-xs sm:text-sm text-stone-500">
-          <span>SABORA SPICES • Jahangirpuri, Delhi – 110033</span>
+        <div className="bg-stone-50 p-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-stone-500">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-semibold text-stone-700">SABORA SPICES</span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-stone-200 text-2xs font-mono font-bold text-[#0B2568]">
+              <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain" />
+              <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
+            </span>
+            <span className="text-2xs font-mono text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+              ISO: {SITE_CONFIG.isoNumber}
+            </span>
+            <span className="text-2xs font-mono text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">
+              GST: {SITE_CONFIG.gstin}
+            </span>
+          </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg border border-stone-300 hover:bg-white text-stone-700 font-semibold cursor-pointer"
+            className="px-4 py-1.5 rounded-lg border border-stone-300 hover:bg-white text-stone-700 font-semibold cursor-pointer shrink-0"
           >
             Close
           </button>

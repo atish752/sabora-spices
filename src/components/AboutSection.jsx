@@ -80,20 +80,30 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
             </div>
 
             {/* Quick Sabora Stats / Credentials */}
-            <div className="grid grid-cols-3 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
-                <div className="text-xl sm:text-2xl font-extrabold font-serif text-[#0F3D2E]">2 Core</div>
-                <div className="text-xs sm:text-sm text-stone-600 font-medium">Categories (Spices & Makhana)</div>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
+              <div className="p-3 sm:p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
+                <div className="text-lg sm:text-2xl font-extrabold font-serif text-[#0F3D2E]">2 Core</div>
+                <div className="text-2xs sm:text-sm text-stone-600 font-medium">Spices & Makhana</div>
               </div>
-              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
-                <div className="text-xl sm:text-2xl font-extrabold font-serif text-amber-600">100%</div>
-                <div className="text-xs sm:text-sm text-stone-600 font-medium">Whole Products Only</div>
+              <div className="p-3 sm:p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
+                <div className="text-lg sm:text-2xl font-extrabold font-serif text-amber-600">100%</div>
+                <div className="text-2xs sm:text-sm text-stone-600 font-medium">Whole Crops Only</div>
               </div>
-              <div className="p-3 sm:p-4 rounded-xl bg-stone-50 border border-stone-200 text-center flex flex-col items-center justify-center">
+              <div className="p-2.5 sm:p-4 rounded-xl bg-stone-50 border border-stone-200 text-center flex flex-col items-center justify-center">
                 <img src="/images/fssai-logo.png" alt="FSSAI Logo" className="h-5 sm:h-6 w-auto object-contain mb-1" />
-                <div className="text-2xs sm:text-xs font-mono font-bold text-[#0B2568]">13326008000336</div>
+                <div className="text-2xs sm:text-xs font-mono font-bold text-[#0B2568]">{SITE_CONFIG.fssaiNumber}</div>
                 <div className="text-3xs sm:text-2xs text-stone-500 font-medium">Licensed & Aligned</div>
               </div>
+            </div>
+
+            {/* Official Statutory Badges Row in About */}
+            <div className="flex flex-wrap items-center gap-2 font-mono text-2xs text-stone-700">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-stone-100 border border-stone-200">
+                <strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-stone-100 border border-stone-200">
+                <strong className="text-stone-900">GSTIN:</strong> {SITE_CONFIG.gstin}
+              </span>
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">

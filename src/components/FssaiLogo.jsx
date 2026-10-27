@@ -1,4 +1,5 @@
 import React from 'react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 /**
  * Authentic FSSAI Logo component displaying the official Food Safety and
@@ -7,7 +8,7 @@ import React from 'react';
 export default function FssaiLogo({ 
   className = "h-4 w-auto", 
   showLicense = false, 
-  licenseNumber = "13326008000336",
+  licenseNumber = SITE_CONFIG.fssaiNumber,
   licenseClassName = "text-2xs font-mono font-bold text-[#0B2568]",
   containerClassName = "inline-flex items-center gap-1.5",
   variant = "default" // "default" | "badge" | "dark"

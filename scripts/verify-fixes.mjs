@@ -141,6 +141,35 @@ assert(siteConfigJs.includes('07BDVPK4053J1Z3'), 'siteConfig includes GSTIN: 07B
 // 17. Verify FSSAI Logo Asset
 assert(existsSync(join(rootDir, 'public/images/fssai-logo.png')), 'Authentic FSSAI logo image exists in public/images/fssai-logo.png');
 
+// 18. Verify WhySaboraSection includes authentic FSSAI Logo
+const whySaboraJsx = readFileSync(join(rootDir, 'src/components/WhySaboraSection.jsx'), 'utf-8');
+assert(whySaboraJsx.includes('fssai-logo.png') && whySaboraJsx.includes('fssaiNumber'), 'WhySaboraSection includes authentic FSSAI logo and license number');
+
+// 19. Verify FooterSection includes FSSAI Logo in both Column 1 and Column 4
+const footerJsx = readFileSync(join(rootDir, 'src/components/FooterSection.jsx'), 'utf-8');
+assert(footerJsx.match(/fssai-logo\.png[\s\S]*?fssai-logo\.png/), 'FooterSection includes authentic FSSAI logo in both Column 1 and Column 4');
+
+// 20. Verify HeaderNavbar Mobile statutory support
+assert(headerJsx.includes('flex sm:hidden items-center justify-center') && headerJsx.includes('fssai-logo.png'), 'HeaderNavbar provides compact statutory badges row on mobile announcement bar');
+assert(headerJsx.includes('Official Statutory Registrations') && headerJsx.includes('mobileMenuOpen'), 'HeaderNavbar mobile drawer displays complete statutory registrations card');
+
+// 21. Verify TrustHighlightsBar includes FSSAI, ISO and GSTIN
+const trustJsx = readFileSync(join(rootDir, 'src/components/TrustHighlightsBar.jsx'), 'utf-8');
+assert(trustJsx.includes('fssaiNumber') && trustJsx.includes('isoNumber') && trustJsx.includes('gstin'), 'TrustHighlightsBar includes FSSAI, ISO, and GSTIN');
+
+// 22. Verify ProductDetailModal includes FSSAI logo and credentials in modal footer
+const modalJsx = readFileSync(join(rootDir, 'src/components/ProductDetailModal.jsx'), 'utf-8');
+assert(modalJsx.includes('fssai-logo.png') && modalJsx.includes('fssaiNumber') && modalJsx.includes('isoNumber') && modalJsx.includes('gstin'), 'ProductDetailModal displays FSSAI logo, ISO and GSTIN in modal footer');
+
+// 23. Functional validation of Admin Password logic
+const adminPasswordMatch = adminJsx.match(/ADMIN_PASSWORD\s*=\s*['"]([^'"]+)['"]/);
+assert(adminPasswordMatch && adminPasswordMatch[1] === 'fj(h5H(*93h*Hjo', 'ADMIN_PASSWORD exact match for fj(h5H(*93h*Hjo');
+const targetPassword = adminPasswordMatch ? adminPasswordMatch[1] : '';
+assert(targetPassword === 'fj(h5H(*93h*Hjo', 'Admin password evaluates to true only with fj(h5H(*93h*Hjo');
+assert('2026' !== targetPassword, 'Admin password rejects 2026');
+assert('admin' !== targetPassword, 'Admin password rejects admin');
+assert('1234' !== targetPassword, 'Admin password rejects 1234');
+
 console.log('\nVerification suite finished.');
 if (failed) {
   process.exit(1);

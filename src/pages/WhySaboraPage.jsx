@@ -3,6 +3,7 @@ import PageHeaderBanner from '../components/PageHeaderBanner';
 import WhySaboraSection from '../components/WhySaboraSection';
 import ContactRfqSection from '../components/ContactRfqSection';
 import { Check, X, ShieldCheck, Award, Users } from 'lucide-react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitInquiry }) {
   const comparisonItems = [
@@ -23,7 +24,7 @@ export default function WhySaboraPage({ onNavigate, onOpenQuoteModal, onSubmitIn
     },
     {
       criterion: "FSSAI & Regulatory Alignment",
-      sabora: "Full FSSAI license compliance, FoSCoS reporting, and annual filings",
+      sabora: `Full FSSAI license compliance (Lic. ${SITE_CONFIG.fssaiNumber}), ISO 9001:2015 (Cert. ${SITE_CONFIG.isoNumber}), GSTIN registered (${SITE_CONFIG.gstin}), and FoSCoS portal reporting`,
       traders: "Often operating informally without batch traceability or documentation"
     },
     {

@@ -334,6 +334,14 @@ export default function PrivacyPage({ onNavigate, onOpenQuoteModal, onSubmitInqu
                       <Clock className="w-4 h-4 text-stone-500 shrink-0" />
                       <span>Response SLA: Within 48 working hours</span>
                     </div>
+                    <div className="pt-2 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-3xs text-stone-700">
+                      <div><strong className="text-stone-900">GSTIN:</strong> {SITE_CONFIG.gstin}</div>
+                      <div className="flex items-center gap-1">
+                        <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain" />
+                        <span><strong className="text-stone-900">FSSAI Lic:</strong> {SITE_CONFIG.fssaiNumber}</span>
+                      </div>
+                      <div><strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}</div>
+                    </div>
                   </div>
                 </div>
               </div>
