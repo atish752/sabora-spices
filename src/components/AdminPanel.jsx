@@ -24,6 +24,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
+import { firebaseConfig } from '../config/firebase';
 
 const compressImageFile = (file, maxWidth = 900, quality = 0.80) => {
   return new Promise((resolve) => {
@@ -1247,22 +1248,22 @@ export default function AdminPanel({
                   Firebase Cloud Backend & Storage
                 </h2>
                 <p className="text-xs text-stone-500">
-                  Configured credentials for project <strong className="text-stone-800">sabora-spices</strong>.
+                  Configured credentials for project <strong className="text-stone-800">{firebaseConfig.projectId}</strong>.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2 text-xs font-mono">
                 <div className="flex justify-between">
                   <span className="text-stone-500">Project ID:</span>
-                  <span className="font-bold text-stone-900">sabora-spices</span>
+                  <span className="font-bold text-stone-900">{firebaseConfig.projectId}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-stone-500">Auth Domain:</span>
-                  <span className="text-stone-800">sabora-spices.firebaseapp.com</span>
+                  <span className="text-stone-800">{firebaseConfig.authDomain}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-stone-500">Storage Bucket:</span>
-                  <span className="text-stone-800">sabora-spices.firebasestorage.app</span>
+                  <span className="text-stone-800">{firebaseConfig.storageBucket}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-stone-500">Sync Status:</span>
@@ -1281,7 +1282,7 @@ export default function AdminPanel({
                 </p>
                 <ol className="text-xs text-stone-700 space-y-2 pl-4 list-decimal">
                   <li>
-                    Go to <a href="https://console.firebase.google.com/project/sabora-spices/firestore" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-800 hover:underline">Firebase Console &rarr; Firestore Database</a>.
+                    Go to <a href={`https://console.firebase.google.com/project/${firebaseConfig.projectId}/firestore`} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-800 hover:underline">Firebase Console &rarr; Firestore Database</a>.
                   </li>
                   <li>
                     Click <strong>Create Database</strong>, select location (e.g. <code>asia-south1 (Mumbai)</code>), and click Next.
