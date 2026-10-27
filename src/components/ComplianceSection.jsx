@@ -9,20 +9,21 @@ import {
   ArrowRight,
   ClipboardCheck
 } from 'lucide-react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection }) {
   const complianceAreas = [
     {
       title: "Indian Food Regulations (FSSAI)",
-      desc: "We consider applicable food business licensing, product standards, food safety requirements, hygienic handling, storage parameters, and mandatory statutory records."
+      desc: `Operating under FSSAI License No. ${SITE_CONFIG.fssaiNumber}. Complete statutory adherence to Indian food safety standards, FoSCoS portal logging, hygienic storage parameters, and mandatory lot traceability.`
     },
     {
-      title: "Packaging & Labelling Mandates",
-      desc: "Mandatory declarations including product name, net quantity, batch or lot identification, manufacturing & expiry dates, business address, and food-grade packaging compliance."
+      title: "ISO 9001:2015 Quality Systems",
+      desc: `Certificate of Compliance No: ${SITE_CONFIG.isoNumber}. Standardized Quality Management Systems (QMS) ensuring documented testing protocols, systematic supplier audits, and zero-defect dispatch controls.`
     },
     {
-      title: "Domestic Supply Statutory Terms",
-      desc: "Statutory tax invoicing, GST compliance, traceable transport e-way bills, and verified lot tracking across Indian wholesale and distribution channels."
+      title: "Domestic Supply & GSTIN Statutory Terms",
+      desc: `Registered under GSTIN: ${SITE_CONFIG.gstin}. Transparent commercial invoicing, e-way bills, clean batch accounting, and verified transit documentation across Indian supply chains.`
     },
     {
       title: "International Trade & Export Mandates",
@@ -61,6 +62,89 @@ export default function ComplianceSection({ onOpenQuoteModal, onScrollToSection 
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
             At SABORA SPICES, we recognize that regulatory compliance is an essential part of responsible food sourcing, packaging, and supply. Our approach is to identify and address the relevant regulatory requirements for each product and transaction before dispatch.
           </p>
+        </div>
+
+        {/* Verified Statutory Registrations Showcase */}
+        <div className="bg-gradient-to-br from-[#041A12] via-[#0F3D2E] to-[#041A12] text-white rounded-3xl p-6 sm:p-8 border border-emerald-700/40 shadow-xl space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block">
+                Official Government Registrations & Certifications
+              </span>
+              <h3 className="font-serif text-2xl font-bold text-white">
+                Statutory Enterprise Credentials
+              </h3>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-mono font-semibold w-fit">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              Verified & Active Regulatory Records
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* FSSAI Credential */}
+            <div className="bg-white rounded-2xl p-5 border border-stone-200 text-stone-900 space-y-2.5 shadow-md">
+              <div className="flex items-center justify-between">
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-7 w-auto object-contain" />
+                <span className="text-2xs font-mono font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
+                  Mandatory Standard
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-xs text-stone-500 font-semibold uppercase tracking-wider">
+                  FSSAI License Number
+                </div>
+                <div className="text-lg font-mono font-bold text-[#0B2568] tracking-wider select-all">
+                  {SITE_CONFIG.fssaiNumber}
+                </div>
+              </div>
+              <p className="text-xs text-stone-600 leading-relaxed pt-1 border-t border-stone-100">
+                Food Safety and Standards Authority of India Central / State license covering whole spices and makhana sourcing, handling & supply.
+              </p>
+            </div>
+
+            {/* ISO 9001:2015 Credential */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15 text-white space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="font-serif font-bold text-lg text-emerald-300">ISO 9001:2015</span>
+                <span className="text-2xs font-mono font-bold bg-emerald-500/20 text-emerald-200 px-2 py-0.5 rounded border border-emerald-400/30">
+                  Quality Management
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-xs text-stone-300 font-semibold uppercase tracking-wider">
+                  Certificate of Compliance No.
+                </div>
+                <div className="text-lg font-mono font-bold text-amber-300 tracking-wider select-all">
+                  {SITE_CONFIG.isoNumber}
+                </div>
+              </div>
+              <p className="text-xs text-stone-300 leading-relaxed pt-1 border-t border-white/10">
+                Adherence to Quality Management Systems (QMS) principles: standardized grading, supplier audits, batch documentation, and dispatch controls.
+              </p>
+            </div>
+
+            {/* GSTIN Credential */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15 text-white space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="font-serif font-bold text-lg text-amber-300">GSTIN Registered</span>
+                <span className="text-2xs font-mono font-bold bg-amber-500/20 text-amber-200 px-2 py-0.5 rounded border border-amber-400/30">
+                  Tax Invoiced
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-xs text-stone-300 font-semibold uppercase tracking-wider">
+                  Goods & Services Tax ID
+                </div>
+                <div className="text-lg font-mono font-bold text-emerald-300 tracking-wider select-all">
+                  {SITE_CONFIG.gstin}
+                </div>
+              </div>
+              <p className="text-xs text-stone-300 leading-relaxed pt-1 border-t border-white/10">
+                Registered commercial business entity in Delhi, India providing legitimate GST tax invoices and compliant e-way bills for domestic and international orders.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* 4 Pillars of Compliance */}

@@ -44,16 +44,59 @@ export const SITE_CONFIG = {
     turmeric: "Salem & Nizamabad, India"
   },
 
+  // Official Compliance & Statutory Credentials
+  fssaiNumber: "13326008000336",
+  fssaiLicenseNumber: "13326008000336",
+  fssaiLicenseLabel: "FSSAI Lic. No. 13326008000336",
+  fssaiLogoUrl: "/images/fssai-logo.png",
+  
+  isoNumber: "Q2A20262410AD742",
+  isoCertificateNumber: "Q2A20262410AD742",
+  isoStandard: "ISO 9001:2015",
+  isoLabel: "ISO 9001:2015 Cert. No. Q2A20262410AD742",
+
+  gstin: "07BDVPK4053J1Z3",
+  gstinLabel: "GSTIN: 07BDVPK4053J1Z3",
+
   // Compliance & Quality Highlights
   certifications: [
-    { name: "FSSAI Compliant", desc: "Food Safety & Standards Authority of India", badge: "Mandatory Standard" },
-    { name: "ISO 9001:2015 Principles", desc: "Quality Management Systems (QMS)", badge: "Quality Assured" },
-    { name: "ISO 22000:2018 Principles", desc: "Food Safety Management Systems (FSMS)", badge: "Food Safety" },
-    { name: "FoSCoS Reporting", desc: "Periodic laboratory test reports upload", badge: "Regulatory Portal" },
-    { name: "Tested Before Dispatch", desc: "Approved Food Testing Laboratory COA", badge: "Release Control" }
+    { 
+      name: "FSSAI License", 
+      desc: "Food Safety & Standards Authority of India (Lic. No. 13326008000336)", 
+      badge: "Lic. #13326008000336",
+      regNo: "13326008000336",
+      logo: "/images/fssai-logo.png"
+    },
+    { 
+      name: "ISO 9001:2015 Certified", 
+      desc: "Certificate of Compliance No: Q2A20262410AD742 (Quality Management Systems)", 
+      badge: "Cert. #Q2A20262410AD742",
+      regNo: "Q2A20262410AD742"
+    },
+    { 
+      name: "GSTIN Registered", 
+      desc: "Goods and Services Tax Identification Number: 07BDVPK4053J1Z3", 
+      badge: "07BDVPK4053J1Z3",
+      regNo: "07BDVPK4053J1Z3"
+    },
+    { 
+      name: "ISO 22000:2018 Principles", 
+      desc: "Food Safety Management Systems (FSMS)", 
+      badge: "Food Safety" 
+    },
+    { 
+      name: "FoSCoS Reporting", 
+      desc: "Periodic laboratory test reports upload via FoSCoS portal", 
+      badge: "Regulatory Portal" 
+    },
+    { 
+      name: "Tested Before Dispatch", 
+      desc: "Approved Food Testing Laboratory COA", 
+      badge: "Release Control" 
+    }
   ],
 
-  // Menu Items (matching screenshot: WhatsApp Image 2026-10-24 at 11.42.47.jpeg)
+  // Menu Items (Top Navigation - FAQ removed from top as it is situated at the bottom)
   menuItems: [
     { id: "hero", label: "Home", href: "#hero" },
     { id: "about", label: "About Us", href: "#about" },
@@ -74,7 +117,6 @@ export const SITE_CONFIG = {
     { id: "lab-testing", label: "Laboratory Testing", href: "#lab-testing" },
     { id: "compliance", label: "Regulatory Compliance", href: "#compliance" },
     { id: "export", label: "International & Export Supply", href: "#export" },
-    { id: "faq", label: "FAQ", href: "#faq" },
     { id: "contact", label: "Contact Us", href: "#contact" }
   ],
 

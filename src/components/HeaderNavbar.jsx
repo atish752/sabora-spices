@@ -85,12 +85,27 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </div>
           </div>
 
-          {/* Right: WhatsApp Desk and Request Quote side-by-side below address on mobile */}
+          {/* Right: Statutory Badges, WhatsApp Desk and Request Quote */}
           <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-2.5">
-            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-700/40 text-xs text-emerald-300 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              FSSAI & ISO Compliant
-            </span>
+            {/* Official Statutory Badges: FSSAI, ISO 9001:2015 & GSTIN */}
+            <div className="hidden lg:flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200/90 shadow-2xs text-2xs font-mono font-bold text-[#0B2568]" title="FSSAI Central / State License No: 13326008000336">
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
+                <span>Lic. 13326008000336</span>
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold" title="ISO 9001:2015 Certificate of Compliance: Q2A20262410AD742">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>ISO: Q2A20262410AD742</span>
+              </span>
+              <span className="hidden xl:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-stone-900/90 border border-stone-700/60 text-2xs text-stone-300 font-mono" title="GSTIN: 07BDVPK4053J1Z3">
+                <span>GST: 07BDVPK4053J1Z3</span>
+              </span>
+            </div>
+            
+            <div className="hidden md:flex lg:hidden items-center gap-1.5 px-2 py-0.5 rounded-md bg-white border border-stone-200 text-2xs font-mono font-bold text-[#0B2568]">
+              <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
+              <span>13326008000336</span>
+            </div>
             
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
@@ -313,17 +328,6 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </button>
 
             <button 
-              onClick={() => handleNavClick('faq')} 
-              className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
-                isActive('faq')
-                  ? 'bg-emerald-50 text-[#0F3D2E] font-bold shadow-xs border-b-2 border-emerald-700'
-                  : 'hover:text-[#0F3D2E] hover:bg-emerald-50/70'
-              }`}
-            >
-              FAQ
-            </button>
-
-            <button 
               onClick={() => handleNavClick('contact')} 
               className={`px-2 2xl:px-2.5 py-1 2xl:py-1.5 rounded-md transition-all cursor-pointer ${
                 isActive('contact')
@@ -335,17 +339,8 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
             </button>
           </nav>
 
-          {/* Right Action: Quick WhatsApp Desk & Mobile Hamburger Button */}
+          {/* Right Action: Mobile Hamburger Button (WhatsApp Desk already present at very top announcement bar beside Request Quote) */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100/90 text-[#0F3D2E] text-xs font-bold transition-all border border-emerald-300/60 active:scale-95 cursor-pointer shadow-2xs"
-              title="1-Click WhatsApp Sourcing Desk"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
-              <span>WhatsApp Desk</span>
-            </button>
-
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -476,28 +471,22 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 9. International & Export Supply
               </button>
               <button 
-                onClick={() => handleNavClick('faq')} 
-                className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors"
-              >
-                10. FAQ
-              </button>
-              <button 
                 onClick={() => handleNavClick('contact')} 
                 className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors"
               >
-                11. Contact Us
+                10. Contact Us
               </button>
               <button 
                 onClick={() => handleNavClick('privacy')} 
                 className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors text-stone-600"
               >
-                12. Privacy Policy
+                11. Privacy Policy
               </button>
               <button 
                 onClick={() => handleNavClick('terms')} 
                 className="w-full text-left py-2 px-3 rounded hover:bg-emerald-50 hover:text-[#0F3D2E] transition-colors text-stone-600"
               >
-                13. Terms & Conditions
+                12. Terms & Conditions
               </button>
             </div>
 

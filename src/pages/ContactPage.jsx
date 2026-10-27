@@ -108,6 +108,38 @@ export default function ContactPage({
             </div>
           </div>
 
+          {/* Statutory Registration Badges */}
+          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 shrink-0">
+                <img src="/images/fssai-logo.png" alt="FSSAI" className="h-8 w-auto object-contain" />
+              </div>
+              <div>
+                <h4 className="font-serif text-lg font-bold text-stone-900">
+                  Government Registered Enterprise
+                </h4>
+                <p className="text-xs sm:text-sm text-stone-600">
+                  Fully compliant and registered under Indian statutory authorities for domestic and global B2B trade.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
+              <div className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[#0F3D2E]">
+                <span className="font-sans text-stone-500 block text-3xs font-bold uppercase">FSSAI License</span>
+                <span className="font-bold">{SITE_CONFIG.fssaiNumber}</span>
+              </div>
+              <div className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[#0F3D2E]">
+                <span className="font-sans text-stone-500 block text-3xs font-bold uppercase">ISO 9001:2015</span>
+                <span className="font-bold">{SITE_CONFIG.isoNumber}</span>
+              </div>
+              <div className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[#0F3D2E]">
+                <span className="font-sans text-stone-500 block text-3xs font-bold uppercase">GSTIN</span>
+                <span className="font-bold">{SITE_CONFIG.gstin}</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

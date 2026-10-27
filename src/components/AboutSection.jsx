@@ -89,9 +89,10 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
                 <div className="text-xl sm:text-2xl font-extrabold font-serif text-amber-600">100%</div>
                 <div className="text-xs sm:text-sm text-stone-600 font-medium">Whole Products Only</div>
               </div>
-              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-center">
-                <div className="text-xl sm:text-2xl font-extrabold font-serif text-emerald-700">FSSAI</div>
-                <div className="text-xs sm:text-sm text-stone-600 font-medium">Standards Guided</div>
+              <div className="p-3 sm:p-4 rounded-xl bg-stone-50 border border-stone-200 text-center flex flex-col items-center justify-center">
+                <img src="/images/fssai-logo.png" alt="FSSAI Logo" className="h-5 sm:h-6 w-auto object-contain mb-1" />
+                <div className="text-2xs sm:text-xs font-mono font-bold text-[#0B2568]">13326008000336</div>
+                <div className="text-3xs sm:text-2xs text-stone-500 font-medium">Licensed & Aligned</div>
               </div>
             </div>
 

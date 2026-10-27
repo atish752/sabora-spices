@@ -265,22 +265,27 @@ export default function HomePage({
               </div>
             </div>
 
-            {/* Pillar 2: Lab Testing */}
+            {/* Pillar 2: Certified Standards */}
             <div 
-              onClick={() => onNavigate && onNavigate('why-sabora')}
+              onClick={() => onNavigate && onNavigate('compliance')}
               className="p-6 sm:p-7 rounded-2xl bg-stone-50 hover:bg-emerald-50/40 border border-stone-200 hover:border-emerald-500/40 transition-all cursor-pointer group space-y-3.5"
             >
-              <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <ShieldCheck className="w-5 h-5" />
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-xl bg-white text-emerald-800 border border-stone-200 flex items-center justify-center group-hover:scale-105 transition-transform p-1.5 shadow-2xs">
+                  <img src="/images/fssai-logo.png" alt="FSSAI" className="h-6 w-auto object-contain" />
+                </div>
+                <span className="text-3xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                  Lic. 13326008000336
+                </span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 group-hover:text-[#0F3D2E] transition-colors">
                 Certified Standards
               </h3>
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal">
-                FSSAI aligned, ISO compliant, and tested through accredited NABL laboratories for moisture and active assays.
+                FSSAI Central / State licensed (13326008000336), ISO 9001:2015 compliant (Q2A20262410AD742), and GSTIN registered (07BDVPK4053J1Z3).
               </p>
               <div className="pt-1 flex items-center gap-1.5 text-sm font-bold text-[#0F3D2E]">
-                <span>View Quality Standards</span>
+                <span>View Quality & Compliance</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>

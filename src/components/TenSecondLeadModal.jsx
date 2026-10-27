@@ -4,7 +4,7 @@ import {
   MessageCircle, 
   Send, 
   CheckCircle2, 
-  Sparkles, 
+  Leaf, 
   ArrowRight
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
@@ -130,7 +130,7 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
           {/* Header */}
           <div className="space-y-1 pr-12">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <Leaf className="w-3.5 h-3.5 text-amber-400" />
               <span>Direct Wholesale Desk</span>
             </div>
             

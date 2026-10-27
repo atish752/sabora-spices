@@ -54,16 +54,32 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
               India-based sourcing and supply for domestic and international buyers. We specialise in whole green cardamom, whole turmeric fingers, and Makhana (Fox Nuts), with additional whole spices available according to buyer requirements.
             </p>
 
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
-                FSSAI Regulated
-              </span>
-              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
-                ISO 9001/22000 Principles
-              </span>
-              <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/50 text-xs text-emerald-300 font-medium">
-                FoSCoS Linked
-              </span>
+            <div className="pt-2 space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <div 
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-stone-900 border border-stone-200/90 shadow-2xs"
+                  title="FSSAI Central / State License No: 13326008000336"
+                >
+                  <img src="/images/fssai-logo.png" alt="FSSAI" className="h-4 w-auto object-contain shrink-0" />
+                  <span className="font-mono text-2xs font-bold text-[#0B2568]">Lic. 13326008000336</span>
+                </div>
+                <span 
+                  className="px-2.5 py-1 rounded-md bg-emerald-950/90 border border-emerald-700/60 text-2xs text-emerald-300 font-mono font-semibold"
+                  title="ISO 9001:2015 Certificate of Compliance: Q2A20262410AD742"
+                >
+                  ISO 9001:2015: Q2A20262410AD742
+                </span>
+                <span 
+                  className="px-2.5 py-1 rounded-md bg-stone-900/90 border border-stone-700/70 text-2xs text-stone-300 font-mono font-medium"
+                  title="GSTIN: 07BDVPK4053J1Z3"
+                >
+                  GSTIN: 07BDVPK4053J1Z3
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-2xs text-stone-400">
+                <span className="px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-900/60 text-emerald-400">FoSCoS Reporting</span>
+                <span className="px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-900/60 text-emerald-400">Tested Before Dispatch</span>
+              </div>
             </div>
           </div>
 
@@ -203,6 +219,22 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                   <MessageCircle className="w-4 h-4 fill-emerald-300 text-emerald-300" />
                   <span>WhatsApp Commercial Desk</span>
                 </button>
+              </div>
+
+              {/* Statutory Registration Summary */}
+              <div className="pt-3 border-t border-white/10 space-y-1.5 text-2xs font-mono text-stone-300">
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-400">FSSAI Lic. No:</span>
+                  <span className="text-amber-400 font-bold">{SITE_CONFIG.fssaiNumber}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-400">ISO 9001:2015:</span>
+                  <span className="text-emerald-300 font-semibold">{SITE_CONFIG.isoNumber}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-400">GSTIN:</span>
+                  <span className="text-stone-200 font-semibold">{SITE_CONFIG.gstin}</span>
+                </div>
               </div>
             </div>
           </div>

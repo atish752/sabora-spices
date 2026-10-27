@@ -37,7 +37,7 @@ Directly structured from the client's specification and `SABORA SPICES.txt`:
 
 ### 3. Powerful Admin Panel (`?page=admin`)
 - Accessible via the link in the footer or by visiting `?page=admin`.
-- Protected by PIN code (**Default PIN: `2026`**).
+- Protected by administrator password (`fj(h5H(*93h*Hjo`).
 - **Hero Section Banner Manager**: Add new slides, edit headline/subtitles/tags/CTAs, upload new hero photos from your computer, toggle image fit mode (`cover` vs `contain`).
 - **Products Catalog Manager**: Add products, upload photos, edit titles, grades, origins, technical specifications, and packaging options.
 - **Inquiries & Quotes Inbox**: Review incoming quote requests in real time, filter by status, export to CSV, and 1-click reply to buyers via WhatsApp.

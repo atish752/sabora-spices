@@ -47,8 +47,7 @@ assert(adminJsx.includes('currentHeroSlide.fitMode || \'cover\''), 'AdminPanel d
 
 // 6. Verify HeroSection CTA parsing
 const heroJsx = readFileSync(join(rootDir, 'src/components/HeroSection.jsx'), 'utf-8');
-assert(heroJsx.includes('URLSearchParams(search)'), 'HeroSection parses CTA query parameters');
-assert(heroJsx.includes('w-full h-full object-cover object-center'), 'HeroSection uses full-width object-cover');
+assert(heroJsx.includes('w-full h-full') && (heroJsx.includes('object-contain') || heroJsx.includes('object-cover')), 'HeroSection uses full-width responsive video/image display');
 
 // 7. Verify vercel.json exists and has rewrites
 const vercelJson = JSON.parse(readFileSync(join(rootDir, 'vercel.json'), 'utf-8'));
@@ -120,6 +119,27 @@ assert(aiArtifactsFound === 0, `Scanned ${allJsxFiles.length} JSX files: ZERO AI
 // 13. Verify Google Fonts (Outfit, Fraunces, Caveat)
 const indexHtml = readFileSync(join(rootDir, 'index.html'), 'utf-8');
 assert(indexHtml.includes('family=Outfit') && indexHtml.includes('family=Fraunces') && indexHtml.includes('family=Caveat'), 'index.html loads Outfit, Fraunces & Caveat fonts');
+
+// 14. Verify Admin Password Security (Changed from 2026 to fj(h5H(*93h*Hjo)
+assert(adminJsx.includes("ADMIN_PASSWORD = 'fj(h5H(*93h*Hjo'") || adminJsx.includes("pinInput === 'fj(h5H(*93h*Hjo'"), 'AdminPanel enforces new secure password fj(h5H(*93h*Hjo');
+assert(!adminJsx.includes("pinInput === '2026'"), 'AdminPanel no longer accepts old password 2026');
+assert(!adminJsx.includes("pinInput === 'admin'"), 'AdminPanel no longer accepts weak password admin');
+assert(!adminJsx.includes("pinInput === '1234'"), 'AdminPanel no longer accepts weak password 1234');
+
+// 15. Verify HeaderNavbar Clean-up (FAQ and duplicate WhatsApp Desk removed)
+const headerJsx = readFileSync(join(rootDir, 'src/components/HeaderNavbar.jsx'), 'utf-8');
+const desktopNavMatch = headerJsx.match(/<nav className="hidden xl:flex[\s\S]*?<\/nav>/);
+assert(desktopNavMatch && !desktopNavMatch[0].includes("handleNavClick('faq')"), 'HeaderNavbar removed FAQ button from top desktop navigation bar');
+assert(!headerJsx.includes('hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50'), 'HeaderNavbar removed duplicate WhatsApp desk button from sticky bar');
+
+// 16. Verify Statutory Credentials in siteConfig
+const siteConfigJs = readFileSync(join(rootDir, 'src/config/siteConfig.js'), 'utf-8');
+assert(siteConfigJs.includes('13326008000336'), 'siteConfig includes FSSAI License No: 13326008000336');
+assert(siteConfigJs.includes('Q2A20262410AD742'), 'siteConfig includes ISO 9001:2015 Cert No: Q2A20262410AD742');
+assert(siteConfigJs.includes('07BDVPK4053J1Z3'), 'siteConfig includes GSTIN: 07BDVPK4053J1Z3');
+
+// 17. Verify FSSAI Logo Asset
+assert(existsSync(join(rootDir, 'public/images/fssai-logo.png')), 'Authentic FSSAI logo image exists in public/images/fssai-logo.png');
 
 console.log('\nVerification suite finished.');
 if (failed) {

@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   ArrowRight
 } from 'lucide-react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }) {
   const pillars = [
@@ -176,18 +177,18 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
           </div>
 
           <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-stone-300">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                Zero Unsupported Claims
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-stone-300">
+              <span className="flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                FSSAI: {SITE_CONFIG.fssaiNumber}
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                Accredited Lab Verified
+              <span className="flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                ISO: {SITE_CONFIG.isoNumber}
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                FSSAI & FoSCoS Aligned
+              <span className="flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                GSTIN: {SITE_CONFIG.gstin}
               </span>
             </div>
 

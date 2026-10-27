@@ -213,6 +213,32 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   </div>
                 </div>
 
+                {/* Official Compliance & Statutory Credentials */}
+                <div className="pt-3 border-t border-white/10 space-y-2">
+                  <span className="block font-semibold text-amber-300 text-xs uppercase tracking-wider font-mono">
+                    Statutory Registrations:
+                  </span>
+                  <div className="grid grid-cols-1 gap-1.5 text-2xs font-mono">
+                    <div className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10">
+                      <div className="flex items-center gap-1.5">
+                        <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3.5 w-auto object-contain" />
+                        <span className="text-stone-300">FSSAI Lic.</span>
+                      </div>
+                      <span className="text-amber-400 font-bold">{SITE_CONFIG.fssaiNumber}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10">
+                      <span className="text-stone-300">ISO 9001:2015 Cert.</span>
+                      <span className="text-emerald-300 font-semibold">{SITE_CONFIG.isoNumber}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10">
+                      <span className="text-stone-300">GSTIN</span>
+                      <span className="text-stone-200 font-semibold">{SITE_CONFIG.gstin}</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
               {/* Direct WhatsApp Callout Button */}

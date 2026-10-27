@@ -96,10 +96,12 @@ export default function AdminPanel({
     }
   }, [heroSlides]);
 
-  // Authentication check
+  // Administrator Authentication Credential
+  const ADMIN_PASSWORD = 'fj(h5H(*93h*Hjo';
+
   const handleLogin = (e) => {
     e.preventDefault();
-    if (pinInput === '2026' || pinInput === 'admin' || pinInput === '1234') {
+    if (pinInput === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       sessionStorage.setItem('sabora_admin_auth', 'true');
       setPinError(false);
@@ -343,13 +345,13 @@ export default function AdminPanel({
                 type="password"
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
-                placeholder="Enter PIN (Default: 2026)"
+                placeholder="Enter Administrator Password"
                 autoFocus
-                className="w-full text-center tracking-widest text-lg font-mono py-3 px-4 rounded-xl border border-stone-300 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
+                className="w-full text-center tracking-widest text-base sm:text-lg font-mono py-3 px-4 rounded-xl border border-stone-300 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
               />
               {pinError && (
                 <p className="text-xs text-rose-600 font-medium pt-1.5">
-                  Invalid passcode. Please use 2026 or contact admin.
+                  Invalid passcode. Please enter the authorized administrator password or contact support.
                 </p>
               )}
             </div>

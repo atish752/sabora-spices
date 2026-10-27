@@ -11,22 +11,25 @@ import {
   TrendingUp 
 } from 'lucide-react';
 
+import { SITE_CONFIG } from '../config/siteConfig';
+
 export default function QualitySafetySection({ onScrollToSection, onOpenQuoteModal }) {
   const frameworks = [
     {
       title: "FSSAI Compliance",
-      code: "Food Safety & Standards Authority of India",
-      desc: "We consider relevant requirements for food handling, storage, packaging, hygiene, labelling, and traceability as established by Indian food safety legislation."
+      code: `Lic. No. ${SITE_CONFIG.fssaiNumber}`,
+      desc: `Official Food Safety & Standards Authority of India License No. ${SITE_CONFIG.fssaiNumber}. Mandatory adherence to Indian food safety legislation, hygienic storage, FoSCoS portal test logging, and lot traceability.`,
+      logo: "/images/fssai-logo.png"
     },
     {
       title: "ISO 9001:2015 Principles",
-      code: "Quality Management Systems (QMS)",
-      desc: "Internationally recognized framework guiding our clear product specifications, systematic supplier evaluation, batch inspection, and organized order coordination."
+      code: `Cert. No. ${SITE_CONFIG.isoNumber}`,
+      desc: `Certificate of Compliance No: ${SITE_CONFIG.isoNumber}. Internationally recognized framework guiding our clear product specifications, systematic supplier evaluation, batch inspection, and organized order coordination.`
     },
     {
-      title: "ISO 22000:2018 Principles",
-      code: "Food Safety Management Systems (FSMS)",
-      desc: "Guidance on identifying food safety hazards, prerequisite hygiene programmes, contamination prevention, and rigorous control measures across the handling chain."
+      title: "ISO 22000:2018 & GSTIN",
+      code: `GSTIN: ${SITE_CONFIG.gstin}`,
+      desc: `Guidance on identifying food safety hazards and prerequisite hygiene programmes, backed by registered GSTIN commercial taxation, transparent invoicing, and legitimate transport e-way bills.`
     }
   ];
 
@@ -104,11 +107,16 @@ export default function QualitySafetySection({ onScrollToSection, onOpenQuoteMod
               key={idx}
               className="p-6 sm:p-7 rounded-2xl bg-stone-50 border border-stone-200 hover:border-emerald-500/50 hover:bg-emerald-50/30 transition-all duration-300 space-y-3.5 shadow-xs"
             >
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                <h3 className="font-serif text-xl font-bold text-stone-900">
-                  {f.title}
-                </h3>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <h3 className="font-serif text-xl font-bold text-stone-900">
+                    {f.title}
+                  </h3>
+                </div>
+                {f.logo && (
+                  <img src={f.logo} alt="FSSAI Logo" className="h-6 w-auto object-contain shrink-0" />
+                )}
               </div>
               <div className="text-xs sm:text-sm font-semibold font-mono text-amber-700 bg-amber-50 px-2.5 py-1 rounded inline-block">
                 {f.code}

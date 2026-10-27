@@ -3,32 +3,34 @@ import PageHeaderBanner from '../components/PageHeaderBanner';
 import ComplianceSection from '../components/ComplianceSection';
 import ContactRfqSection from '../components/ContactRfqSection';
 import { ShieldCheck, FileCheck, Landmark, CheckCircle2, Lock } from 'lucide-react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitInquiry }) {
   const complianceBodies = [
     {
       name: "Food Safety and Standards Authority of India (FSSAI)",
       role: "Statutory Food Authority of India",
-      desc: "Mandatory licensing ensuring whole spices and makhana meet national standards for purity, absence of harmful chemicals, and proper labeling.",
-      badge: "FSSAI Standards"
+      desc: `Central / State License No. ${SITE_CONFIG.fssaiNumber}. Mandatory food business registration ensuring all whole green cardamom, whole turmeric fingers, and Makhana meet statutory purity standards, FoSCoS test logging, and packaging declarations.`,
+      badge: `Lic. #${SITE_CONFIG.fssaiNumber}`,
+      logo: "/images/fssai-logo.png"
     },
     {
-      name: "Spices Board of India",
+      name: "ISO 9001:2015 Quality Management",
+      role: "Certificate of Compliance (QMS)",
+      desc: `Certificate No. ${SITE_CONFIG.isoNumber}. International quality management framework guiding clear product specifications, systematic grower evaluation, sieve-calibrated grading, and zero-defect dispatch controls.`,
+      badge: `Cert. #${SITE_CONFIG.isoNumber}`
+    },
+    {
+      name: "Goods and Services Tax Network (GSTIN)",
+      role: "Department of Revenue, Ministry of Finance, India",
+      desc: `Registered GSTIN: ${SITE_CONFIG.gstin}. Legitimate commercial invoicing, valid transit e-way bills, transparent tax accounting, and verified lot tracking across all Indian wholesale transactions.`,
+      badge: `GSTIN: ${SITE_CONFIG.gstin}`
+    },
+    {
+      name: "Spices Board & Export Framework",
       role: "Ministry of Commerce and Industry",
-      desc: "Regulatory authority overseeing the export promotion, registration (CRES), and quality evaluation of Indian whole spices.",
-      badge: "Spices Board Registered"
-    },
-    {
-      name: "APEDA",
-      role: "Agricultural & Processed Food Products Export Development Authority",
-      desc: "Apex body regulating the export of scheduled agricultural products including whole Makhana (Fox Nuts) and specialty produce.",
-      badge: "Export Promotion"
-    },
-    {
-      name: "Directorate General of Foreign Trade (DGFT)",
-      role: "Ministry of Commerce and Industry",
-      desc: "Issuing authority for Import Export Code (IEC) enabling legal commercial exports through Indian maritime ports and airports.",
-      badge: "IEC Verified"
+      desc: "Regulatory alignment for commercial export promotion, registration (CRES), phytosanitary inspections, and laboratory analysis for destination-market MRL compliance.",
+      badge: "Export Standard"
     }
   ];
 
@@ -70,9 +72,14 @@ export default function CompliancePage({ onNavigate, onOpenQuoteModal, onSubmitI
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {complianceBodies.map((body, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 border border-stone-200 space-y-3 shadow-xs">
-                <div className="flex items-center justify-between">
-                  <span className="font-serif text-lg sm:text-xl font-bold text-stone-900">{body.name}</span>
-                  <span className="text-xs sm:text-sm bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    {body.logo && (
+                      <img src={body.logo} alt="FSSAI Logo" className="h-6 w-auto object-contain shrink-0" />
+                    )}
+                    <span className="font-serif text-lg sm:text-xl font-bold text-stone-900">{body.name}</span>
+                  </div>
+                  <span className="text-xs sm:text-sm bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-semibold whitespace-nowrap shrink-0">
                     {body.badge}
                   </span>
                 </div>

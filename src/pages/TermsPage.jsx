@@ -296,6 +296,11 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                       <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Email: info@saboraspices.com / sales@saboraspices.com</span>
                     </div>
+                    <div className="pt-2 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-3xs text-stone-700">
+                      <div><strong className="text-stone-900">GSTIN:</strong> {SITE_CONFIG.gstin}</div>
+                      <div><strong className="text-stone-900">FSSAI Lic:</strong> {SITE_CONFIG.fssaiNumber}</div>
+                      <div><strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}</div>
+                    </div>
                   </div>
                 </div>
               </div>
