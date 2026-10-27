@@ -192,6 +192,30 @@ for (const email of expectedEmails) {
 // 26. Verify Desktop Floating WhatsApp is non-colliding with Tawk.to Live Chat
 assert(appJsx.includes('fixed bottom-6 left-6') && !appJsx.includes('fixed bottom-6 right-6'), 'App.jsx positions desktop WhatsApp button at bottom-left to prevent collision with bottom-right Tawk.to widget');
 
+// 27. Verify origin location badge completely removed from top-right of product photos in HomePage and ProductsSection
+assert(!homePageJsx.includes("top-3.5 right-3.5") && !homePageJsx.includes("product.origin?.split"), 'HomePage product photos do NOT contain top-right origin location badge');
+assert(!productsSecJsx.includes("top-3.5 right-3.5") && !productsSecJsx.includes("product.origin?.split"), 'ProductsSection product photos do NOT contain top-right origin location badge');
+
+// 28. Verify authentic ISO logo asset and widespread integration
+assert(existsSync(join(rootDir, 'public/images/iso-logo.svg')), 'ISO logo exists in public/images/iso-logo.svg');
+assert(footerJsx.includes('iso-logo.svg'), 'FooterSection.jsx displays authentic ISO logo alongside FSSAI');
+const complianceJsx = readFileSync(join(rootDir, 'src/pages/CompliancePage.jsx'), 'utf-8');
+assert(complianceJsx.includes('iso-logo.svg'), 'CompliancePage.jsx displays authentic ISO logo');
+const complianceSecJsx = readFileSync(join(rootDir, 'src/components/ComplianceSection.jsx'), 'utf-8');
+assert(complianceSecJsx.includes('iso-logo.svg'), 'ComplianceSection.jsx displays authentic ISO logo');
+assert(homePageJsx.includes('iso-logo.svg'), 'HomePage.jsx Certified Standards pillar displays ISO logo');
+
+// 29. Verify Footer credibility & statutory compliance boost strip
+assert(footerJsx.includes('Credibility & Statutory Compliance Boost Strip') && footerJsx.includes('Food Safety Authority of India') && footerJsx.includes('ISO 9001:2015 Certified QMS'), 'FooterSection includes credibility & statutory compliance boost strip with both FSSAI and ISO logos');
+
+// 30. Verify Language Translation Engine & Native Language Suggestion
+assert(existsSync(join(rootDir, 'src/components/LanguageTranslator.jsx')), 'LanguageTranslator.jsx exists');
+const langTranslatorJsx = readFileSync(join(rootDir, 'src/components/LanguageTranslator.jsx'), 'utf-8');
+assert(langTranslatorJsx.includes('SUPPORTED_LANGUAGES') && langTranslatorJsx.includes('detectUserNativeLanguage'), 'LanguageTranslator implements SUPPORTED_LANGUAGES and detectUserNativeLanguage');
+assert(headerJsx.includes('LanguageDropdown'), 'HeaderNavbar includes LanguageDropdown in top bar and mobile drawer');
+assert(appJsx.includes('<LanguageTranslator />'), 'App.jsx mounts LanguageTranslator component');
+assert(indexHtml.includes('http-equiv="content-language" content="en"'), 'index.html sets content-language to English for browser translation support');
+
 console.log('\nVerification suite finished.');
 if (failed) {
   process.exit(1);
