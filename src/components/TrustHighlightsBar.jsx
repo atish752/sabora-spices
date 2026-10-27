@@ -10,6 +10,7 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
       icon: ShieldCheck,
       iconBg: "bg-white text-emerald-800 border border-stone-200/90",
       customLogo: "/images/fssai-logo.png",
+      secondaryLogo: "/images/iso-logo.svg",
       title: `FSSAI: ${SITE_CONFIG.fssaiNumber}`,
       subtitle: `ISO: ${SITE_CONFIG.isoNumber} • GST: ${SITE_CONFIG.gstin}`,
       target: "compliance"
@@ -71,7 +72,12 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
               >
                 <div className={`p-2 sm:p-2.5 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs flex items-center justify-center`}>
                   {item.customLogo ? (
-                    <img src={item.customLogo} alt="FSSAI" className="h-5 w-auto object-contain" />
+                    <div className="flex items-center gap-1.5">
+                      <img src={item.customLogo} alt="FSSAI" className="h-5 w-auto object-contain" />
+                      {item.secondaryLogo && (
+                        <img src={item.secondaryLogo} alt="ISO 9001:2015" className="h-5 w-auto object-contain" />
+                      )}
+                    </div>
                   ) : (
                     <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                   )}
@@ -101,7 +107,12 @@ export default function TrustHighlightsBar({ onScrollToSection }) {
               >
                 <div className={`p-2 sm:p-2.5 rounded-lg ${item.iconBg} shrink-0 group-hover:scale-105 transition-transform shadow-xs flex items-center justify-center`}>
                   {item.customLogo ? (
-                    <img src={item.customLogo} alt="FSSAI" className="h-5 w-auto object-contain" />
+                    <div className="flex items-center gap-1.5">
+                      <img src={item.customLogo} alt="FSSAI" className="h-5 w-auto object-contain" />
+                      {item.secondaryLogo && (
+                        <img src={item.secondaryLogo} alt="ISO 9001:2015" className="h-5 w-auto object-contain" />
+                      )}
+                    </div>
                   ) : (
                     <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                   )}

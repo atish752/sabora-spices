@@ -98,8 +98,9 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
 
             {/* Official Statutory Badges Row in About */}
             <div className="flex flex-wrap items-center gap-2 font-mono text-2xs text-stone-700">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-stone-100 border border-stone-200">
-                <strong className="text-stone-900">ISO 9001:2015:</strong> {SITE_CONFIG.isoNumber}
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-stone-200 shadow-2xs">
+                <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3.5 w-auto object-contain shrink-0" />
+                <strong className="text-stone-900">ISO:</strong> {SITE_CONFIG.isoNumber}
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-stone-100 border border-stone-200">
                 <strong className="text-stone-900">GSTIN:</strong> {SITE_CONFIG.gstin}

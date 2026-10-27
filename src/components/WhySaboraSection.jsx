@@ -182,9 +182,9 @@ export default function WhySaboraSection({ onOpenQuoteModal, onScrollToSection }
                 <img src="/images/fssai-logo.png" alt="FSSAI" className="h-4 w-auto object-contain shrink-0" />
                 <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 font-mono px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 font-semibold">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>ISO 9001:2015: {SITE_CONFIG.isoNumber}</span>
+              <span className="inline-flex items-center gap-1.5 font-mono bg-white px-2.5 py-1 rounded-md text-stone-900 font-bold shadow-2xs">
+                <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-4 w-auto object-contain shrink-0" />
+                <span>ISO {SITE_CONFIG.isoNumber}</span>
               </span>
               <span className="inline-flex items-center gap-1.5 font-mono px-2.5 py-1 rounded-md bg-stone-900/80 border border-stone-700/50 text-stone-300">
                 <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />

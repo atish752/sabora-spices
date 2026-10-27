@@ -211,8 +211,9 @@ export default function ProductDetailModal({ product, onClose, onOpenQuoteModal 
               <img src="/images/fssai-logo.png" alt="FSSAI" className="h-3 w-auto object-contain" />
               <span>Lic. {SITE_CONFIG.fssaiNumber}</span>
             </span>
-            <span className="text-2xs font-mono text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
-              ISO: {SITE_CONFIG.isoNumber}
+            <span className="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-stone-200 text-2xs font-mono font-bold text-stone-900">
+              <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3 w-auto object-contain" />
+              <span>ISO {SITE_CONFIG.isoNumber}</span>
             </span>
             <span className="text-2xs font-mono text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">
               GST: {SITE_CONFIG.gstin}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Globe, Check, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Globe, Check, X, ChevronDown } from 'lucide-react';
 
 export const SUPPORTED_LANGUAGES = [
   // Default Original
@@ -31,46 +31,73 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 /**
- * Read current Google Translate cookie if present
+ * Read current Google Translate cookie or local storage fallback
  */
 function getActiveLanguageFromCookie() {
   if (typeof document === 'undefined') return 'en';
   const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
-  if (!match) return 'en';
+  if (!match) {
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('sabora_selected_lang');
+      if (saved && SUPPORTED_LANGUAGES.some(l => l.code === saved)) {
+        return saved;
+      }
+    }
+    return 'en';
+  }
   const val = decodeURIComponent(match[1]);
   // format is /en/de or /auto/de
   const parts = val.split('/').filter(Boolean);
-  return parts.length >= 2 ? parts[1] : (parts[0] || 'en');
+  const langCode = parts.length >= 2 ? parts[1] : (parts[0] || 'en');
+  return langCode;
 }
 
 /**
  * Detect user's native language from browser environment
  */
-function detectUserNativeLanguage() {
-  if (typeof window === 'undefined' || !navigator) return null;
+export function detectUserNativeLanguage() {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return null;
 
-  // Collect all preferred languages
+  // 1. Primary browser/device locale
+  const primaryRaw = (navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
+  const primaryPrefix = primaryRaw.split('-')[0];
+
+  // If primary language is already English, default to English without showing translation banner
+  if (primaryPrefix === 'en') {
+    return null;
+  }
+
+  // Check if primary matches any supported non-English language
+  if (primaryPrefix) {
+    const directMatch = SUPPORTED_LANGUAGES.find(lang => {
+      const code = lang.code.toLowerCase();
+      return primaryRaw === code || primaryPrefix === code.split('-')[0];
+    });
+    if (directMatch && directMatch.code !== 'en') {
+      return directMatch;
+    }
+  }
+
+  // 2. Scan preferred language list (navigator.languages)
   const browserLangs = navigator.languages && navigator.languages.length
     ? Array.from(navigator.languages)
-    : [navigator.language || navigator.userLanguage || ''];
+    : [];
 
   for (const raw of browserLangs) {
     if (!raw) continue;
     const lower = raw.toLowerCase();
-    const primary = lower.split('-')[0];
-
-    // If preferred is English, do not prompt
-    if (primary === 'en') continue;
+    const prefix = lower.split('-')[0];
+    if (prefix === 'en') continue;
 
     const matched = SUPPORTED_LANGUAGES.find(lang => {
       const code = lang.code.toLowerCase();
-      return lower === code || primary === code.split('-')[0];
+      return lower === code || prefix === code.split('-')[0];
     });
 
-    if (matched) return matched;
+    if (matched && matched.code !== 'en') return matched;
   }
 
-  // Fallback: detect European timezones for international users
+  // 3. Fallback: detect European timezones for international users
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
     if (tz.includes('Berlin') || tz.includes('Vienna') || tz.includes('Zurich')) {
@@ -102,7 +129,7 @@ function detectUserNativeLanguage() {
 }
 
 /**
- * Apply translation to target language
+ * Apply translation to target language with smooth polling retry
  */
 export function changeLanguage(targetCode) {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
@@ -110,16 +137,18 @@ export function changeLanguage(targetCode) {
   const current = getActiveLanguageFromCookie();
   if (current === targetCode && targetCode !== 'en') return;
 
+  const hostname = window.location.hostname;
+  const hostParts = hostname.split('.');
+
   if (targetCode === 'en') {
-    // Clear cookies
-    const hostname = window.location.hostname;
+    // Clear cookies across host and root domains
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${hostname}; path=/;`;
-    
-    const hostParts = hostname.split('.');
     if (hostParts.length > 1) {
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.${hostParts.slice(-2).join('.')}; path=/;`;
     }
+    // Set explicit en-to-en override
+    document.cookie = "googtrans=/en/en; path=/;";
 
     localStorage.removeItem('sabora_selected_lang');
     document.documentElement.lang = 'en';
@@ -129,17 +158,17 @@ export function changeLanguage(targetCode) {
       select.value = 'en';
       select.dispatchEvent(new Event('change'));
     }
-    window.location.reload();
+    // Smooth reload to clear any residual translated DOM nodes
+    setTimeout(() => {
+      window.location.reload();
+    }, 150);
     return;
   }
 
   // Set translation cookie
   const cookieVal = `/en/${targetCode}`;
-  const hostname = window.location.hostname;
   document.cookie = `googtrans=${cookieVal}; path=/;`;
   document.cookie = `googtrans=${cookieVal}; domain=${hostname}; path=/;`;
-
-  const hostParts = hostname.split('.');
   if (hostParts.length > 1) {
     document.cookie = `googtrans=${cookieVal}; domain=.${hostParts.slice(-2).join('.')}; path=/;`;
   }
@@ -147,12 +176,28 @@ export function changeLanguage(targetCode) {
   localStorage.setItem('sabora_selected_lang', targetCode);
   document.documentElement.lang = targetCode;
 
-  const select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = targetCode;
-    select.dispatchEvent(new Event('change'));
-  } else {
-    window.location.reload();
+  // Poll for .goog-te-combo if script is still initializing
+  let attempts = 0;
+  const triggerCombo = () => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = targetCode;
+      select.dispatchEvent(new Event('change'));
+      return true;
+    }
+    return false;
+  };
+
+  if (!triggerCombo()) {
+    const interval = setInterval(() => {
+      attempts++;
+      if (triggerCombo() || attempts >= 15) {
+        clearInterval(interval);
+        if (attempts >= 15 && !document.querySelector('.goog-te-combo')) {
+          window.location.reload();
+        }
+      }
+    }, 120);
   }
 }
 
@@ -227,8 +272,12 @@ export default function LanguageTranslator() {
 
   return (
     <>
-      {/* Hidden container for Google Translate widget */}
-      <div id="google_translate_element" style={{ display: 'none' }} aria-hidden="true" />
+      {/* Offscreen container for Google Translate widget - avoids display:none layout calculation issues */}
+      <div 
+        id="google_translate_element" 
+        className="fixed -top-[9999px] -left-[9999px] w-px h-px opacity-0 pointer-events-none overflow-hidden" 
+        aria-hidden="true" 
+      />
 
       {/* Automated Native Language Suggestion Banner */}
       {showBanner && suggestedLang && (

@@ -216,6 +216,29 @@ assert(headerJsx.includes('LanguageDropdown'), 'HeaderNavbar includes LanguageDr
 assert(appJsx.includes('<LanguageTranslator />'), 'App.jsx mounts LanguageTranslator component');
 assert(indexHtml.includes('http-equiv="content-language" content="en"'), 'index.html sets content-language to English for browser translation support');
 
+// 31. Verify React DOM Reconciliation Guard for Google Translate in main.jsx
+const mainJsx = readFileSync(join(rootDir, 'src/main.jsx'), 'utf-8');
+assert(mainJsx.includes('originalRemoveChild') && mainJsx.includes('originalInsertBefore'), 'main.jsx guards against Google Translate removeChild/insertBefore reconciliation crashes');
+
+// 32. Verify Header announcement bar does not clip floating LanguageDropdown
+assert(!headerJsx.includes('overflow-x-hidden'), 'HeaderNavbar top announcement bar does not clip dropdown menu with overflow-x-hidden');
+
+// 33. Verify ISO Logo Consistency Across Modal, RFQ, Contact, About, and Why Sabora
+const modalJsxFresh = readFileSync(join(rootDir, 'src/components/ProductDetailModal.jsx'), 'utf-8');
+assert(modalJsxFresh.includes('iso-logo.svg'), 'ProductDetailModal displays ISO logo alongside FSSAI in modal footer');
+const rfqJsxFresh = readFileSync(join(rootDir, 'src/components/ContactRfqSection.jsx'), 'utf-8');
+assert(rfqJsxFresh.includes('iso-logo.svg'), 'ContactRfqSection displays ISO logo alongside FSSAI');
+const contactFresh = readFileSync(join(rootDir, 'src/pages/ContactPage.jsx'), 'utf-8');
+assert(contactFresh.includes('iso-logo.svg'), 'ContactPage displays ISO logo alongside FSSAI');
+const whySaboraFresh = readFileSync(join(rootDir, 'src/components/WhySaboraSection.jsx'), 'utf-8');
+assert(whySaboraFresh.includes('iso-logo.svg'), 'WhySaboraSection displays authentic ISO logo alongside FSSAI');
+const aboutFresh = readFileSync(join(rootDir, 'src/components/AboutSection.jsx'), 'utf-8');
+assert(aboutFresh.includes('iso-logo.svg'), 'AboutSection displays authentic ISO logo in statutory badges');
+
+// 34. Verify Translation Widget Robustness & Offscreen Positioning
+assert(!langTranslatorJsx.includes("display: 'none'"), 'LanguageTranslator avoids display: none for google_translate_element to ensure layout engine execution');
+assert(!langTranslatorJsx.includes('Sparkles'), 'LanguageTranslator does not import unused Sparkles icon');
+
 console.log('\nVerification suite finished.');
 if (failed) {
   process.exit(1);

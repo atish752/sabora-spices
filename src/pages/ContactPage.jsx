@@ -135,12 +135,14 @@ export default function ContactPage({
           {/* Statutory Registration Badges */}
           <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 shrink-0">
+              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 shrink-0 flex items-center gap-2.5">
                 <img src="/images/fssai-logo.png" alt="FSSAI" className="h-8 w-auto object-contain" />
+                <div className="h-7 w-px bg-stone-300" />
+                <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-8 w-auto object-contain" />
               </div>
               <div>
                 <h4 className="font-serif text-lg font-bold text-stone-900">
-                  Government Registered Enterprise
+                  Government Registered & ISO Certified Enterprise
                 </h4>
                 <p className="text-xs sm:text-sm text-stone-600">
                   Fully compliant and registered under Indian statutory authorities for domestic and global B2B trade.

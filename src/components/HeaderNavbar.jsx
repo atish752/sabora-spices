@@ -60,7 +60,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
   return (
     <header ref={headerRef} className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Announcement & Contact Bar (Inspired by Shahi Food Services) ── */}
-      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full overflow-x-hidden">
+      <div className="bg-[#041A12] text-stone-200 text-xs border-b border-emerald-900/40 w-full relative">
         <div className="max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-6 2xl:px-8 py-1.5 flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2">
           
           {/* Left: Location & Phones */}

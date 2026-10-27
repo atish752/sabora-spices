@@ -252,7 +252,10 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                     </div>
 
                     <div className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10">
-                      <span className="text-stone-300">ISO 9001:2015 Cert.</span>
+                      <div className="flex items-center gap-1.5">
+                        <img src="/images/iso-logo.svg" alt="ISO 9001:2015" className="h-3.5 w-auto object-contain" />
+                        <span className="text-stone-300">ISO 9001:2015</span>
+                      </div>
                       <span className="text-emerald-300 font-semibold">{SITE_CONFIG.isoNumber}</span>
                     </div>
 
