@@ -11,15 +11,17 @@ export const SITE_CONFIG = {
   address: "Jahangirpuri, Delhi – 110033, India",
   phones: [
     { display: "+91 95327 01582", raw: "919532701582", primary: true },
-    { display: "+91 78809 06610", raw: "917880906610", primary: false }
+    { display: "+91 86048 77610", raw: "918604877610", primary: false }
   ],
   primaryPhone: "+91 95327 01582",
-  secondaryPhone: "+91 78809 06610",
+  secondaryPhone: "+91 86048 77610",
   primaryPhoneRaw: "919532701582",
-  secondaryPhoneRaw: "917880906610",
+  secondaryPhoneRaw: "918604877610",
   
-  whatsappNumber: "917880906610",
-  whatsappDisplayNumber: "+91 78809 06610",
+  whatsappNumber: "919532701582",
+  whatsappDisplayNumber: "+91 95327 01582",
+  secondaryWhatsappNumber: "918604877610",
+  secondaryWhatsappDisplayNumber: "+91 86048 77610",
   
   // Official Email Directory (General, Sales, Contact, Support)
   email: "info@saboraspices.com",
@@ -158,12 +160,14 @@ export const SITE_CONFIG = {
     { id: "contact", label: "Contact Us", href: "#contact" }
   ],
 
-  buildWhatsAppUrl: (message) => {
-    return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  buildWhatsAppUrl: (message, number = null) => {
+    const targetNum = number || SITE_CONFIG.whatsappNumber;
+    return `https://wa.me/${targetNum}?text=${encodeURIComponent(message)}`;
   },
 
-  openWhatsApp: (message) => {
-    const url = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  openWhatsApp: (message, number = null) => {
+    const targetNum = number || SITE_CONFIG.whatsappNumber;
+    const url = `https://wa.me/${targetNum}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   },
 

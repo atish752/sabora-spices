@@ -144,7 +144,7 @@ export default function AboutSection({ onScrollToSection, onOpenQuoteModal }) {
               <div className="space-y-0.5">
                 <div className="font-serif font-bold text-lg text-amber-300">SABORA SPICES</div>
                 <div className="text-xs sm:text-sm text-stone-200">Jahangirpuri, Delhi – 110033, India</div>
-                <div className="text-xs text-emerald-300 font-mono">+91 78809 06610 | +91 95327 01582</div>
+                <div className="text-xs text-emerald-300 font-mono">+91 95327 01582 | +91 86048 77610</div>
               </div>
             </div>
           </div>

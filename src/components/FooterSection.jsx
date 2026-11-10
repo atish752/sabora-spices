@@ -205,7 +205,7 @@ export default function FooterSection({ onNavigate, onScrollToSection, onOpenAdm
                     +91 95327 01582
                   </a>
                   <a href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} className="hover:text-amber-400 transition-colors">
-                    +91 78809 06610
+                    +91 86048 77610
                   </a>
                 </div>
               </div>

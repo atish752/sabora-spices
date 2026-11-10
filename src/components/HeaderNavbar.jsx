@@ -87,7 +87,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 className="hidden sm:inline text-stone-300 hover:text-amber-400 transition-colors"
                 title="Secondary Sourcing Desk Phone"
               >
-                +91 78809 06610
+                +91 86048 77610
               </a>
             </div>
 
@@ -539,13 +539,22 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
 
             {/* Direct Contact Actions in Mobile Drawer */}
             <div className="pt-3 border-t border-stone-200 space-y-2">
-              <a 
-                href={`tel:${SITE_CONFIG.primaryPhoneRaw}`}
-                className="w-full py-2.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-sm font-semibold flex items-center justify-center gap-2"
-              >
-                <Phone className="w-4 h-4 text-emerald-700" />
-                <span>Call Us: +91 95327 01582</span>
-              </a>
+              <div className="grid grid-cols-2 gap-2">
+                <a 
+                  href={`tel:${SITE_CONFIG.primaryPhoneRaw}`}
+                  className="py-2.5 px-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5"
+                >
+                  <Phone className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span className="truncate">+91 95327 01582</span>
+                </a>
+                <a 
+                  href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`}
+                  className="py-2.5 px-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5"
+                >
+                  <Phone className="w-3.5 h-3.5 text-stone-600 shrink-0" />
+                  <span className="truncate">+91 86048 77610</span>
+                </a>
+              </div>
 
               <button
                 onClick={() => {
@@ -555,7 +564,7 @@ export default function HeaderNavbar({ currentRoute = 'home', onNavigate, onScro
                 className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 fill-white" />
-                <span>Chat on WhatsApp (1-Click)</span>
+                <span>Chat on WhatsApp (+91 95327 01582)</span>
               </button>
 
               {/* Mobile Social Follow Buttons */}

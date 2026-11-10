@@ -69,7 +69,7 @@ export default function ContactPage({
                   +91 95327 01582
                 </a>
                 <a href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} className="block text-stone-700 hover:text-emerald-700 font-semibold">
-                  +91 78809 06610
+                  +91 86048 77610
                 </a>
               </div>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
@@ -86,7 +86,7 @@ export default function ContactPage({
                 onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
                 className="text-sm text-emerald-700 font-bold hover:underline block text-left"
               >
-                1-Click Instant Sourcing Chat
+                +91 95327 01582 (1-Click Chat)
               </button>
               <div className="pt-2 text-xs sm:text-sm text-stone-500 font-medium">
                 Average reply time: &lt; 30 minutes

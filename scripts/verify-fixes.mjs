@@ -240,12 +240,14 @@ assert(aboutFresh.includes('iso-logo.svg'), 'AboutSection displays authentic ISO
 assert(!langTranslatorJsx.includes("display: 'none'"), 'LanguageTranslator avoids display: none for google_translate_element to ensure layout engine execution');
 assert(!langTranslatorJsx.includes('Sparkles'), 'LanguageTranslator does not import unused Sparkles icon');
 
-// 35. Verify Top Phone Numbers Swap (+91 95327 01582 first, +91 78809 06610 second)
+// 35. Verify Top Phone Numbers (+91 95327 01582 first, +91 86048 77610 second)
 const freshHeader = readFileSync(join(rootDir, 'src/components/HeaderNavbar.jsx'), 'utf-8');
 const freshConfig = readFileSync(join(rootDir, 'src/config/siteConfig.js'), 'utf-8');
-const phoneRegex = /95327\s*01582[\s\S]*?78809\s*06610/;
-assert(phoneRegex.test(freshHeader), 'HeaderNavbar top announcement bar displays +91 95327 01582 first and +91 78809 06610 second');
+const phoneRegex = /95327\s*01582[\s\S]*?86048\s*77610/;
+assert(phoneRegex.test(freshHeader), 'HeaderNavbar top announcement bar displays +91 95327 01582 first and +91 86048 77610 second');
 assert(freshConfig.includes("primaryPhone: '+91 95327 01582'") || freshConfig.includes('primaryPhone: "+91 95327 01582"'), 'siteConfig sets primaryPhone to +91 95327 01582');
+assert(freshConfig.includes("secondaryPhone: '+91 86048 77610'") || freshConfig.includes('secondaryPhone: "+91 86048 77610"'), 'siteConfig sets secondaryPhone to +91 86048 77610');
+assert(freshConfig.includes("whatsappNumber: '919532701582'") || freshConfig.includes('whatsappNumber: "919532701582"'), 'siteConfig sets whatsappNumber to 919532701582');
 
 // 36. Verify Homebar Nav stretches smoothly beside brand logo to right edge
 assert(freshHeader.includes('justify-between') && freshHeader.includes('flex-1'), 'HeaderNavbar desktop nav stretches flexibly with justify-between across the homebar');

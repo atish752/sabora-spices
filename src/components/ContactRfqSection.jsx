@@ -166,11 +166,11 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                   <div>
                     <span className="block font-semibold text-white">Direct Phone Lines:</span>
                     <div className="flex flex-col gap-0.5 pt-0.5">
-                      <a href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} className="text-stone-300 hover:text-amber-300 transition-colors">
-                        +91 78809 06610 (Primary Desk)
+                      <a href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} className="text-emerald-300 hover:text-amber-300 font-semibold transition-colors">
+                        +91 95327 01582 (Primary Desk)
                       </a>
                       <a href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} className="text-stone-300 hover:text-amber-300 transition-colors">
-                        +91 95327 01582
+                        +91 86048 77610 (Direct Desk)
                       </a>
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                       rel="noopener noreferrer"
                       className="text-amber-300 hover:underline font-mono"
                     >
-                      +91 78809 06610 (Instant 1-Click)
+                      +91 95327 01582 (Instant 1-Click)
                     </a>
                   </div>
                 </div>
@@ -359,7 +359,7 @@ export default function ContactRfqSection({ onSubmitInquiry, preselectedProduct 
                     className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4 fill-white" />
-                    <span>Send RFQ to WhatsApp (+91 78809 06610)</span>
+                    <span>Send RFQ to WhatsApp (+91 95327 01582)</span>
                   </button>
                 </div>
 

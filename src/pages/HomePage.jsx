@@ -347,9 +347,10 @@ export default function HomePage({
             <button
               onClick={() => SITE_CONFIG.openWhatsApp("Hello SABORA SPICES, I would like to inquire about wholesale whole spices and makhana.")}
               className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white font-semibold text-sm sm:text-base border border-emerald-500/40 shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              title="Chat with Sabora Spices on WhatsApp (+91 95327 01582)"
             >
               <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400 shrink-0" />
-              <span>WhatsApp Desk (+91 78809 06610)</span>
+              <span>WhatsApp Desk (+91 95327 01582)</span>
             </button>
           </div>
 

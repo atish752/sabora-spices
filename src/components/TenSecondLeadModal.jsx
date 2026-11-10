@@ -144,16 +144,26 @@ export default function TenSecondLeadModal({ onSubmitInquiry }) {
           </div>
 
           {/* WhatsApp 1-Click Direct Button (Instant Option) */}
-          <div>
+          <div className="space-y-2">
             <button
               type="button"
               onClick={handleDirectWhatsApp}
               className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:brightness-110 active:scale-[0.98] text-white font-bold text-xs sm:text-sm shadow-md border border-emerald-400/40 flex items-center justify-center gap-2 transition-all cursor-pointer group"
             >
               <MessageCircle className="w-4 h-4 fill-white text-emerald-500 group-hover:scale-110 transition-transform" />
-              <span>Chat on WhatsApp (+91 78809 06610)</span>
+              <span>Chat on WhatsApp (+91 95327 01582)</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
+            <div className="flex items-center justify-center gap-2 text-2xs text-stone-300">
+              <span className="text-amber-400 font-semibold">Direct Desks:</span>
+              <a href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} className="text-emerald-300 hover:underline font-mono font-bold">
+                +91 95327 01582
+              </a>
+              <span className="text-stone-500">|</span>
+              <a href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} className="text-stone-300 hover:text-amber-300 font-mono">
+                +91 86048 77610
+              </a>
+            </div>
           </div>
 
           {/* Divider */}

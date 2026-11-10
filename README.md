@@ -23,7 +23,7 @@ Directly structured from the client's specification and `SABORA SPICES.txt`:
 8. **Regulatory Compliance (Section 008)**: Domestic statutory terms, export documentation, packaging & labelling declarations.
 9. **International & Export Supply (Section 009)**: Multi-modal freight (ocean container & air cargo), documentation support (COA, Phytosanitary, Certificate of Origin).
 10. **FAQ (Section 0010)**: All 25 questions and answers with category filters and instant live search.
-11. **Contact Us & RFQ Desk**: Interactive quote builder, Jahangirpuri Delhi office details, phone numbers (+91 78809 06610 / +91 95327 01582), and 1-click WhatsApp transmission.
+11. **Contact Us & RFQ Desk**: Interactive quote builder, Jahangirpuri Delhi office details, phone numbers (+91 95327 01582 / +91 86048 77610), and 1-click WhatsApp transmission.
 
 ---
 
@@ -72,8 +72,8 @@ const firebaseConfig = {
 ### 6. Official Contact Information
 - **Brand**: SABORA SPICES
 - **Address**: Jahangirpuri, Delhi – 110033, India
-- **Phones**: +91 78809 06610 | +91 95327 01582
-- **WhatsApp**: +91 78809 06610
+- **Phones**: +91 95327 01582 | +91 86048 77610
+- **WhatsApp**: +91 95327 01582 | +91 86048 77610
 - **Website**: www.saboraspices.com
 - **Emails**:
   - General Inquiries: info@saboraspices.com

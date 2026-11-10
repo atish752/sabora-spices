@@ -6,7 +6,8 @@ import {
   Volume2, 
   VolumeX, 
   Play, 
-  Pause
+  Pause,
+  Phone
 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -270,6 +271,27 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
             <p className="text-sm sm:text-base text-stone-300">
               Direct Origin Procurement • Delhi Logistics Hub • Wholesale Supply
             </p>
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 text-xs">
+              <span className="text-amber-400 font-semibold flex items-center gap-1">
+                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Direct Desk:</span>
+              </span>
+              <a 
+                href={`tel:${SITE_CONFIG.primaryPhoneRaw}`} 
+                className="font-mono text-emerald-300 hover:text-amber-300 font-bold transition-colors"
+                title="Primary Sourcing Desk Phone"
+              >
+                +91 95327 01582
+              </a>
+              <span className="text-stone-500">|</span>
+              <a 
+                href={`tel:${SITE_CONFIG.secondaryPhoneRaw}`} 
+                className="font-mono text-stone-300 hover:text-amber-300 transition-colors"
+                title="Secondary Sourcing Desk Phone"
+              >
+                +91 86048 77610
+              </a>
+            </div>
           </div>
 
           {/* Action Buttons: Extended full width on mobile so borders never touch and texts are 100% visible */}
@@ -295,9 +317,10 @@ export default function HeroSection({ onScrollToSection, onOpenQuoteModal, onNav
             <button
               onClick={() => handleCtaClick('whatsapp')}
               className="w-full sm:w-auto px-5 sm:px-6 py-3.5 rounded-xl bg-[#0F3D2E] hover:bg-[#15543F] text-emerald-300 hover:text-white text-sm sm:text-base font-semibold border border-emerald-500/50 shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-sm text-center whitespace-nowrap"
+              title="Chat with Sabora Spices on WhatsApp (+91 95327 01582)"
             >
               <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 fill-emerald-400 shrink-0" />
-              <span>WhatsApp Desk</span>
+              <span>WhatsApp Desk (+91 95327 01582)</span>
             </button>
           </div>
 

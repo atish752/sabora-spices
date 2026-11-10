@@ -290,7 +290,7 @@ export default function TermsPage({ onNavigate, onOpenQuoteModal, onSubmitInquir
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Phones: +91 78809 06610 / +91 95327 01582</span>
+                      <span>Phones: +91 95327 01582 / +91 86048 77610</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <Mail className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
